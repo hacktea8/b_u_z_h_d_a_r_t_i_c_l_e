@@ -1,0 +1,15 @@
+User-agent: *
+Sitemap: http://www.qvdhd.com/google_sitemap.xml
+Disallow: /*maindex/addCollect/
+Disallow: /*maindex/login
+Disallow: /*maindex/loginout
+Disallow: /*maindex/isUserInfo
+Disallow: /*maindex/playdata/*
+Allow: /*maindex/
+Allow: /*.shtm*
+Allow: /*.htm*
+Disallow: /*.php
+Disallow: /*.gif
+Disallow: /*.js
+Disallow: /*.css
+
