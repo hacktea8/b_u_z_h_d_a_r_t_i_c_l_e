@@ -49,11 +49,11 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'qvodweb';
+$db['default']['username'] = 'buzhdweb';
 $db['default']['password'] = 'ilove';
-$db['default']['database'] = 'qvodweb';
+$db['default']['database'] = 'buzhdweb';
 $db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = 'qd_';
+$db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;

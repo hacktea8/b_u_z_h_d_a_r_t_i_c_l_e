@@ -204,7 +204,7 @@ require_once BASEPATH.'core/CodeIgniter.php';
 
 function redirect(){
 $domain = $_SERVER['HTTP_HOST'];// 获得当前输入的 url
-$root = 'www.qvdhd.com';
+$root = 'buzhd.qvdhd.com';
 if($root == $domain){
   return false;
 }

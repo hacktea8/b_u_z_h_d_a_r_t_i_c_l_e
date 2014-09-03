@@ -16,14 +16,12 @@
 */
 $config['base_url']	= '';
 $config['admin_email']	= 'qvd_emubt$163.com($ => @)';
-$config['js_url']	= '/public/js/';
-$config['css_url']	= '/public/css/';
-$config['img_url']	= '/public/images/';
+$config['cdn_url']	= '/public';
 $config['adm_js_url']	= '/public/js/admin/';
 $config['adm_css_url']	= '/public/css/admin/';
 $config['adm_img_url']	= '/public/images/admin/';
-$config['domain']	= 'www.qvdhd.com';
-$config['web_title']	= 'QVDHD影院';
+$config['domain']	= 'buzhd.qvdhd.com';
+$config['web_title']	= 'BuzHd';
 $config['login_url']	= 'http://www.hacktea8.com/member.php?mod=logging&action=login&goto=';
 $config['allow_referer'] = '.qvdhd.com|.hacktea8.com|.emubt.com';
 

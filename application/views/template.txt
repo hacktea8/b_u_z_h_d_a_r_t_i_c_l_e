@@ -1,0 +1,9 @@
+header
+<header ></header>
+
+body
+<div id="container"></div>
+
+footer
+<footer id="footer"></footer>
+

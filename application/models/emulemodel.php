@@ -10,30 +10,30 @@ class emuleModel extends baseModel{
      parent::__construct();
   }
   public function autoSetVideoOnline($limit = 5){
-    $cate = $this->getAllChannel();
+    $cate = $this->getAllCateInfo();
     foreach($cate as $v){
-      $k = $v['id'];
-      $sql = sprintf('UPDATE %s SET `onlinedate`=%d,`flag`=1,`utime`=%d,`ptime`=%d WHERE `onlinedate`=0 AND `cid`=%d LIMIT %d',$this->db->dbprefix('emule_article'),date('Ymd'),time(),time(),$k,$limit);
+      $k = $v['cid'];
+      $sql = sprintf('UPDATE %s SET `onlinedate`=%d,`flag`=1,`utime`=%d,`ptime`=%d WHERE `onlinedate`=0 AND `cid`=%d LIMIT %d',$this->db->dbprefix('article_title'),date('Ymd'),time(),time(),$k,$limit);
       $this->db->query($sql);
     }
     return 1;
   }
   public function setCateVideoTotal(){
-    $cate = $this->getAllChannel();
+    $cate = $this->getAllCateInfo();
     foreach($cate as $v){
-      $k = $v['id'];
-      $sql = sprintf('UPDATE %s SET`atotal`=(SELECT COUNT(*) FROM %s WHERE `flag`=1 AND `onlinedate`<=%d AND `onlinedate`>0 AND `cid`=%d) WHERE `id`=%d LIMIT 1',$this->db->dbprefix('emule_cate'),$this->db->dbprefix('emule_article'),date('Ymd'),$k,$k);
+      $k = $v['cid'];
+      $sql = sprintf('UPDATE %s SET`atotal`=(SELECT COUNT(*) FROM %s WHERE `flag`=1 AND `onlinedate`<=%d AND `onlinedate`>0 AND `cid`=%d) WHERE `id`=%d LIMIT 1',$this->db->dbprefix('cate'),$this->db->dbprefix('article_title'),date('Ymd'),$k,$k);
       $this->db->query($sql);
     }
     return 1;
   }
-  public function getAllChannel(){
-    $sql = sprintf("SELECT `id`, `pid`, `name`, `atotal` FROM %s WHERE `flag`=1",$this->db->dbprefix('emule_cate'));
+  public function getAllCateInfo(){
+    $sql = sprintf("SELECT `cid`, `pcid`, `title`, `total` FROM %s WHERE `flag`=1 ORDER BY `sort` ASC",$this->db->dbprefix('cate'));
     $list = $this->db->query($sql)->result_array();
     $return = array();
     foreach($list as &$v){
-      $v['url'] = $this->geturl('lists',$v['id']);
-      $return[$v['id']] = $v;
+      $v['url'] = $this->geturl('lists',$v['cid']);
+      $return[$v['cid']] = $v;
     }
     return $return;
   }

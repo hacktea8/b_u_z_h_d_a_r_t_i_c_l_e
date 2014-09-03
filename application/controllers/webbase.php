@@ -37,8 +37,8 @@ class Webbase extends CI_Controller {
       $this->userInfo = $session_uinfo;
     }
     //var_dump($this->userInfo);exit;
-    $this->_c = $this->uri->segment(1,'index');
-    $this->_a = $this->uri->segment(2,'index');
+    $this->_c = $this->segment(1,'maindex');
+    $this->_a = $this->segment(2,'index');
     $c = isset($_GET['c'])?$_GET['c']:'';
     if($c){
        $this->_a = 'list' == $c ? 'lists' : 'topic';
@@ -46,12 +46,12 @@ class Webbase extends CI_Controller {
     $current_url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $this->checkIsrobot();
     $this->assign(array('domain'=>$this->config->item('domain'),
-                'base_url'=>$this->config->item('base_url'),'css_url'=>$this->config->item('css_url'),
-                'admin_email'=>$this->config->item('admin_email'),'errorimg'=>'/public/images/show404.jpg',
-                'img_url'=>$this->config->item('img_url'),'js_url'=>$this->config->item('js_url'),
-                'toptips'=>$this->config->item('toptips'),'web_title'=>$this->config->item('web_title')
-                ,'version'=>20140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
-                ,'_c'=>$this->_c,'_a'=>$this->_a,'current_url'=>$current_url
+     'base_url'=>$this->config->item('base_url'),
+     'admin_email'=>$this->config->item('admin_email'),'errorimg'=>'/public/images/show404.jpg',
+            
+     'toptips'=>$this->config->item('toptips'),'web_title'=>$this->config->item('web_title')
+     ,'version'=>20140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
+     ,'_c'=>$this->_c,'_a'=>$this->_a,'current_url'=>$current_url
     ));
   }
   
@@ -85,5 +85,10 @@ class Webbase extends CI_Controller {
     if(false !== stripos($_SERVER['HTTP_USER_AGENT'],'spider')){
       $this->_isrobot = 1;
     }
+  }
+  protected function segment($i, $default = 'maindex'){
+    $q = $this->uri->segment($i, $default);
+    $q = str_replace('.','',$q);
+    return $q ? $q: $default;
   }
 }
