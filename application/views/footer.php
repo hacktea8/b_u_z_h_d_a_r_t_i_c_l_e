@@ -3,7 +3,7 @@
     <div class="footer_block logo" onclick="window.location.href='/'">
       <h2 class="fb">
         <a href="/">
-          BuzzHand
+          <?php echo $web_title;?>
         </a>
       </h2>
       <p class="f18">
@@ -39,72 +39,72 @@
         </li>
         <li>
           <a href="/forum/index.html?cid=10">
-            經驗分享
+            经验分享
           </a>
         </li>
         <li style="border:0">
           <a href="/forum/index.html?cid=1">
-            站內幫助
+            站内帮助
           </a>
         </li>
       </ul>
     </div>
     <div class="footer_block info">
       <h2 class="fcEm5 mb5">
-        關於BuzzHand
+        关于<?php echo $web_title;?>
       </h2>
       <p>
-        BuzzHand一個創新多用戶部落格平台，網友可以在這裡免費創建自己的部落格頻道!
+        <?php echo $web_title;?>一个拥有创新精神多用户部落格网络平台，亲爱的网友您可以尽情免费创建自己的部落格频道!
       </p>
     </div>
     <div class="footer_block info">
       <h2 class="fcEm5 mb5">
-        什麼是發文賺錢
+        什么是发文赚钱？
       </h2>
       <p class="mb5">
-        在本站分享您的創作，包括文章、圖片、或影片即可讓您輕鬆賺取現金收益！
+        在本网站()分享您的创造，包括文章、图片、或影片即可让您轻松赚取现金收益！
       </p>
-      <a class="ui_btn ui_btn_green f12" title="發文賺錢" href="/help/bonus.html">
-        瞭解更多
+      <a class="ui_btn ui_btn_green f12" title="发文赚钱" href="/help/bonus.html">
+        了解更多
       </a>
     </div>
   </div>
   <div class="footer_main f12 fcEm7">
     <div class="content">
-      重要聲明：本站所有文章由會員即時發表，本站對所有文章的真實性、完整性及立場等，不負任何法律責任。所有文章內容只代表發文者個人意見，並非本網站之立場，用戶不應信賴內容，並應自行判斷內容之真實性。發文者擁有在BuzzHand張貼的文章。
-      由於本站是受到「即時發表」運作方式所規限，故不能完全監察所有即時文章，如有不適當或對於文章出處有疑慮，請聯絡我們告知，我們將在最短時間內進行撤除。本站有權刪除任何留言及拒絕任何人士發文，同時亦有不刪除文章的權利。
+      重要声明：本站所有文章由会员即时发表，本站对所有文章的真实性、完整性及立场等，不负任何法律责任。所有文章内容只代表发文者个人意见，亦非本网站之立场，用户不应信赖内容，亦应自行判断内容之真实性。发文者拥有在<?php echo $web_title;?>张贴的文章。
+      由于本站受到「即时发表」运作方式所规限，故不能完全监察所有即时文章，如有不过当或对于文章出处有疑虑，请联络我们告知，我们将在最短时间内进行撤除。本站有权删除任何留言及拒绝任何人士发文，同时亦有不删除文章的权利。
     </div>
   </div>
   <div class="tc f12 footer_bottom">
     <span class="mr5">
-      ©2014 BuzzHand. All Rights Reserved.
+      ©<?php echo date('Y'),' ',$web_title;?>. All Rights Reserved.
     </span>
     <a rel="nofollow" href="/help/service.html">
-      使用條款
+      使用条款
     </a>
     <span class="ml5 mr5">
       |
     </span>
     <a rel="nofollow" href="/help/privacy.html">
-      隱私條款
+      隐私条款
     </a>
     <span class="ml5 mr5">
       |
     </span>
     <a rel="nofollow" href="/help/tortreport.html">
-      侵權舉報
+      侵权举报
     </a>
     <span class="ml5 mr5">
       |
     </span>
     <a rel="nofollow" href="/help/contactus.html">
-      聯絡我們
+      联络我们
     </a>
     <span class="ml5 mr5">
       |
     </span>
     <a rel="nofollow" href="/help/copyright.html">
-      著作權保護
+      著作权保护
     </a>
   </div>
 </footer>

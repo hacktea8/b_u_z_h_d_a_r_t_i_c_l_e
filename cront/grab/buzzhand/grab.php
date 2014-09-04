@@ -1,92 +1,127 @@
 <?php
 
-$APPPATH=dirname(__FILE__).'/';
+$APPPATH = dirname(__FILE__).'/';
 include_once($APPPATH.'../db.class.php');
 include_once($APPPATH.'config.php');
 
-$pattern = '/tutuzx/grab.php';
+$pattern = '/buzhd/grab.php';
 require_once $APPPATH.'singleProcess.php';
 
 $db=new DB_MYSQL();
 
-$data = array('url' => 'http://img.hacktea8.com/picapi/uploadurl?seq=', 'imgurl'=>'');
-$file_data = array('url' => 'http://img.hacktea8.com/fileapi/uploadurl?seq=', 'imgurl'=>'','filename'=>'');
+$data = array('url' => 'http://img.hacktea8.com/buzhdapi/uploadurl?seq=', 'imgurl'=>'');
+$file_data = array('url' => 'http://img.hacktea8.com/buzhdapi/uploadurl?seq='
+, 'imgurl'=>'','filename'=>'');
+
 $task = 5;
 while($task){
-$list = getnocoverlist();
-if(empty($list)){
-echo "grab list empty!\n";
-sleep(600);
-break;
-}
-foreach($list as $val){
-if('http://' != substr($val['thum'],0,7)){
-  $val['thum'] = $_root.$val['thum'];
-}
-echo "== $val[thum] ==\n";
-//exit;
-$data['imgurl'] = $val['thum'];
-$cover = getHtml($data);
-//去除字符串前3个字节
-$cover = substr($cover,3);
-echo $val['id'],' , ',$cover,"\n";
-#exit;
-//echo strlen($cover);exit;
-$status = preg_replace('#[^\d]+#','',$cover);
-//echo $status;exit;
-if( in_array($status,array(44,404))){
-  die('Token 失效!');
-}
-if(0 == $status){
-  echo "$val[id] cover is down!\n";
-  seterrcoverByid(4,$val['id']);
-  sleep(1);
-  continue;
-}
+ $list = getnocoverlist();
+ if(empty($list)){
+  echo "grab list empty!\n";
+  sleep(600);
+  break;
+ }
+ foreach($list as $val){
+  if('http://' != substr($val['thum'],0,7)){
+   $val['thum'] = $_root.$val['thum'];
+  }
+  echo "== $val[thum] ==\n";
+  //exit;
+  $data['imgurl'] = $val['thum'];
+  $cover = getHtml($data);
+  //去除字符串前3个字节
+  $cover = substr($cover,3);
+  echo $val['id'],' , ',$cover,"\n";
+  #exit;
+  //echo strlen($cover);exit;
+  $status = preg_replace('#[^\d]+#','',$cover);
+  //echo $status;exit;
+  if( in_array($status,array(44,404))){
+   die('Token 失效!');
+  }
+  if(0 == $status){
+   echo "$val[id] cover is down!\n";
+   seterrcoverByid(4,$val['id']);
+   sleep(1);
+   continue;
+  }
+  //upload intro images
+  $info = getvideobyid($val['id']);
+  preg_match_all('#src\s*=\s*[\'|"](.+)[\'|"]#Uis', $info['intro'], $match);
+  $imgs = $match[1];
+  foreach($imgs as $v){
+   if('IMG_API_URL=' == substr($v,0,12)){
+    continue;
+   }
+   $data['imgurl'] = $v;
+   $covers = getHtml($data);
+   //去除字符串前3个字节
+   $covers = substr($covers,3);
+   $status = preg_replace('#[^\d]+#','',$covers);
+   //echo $status;exit;
+   if( in_array($status,array(44,404))){
+    die('Token 失效!');
+   }
+   if(0 == $status){
+    echo "$val[id] cover is down!\n";
+    seterrcoverByid(4,$val['id']);
+    break;
+   }
+   if(false == stripos($covers,'.')){
+    die("\nid: $val[id] down contents images error!\n");
+   }
+   //echo $covers,"\n";
+   $img_str = 'IMG_API_URL='.$covers;
+   $info['intro'] = str_replace($v,$img_str,$info['intro']);
+  }// end foreach imgs
 
-//
-setcoverByid($cover,$val['id']);
-//echo $val['id'],"\n",exit;
+  $set_data = array('intro'=>$info['intro']);
+  //var_dump($set_data);exit;
+  setcontentdata($set_data,$val['id']);
+  //
+  setcoverByid($cover,$val['id']);
+  //echo $val['id'],"\n",exit;
 
-sleep(15);
-}
-//var_dump($list);exit;
-$task --;
-//2min
-sleep(18);
+  sleep(15);
+ }
+ //var_dump($list);exit;
+ $task --;
+ //2min
+ sleep(18);
 }
 file_put_contents('imgres.txt',$val['id']);
 
 
 function getnocoverlist($limit = 20){
-    global $db;
-    $sql=sprintf('SELECT `id`,`sitetype`,`thum`,`ourl` FROM %s WHERE `iscover`=0 LIMIT %d',$db->getTable('emule_article'),$limit);
-    $res=$db->result_array($sql);
-    return $res;
+ global $db;
+ $sql = sprintf('SELECT `id`,`sitetype`,`thum`,`ourl` FROM %s WHERE `iscover`=0 LIMIT %d',$db->getTable('article_title'),$limit);
+ $res = $db->result_array($sql);
+ return $res;
 }
-function getcontenttable($id){
-  return sprintf("emule_article_content%d",$id%10);
+function getcontenttable(){
+ return sprintf("article_content");
 }
 function getvideobyid($id){
-  global $db;
-  $table = getcontenttable($id);
-  $sql=sprintf('SELECT  `downurl`, `intro` FROM %s WHERE `id`=%d LIMIT 1',$db->getTable($table),$id);
-  $row = $db->row_array($sql);
-  return $row;
+ global $db;
+ $table = getcontenttable($id);
+ $sql = sprintf('SELECT `intro` FROM %s WHERE `id`=%d LIMIT 1',$db->getTable($table),$id);
+ $row = $db->row_array($sql);
+ return $row;
 }
 function setcontentdata($data,$id){
-  global $db;
-  $table = getcontenttable($id);
-  $sql = $db->update_string($db->getTable($table),$data,array('id'=>$id));
-  $db->query($sql);
-  return true;
+ global $db;
+ $table = getcontenttable($id);
+ $sql = $db->update_string($db->getTable($table),$data,array('id'=>$id));
+ $db->query($sql);
+ return true;
 }
 function seterrcoverByid($cover = '',$id = 0){
   if(!$id){
      return false;
   }
   global $db;
-  $sql = sprintf('UPDATE %s SET `iscover`=%d WHERE `id`=%d LIMIT 1',$db->getTable('emule_article'),$cover,$id);
+  $sql = sprintf('UPDATE %s SET `iscover`=%d WHERE `id`=%d LIMIT 1',$db->getTable('article_title')
+  ,$cover,$id);
   $db->query($sql);
 }
 function setcoverByid($cover = '',$id = 0){
@@ -95,7 +130,7 @@ function setcoverByid($cover = '',$id = 0){
      return false;
   }
   global $db;
-  $sql = sprintf('UPDATE %s SET `cover`=\'%s\',flag=1,`iscover`=1 WHERE `id`=%d LIMIT 1',$db->getTable('emule_article'),mysql_real_escape_string($cover),$id);
+  $sql = sprintf('UPDATE %s SET `cover`=\'%s\',flag=1,`iscover`=1 WHERE `id`=%d LIMIT 1',$db->getTable('article_title'),mysql_real_escape_string($cover),$id);
   $db->query($sql);
 }
 function getHtml(&$data){
@@ -125,7 +160,7 @@ global $_root;
 $str_replace = array(
 array('from'=>'</a>','to'=>'')
 ,array('from'=>'<img </td>','to'=>'<img ')
-,array('from'=>substr($_root,0,-1),'to'=>'http://btv.hacktea8.com/')
+,array('from'=>substr($_root,0,-1),'to'=>'')
 );
 $preg_replace = array(
 array('from'=>'#<a[^>]+>#Uis','to'=>'')

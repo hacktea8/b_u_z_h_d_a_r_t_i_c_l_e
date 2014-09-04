@@ -4,17 +4,26 @@ $_root='http://www.buzzhand.com/';
 $_devStatus = '_OK';
 #$http_proxy = '211.138.121.37:82';
 $http_proxy = '';
+define('CHARSET', 'UTF-8');
+define('LIST_HOT', '0');
 //
 $strreplace=array(
-array('from'=>'www.buzzhand.com','to'=>'www.buzhd.com')
-,array('from'=>'\"','to'=>'"')
-,array('from'=>'\r\n','to'=>'')
-,array('from'=>'\n','to'=>'')
+#array('from'=>'www.buzzhand.com','to'=>'www.buzhd.com')
+#,array('from'=>'<p><br /></p>','to'=>'')
 );
 //
 $pregreplace=array(
-array('from'=>'#<br>引用.+</td>#Us','to'=>'</td>')
-,array('from'=>'#<script [^>]+>.*</script>#','to'=>'')
+array('from'=>'#<a[^>]+>#Uis','to'=>'</td>')
+,array('from'=>'#</a[^>]*>#Uis','to'=>'')
+,array('from'=>'#<!--.*-->#Uis','to'=>'')
+,array('from'=>'#<ins[^>]*></ins>#Uis','to'=>'')
+,array('from'=>'#<img [^>]*src=[\'|"]\S+\.gif[^>]*[\'|"][^>]*>#Uis','to'=>'')
+,array('from'=>'#\s+(id|class|style|alt)\s*=\s*".+"#Uis','to'=>'')
+,array('from'=>'#\s+(id|class|style|alt)\s*=\s*\'.+\'#Uis','to'=>'')
+,array('from'=>'#<script[^>]*>.*</script[^>]*>#Uis','to'=>'')
+,array('from'=>'#(\s*\r\n\s*){2,}#Uis','to'=>'')
+,array('from'=>'#(\s*\n\s*){2,}#Uis','to'=>'')
+,array('from'=>'#\s{2,}#Uis','to'=>' ')
 );
 
 $cate_config = array(

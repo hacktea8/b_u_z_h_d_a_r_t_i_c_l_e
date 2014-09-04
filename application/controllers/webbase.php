@@ -7,7 +7,7 @@ class Webbase extends CI_Controller {
   public $viewData = array();
   protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0,'isadmin'=>0);
   public $adminList = array(1);
-  protected $_c = 'index'; 
+  protected $_c = 'maindex'; 
   protected $_a = 'index'; 
   protected $_isrobot = 0;
 

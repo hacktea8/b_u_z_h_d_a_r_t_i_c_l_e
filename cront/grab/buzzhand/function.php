@@ -1,5 +1,12 @@
 <?php
-  
+require_once $APPPATH.'../class_bbcode.php';
+require_once $APPPATH.'../phpCurl.php';
+require_once $APPPATH.'../big2gb/big2gb.php';
+
+$bb = &bbcode::instance();
+$curl = new phpCurl();
+//繁体转简体
+$big2gb = new big2gb();
 
 function getinfolist(&$_cate){
   global $_root,$cid;
@@ -7,11 +14,13 @@ function getinfolist(&$_cate){
 //通过 atotal计算i的值
     $url = $_root.$_cate['ourl'].'?page='.$i;
 echo "\n++++ ",$url," ++++\n";
-exit;
+//exit;
     $html = getHtml($url);
+   if(CHARSET == 'GBK'){
     $html = mb_convert_encoding($html,"UTF-8","GBK");
+   }
     $matchs = getParseListInfo($html);
-#echo '<pre>';var_dump($matchs);exit;
+//echo '<pre>';var_dump($matchs);exit;
     if(empty($matchs)){
        file_put_contents('match_error_list'.$cid.'.html',$html);
        //preg_match_all('##Uis',$html,$matchs,PREG_SET_ORDER);
@@ -22,8 +31,8 @@ exit;
     }
     foreach($matchs as $list){
       $oid = intval(preg_replace('#[^\d]+#','',$list['ourl']));
-      $oname = trim($list['name']);
-/*
+      $oname = trim($list['title']);
+/**/
 //在判断是否更新
       $aid = checkArticleByOname($oname);
       if($aid){
@@ -31,10 +40,9 @@ exit;
          continue;
         return 6;
       }
-*/
+/**/
       $ourl = getFullPath($list['ourl']);
-      $purl = '';
-      $ainfo = array('thum'=>$list['cover'],'ourl'=>$ourl,'purl'=>$purl,'actor'=>$list['actor'],'name'=>$oname,'oid'=>$oid,'cid'=>$cid);
+      $ainfo = array('thum'=>$list['cover'],'ourl'=>$ourl,'title'=>$oname,'oid'=>$oid,'cid'=>$cid);
       getinfodetail($ainfo);
 sleep(1);
     }
@@ -43,10 +51,12 @@ return 0;
 }
 
 function getinfodetail(&$data){
-  global $model,$_root,$cid,$strreplace,$pregreplace;
+  global $model,$_root,$cid,$bb,$curl,$big2gb,$strreplace,$pregreplace;
 echo $data['ourl'],"\n";
   $html = getHtml($data['ourl']);
+ if(CHARSET == 'GBK'){
   $html = mb_convert_encoding($html,"UTF-8","GBK");
+ }
   if(!$html){
     echo "获取html失败";exit;
   }
@@ -55,38 +65,37 @@ echo $data['ourl'],"\n";
   //
   $data['ptime']=time();
   $data['utime']=time();
-  preg_match('#剧情介绍：</h2>\s*</div>\s*<div style="[^"]+">(.+)<p>#Uis',$html,$match);
-  $match[1] = isset($match[1])?$match[1]:'';
+  preg_match('#<div id="detailContent" .+<!-- end content -->#Uis',$html,$match);
+  $match[1] = isset($match[0])?$match[0]:'';
   $match[1] = @iconv("UTF-8","UTF-8//TRANSLIT",$match[1]);
 //echo $match[1],"\n";
-  $data['intro'] = strip_tags($match[1]);
+  $data['intro'] = $match[1];
+  $data['intro'] = closetags($data['intro']);
+
+  foreach($strreplace as $v){
+   $data['intro'] = str_replace($v['from'], $v['to'], $data['intro']);
+  }
+  foreach($pregreplace as $v){
+   $data['intro'] = preg_replace($v['from'], $v['to'], $data['intro']);
+  }
+
+//  $data['intro'] = $bb->html2bbcode($data['intro']);
   $data['intro'] = preg_replace('#&\S+;#Uis','',$data['intro']);
-  $data['intro'] = mb_strlen($data['intro'])>300?mb_substr($data['intro'],0,300,'utf-8'):$data['intro'];
   $data['intro'] = trim($data['intro']);
-  preg_match('#<li><a title=\'[^\']+\' href=\'(/.+/player-0-0\.html)\' target="_blank">.+</a></li>#Uis',$html,$match);
-  $data['purl'] = @$match[1];
-  $playhtml = getArticlePlayData($data['purl']);
-  if(empty($playhtml)){
-    echo ("\n++ Ourl:$data[ourl] Purl:$data[purl] playdata vols decode error!++\n");
-    return 0;
-  }
-  $data['vols'] = getParseVideoInfo($playhtml);
-  unset($data['purl']);
-  if(!$data['name'] || empty($data['vols'])){
-     echo "抓取失败 $data[ourl] \r\n";
-     return false;
-  }
   $data['ourl'] = str_replace($_root,'',$data['ourl']);
+// lib translate
+  $data['title'] = $big2gb->chg_utfcode($data['title'],'UTF-8');
+  $data['intro'] = $big2gb->chg_utfcode($data['intro'],'UTF-8');
+// 添加图片链接
+  preg_match_all('#src\s*=\s*[\'|"](.+)[\'|"]#Uis', $data['intro'], $match);
+//  var_dump($match);exit;
+  $imgs = $match[1];
+  foreach($imgs as $v){
+   $img = getFullPath($v);
+   $data['intro'] = str_replace($v,$img,$data['intro']);
+  }
   echo '<pre>';var_dump($data);exit;
 //在判断是否更新
-  $oname = $data['name'];
-  $aid = checkArticleByOname($oname);
-  if($aid){
-    $vdata = array('name'=>$data['name'],'vols'=>$data['vols']);
-    $aid = addArticleVols($vdata);
-    echo "{$aid}已存在更新!\r\n";
-    return 6;
-  }
 
   $aid = addArticle($data);
 //echo '|',$aid,'|';exit;
@@ -96,43 +105,36 @@ echo $data['ourl'],"\n";
   }
   echo "添加成功! $aid \r\n";
 }
-function getArticlePlayData($purl){
-  global $_root;
-  $purl = getFullPath($purl);
-  $html = getHtml($purl);
-  $html = mb_convert_encoding($html,"UTF-8","GBK");
-  preg_match('#<script type="text/javascript" src="(/playdata/[^"]+)"></script>#Uis',$html,$match);
-  $url = $match[1];
-  $url = getFullPath($url);
-  $html = getHtml($url);
-  $html = mb_convert_encoding($html,"UTF-8","GBK");
-  $htm = explode("'); var urlinfo=",$html);
-  $htm = str_replace("var VideoInfoList=unescape('",'',$htm[0]);
-  return $htm;
-}
 function getParseListInfo($html){
-  preg_match('#<ul class="list_show grid_mode c_clear" id="contents">(.+)</ul>#Uis',$html,$match);
+ if(LIST_HOT){
+  preg_match('#<ul class="ui_list3">(.+)</ul>#Uis',$html,$match);
   $html = isset($match[1])?$match[1]:'';
   if( !$html){
     die("\n+++++ Get Video List Is Empty! ++++\n");
   }
-  preg_match_all('#<li><a class="play_pic" target="_blank" href="([^"]+)"><img src="([^"]+)" alt="[^"]+" onerror="[^"]+" title="([^"]+)" />#Uis',$html,$match);
+  preg_match_all('#<li class="entry" .+<a href="[^"]+">\s+<img src="([^"]+)" />.+<div class="content">\s+<h2 class="mt5 entry-title"><a class="fcEm8" href="([^"]+)">(.+)</a></h2>#Uis',$html,$match);
+ }else{
+// new list
+  preg_match('#<h2>最新文章</h2>\s*</div>\s+<ul>(.+)</ul>#Uis',$html,$match);
+  $html = isset($match[1])?$match[1]:'';
+  if( !$html){
+    die("\n+++++ Get Video List Is Empty! ++++\n");
+  }
+  preg_match_all('#<li .+<img src="([^"]+)" />\s+</a>\s*</div>\s+<div class="content" >\s+<h3 class="entry-title"><a class="fcEm" href="([^"]+)">(.+)</a>#Uis',$html,$match);
+ }
   $titlePool = $match[3];
-  $urlPool = $match[1];
-  $coverPool = $match[2];
-  preg_match_all('#<p class="actor"><em>主演:</em>([^<]*)</p>#Uis',$html,$match);
-  $actorPool = $match[1];
+  $urlPool = $match[2];
+  $coverPool = $match[1];
   $return = array();
   foreach($titlePool as $k => $title){
     $title = trim($title);
     $cover = getFullPath($coverPool[$k]);
     $cover = preg_replace('#\?.+#is','',$cover);
     $cover = preg_replace('#\#.+#is','',$cover);
-    $actor = str_replace('   ',',',$actorPool[$k]);
-    $actor = str_replace('  ',',',$actor);
-    $actor = str_replace(' ',',',$actor);
-    $actor = str_replace('、',',',$actor);
-    $return[] = array('name'=>$title,'ourl'=>$urlPool[$k],'actor'=>$actor,'cover'=>$cover);
+    if( !LIST_HOT){
+     $cover = preg_replace('#\_\d+x\d+\.#Uis','_500x290.',$cover);
+    }
+    $return[] = array('title'=>$title,'ourl'=>$urlPool[$k],'cover'=>$cover);
   }
   return $return;
   var_dump($match);exit;

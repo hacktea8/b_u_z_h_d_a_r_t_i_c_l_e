@@ -1,7 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Grabapi extends CI_Controller {
-   
+  public $mem = '';
+  public $ttl=array('5m'=>300,'15m'=>900,'30m'=>1800,'1h'=>3600,'3h'=>10800,'6h'=>21600,'9h'=>32400,'12h'=>43200,'1d'=>86400,'3d'=>253200,'5d'=>432000,'7d'=>604800);
+  
 	/**
 	 * Index Page for this controller.
 	 *
@@ -9,6 +11,9 @@ class Grabapi extends CI_Controller {
   public function __construct(){
     parent::__construct();
     $this->load->model('grabapimodel');
+    $this->load->model('emulemodel');
+    $this->load->library('memcached');
+    $this->mem = &$this->memcached;
   }
   public function addCateByname(){
     $post = $_POST['cate_info'];
@@ -37,19 +42,22 @@ class Grabapi extends CI_Controller {
       echo '404';
       return 0;
     }
+    if( !isset($post['pcid'])){
+     $cate = $this->getCateInfo();
+     $subCate = $cate[$post['cid']];
+     $post['pcid'] = $subCate['pid'];
+    }
     $data = $this->grabapimodel->addArticle($post);
     $data = json_encode($data);
     die($data);
   }
-  public function addArticleVols(){
-    $post = $_POST['article_data'];
-    $post = json_decode($post,1);
-    if(!$post){
-      echo '404';
-      return 0;
+  private function getCateInfo(){
+    $_key = 'cate_info';
+    $cate_info = $this->mem->get($_key);
+    if( empty($cate_info)){
+      $cate_info = $this->emulemodel->getAllCateInfo();
+      $this->mem->set($_key,$cate_info,$this->ttl['3d']);
     }
-    $data = $this->grabapimodel->updateArticleVols($post);
-    $data = json_encode($data);
-    die($data);
+    return $cate_info;
   }
 }

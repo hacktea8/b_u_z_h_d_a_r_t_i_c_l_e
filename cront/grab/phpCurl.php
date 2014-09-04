@@ -64,8 +64,8 @@ class phpCurl{
     curl_close($this->ch);
     return $this->html;
   }
-  public function translate($q='',$sl='ja',$tl='zh-TW'){
-    $url = sprintf("http://translate.google.cn/translate_a/t?client=t&sl=%s&tl=%s&hl=zh-CN&sc=2&ie=UTF-8&oe=UTF-8&prev=enter&srcrom=1&ssel=4&tsel=4&q=%s",$sl,$tl,urlencode($q));
+  public function translate($q='',$sl='zh-CN',$tl='zh-TW'){
+    $url = sprintf("http://translate.google.cn/translate_a/t?client=t&sl=%s&tl=%s&hl=%s&sc=2&ie=UTF-8&oe=UTF-8&prev=enter&srcrom=1&ssel=4&tsel=4&q=%s",$sl,$sl,$tl,urlencode($q));
     $html = file_get_contents($url);
     $html = explode(',',$html);
     $html = $html[0];

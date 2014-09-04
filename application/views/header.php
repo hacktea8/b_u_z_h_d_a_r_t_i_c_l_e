@@ -104,12 +104,13 @@
               <li class="vertical logo">
                 <h1 class="center">
                   <a href="/">
-                    BuzzHand
+                    <?php echo $web_title;?>
                   </a>
                 </h1>
               </li>
+              <?php if($uinfo['uid']){ ?>
               <li class="vertical nav_r submenu small user">
-                <a class="center" href="/my/index.html">
+                <a class="center" href="/my/index">
                   <img alt="1187247901" title="1187247901" src="/themes/default/images/user_img_def.png"
                   width="30px" height="30px" />
                   <span class="ui_point ui_point_down">
@@ -146,7 +147,7 @@
                       </a>
                     </li>
                     <li>
-                      <a class="fcEm7" href="/user/logout.html">
+                      <a class="fcEm7" href="/user/logout">
                         <span class="ui_icon ui_icon20 ui_icon20_power">
                         </span>
                         登出
@@ -154,11 +155,17 @@
                     </li>
                   </ul>
                 </div>
+                <?php }else{ ?>
+<li class="vertical nav_r small user">
+  <a href="/user/login/?goto=<?php echo $current_url;?>" class="center ui_icon ui_icon20 ui_icon20_user">
+    用户
+  </a>
+                <?php } ?>
                 <!-- login -->
               </li>
               <li class="vertical nav_r submenu small search">
                 <a id="showSearch" class="center ui_icon ui_icon20 ui_icon20_search">
-                  搜尋
+                  搜寻
                 </a>
               </li>
               <li class="vertical nav_r submenu follow">
@@ -176,7 +183,7 @@
               </li>
               <li class="vertical">
                 <a class="center" href="/post/hots.html?date=daily">
-                  熱門
+                  热门
                 </a>
               </li>
               <li class="vertical">
@@ -184,72 +191,43 @@
                   最新
                 </a>
               </li>
-              <li class="vertical submenu" list-id="0">
-                <a class="center" href="/cate_1/">
-                  新聞
+              <?php foreach($cate_info as $k => $v){
+                if($v['pid']){
+                 continue;
+                }
+              ?>
+              <li class="vertical submenu" list-id="<?php echo $k;?>">
+                <a class="center" href="<?php echo $v['url'];?>">
+                  <?php echo $v['title'];?>
                   <span class="ui_point ui_point_down">
                   </span>
                 </a>
               </li>
-              <li class="vertical submenu" list-id="1">
-                <a class="center" href="/cate_2/">
-                  奇趣
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="2">
-                <a class="center" href="/cate_3/">
-                  生活
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="3">
-                <a class="center" href="/cate_4/">
-                  科技
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="4">
-                <a class="center" href="/cate_5/">
-                  娛樂
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="5">
-                <a class="center" href="/cate_6/">
-                  興趣
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
+              <?php } ?>
               <li class="vertical submenu small">
                 <a class="center">
-                  幫助
+                  帮助
                 </a>
                 <div class="submenu_content">
                   <ul>
                     <li>
                       <a href="/forum/cate_1.html">
-                        常見問題
+                        常见问题
                       </a>
                     </li>
                     <li>
                       <a href="/forum/cate_10.html">
-                        經驗分享
+                        经验分享
                       </a>
                     </li>
                     <li>
                       <a href="/forum/cate_11.html">
-                        曬收入
+                        晒收入
                       </a>
                     </li>
                     <li>
                       <a href="/forum/cate_12.html">
-                        提問題
+                        提问题
                       </a>
                     </li>
                     <li>
@@ -259,7 +237,7 @@
                     </li>
                     <li>
                       <a href="/forum/cate_14.html">
-                        網站公告
+                        网站公告
                       </a>
                     </li>
                   </ul>
@@ -270,16 +248,20 @@
                   <span class="ui_icon ui_icon15 ui_icon15_cate mr5">
                   </span>
                   <span class="vm">
-                    頻道
+                    频道
                   </span>
                 </a>
               </li>
               <li class="vertical pub">
-                <a class="center ui_btn ui_btn_green f12" href="/my/postcreate.html">
+              <?php $tmp = array('url'=>'/help/bonus.html','title'=>'发文赚钱');
+              if($uinfo['uid']){
+               $tmp['url'] = '/my/postcreate.html';$tmp['title'] = '发表文章';
+              }?>
+                <a class="center ui_btn ui_btn_green f12" href="<?php echo $tmp['url'];?>">
                   <span class="ui_icon ui_icon15 ui_icon15_edit mr5">
                   </span>
                   <span class="vm">
-                    發表文章
+                    <?php echo $tmp['title'];?>
                   </span>
                 </a>
               </li>

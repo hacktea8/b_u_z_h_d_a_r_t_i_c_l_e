@@ -27,10 +27,15 @@ class userModel extends baseModel{
     $ip = get_client_ip();
     $row['groupid'] = $uinfo['groupid'];
     $row['groups'] = $uinfo['groups'];
+    $introducer = isset($_COOKIE['online']? intval($_COOKIE['online']): 0;
     if(isset($row['uid'])){
       $update = array();
     if($row['loginip'] != $ip){
       $row['loginip'] = $update['loginip'] = $ip;
+    }
+    // 更新上线
+    if($introducer && !$row['introducer']){
+     $update['introducer'] = $introducer;
     }
     if($row['logintime'] != date('Ymd')){
       $row['logintime'] = $update['logintime'] = date('Ymd');
@@ -48,7 +53,8 @@ class userModel extends baseModel{
     }
     return $row;
     }else{
-      $sql = sprintf("INSERT INTO %s(`uid`, `uname`, `isvip`, `loginip`, `logintime`, `collectcount`, `bmarkcount`) VALUES (%d,'%s',%d,'%s',%d,0,0)", $this->db->dbprefix('user'), $uinfo['uid'],mysql_real_escape_string($uinfo['uname']),$uinfo['isvip'],mysql_real_escape_string($ip),date('Ymd'));
+      
+      $sql = sprintf("INSERT INTO %s(`uid`, `uname`, `isvip`, `loginip`, `logintime`, `introducer`) VALUES (%d,'%s',%d,'%s',%d,%d)", $this->db->dbprefix('user'), $uinfo['uid'],mysql_real_escape_string($uinfo['uname']),$uinfo['isvip'],mysql_real_escape_string($ip),date('Ymd'),$introducer);
       $this->db->query($sql);
     }
     return $uinfo;

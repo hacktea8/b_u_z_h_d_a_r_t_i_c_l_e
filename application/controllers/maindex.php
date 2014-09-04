@@ -318,14 +318,6 @@ var_dump($list);exit;
     header('Location: '.$url);
     exit;
   }
-  public function loginout(){
-    $this->session->unset_userdata('user_logindata');
-    setcookie('hk8_auth','',time()-3600,'/');
-    $url = $_SERVER['HTTP_REFERER'];
-//echo $url;exit;
-    header('Location: '.$url);
-    exit;
-  }
   public function isUserInfo(){
     $data = array('status'=>0);
     if( isset($this->userInfo['uid']) && $this->userInfo['uid']){

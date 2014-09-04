@@ -24,7 +24,7 @@ class Usrbase extends Webbase {
 */
     $_key = 'cate_info';
     $cate_info = $this->mem->get($_key);
-    if( empty($channel)){
+    if( empty($cate_info)){
       $cate_info = $this->emulemodel->getAllCateInfo();
       $this->mem->set($_key,$cate_info,$this->expirettl['3d']);
     } 
