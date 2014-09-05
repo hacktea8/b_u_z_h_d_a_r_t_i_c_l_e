@@ -1,12 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-ini_set('display_errors',1);
-error_reporting(E_ALL);
 require_once 'webbase.php';
-class Ajaxapi extends Webbase {
+class Ajax extends Webbase {
 
 
   public function __construct(){
     parent::__construct();
+    //判断请求是否Ajax
+    if( !$this->input->is_ajax_request()){
+       die(0);
+    }
     //判断referer是否合法
     $allow_referer = $this->config->item('allow_referer');
     $domain_arr = explode('|', $allow_referer);
@@ -20,22 +22,20 @@ class Ajaxapi extends Webbase {
     if(!$referer){
       die(0);
     }
-    //判断请求是否Ajax
-    if( 'XMLHttpRequest' != $_SERVER['HTTP_X_REQUESTED_WITH']){
-       die(0);
-    }
     $this->load->model('emulemodel');
   }
-  
-  public function getcate($cid = 0, $pid = 0){
-    $return = $this->_getCateListById($id, $pid);
-    die(json_encode($return));
-  }
-  public function addpv(){
-    $key = 'play_auth'.$ip;
-    $this->redis->set($key,1,$this->expirettl['12h']);
-    echo 1;
-  }
+  public function clicklog($aid,$uid,$cid){
+    $ip = $this->input->ip_address();
+    // 检查当前IP是否已使用
+    $check_key = sprintf('post_uv_key_%d_%s',$aid,$ip);
+    if($this->redis->exists($check_key)){
+      return 0;
+    }
+    //redis file_storge
+    $this->redis->set($check_key,1,$this->ttl['1d']);
+    $log_key = sprintf('post_uv:1:%d:%d:%d:%d:%d',$aid,$uid,$cid,date('Ym'),date('Ymd'));
+    $this->redis->incr($log_key);
+  } 
   public function clearcache($type = 'mem',$key = 'all'){
     if($type == 'mem'){
       $key_map = array('top_youMayLike','channel','');
