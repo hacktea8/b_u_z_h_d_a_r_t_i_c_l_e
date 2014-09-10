@@ -139,10 +139,13 @@ function addArticle($data){
   );
   $error = json_last_error();
   if($error){
+    echo "=== JSON ERROR! ====\n";
     var_dump($data);exit;
   }
   $html = $apicurl->getHtml();
-//var_dump($html);exit;
+/**/echo $url;
+var_dump($html);exit;
+/**/
   return json_decode($html,1);
 }
 function getHtml($url){

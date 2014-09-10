@@ -42,4 +42,34 @@ class Ajax extends Webbase {
     }
     echo '1';
   }
+  public function topList_data(){
+    $ttl = 3600;
+    $file = APPPATH.'../public/js/toplist_data.js';
+    if( file_exists($file) && (time() - filemtime($file)) > $ttl{
+      $cate_list = $this->mem->get('cate_info');
+      $return = array();
+      if(empty($return)){
+       return 1;
+      }
+      foreach($cate_list as $k => $pc){
+       if($pc['pcid']){
+        continue;
+       }
+       $tmp = array();
+       $subList = $this->emulemodel->getArticleListByCid($pcid = $k,$cid='',$order=0,$page=1,$limit=4);
+       $tmp[] = array('title' => '全部','url' => $pc['url'],'subList'=>$subList);
+       foreach($cate_list as $v){
+        if($k != $v['pcid']){
+         continue;
+        }
+        $subList = $this->emulemodel->getArticleListByCid($cid=$v['cid'],$order=0,$page=1,$limit=4);
+        $tmp[] = array('title' => $v['title'],'url' => $v['url'],'subList'=>$subList);
+       }
+       $return[] = array('list'=>$tmp,'more'=>$pc['url']);
+      }
+      $json = 'var jsonList = '.json_encode($return);
+      file_put_contents($file, $json);
+    }
+    die('OK');
+  }
 }

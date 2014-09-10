@@ -140,7 +140,7 @@ class emuleModel extends baseModel{
     return isset($row['total']) ? $row['total']: 0;
   }
 
-  public function getArticleListByCid($cid='',$order=0,$page=1,$limit=25){
+  public function getArticleListByCid($pcid = 0,$cid='',$order=0,$page=1,$limit=25){
      switch($order){
        case 1:
        $order=' ORDER BY a.hits ASC '; break;
@@ -154,14 +154,11 @@ class emuleModel extends baseModel{
      $page *= $limit;
      $where = '';
      if($cid){
-/*
-       $cids = $this->getAllCateidsByCid($cid);
-       $cids = implode(',',$cids);
-       $where = ' a.`cid` in ('.$cids.')  ';
-*/
        $where = ' a.`cid` ='.$cid.' AND ';
+     }elseif($pcid){
+       $where = ' a.`pcid` ='.$pcid.' AND ';
      }
-     $sql = sprintf('SELECT %s FROM %s as a WHERE %s a.`onlinedate`<=%d AND a.`onlinedate`>0 AND a.`flag`=1 %s LIMIT %d,%d',$this->_dataStruct,$this->db->dbprefix('emule_article'),$where,date('Ymd'),$order,$page,$limit);
+     $sql = sprintf('SELECT %s FROM %s as a WHERE %s a.`onlinedate`<=%d AND a.`onlinedate`>0 AND a.`flag`=1 %s LIMIT %d,%d',$this->_dataStruct,$this->db->dbprefix('article_title'),$where,date('Ymd'),$order,$page,$limit);
 //echo $sql;exit;
      $data = array();
      $data = $this->db->query($sql)->result_array();

@@ -42,7 +42,7 @@ echo "\n++++ ",$url," ++++\n";
       }
 /**/
       $ourl = getFullPath($list['ourl']);
-      $ainfo = array('thum'=>$list['cover'],'ourl'=>$ourl,'title'=>$oname,'oid'=>$oid,'cid'=>$cid);
+      $ainfo = array('thum'=>$list['cover'],'ourl'=>$ourl,'title'=>$oname,'sitetype'=>'buzzhand','cid'=>$cid);
       getinfodetail($ainfo);
 sleep(1);
     }
@@ -60,14 +60,11 @@ echo $data['ourl'],"\n";
   if(!$html){
     echo "获取html失败";exit;
   }
-  //kw
-  $data['keyword'] = '';
   //
   $data['ptime']=time();
   $data['utime']=time();
   preg_match('#<div id="detailContent" .+<!-- end content -->#Uis',$html,$match);
   $match[1] = isset($match[0])?$match[0]:'';
-  $match[1] = @iconv("UTF-8","UTF-8//TRANSLIT",$match[1]);
 //echo $match[1],"\n";
   $data['intro'] = $match[1];
   $data['intro'] = closetags($data['intro']);
@@ -85,6 +82,7 @@ echo $data['ourl'],"\n";
   $data['ourl'] = str_replace($_root,'',$data['ourl']);
 // lib translate
   $data['title'] = $big2gb->chg_utfcode($data['title'],'UTF-8');
+  //$data['intro'] = @iconv("UTF-8","UTF-8//TRANSLIT", $data['intro']);
   $data['intro'] = $big2gb->chg_utfcode($data['intro'],'UTF-8');
 // 添加图片链接
   preg_match_all('#src\s*=\s*[\'|"](.+)[\'|"]#Uis', $data['intro'], $match);
@@ -94,7 +92,7 @@ echo $data['ourl'],"\n";
    $img = getFullPath($v);
    $data['intro'] = str_replace($v,$img,$data['intro']);
   }
-  echo '<pre>';var_dump($data);exit;
+//  echo '<pre>';var_dump($data);exit;
 //在判断是否更新
 
   $aid = addArticle($data);
@@ -104,6 +102,7 @@ echo $data['ourl'],"\n";
     exit;return false;
   }
   echo "添加成功! $aid \r\n";
+exit;
 }
 function getParseListInfo($html){
  if(LIST_HOT){

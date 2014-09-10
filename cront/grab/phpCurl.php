@@ -1,6 +1,6 @@
 <?php
 class phpCurl{
-  public $config = array();
+  public $config = array('auto'=>1);
   public $postVal = array();
   protected $ch = '';
   public $cookie_file = '';
@@ -11,6 +11,7 @@ class phpCurl{
     'cookie'=>'cookie',
     'userAgent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.95 Safari/537.36',
     'header' => 0
+    ,'auto'=>1
     );
 
   }
@@ -22,7 +23,7 @@ class phpCurl{
     curl_setopt($this->ch,CURLOPT_HEADER, intval($this->config['header']));
     //lighttpd server
     curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->http_header);
-    curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, $this->config['auto']);
     curl_setopt($this->ch, CURLOPT_MAXREDIRS, 1);
     if(isset($this->config['referer'])){
        curl_setopt ($this->ch,CURLOPT_REFERER, $this->config['referer']);

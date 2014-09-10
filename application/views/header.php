@@ -21,10 +21,10 @@
       window.jQuery || document.write("<script src='http://libs.baidu.com/jquery/1.7.2/jquery.min.js'><\/script>");
     </script>
     <script src="<?php echo $cdn_url;?>/js/lib/VK.js"></script>
-    <script src="<?php echo $cdn_url;?>/public/js/lanage.js?v=<?php echo $version;?>"></script>
-    <script src="<?php echo $cdn_url;?>/public/js/function.js?v=<?php echo $version;?>"></script>
+    <script src="<?php echo $cdn_url;?>/js/lanage.js?v=<?php echo $version;?>"></script>
+    <script src="<?php echo $cdn_url;?>/js/function.js?v=<?php echo $version;?>"></script>
     <?php if(in_array($_a,array('index','lists','views','play','fav','search'))){ ?>
-     <script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
+     <script type="text/javascript" src="<?php echo $cdn_url;?>/js/jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
     <?php } ?>
     <!--[if lt IE 9]>
       <script src="<?php echo $cdn_url;?>/js/lib/html5.js">
@@ -81,7 +81,7 @@
           }
          ?>
             <a href="<?php echo $v['url'];?>" title="<?php echo $v['title'];?>">
-              <?php echo $v['title'];?>
+              <?php echo $v['title'];?> <span class="ui_point ui_point_down"></span>
             </a>
           </li>
          <?php }?>

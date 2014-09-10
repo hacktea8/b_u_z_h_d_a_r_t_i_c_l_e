@@ -2,10 +2,10 @@
 
 class Api extends CI_Controller {
    
-	/**
-	 * Index Page for this controller.
-	 *
-	 */
+  /**
+   * Index Page for this controller.
+   *
+   */
   public function __construct(){
     parent::__construct();
     $this->load->model('apimodel');
