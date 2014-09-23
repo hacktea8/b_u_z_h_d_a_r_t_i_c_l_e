@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'webbase.php';
-class Usrbase extends Webbase {
+class Viewbase extends Webbase {
   public $url404 = '/maindex/show404'; 
   public $seo_title = '首页'; 
   public $seo_keywords = '';

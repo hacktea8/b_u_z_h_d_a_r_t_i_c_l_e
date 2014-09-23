@@ -72,4 +72,17 @@ class Ajax extends Webbase {
     }
     die('OK');
   }
+  public function crontab(){
+    $lock = BASEPATH.'/../crontab_loc.txt';
+    if(file_exists($lock) && time()-filemtime($lock)<6*3600){
+       return false;
+    }
+    $this->emulemodel->autoSetVideoOnline(5);
+    $this->emulemodel->setCateVideoTotal();
+    //clear channel cache
+    $this->mem->set('channel','',$this->expirettl['3h']);
+    file_put_contents($lock,'');
+    chmod($lock,0777);
+    echo 1;exit;
+  }
 }

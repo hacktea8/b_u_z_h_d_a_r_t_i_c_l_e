@@ -34,7 +34,7 @@ class grabapiModel extends CI_Model{
     return $row['id']? $row['id']: 0;
   }
   public function addArticle($data){
-    if(empty($data['name'])){
+    if(empty($data['title'])){
       return 0;
     }
     $head = $this->copy_array($data,array('title','pcid','uid','chid','cid','thum'
@@ -45,6 +45,7 @@ class grabapiModel extends CI_Model{
     }
     $contents = $this->copy_array($data,array('intro'));
     $sql = $this->db->insert_string($this->db->dbprefix('article_title'),$head);
+//echo $sql;exit;
     $this->db->query($sql);
     $id = $this->db->insert_id();
     if(!$id){

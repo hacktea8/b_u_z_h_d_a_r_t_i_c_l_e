@@ -35,7 +35,7 @@ $config['allow_referer'] = '.qvdhd.com|.hacktea8.com|.emubt.com';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

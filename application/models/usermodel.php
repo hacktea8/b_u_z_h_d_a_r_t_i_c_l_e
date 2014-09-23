@@ -27,7 +27,7 @@ class userModel extends baseModel{
     $ip = get_client_ip();
     $row['groupid'] = $uinfo['groupid'];
     $row['groups'] = $uinfo['groups'];
-    $introducer = isset($_COOKIE['online']? intval($_COOKIE['online']): 0;
+    $introducer = isset($_COOKIE['online'])? intval($_COOKIE['online']): 0;
     if(isset($row['uid'])){
       $update = array();
     if($row['loginip'] != $ip){

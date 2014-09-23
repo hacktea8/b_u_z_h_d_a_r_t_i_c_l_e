@@ -37,7 +37,8 @@ class Grabapi extends CI_Controller {
   }
   public function addArticleInfo(){
     $post = $_POST['article_data'];
-    $post = json_decode($post,1);
+    //$post = json_decode($post,1);
+    $post = unserialize($post);
     if(!$post){
       echo '404';
       return 0;
@@ -45,8 +46,9 @@ class Grabapi extends CI_Controller {
     if( !isset($post['pcid'])){
      $cate = $this->getCateInfo();
      $subCate = $cate[$post['cid']];
-     $post['pcid'] = $subCate['pid'];
+     $post['pcid'] = $subCate['pcid'];
     }
+//var_dump($post);exit;
     $data = $this->grabapimodel->addArticle($post);
     $data = json_encode($data);
     die($data);
