@@ -12,7 +12,7 @@ class Viewbase extends Webbase {
     parent::__construct();
     
     $this->load->helper('rewrite');
-    $this->load->model('emulemodel');
+    $this->load->model('cateModel');
 /*
     $_key = 'top_youMayLike';
     $youMayLike = $this->mem->get($_key);
@@ -25,20 +25,19 @@ class Viewbase extends Webbase {
     $_key = 'cate_info';
     $cate_info = $this->mem->get($_key);
     if( empty($cate_info)){
-      $cate_info = $this->emulemodel->getAllCateInfo();
-      $this->mem->set($_key,$cate_info,$this->expirettl['3d']);
+      $cate_info = $this->cateModel->getAllCateInfo();
+      $this->mem->set($_key,$cate_info,self::$ttl['3d']);
     } 
-//echo "<pre>";var_dump($cate_info);exit;
     $this->assign(array(
     'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description
     ,'seo_title'=>$this->seo_title,'cdn_url'=>$this->config->item('cdn_url')
     ,'showimgapi'=>$this->showimgapi,'error_img'=>'/public/images/show404.jpg'
     ,'youMayLike'=>$youMayLike,'cate_info'=>$cate_info
-    ,'cpid'=>0,'cid'=>0,'playMod'=>$this->playMod
+    ,'pcid'=>0,'cid'=>0
     ,'editeUrl' => '/edite/index/emuleTopicAdd'
     ));
-    $this->_get_postion();
-    $this->_get_ads_link();
+    //$this->_get_postion();
+    //$this->_get_ads_link();
 //var_dump($this->viewData);exit;
   }
   protected function _get_postion($postion = array()){

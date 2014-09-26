@@ -1,10 +1,32 @@
 <?php
 class baseModel extends CI_Model{
  public $db;
- static public $_tArtileHead = '';
- static public $_tArtileBody = '';
+ static public $_tArtileHead = 'article_title';
+ static public $_fAH = ' `pcid`, `cid`, `uid`, `title`, `cover`, `ourl`, `coop`, `hits`, `iscover`, `ptime`, `utime`';
+ static public $_tArtileBody = 'article_content';
+ static public $_fAB = '`source_site`, `source_link`, `intro`, `tags`, `prelink`, `nextlink`';
+ static public $_tCate = 'cate';
+ static public $_fCate = '`cid`, `pcid`, `title`, `sort`, `adult`, `total`';
+ static public $_tTag = '`tags`';
+ static public $_fTag = '`tid`, `title`, `total`';
+ static public $_tTA = '`article_tag`';
+ static public $_tUser = '`user`';
+ static public $_fUser = '`uid`, `uname`, `gid`, `introducer`, `visitors`, `prevgains`, `prev_visitors`, `isvip`, `loginip`, `logintime`';
+ static public $_tUMeta = '`user_meta`';
+ static public $_fUMeta = '`uid`, `fname`, `lname`, `cover`, `mobile`, `county`, `pay_method`, `pay_account`';
+ static public $_tUGroup = '`user_group`';
+ static public $_fUGroup = '`gid`, `title`, `price`, `note`, `post_count`, `offline_count`, `offline_amount`';
+ static public $_tUPC = '`user_pay_records`';
+ static public $_fUPC = '`id`, `uid`, `dateline`, `code`, `account`, `amount`';
+ static public $_tUDI = '`user_daily_income`';
+ static public $_fUDI = '`id`, `uid`, `gid`, `wid`, `amount`, `post_amount`, `deduct_amount`, `click_amount`, `writer_amount`, `devote_amount`, `post_count`, `Ym`, `Ymd`';
+ static public $_tWGroup = 'writer_group';
+ static public $_fWG = '`id`, `title`, `hits`, `award`';
+ static public $_tADR = '`article_dayily_read`';
+ static public $_fADR = '`id`, `aid`, `uid`, `cid`, `Ym`, `Ymd`, `click`';
+ static public $_tACR = '`article_coop_read`';
+ static public $_fACR = '`id`, `aid`, `uid`,`cop_uid`, `referer`, `total`';
  
-
  public function __construct(){
   parent::__construct();
   $this->db  = $this->load->database('default', TRUE);     
@@ -14,7 +36,7 @@ class baseModel extends CI_Model{
   $suf = '.html';
   $site_url = '';
   if('cate' == $mod){
-    $url = sprintf('%s/cate/index/%d/%d/%d%s',$site_url,$p1,$p2,$p3,$suf);
+    $url = sprintf('%s/cate/index/%d%s',$site_url,$p1,$suf);
   }elseif('article' == $mod){
     $url = sprintf('%s/article/index/%d%s',$site_url,$p1,$suf);
   }elseif('channel' == $mod){

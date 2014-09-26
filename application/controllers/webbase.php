@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Webbase extends CI_Controller {
-  public $ttl=array('5m'=>300,'15m'=>900,'30m'=>1800,'1h'=>3600,'3h'=>10800,'6h'=>21600,'9h'=>32400,'12h'=>43200,'1d'=>86400,'3d'=>253200,'5d'=>432000,'7d'=>604800);
+  static public $ttl = array('5m'=>300,'15m'=>900,'30m'=>1800,'1h'=>3600,'3h'=>10800,'6h'=>21600,'9h'=>32400,'12h'=>43200,'1d'=>86400,'3d'=>253200,'5d'=>432000,'7d'=>604800);
   protected $mem = '';
   protected $redis = '';
   public $viewData = array();
   protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0,'isadmin'=>0);
   public $adminList = array(1);
-  protected $_c = 'maindex'; 
+  protected $_c = 'index'; 
   protected $_a = 'index'; 
   protected $_isrobot = 0;
 
@@ -90,5 +90,8 @@ class Webbase extends CI_Controller {
     $q = $this->uri->segment($i, $default);
     $q = str_replace('.','',$q);
     return $q ? $q: $default;
+  }
+  protected function debug($data){
+   echo "<pre>";var_dump($data);exit;
   }
 }

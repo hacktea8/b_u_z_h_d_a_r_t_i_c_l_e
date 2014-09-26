@@ -7,8 +7,8 @@ class Rediscache{
     'port'   => 6379,
     'timeout'  => 10800
   );
-  public $redis=null;
-  public $pre='qvod';
+  public $redis = null;
+  public $pre = 'buzhd';
   public function __construct() {
     $this->redis=new Redis();
     $this->redis->pconnect($this->_config['host'],$this->_config['port'],$this->_config['timeout']);

@@ -1,7 +1,7 @@
 /**
  * @author Vickyhuang
  */
-document.write('<script language=javascript src="/public/toplist_data.js?t='+new Date().getHours()+'"></script>');
+document.write('<script language=javascript src="/public/js/topList_data.js?t='+new Date().getHours()+'"></script>');
 
 var TopList = {
 	getList: function (args) {
