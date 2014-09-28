@@ -19,12 +19,14 @@ class Article extends Viewbase {
        exit;
     }
     $cid = $data['cid'] ? $data['cid'] : 0;
+    $top_channel = array($data['pcid'],$data['cid']);
     $_key = 'view_rightHot'.$cid;
     $viewHot = $this->mem->get($_key);
     if(empty($viewHot)){
        $viewHot = $this->articleModel->getArticleListByCid($pcid = 0,$cid,'hot',array(2,18));
        $this->mem->set($_key,$viewHot,self::$ttl['12h']);
     }
+    $also_like = array();
     $data['intro'] = preg_replace(array('#[a-z]+://[a-z0-9]+\.[a-z0-9-_/\.]+#is','#[a-z0-9]+\.[a-z0-9-_/\.]+#is'),array('',''),$data['intro']);
 // seo setting
     $kw = $this->viewData['cate_info'][$cid]['title'];
@@ -35,9 +37,9 @@ class Article extends Viewbase {
     $seo_description = mb_substr($seo_description,0,250);
     $isCollect = 0;//$this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['id']);
     $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title
-    ,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data
-    ,'aid'=>$aid,'seo_description'=>$seo_description
-    ,'videovols'=>$data['vols'],'viewHot'=>$viewHot
+    ,'seo_keywords'=>$keywords,'cid'=>$cid,'pcid'=>$cpid,'info'=>$data
+    ,'aid'=>$aid,'seo_description'=>$seo_description,'top_channel'=>$top_channel
+    ,'also_like'=>$also_like,'viewHot'=>$viewHot
     )); 
 //$this->debug($this->viewData);
     $this->view('index_post');

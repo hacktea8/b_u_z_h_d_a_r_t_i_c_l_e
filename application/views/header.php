@@ -1,46 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta property="og:image" content="http://www.buzzhand.com/uploads/e9/b/125843/14116516059756.jpg"
+<?php if('article' == $_a){?>
+ <?php foreach($intro_img as $v){?>
+    <meta property="og:image" content="<?php echo $v;?>"
     />
-    <meta property="og:image" content="http://www.buzzhand.com/uploads/e9/b/125843/14116516105952.jpg"
-    />
-    <meta property="og:image" content="http://www.buzzhand.com/uploads/e9/b/125843/141165162234.jpg"
-    />
-    <meta property="og:image" content="http://www.buzzhand.com/uploads/e9/b/125843/14116516394302.jpg"
-    />
-    <meta property="og:image" content="http://www.buzzhand.com/uploads/e9/b/125843/14116516595907.jpg"
-    />
-    <meta property="og:site_name" content="BuzzHand" />
-    <meta property="article:publisher" content="https://www.facebook.com/BuzzHandCom"
-    />
-    <meta property="og:title" content="太可怕了，以後千萬別吃了這5種小吃了，有毒,為了家人和朋友一定要分享"
-    />
+ <?php }?>
     <meta property="og:type" content="article" />
+    <meta property="og:url" content="<?php echo $site_url;$info['url'];?>" />
+    <meta property="article:publisher" content="https://www.facebook.com/<?php echo $fans_page;?>"
+    />
+<?php }?>
+    <meta property="og:site_name" content="<?php echo $site_name?>" />
+    <meta property="og:title" content="<?php echo $seo_title;?>" />
     <meta property="article:section" content="社會萬象" />
-    <meta property="og:description" content="路邊攤的食物因為美味多樣，並且價格便宜而受到很多人的喜歡，但是有些路邊攤食物會對身體健康產生嚴重危害，建議大家最好不要食用。比如下面5種常見「有毒」食物以後就千萬別吃了，以免給身體健康埋下隱患。"
+    <meta property="og:description" content="<?php echo $seo_description;?>"
     />
     <meta property="og:locale" content="zh_TW" />
-    <meta property="og:url" content="http://www.buzzhand.com/post_125843.html"
-    />
-    <script type="text/javascript" src="/assets/2606479b/jquery.min.js">
-    </script>
     <title>
-      太可怕了，以後千萬別吃了這5種小吃了，有毒,為了家人和朋友一定要分享 - BuzzHand
+     <?php echo $seo_title;?> - <?php echo $site_name;?>
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="tencent-x5-page-direction" content="landscape">
     <meta name="distribution" content="Taiwan" />
-    <meta name="author" content="BuzzHand">
+    <meta name="author" content="<?php echo $site_name?>">
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no">
-    <link rel="alternate" type="application/rss+xml" title="BuzzHand &raquo; Feed"
-    href="/site/feed.html">
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $site_name?> &raquo; Feed"
+    href="/rss/index/feed.html">
     <link href="<?php echo $cdn_url;?>/css/buzzhand.css?v=<?php echo $version;?>" rel="stylesheet">
     <link rel="icon shortcut" href="<?php echo $cdn_url;?>/images/favicon.ico" type="image/x-icon">
     <script type="text/javascript">
-      window.jQuery || document.write("<script src='<?php echo $cdn_url;?>/js/lib/jquery.js'><\/script>");
+      window.jQuery || document.write("<script src='http://libs.baidu.com/jquery/1.7.2/jquery.min.js'><\/script>");
     </script>
     <script src="<?php echo $cdn_url;?>/js/waypoints.min.js">
     </script>
@@ -95,41 +87,20 @@
               最新
             </a>
           </li>
+<?php $ik=0;foreach($cate_info as $v){
+if($ik>6){
+ break;
+}
+if($v['pid']){
+ continue;
+}
+?>
           <li>
-            <a href="/cate_1/" title="新聞">
-              新聞
+            <a href="<?php echo $v['url'];?>" title="<?php echo $v['title'];?>">
+              <?php echo $v['title'];?>
             </a>
           </li>
-          <li>
-            <a href="/cate_2/" title="奇趣">
-              奇趣
-            </a>
-          </li>
-          <li>
-            <a href="/cate_3/" title="生活">
-              生活
-            </a>
-          </li>
-          <li>
-            <a href="/cate_4/" title="科技">
-              科技
-            </a>
-          </li>
-          <li>
-            <a href="/cate_5/" title="娛樂">
-              娛樂
-            </a>
-          </li>
-          <li>
-            <a href="/cate_6/" title="興趣">
-              興趣
-            </a>
-          </li>
-          <li>
-            <a title="頻道" href="/channel/index.html">
-              頻道
-            </a>
-          </li>
+<?php $ik++;}?>
           <li class="title">
             個人中心
           </li>
@@ -144,7 +115,7 @@
             </a>
           </li>
           <li>
-            <a href="http://my.buzzhand.com/user/logout.html" title="退出">
+            <a href="/user/logout.html" title="退出">
               退出
             </a>
           </li>
@@ -164,8 +135,8 @@
               </li>
               <li class="vertical logo">
                 <h2 class="center">
-                  <a href="http://www.buzzhand.com">
-                    BuzzHand
+                  <a href="/">
+                    <?php echo $site_name;?>
                   </a>
                 </h2>
               </li>
@@ -245,48 +216,22 @@
                   最新
                 </a>
               </li>
-              <li class="vertical submenu" list-id="0">
-                <a class="center" href="/cate_1/">
-                  新聞
+<?php $ik=0;foreach($cate_info as $v){
+if($ik>5){
+ break;
+}
+if($v['pid']){
+ continue;
+}
+?>
+              <li class="vertical submenu" list-id="<?php echo $ik;?>">
+                <a class="center" href="<?php echo $v['url'];?>">
+                  <?php echo $v['title'];?>
                   <span class="ui_point ui_point_down">
                   </span>
                 </a>
               </li>
-              <li class="vertical submenu" list-id="1">
-                <a class="center" href="/cate_2/">
-                  奇趣
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="2">
-                <a class="center" href="/cate_3/">
-                  生活
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="3">
-                <a class="center" href="/cate_4/">
-                  科技
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="4">
-                <a class="center" href="/cate_5/">
-                  娛樂
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
-              <li class="vertical submenu" list-id="5">
-                <a class="center" href="/cate_6/">
-                  興趣
-                  <span class="ui_point ui_point_down">
-                  </span>
-                </a>
-              </li>
+<?php $ik++;}?>
               <li class="vertical submenu small">
                 <a class="center">
                   幫助
