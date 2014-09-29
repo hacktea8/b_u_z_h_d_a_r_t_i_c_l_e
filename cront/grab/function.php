@@ -134,8 +134,10 @@ function addArticle($data){
   global $apicurl,$POST_API;
   $url = $POST_API.'addArticleInfo';
   $apicurl->config['url'] = $url;
+  //$post = json_encode($data);
+  $post = serialize($data);
   $apicurl->postVal = array(
-  'article_data' => json_encode($data)
+  'article_data' => $post
   );
   $error = json_last_error();
   if($error){
@@ -143,7 +145,7 @@ function addArticle($data){
     var_dump($data);exit;
   }
   $html = $apicurl->getHtml();
-/**/echo $url;
+/*/echo $url;
 var_dump($html);exit;
 /**/
   return json_decode($html,1);

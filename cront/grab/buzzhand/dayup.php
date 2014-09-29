@@ -14,11 +14,12 @@ include_once($APPPATH.'config.php');
 $lastgrab = basename(__FILE__);
 $path = $APPPATH.'config/';
 
-$num=17;
-foreach($cids as $num){
-$i=0;
-foreach($cate_config as $_cate){
-  $i++;
+$it = count($cate_config);
+
+for($num =0; $num<$it; $num++){
+ 
+ foreach($cate_config as $k => $_cate){
+  $i = $k;
   //1,5,9,13,17 isok
   if($i > $num){
     break;
@@ -26,13 +27,13 @@ foreach($cate_config as $_cate){
   if($i != $num){
     continue;
   }
-
-//var_dump($_cate);exit;
-  $lastgrab = $path.$_cate['cid'].'_'.$lastgrab;
-  getSubCatearticle($_cate);
-  sleep(10);
-}
-sleep(10);
+  echo "\n+++++++ Curren Task Is $num +++++++\n";
+ //var_dump($_cate);exit;
+  $cid = $_cate['cid'];
+  getinfolist($_cate);
+  echo "\n==== 抓取任务结束! =====\n";
+ }
+ sleep(10);
 }
 
 

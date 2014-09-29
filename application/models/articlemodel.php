@@ -5,9 +5,10 @@ class articleModel extends baseModel{
  public function __construct(){
   parent::__construct();
  }
- public function getIndexData(){
+ public function getIndexData($p = 1){
   $r = array();
-  
+  $r['hot'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'new', $limit = array($p,9));
+  $r['new'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'hot', $limit = array($p,9));
   return $r;
  }
  public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7)){

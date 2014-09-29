@@ -10,7 +10,7 @@ $big2gb = new big2gb();
 
 function getinfolist(&$_cate){
   global $_root,$cid;
-  for($i=1; $i<=2000; $i++){
+  for($i=1; $i<=5; $i++){
 //通过 atotal计算i的值
     $url = $_root.$_cate['ourl'].'?page='.$i;
 echo "\n++++ ",$url," ++++\n";
@@ -63,10 +63,14 @@ echo $data['ourl'],"\n";
   //
   $data['ptime']=time();
   $data['utime']=time();
-  preg_match('#<div id="detailContent" .+<!-- end content -->#Uis',$html,$match);
-  $match[1] = isset($match[0])?$match[0]:'';
-//echo $match[1],"\n";
-  $data['intro'] = $match[1];
+  //preg_match('#<div id="detailContent" .+<!-- end content -->#Uis',$html,$match);
+  //$match[1] = isset($match[0])?$match[0]:'';
+  $str = '';$string = $html;
+  $head = '<div class="detail f16 fcEm8 lh32">';
+  $end = '</div>';$same = $end;
+  getTagpair($str,$string,$head,$end,$same);
+//echo $str,"\n";exit;
+  $data['intro'] = $str;
   $data['intro'] = closetags($data['intro']);
 
   foreach($strreplace as $v){
@@ -84,6 +88,7 @@ echo $data['ourl'],"\n";
   $data['title'] = $big2gb->chg_utfcode($data['title'],'UTF-8');
   //$data['intro'] = @iconv("UTF-8","UTF-8//TRANSLIT", $data['intro']);
   $data['intro'] = $big2gb->chg_utfcode($data['intro'],'UTF-8');
+//  var_dump($data['intro']);exit;
 // 添加图片链接
   preg_match_all('#src\s*=\s*[\'|"](.+)[\'|"]#Uis', $data['intro'], $match);
 //  var_dump($match);exit;
@@ -102,13 +107,13 @@ echo $data['ourl'],"\n";
     exit;return false;
   }
   echo "添加成功! $aid \r\n";
-exit;
 }
 function getParseListInfo($html){
  if(LIST_HOT){
   preg_match('#<ul class="ui_list3">(.+)</ul>#Uis',$html,$match);
   $html = isset($match[1])?$match[1]:'';
   if( !$html){
+    file_put_contents('debug_list_hot.html',$html);
     die("\n+++++ Get Video List Is Empty! ++++\n");
   }
   preg_match_all('#<li class="entry" .+<a href="[^"]+">\s+<img src="([^"]+)" />.+<div class="content">\s+<h2 class="mt5 entry-title"><a class="fcEm8" href="([^"]+)">(.+)</a></h2>#Uis',$html,$match);
@@ -117,6 +122,7 @@ function getParseListInfo($html){
   preg_match('#<h2>最新文章</h2>\s*</div>\s+<ul>(.+)</ul>#Uis',$html,$match);
   $html = isset($match[1])?$match[1]:'';
   if( !$html){
+    file_put_contents('debug_list_new.html',$html);
     die("\n+++++ Get Video List Is Empty! ++++\n");
   }
   preg_match_all('#<li .+<img src="([^"]+)" />\s+</a>\s*</div>\s+<div class="content" >\s+<h3 class="entry-title"><a class="fcEm" href="([^"]+)">(.+)</a>#Uis',$html,$match);

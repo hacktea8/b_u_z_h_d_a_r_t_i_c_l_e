@@ -2,7 +2,7 @@
 class baseModel extends CI_Model{
  public $db;
  static public $_tArtileHead = 'article_title';
- static public $_fAH = ' `pcid`, `cid`, `uid`, `title`, `cover`, `ourl`, `coop`, `hits`, `iscover`, `ptime`, `utime`';
+ static public $_fAH = ' id,`pcid`, `cid`, `uid`, `title`, `cover`, `ourl`, `coop`, `hits`, `iscover`, `ptime`, `utime`';
  static public $_tArtileBody = 'article_content';
  static public $_fAB = '`source_site`, `source_link`, `intro`, `tags`, `prelink`, `nextlink`';
  static public $_tCate = 'cate';
