@@ -5,6 +5,11 @@ class articleModel extends baseModel{
  public function __construct(){
   parent::__construct();
  }
+ public function getIndexData(){
+  $r = array();
+  
+  return $r;
+ }
  public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7)){
   $where = array('flag='=>1);
   $where = array();
@@ -13,7 +18,10 @@ class articleModel extends baseModel{
   }elseif($cid){
    $where['cid='] = $cid;
   }
-  $orderMap = array('new'=>' utime DESC ','hot'=>' hits DESC','cold'=>' hits ASC','rand'=>' utime ASC');
+  if('wonderful' == $sort){
+   $where['wonderful>='] = 0;
+  }
+  $orderMap = array('wonderful'=>' wonderful DESC ','new'=>' utime DESC ','hot'=>' hits DESC','cold'=>' hits ASC','rand'=>' utime ASC');
   $order = isset($orderMap[$sort])? $orderMap[$sort]: $orderMap['hot'];
   $query = $this->select(self::$_tArtileHead, self::$_fAH, $where, $order, $limit);
   $list = array();

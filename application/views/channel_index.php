@@ -1,5 +1,8 @@
+<!-- container -->
 <div id="container" class="clearfix">
+  <!-- article_wrap -->
   <div class="article_wrap">
+    <!-- breadcrumbs -->
     <div class="ui_breadcrumbs">
       <a class="fcEm3" href="/">
         <span class="ui_icon ui_icon15 ui_icon15_home">
@@ -15,8 +18,12 @@
         熱門頻道
       </a>
     </div>
+    <!-- end breadcrumbs -->
+    <!-- main -->
     <div class="main fl">
+      <!-- main_wrap -->
       <div class="main_wrap ui_blockbg">
+        <!-- article_list_top -->
         <div class="article_list_top">
           <ul class="nav clearfix">
             <li class="nav_l on">
@@ -51,11 +58,229 @@
             </li>
           </ul>
         </div>
+        <!-- end article_list_top -->
+        <!-- article_list grids -->
         <div class="article_list grids2">
+          <!-- ui_list2 -->
           <ul class="ui_list2 clearfix">
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/BBOY'">
+              <a>
+                <img src="/uploads/channel/2/1409061740527.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                BBA
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/BBOY">
+                        <h3 class="fcEm5">
+                          BBA
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          免費註冊.不用投資.輕鬆賺美金>>> http://www
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/SexyGirLs'">
+              <a>
+                <img src="/uploads/user/1/14085519961943.png" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                Sexy & GirL's
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/SexyGirLs">
+                        <h3 class="fcEm5">
+                          Sexy & GirL's
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          『收看「SexyGirL」頻道，讓你天天擁有好心情！』　
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1375.html'">
+              <a>
+                <img src="/uploads/channel/3/14097377595531.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                鳳梨小公主
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1375.html">
+                        <h3 class="fcEm5">
+                          鳳梨小公主
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          分享一切能分享的事實是人生一大快事！
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/dayanzi'">
+              <a>
+                <img src="/uploads/user/1/1411757628230.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                大燕子の分享
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/dayanzi">
+                        <h3 class="fcEm5">
+                          大燕子の分享
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          免費註冊.不用投資.輕鬆賺美金----http://t.cn
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1859.html'">
+              <a>
+                <img src="/uploads/channel/4/14101554548455.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                旺旺前輩
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1859.html">
+                        <h3 class="fcEm5">
+                          旺旺前輩
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          想成為像我一樣輕鬆在家工作的SOHO族嗎~?真正透過網路
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/tai'">
+              <a>
+                <img src="/uploads/user/3/141105431334.jpg" height="160" width="160" />
+              </a>
+              <h3 class="title">
+                各種分享各種玩！！！
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/tai">
+                        <h3 class="fcEm5">
+                          各種分享各種玩！！！
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          各種好文章歡迎大家閱讀、分享和訂閱哦！！！祝大家天天開心快樂
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/xiaocaptain'">
+              <a>
+                <img src="/uploads/channel/2/14092747151628.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                小队长
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/xiaocaptain">
+                        <h3 class="fcEm5">
+                          小队长
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1181.html'">
+              <a>
+                <img src="/uploads/user/3/14095358485348.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                bestrade_store
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1181.html">
+                        <h3 class="fcEm5">
+                          bestrade_store
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
             <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/ishowgo'">
               <a>
-                <img src="/uploads/channel/1/14084645785717.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/14084645785717.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
                 只要有心 人人都有乳溝
@@ -77,9 +302,12 @@
                 </div>
               </div>
             </li>
+            <!-- end loop list -->
+            <!-- loop list -->
             <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/shareant'">
               <a>
-                <img src="/uploads/user/1/14078269729566.jpg" height="160" width="160">
+                <img src="/uploads/user/1/14078269729566.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
                 分享螞蟻
@@ -101,188 +329,23 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/tomhua'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_45.html'">
               <a>
-                <img src="/uploads/channel/1/14085954382454.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/14118624397941.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                Tom Hua
+                ￣伊人輕笑、嬌嬈的紅顏
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/tomhua">
+                      <a href="/channel_45.html">
                         <h3 class="fcEm5">
-                          Tom Hua
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          歡迎加入[網路賺錢] 團隊，對網路宣傳不懂的夥伴，從我這邊連
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/SexyGirLs'">
-              <a>
-                <img src="/uploads/user/1/14085519961943.png" height="160" width="160">
-              </a>
-              <h3 class="title">
-                Sexy &amp; GirL's
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/SexyGirLs">
-                        <h3 class="fcEm5">
-                          Sexy &amp; GirL's
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          『收看「SexyGirL」頻道，讓你天天擁有好心情！歡迎按左
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/cleavage'">
-              <a>
-                <img src="/uploads/channel/1/14085391607783.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                正妹乳溝站
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/cleavage">
-                        <h3 class="fcEm5">
-                          正妹乳溝站
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          ■■■更多精彩好文一手更新，請加入我的FB粉絲團「[url=
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/wowtree'">
-              <a>
-                <img src="/uploads/user/2/14087131763300.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                趣事摘
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/wowtree">
-                        <h3 class="fcEm5">
-                          趣事摘
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          天天分享有趣的事兒。。。
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/farmer'">
-              <a>
-                <img src="/uploads/channel/1/14078580412451.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                寶島農夫
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/farmer">
-                        <h3 class="fcEm5">
-                          寶島農夫
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          我就是個農夫， 春種秋收， 快樂一生。。
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/chen'">
-              <a>
-                <img src="/uploads/channel/1/1408521574321.png" height="160" width="160">
-              </a>
-              <h3 class="title">
-                色色的正妹講限制級笑話
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/chen">
-                        <h3 class="fcEm5">
-                          色色的正妹講限制級笑話
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          色色的正妹講限制級笑話我們的笑話令人有畫面，令人會心一
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/uncleshare'">
-              <a>
-                <img src="/uploads/channel/2/14089623253936.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                uncleshare
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/uncleshare">
-                        <h3 class="fcEm5">
-                          uncleshare
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          關注/訂閱宅哥頻道: http://www.buzzhand
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_762.html'">
-              <a>
-                <img src="/uploads/channel/2/14089791823682.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                笑一笑
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_762.html">
-                        <h3 class="fcEm5">
-                          笑一笑
+                          ￣伊人輕笑、嬌嬈的紅顏
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -292,23 +355,26 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/mjy'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/qwys'">
               <a>
-                <img src="/uploads/channel/1/14093090325393.jpg" height="160" width="160">
+                <img src="/uploads/channel/3/1410357820961.gif" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                快分享
+                墨水成江
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/mjy">
+                      <a href="/qwys">
                         <h3 class="fcEm5">
-                          快分享
+                          墨水成江
                         </h3>
                         <p class="fcEm4 mt5">
-                          http://www.buzzhand.com/mjy
+                          只發精品，拒絕糟粕！歡迎訂閱、收藏、轉發！每天讓妳好看！
                         </p>
                       </a>
                     </div>
@@ -316,33 +382,12 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/BBOY'">
-              <a>
-                <img src="/uploads/channel/2/1409061740527.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                BBA
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/BBOY">
-                        <h3 class="fcEm5">
-                          BBA
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          免費註冊.不用投資.輕鬆賺美金&gt;&gt;&gt; http://www
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
             <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/hlye'">
               <a>
-                <img src="/uploads/channel/1/14083583598856.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/14083583598856.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
                 全能分享王
@@ -364,23 +409,26 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/share'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_2293.html'">
               <a>
-                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160">
+                <img src="/uploads/channel/5/14104901957807.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                攻玉之石
+                發文網賺
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/share">
+                      <a href="/channel_2293.html">
                         <h3 class="fcEm5">
-                          攻玉之石
+                          發文網賺
                         </h3>
                         <p class="fcEm4 mt5">
-                          每天分享些有愛，有趣的文章，給您增添一點快樂！
+                          歡迎加入賺美金團隊，我會指導你如何上手賺美金，以下是我的招募
                         </p>
                       </a>
                     </div>
@@ -388,23 +436,26 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/hhgghhgg6tw'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/tomhua'">
               <a>
-                <img src="/uploads/channel/1/14086280477275.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/14085954382454.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                我就是愛分享的小獅子
+                Tom Hua
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/hhgghhgg6tw">
+                      <a href="/tomhua">
                         <h3 class="fcEm5">
-                          我就是愛分享的小獅子
+                          Tom Hua
                         </h3>
                         <p class="fcEm4 mt5">
-                          好玩、驚悚、感人、美女...各式文章，分享給大家你的點閱
+                          歡迎加入[網路賺錢] 團隊，對網路宣傳不懂的夥伴，從我這邊連
                         </p>
                       </a>
                     </div>
@@ -412,23 +463,26 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/everymm'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/chen'">
               <a>
-                <img src="/uploads/channel/1/14087246553467.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/1408521574321.png" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                天天看正妹
+                色色的正妹講限制級笑話
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/everymm">
+                      <a href="/chen">
                         <h3 class="fcEm5">
-                          天天看正妹
+                          色色的正妹講限制級笑話
                         </h3>
                         <p class="fcEm4 mt5">
-                          天天看正妹照片 ,正妹,正妹貼圖,天天看正妹,正妹照片,美女
+                          色色的正妹講限制級笑話我們的笑話令人有畫面，令人會心一
                         </p>
                       </a>
                     </div>
@@ -436,67 +490,23 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/xiaocaptain'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_2015.html'">
               <a>
-                <img src="/uploads/channel/2/14092747151628.jpg" height="160" width="160">
+                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                小队长
+                jerry23727
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/xiaocaptain">
+                      <a href="/channel_2015.html">
                         <h3 class="fcEm5">
-                          小队长
-                        </h3>
-                        <p class="fcEm4 mt5">
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_560.html'">
-              <a>
-                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                meepong
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_560.html">
-                        <h3 class="fcEm5">
-                          meepong
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          搞笑影片，勵志文章，感人愛情，自創文章，精彩內容全在這裡！
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_699.html'">
-              <a>
-                <img src="/uploads/user/2/14088672294697.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                Tin Tomy
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_699.html">
-                        <h3 class="fcEm5">
-                          Tin Tomy
+                          jerry23727
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -506,9 +516,382 @@
                 </div>
               </div>
             </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/taiwanstar'">
+              <a>
+                <img src="/uploads/channel/1/14082638016390.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                Taiwanstar
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/taiwanstar">
+                        <h3 class="fcEm5">
+                          Taiwanstar
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/lovingyou'">
+              <a>
+                <img src="/uploads/channel/2/14096427019673.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                今天你要嫁给我
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/lovingyou">
+                        <h3 class="fcEm5">
+                          今天你要嫁给我
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_200.html'">
+              <a>
+                <img src="/uploads/channel/1/1409801990874.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                陌上花开
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_200.html">
+                        <h3 class="fcEm5">
+                          陌上花开
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/dotaoffical'">
+              <a>
+                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                DotaOffical
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/dotaoffical">
+                        <h3 class="fcEm5">
+                          DotaOffical
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_41.html'">
+              <a>
+                <img src="/uploads/user/1/14086753734145.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                好文分享
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_41.html">
+                        <h3 class="fcEm5">
+                          好文分享
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/uncleshare'">
+              <a>
+                <img src="/uploads/channel/2/14108006627431.png" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                uncleshare
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/uncleshare">
+                        <h3 class="fcEm5">
+                          uncleshare
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          關注/訂閱宅哥頻道: http://www.buzzhand
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/cleavage'">
+              <a>
+                <img src="/uploads/channel/1/14085391607783.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                正妹乳溝站
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/cleavage">
+                        <h3 class="fcEm5">
+                          正妹乳溝站
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          ■■■更多精彩好文一手更新，請加入我的FB粉絲團「[url=
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_656.html'">
+              <a>
+                <img src="/uploads/channel/2/14112009809272.gif" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                正點美文
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_656.html">
+                        <h3 class="fcEm5">
+                          正點美文
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1285.html'">
+              <a>
+                <img src="/uploads/channel/3/14096457157973.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                cljx1973
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1285.html">
+                        <h3 class="fcEm5">
+                          cljx1973
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_193.html'">
+              <a>
+                <img src="/uploads/channel/1/14114042326736.gif" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                滿滿的都是愛
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_193.html">
+                        <h3 class="fcEm5">
+                          滿滿的都是愛
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          我的青春我做主，分享好文，開心度過每一天
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/wuxiansheng'">
+              <a>
+                <img src="/uploads/channel/5/14106107842003.png" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                Fack
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/wuxiansheng">
+                        <h3 class="fcEm5">
+                          Fack
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          各種好文章歡迎大家閱讀、分享和訂閱哦！！！祝大家天天開心快樂
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/xingganyouhuo'">
+              <a>
+                <img src="/uploads/user/2/14107008145716.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                奇趣萬態
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/xingganyouhuo">
+                        <h3 class="fcEm5">
+                          奇趣萬態
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          劃界萬象、妹紙什麽的都有~
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1497.html'">
+              <a>
+                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                奇闻趣事
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1497.html">
+                        <h3 class="fcEm5">
+                          奇闻趣事
+                        </h3>
+                        <p class="fcEm4 mt5">
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1858.html'">
+              <a>
+                <img src="/uploads/channel/4/14101556289018.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                神奇傑森
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1858.html">
+                        <h3 class="fcEm5">
+                          神奇傑森
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          想成為像我一樣輕鬆在家工作的SOHO族嗎~?真正透過網路
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
             <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_606.html'">
               <a>
-                <img src="/uploads/channel/2/14091021312800.jpg" height="160" width="160">
+                <img src="/uploads/channel/2/14091021312800.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
                 燎原之火
@@ -530,20 +913,23 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/go2share'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_762.html'">
               <a>
-                <img src="/uploads/channel/1/14073791736089.jpg" height="160" width="160">
+                <img src="/uploads/channel/2/14089791823682.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                小市民
+                笑一笑
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/go2share">
+                      <a href="/channel_762.html">
                         <h3 class="fcEm5">
-                          小市民
+                          笑一笑
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -553,44 +939,23 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_624.html'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1641.html'">
               <a>
-                <img src="/uploads/channel/2/1408704334344.jpg" height="160" width="160">
+                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                熱門文章與您分享
+                iwenlui
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/channel_624.html">
+                      <a href="/channel_1641.html">
                         <h3 class="fcEm5">
-                          熱門文章與您分享
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          ■■■加入我們，免費幫你曝光！（[url=http://ww
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_975.html'">
-              <a>
-                <img src="/uploads/user/2/14092009253519.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                Promise Xiao Pei
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_975.html">
-                        <h3 class="fcEm5">
-                          Promise Xiao Pei
+                          iwenlui
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -600,92 +965,23 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_484.html'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1962.html'">
               <a>
-                <img src="/uploads/channel/1/140898635184.jpg" height="160" width="160">
+                <img src="/uploads/user/4/14102431648348.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                幽灵妹乳溝
+                huimenglo
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/channel_484.html">
+                      <a href="/channel_1962.html">
                         <h3 class="fcEm5">
-                          幽灵妹乳溝
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          亲、加入我們吧！免費幫你曝光！（如何加入？）本站全部內容歡迎
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/shengming'">
-              <a>
-                <img src="/uploads/channel/1/14084567437974.png" height="160" width="160">
-              </a>
-              <h3 class="title">
-                笑笑更健康
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/shengming">
-                        <h3 class="fcEm5">
-                          笑笑更健康
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          微笑就像喝水，每天都是必須的。
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_693.html'">
-              <a>
-                <img src="/uploads/channel/2/1408972686712.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                分享快乐
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_693.html">
-                        <h3 class="fcEm5">
-                          分享快乐
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          用自己喜欢的方式，爱属于自己的生活。
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_82.html'">
-              <a>
-                <img src="/uploads/channel/1/14082583104450.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                NZT 娛樂新聞
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_82.html">
-                        <h3 class="fcEm5">
-                          NZT 娛樂新聞
+                          huimenglo
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -695,23 +991,26 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_310.html'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/sexy'">
               <a>
-                <img src="/uploads/channel/1/1408373794799.jpg" height="160" width="160">
+                <img src="/uploads/channel/3/14096255707127.bmp" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                分享是美德～
+                命理 算命 面相 美女
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/channel_310.html">
+                      <a href="/sexy">
                         <h3 class="fcEm5">
-                          分享是美德～
+                          命理 算命 面相 美女
                         </h3>
                         <p class="fcEm4 mt5">
-                          品味生活中的甜酸苦辣，分享人世间的温暖幸福，这里有最新最炫的
+                          命理 算命 面相 美女 知识 趣味 本站內容全部都設定90%
                         </p>
                       </a>
                     </div>
@@ -719,44 +1018,23 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_67.html'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_93.html'">
               <a>
-                <img src="/uploads/channel/1/14082523067161.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/1408263818895.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                甘十九妹
+                健康之家
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/channel_67.html">
+                      <a href="/channel_93.html">
                         <h3 class="fcEm5">
-                          甘十九妹
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          本頻道爲大家奉獻最新的醫學知識，保健知識，兩性技巧，精彩故事
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/taiwanstar'">
-              <a>
-                <img src="/uploads/channel/1/14082638016390.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                Taiwanstar
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/taiwanstar">
-                        <h3 class="fcEm5">
-                          Taiwanstar
+                          健康之家
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -766,20 +1044,50 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_149.html'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/farmer'">
               <a>
-                <img src="/uploads/channel/1/14082891409376.jpg" height="160" width="160">
+                <img src="/uploads/channel/1/14078580412451.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                隨心分享
+                寶島農夫
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/channel_149.html">
+                      <a href="/farmer">
                         <h3 class="fcEm5">
-                          隨心分享
+                          寶島農夫
+                        </h3>
+                        <p class="fcEm4 mt5">
+                          我就是個農夫， 春種秋收， 快樂一生。。
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_1686.html'">
+              <a>
+                <img src="/uploads/channel/4/14099882183024.jpg" height="160" width="160"
+                />
+              </a>
+              <h3 class="title">
+                八卦女人区
+              </h3>
+              <div class="content_wrap">
+                <div class="content vertical2">
+                  <div class="hack">
+                    <div class="centered">
+                      <a href="/channel_1686.html">
+                        <h3 class="fcEm5">
+                          八卦女人区
                         </h3>
                         <p class="fcEm4 mt5">
                         </p>
@@ -789,22 +1097,26 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_41.html'">
+            <!-- end loop list -->
+            <!-- loop list -->
+            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/wowtree'">
               <a>
-                <img src="/uploads/channel/1/14078429696114.jpg" height="160" width="160">
+                <img src="/uploads/user/2/14087131763300.jpg" height="160" width="160"
+                />
               </a>
               <h3 class="title">
-                好文分享
+                趣事摘
               </h3>
               <div class="content_wrap">
                 <div class="content vertical2">
                   <div class="hack">
                     <div class="centered">
-                      <a href="/channel_41.html">
+                      <a href="/wowtree">
                         <h3 class="fcEm5">
-                          好文分享
+                          趣事摘
                         </h3>
                         <p class="fcEm4 mt5">
+                          天天分享有趣的事兒。。。
                         </p>
                       </a>
                     </div>
@@ -812,195 +1124,9 @@
                 </div>
               </div>
             </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_205.html'">
-              <a>
-                <img src="/themes/default/images/channel_img_def.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                woshiwantong
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_205.html">
-                        <h3 class="fcEm5">
-                          woshiwantong
-                        </h3>
-                        <p class="fcEm4 mt5">
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_261.html'">
-              <a>
-                <img src="/uploads/user/1/14083639062141.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                wuliaoheise
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_261.html">
-                        <h3 class="fcEm5">
-                          wuliaoheise
-                        </h3>
-                        <p class="fcEm4 mt5">
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/ishare'">
-              <a>
-                <img src="/uploads/channel/1/14072932764695.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                我分享我快樂
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/ishare">
-                        <h3 class="fcEm5">
-                          我分享我快樂
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          獨樂樂不如眾樂樂
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/channel_764.html'">
-              <a>
-                <img src="/uploads/channel/2/14090246224989.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                1924000411
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/channel_764.html">
-                        <h3 class="fcEm5">
-                          1924000411
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          網羅世界各地娛樂 奇葩 軍事 社會 奇聞 ， 歡迎訂閱
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/tony'">
-              <a>
-                <img src="/uploads/channel/1/14085345565668.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                Ethan Tony Chien
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/tony">
-                        <h3 class="fcEm5">
-                          Ethan Tony Chien
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          歡迎加入[網路賺錢] 團隊，對網路宣傳不懂的夥伴，從我這
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/allsex4u'">
-              <a>
-                <img src="/uploads/channel/1/14084576196133.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                美女辣妹搜索
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/allsex4u">
-                        <h3 class="fcEm5">
-                          美女辣妹搜索
-                        </h3>
-                        <p class="fcEm4 mt5">
-                          分享正妹圖片，視頻，歡迎共推分享。
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/yhy'">
-              <a>
-                <img src="/uploads/user/2/14094135942126.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                愛分享
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/yhy">
-                        <h3 class="fcEm5">
-                          愛分享
-                        </h3>
-                        <p class="fcEm4 mt5">
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="fcEm2 pr ui_imgbg" onclick="window.location.href='/xiuxianxiaozhan'">
-              <a>
-                <img src="/uploads/user/2/14090686535750.jpg" height="160" width="160">
-              </a>
-              <h3 class="title">
-                休閒小站
-              </h3>
-              <div class="content_wrap">
-                <div class="content vertical2">
-                  <div class="hack">
-                    <div class="centered">
-                      <a href="/xiuxianxiaozhan">
-                        <h3 class="fcEm5">
-                          休閒小站
-                        </h3>
-                        <p class="fcEm4 mt5">
-                        </p>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+            <!-- end loop list -->
           </ul>
+          <!-- end ui_list2 -->
           <div class="ui_pagination m20 tc">
             <div class="pager">
               <a class="ui_pagination_first hidden" href="/channel/index.html">
@@ -1041,45 +1167,45 @@
               <a class="ui_pagination_next" href="/channel/index.html?page=2">
                 下一頁
               </a>
-              <a class="ui_pagination_last" href="/channel/index.html?page=11">
+              <a class="ui_pagination_last" href="/channel/index.html?page=25">
               </a>
             </div>
           </div>
         </div>
+        <!-- end article_list grids -->
       </div>
+      <!-- end main_wrap -->
     </div>
+    <!-- end main -->
+    <!-- sidebar -->
     <div class="sidebar fl ui_blockbg">
-      <div class="ui_list">
-        <div class="ui_list_title">
-          <h2>
-            精彩文章
-          </h2>
-          <a class="more f12 fcEm" href="/post/wonderfull.html">
-            <span class="vm">
-              More
-            </span>
-            <span class="ui_icon ui_icon15 ui_icon15_add">
-            </span>
-          </a>
-        </div>
+      <!-- ui_list3 -->
+      <div class="ui_list3 hot_posts">
+        <h2 class="title">
+          熱門文章
+        </h2>
         <ul>
-          <li class="entry" share_count="0" s-facebook="0">
-            <div class="img">
-              <a title="中秋節想吃自己做的月餅嗎？趕快來學習吧。" href="/post_19886.html">
-                <img src="/uploads/0f/c/19886/thumb_19886_80x80.jpg">
+          <!-- loop list -->
+          <li class="entry" share_count="498" s-facebook="486">
+            <div class="img ui_imgbg">
+              <a title="一趟旅行讓我明白了最大的一個道理：請不要對父母不耐煩!" href="/post_134103.html">
+                <img src="http://s1.buzzhand.net/uploads/cc/c/134103/thumb_134103_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_30/">
+                心情日記
               </a>
             </div>
             <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="中秋節想吃自己做的月餅嗎？趕快來學習吧。" href="/post_19886.html">
-                  中秋節想吃自己做的月餅嗎？趕快來學習吧。
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134103.html" target="_blank">
+                  一趟旅行讓我明白了最大的一個道理：請不要對父母不耐煩!
                 </a>
               </h3>
-              <p class="share_stub" style="display: block;">
+              <p class="mt5 share_stub">
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
-                  0
+                  498
                 </span>
                 <span class="vm">
                   次分享
@@ -1087,23 +1213,26 @@
               </p>
             </div>
           </li>
-          <li class="entry" share_count="8" s-facebook="7">
-            <div class="img">
-              <a title="一個人走進電梯，之後發生了令他恐懼的事情！如果換做是你，你會如何呢？" href="/post_19412.html">
-                <img src="/uploads/42/1/19412/thumb_19412_80x80.jpg">
+          <li class="entry" share_count="92" s-facebook="91">
+            <div class="img ui_imgbg">
+              <a title="媽媽看過來！消除「妊娠紋」秘招公開了！（請轉給辛苦的媽媽們 ）" href="/post_134922.html">
+                <img src="http://s1.buzzhand.net/uploads/35/4/134922/thumb_134922_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_22/">
+                養生保健
               </a>
             </div>
             <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="一個人走進電梯，之後發生了令他恐懼的事情！如果換做是你，你會如何呢？" href="/post_19412.html">
-                  一個人走進電梯，之後發生了令他恐懼的事情！如果換做是你，你會如何呢？
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134922.html" target="_blank">
+                  媽媽看過來！消除「妊娠紋」秘招公開了！（請轉給辛苦的媽媽們 ）
                 </a>
               </h3>
-              <p class="share_stub" style="display: block;">
+              <p class="mt5 share_stub">
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
-                  8
+                  92
                 </span>
                 <span class="vm">
                   次分享
@@ -1111,164 +1240,22 @@
               </p>
             </div>
           </li>
-          <li class="entry" share_count="0" s-facebook="0">
-            <div class="img">
-              <a title="抽煙者和不抽煙者的致命的不同，嚇到你了嗎？" href="/post_19595.html">
-                <img src="/uploads/b9/e/19595/thumb_19595_80x80.jpg">
+          <li class="entry" share_count="20" s-facebook="19">
+            <div class="img ui_imgbg">
+              <a title="美味食譜-戚風卷？瑞士卷？蛋糕卷卷卷卷" href="/post_134394.html">
+                <img src="http://s1.buzzhand.net/uploads/4f/6/134394/thumb_134394_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_23/">
+                美食天下
               </a>
             </div>
             <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="抽煙者和不抽煙者的致命的不同，嚇到你了嗎？" href="/post_19595.html">
-                  抽煙者和不抽煙者的致命的不同，嚇到你了嗎？
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134394.html" target="_blank">
+                  美味食譜-戚風卷？瑞士卷？蛋糕卷卷卷卷
                 </a>
               </h3>
-              <p class="share_stub" style="display: block;">
-                <span class="ui_icon ui_icon20 ui_icon20_share">
-                </span>
-                <span class="fb vm">
-                  0
-                </span>
-                <span class="vm">
-                  次分享
-                </span>
-              </p>
-            </div>
-          </li>
-          <li class="entry" share_count="0" s-facebook="0">
-            <div class="img">
-              <a title="這只小狗只是在靜靜的等待死亡以求解脫，但是死亡並沒有發生，接下來發生的事情讓我震驚。。。" href="/post_12560.html">
-                <img src="/uploads/f4/e/12560/thumb_12560_80x80.jpg">
-              </a>
-            </div>
-            <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="這只小狗只是在靜靜的等待死亡以求解脫，但是死亡並沒有發生，接下來發生的事情讓我震驚。。。" href="/post_12560.html">
-                  這只小狗只是在靜靜的等待死亡以求解脫，但是死亡並沒有發生，接下來發生的事情讓我震驚。。。
-                </a>
-              </h3>
-              <p class="share_stub" style="display: block;">
-                <span class="ui_icon ui_icon20 ui_icon20_share">
-                </span>
-                <span class="fb vm">
-                  0
-                </span>
-                <span class="vm">
-                  次分享
-                </span>
-              </p>
-            </div>
-          </li>
-          <li class="entry" share_count="29" s-facebook="23">
-            <div class="img">
-              <a title="這名攝影師每到一個地方都會跟女朋友拍一張牽手照，看到最後才知道，原來這一切都是個伏線..." href="/post_4288.html">
-                <img src="/uploads/7e/c/4288/thumb_4288_80x80.jpg">
-              </a>
-            </div>
-            <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="這名攝影師每到一個地方都會跟女朋友拍一張牽手照，看到最後才知道，原來這一切都是個伏線..."
-                href="/post_4288.html">
-                  這名攝影師每到一個地方都會跟女朋友拍一張牽手照，看到最後才知道，原來這一切都是個伏線...
-                </a>
-              </h3>
-              <p class="share_stub" style="display: block;">
-                <span class="ui_icon ui_icon20 ui_icon20_share">
-                </span>
-                <span class="fb vm">
-                  29
-                </span>
-                <span class="vm">
-                  次分享
-                </span>
-              </p>
-            </div>
-          </li>
-          <li class="entry" share_count="2198" s-facebook="2156">
-            <div class="img">
-              <a title="注意：關燈後千萬不要看手機 否則後悔莫及！ 99%的人都不知道" href="/post_60.html">
-                <img src="/uploads/07/2/60/thumb_60_80x80.jpg">
-              </a>
-            </div>
-            <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="注意：關燈後千萬不要看手機 否則後悔莫及！ 99%的人都不知道" href="/post_60.html">
-                  注意：關燈後千萬不要看手機 否則後悔莫及！ 99%的人都不知道
-                </a>
-              </h3>
-              <p class="share_stub" style="display: block;">
-                <span class="ui_icon ui_icon20 ui_icon20_share">
-                </span>
-                <span class="fb vm">
-                  2198
-                </span>
-                <span class="vm">
-                  次分享
-                </span>
-              </p>
-            </div>
-          </li>
-          <li class="entry" share_count="25" s-facebook="15">
-            <div class="img">
-              <a title="一位阿茲海默症患者堅持5年畫下的自畫像，看到最後一張心都碎了。" href="/post_20.html">
-                <img src="/uploads/98/f/20/thumb_20_80x80.jpg">
-              </a>
-            </div>
-            <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="一位阿茲海默症患者堅持5年畫下的自畫像，看到最後一張心都碎了。" href="/post_20.html">
-                  一位阿茲海默症患者堅持5年畫下的自畫像，看到最後一張心都碎了。
-                </a>
-              </h3>
-              <p class="share_stub" style="display: block;">
-                <span class="ui_icon ui_icon20 ui_icon20_share">
-                </span>
-                <span class="fb vm">
-                  25
-                </span>
-                <span class="vm">
-                  次分享
-                </span>
-              </p>
-            </div>
-          </li>
-          <li class="entry" share_count="10" s-facebook="8">
-            <div class="img">
-              <a title="車被淹如何開車門？請轉發擴散，功德無量~~" href="/post_40.html">
-                <img src="/uploads/d6/4/40/thumb_40_80x80.jpg">
-              </a>
-            </div>
-            <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="車被淹如何開車門？請轉發擴散，功德無量~~" href="/post_40.html">
-                  車被淹如何開車門？請轉發擴散，功德無量~~
-                </a>
-              </h3>
-              <p class="share_stub" style="display: block;">
-                <span class="ui_icon ui_icon20 ui_icon20_share">
-                </span>
-                <span class="fb vm">
-                  10
-                </span>
-                <span class="vm">
-                  次分享
-                </span>
-              </p>
-            </div>
-          </li>
-          <li class="entry" share_count="20" s-facebook="20">
-            <div class="img">
-              <a title="滑手機的同時，你可能失去了美好人生《YouTube爆紅5分鐘微電影》" href="/post_114.html">
-                <img src="/uploads/5f/d/114/thumb_114_80x80.jpg">
-              </a>
-            </div>
-            <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="滑手機的同時，你可能失去了美好人生《YouTube爆紅5分鐘微電影》" href="/post_114.html">
-                  滑手機的同時，你可能失去了美好人生《YouTube爆紅5分鐘微電影》
-                </a>
-              </h3>
-              <p class="share_stub" style="display: block;">
+              <p class="mt5 share_stub">
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
@@ -1280,23 +1267,26 @@
               </p>
             </div>
           </li>
-          <li class="entry" share_count="124" s-facebook="120">
-            <div class="img">
-              <a title="第一眼我被她給嬰兒洗澡的方式嚇到了，看完視頻后才發現其中奧妙。。。" href="/post_122.html">
-                <img src="/uploads/a0/a/122/thumb_122_80x80.jpg">
+          <li class="entry" share_count="9" s-facebook="8">
+            <div class="img ui_imgbg">
+              <a title="簡單甜點大全～ 有25款甜點的做法噢～快來學做給你的另一半哦！！" href="/post_133604.html">
+                <img src="http://s1.buzzhand.net/uploads/0a/8/133604/thumb_133604_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_23/">
+                美食天下
               </a>
             </div>
             <div class="content">
-              <h3 class="entry-title">
-                <a class="fcEm" title="第一眼我被她給嬰兒洗澡的方式嚇到了，看完視頻后才發現其中奧妙。。。" href="/post_122.html">
-                  第一眼我被她給嬰兒洗澡的方式嚇到了，看完視頻后才發現其中奧妙。。。
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_133604.html" target="_blank">
+                  簡單甜點大全～ 有25款甜點的做法噢～快來學做給你的另一半哦！！
                 </a>
               </h3>
-              <p class="share_stub" style="display: block;">
+              <p class="mt5 share_stub">
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
-                  124
+                  9
                 </span>
                 <span class="vm">
                   次分享
@@ -1304,8 +1294,173 @@
               </p>
             </div>
           </li>
+          <li class="entry" share_count="16" s-facebook="14">
+            <div class="img ui_imgbg">
+              <a title="因果12條,條條震撼,我條條信了" href="/post_134397.html">
+                <img src="http://s1.buzzhand.net/uploads/d8/1/134397/thumb_134397_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_7/">
+                社會萬象
+              </a>
+            </div>
+            <div class="content">
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134397.html" target="_blank">
+                  因果12條,條條震撼,我條條信了
+                </a>
+              </h3>
+              <p class="mt5 share_stub">
+                <span class="ui_icon ui_icon20 ui_icon20_share">
+                </span>
+                <span class="fb vm">
+                  16
+                </span>
+                <span class="vm">
+                  次分享
+                </span>
+              </p>
+            </div>
+          </li>
+          <li class="entry" share_count="6" s-facebook="0">
+            <div class="img ui_imgbg">
+              <a title="那深遠的意境，迷離的眼神，使人難以忘懷。" href="/post_134383.html">
+                <img src="http://s1.buzzhand.net/uploads/dd/e/134383/thumb_134383_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_57/">
+                正妹短片
+              </a>
+            </div>
+            <div class="content">
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134383.html" target="_blank">
+                  那深遠的意境，迷離的眼神，使人難以忘懷。
+                </a>
+              </h3>
+              <p class="mt5 share_stub">
+                <span class="ui_icon ui_icon20 ui_icon20_share">
+                </span>
+                <span class="fb vm">
+                  6
+                </span>
+                <span class="vm">
+                  次分享
+                </span>
+              </p>
+            </div>
+          </li>
+          <li class="entry" share_count="4" s-facebook="3">
+            <div class="img ui_imgbg">
+              <a title="你還不知道的 ：咖啡生產過程！！" href="/post_133377.html">
+                <img src="http://s1.buzzhand.net/uploads/1e/9/133377/thumb_133377_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_12/">
+                奇趣資訊
+              </a>
+            </div>
+            <div class="content">
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_133377.html" target="_blank">
+                  你還不知道的 ：咖啡生產過程！！
+                </a>
+              </h3>
+              <p class="mt5 share_stub">
+                <span class="ui_icon ui_icon20 ui_icon20_share">
+                </span>
+                <span class="fb vm">
+                  4
+                </span>
+                <span class="vm">
+                  次分享
+                </span>
+              </p>
+            </div>
+          </li>
+          <li class="entry" share_count="4" s-facebook="4">
+            <div class="img ui_imgbg">
+              <a title="非洲可可工人第一次吃巧克力的模樣，讓人陷入深思" href="/post_133418.html">
+                <img src="http://s1.buzzhand.net/uploads/6b/1/133418/thumb_133418_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_61/">
+                成長勵志
+              </a>
+            </div>
+            <div class="content">
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_133418.html" target="_blank">
+                  非洲可可工人第一次吃巧克力的模樣，讓人陷入深思
+                </a>
+              </h3>
+              <p class="mt5 share_stub">
+                <span class="ui_icon ui_icon20 ui_icon20_share">
+                </span>
+                <span class="fb vm">
+                  4
+                </span>
+                <span class="vm">
+                  次分享
+                </span>
+              </p>
+            </div>
+          </li>
+          <li class="entry" share_count="0" s-facebook="0">
+            <div class="img ui_imgbg">
+              <a title="超溫馨! 超有愛的貓媽媽，收養了三隻黃色小鴨 也太像一家人了!" href="/post_134743.html">
+                <img src="http://s1.buzzhand.net/uploads/00/2/134743/thumb_134743_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_19/">
+                生活百科
+              </a>
+            </div>
+            <div class="content">
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134743.html" target="_blank">
+                  超溫馨! 超有愛的貓媽媽，收養了三隻黃色小鴨 也太像一家人了!
+                </a>
+              </h3>
+              <p class="mt5 share_stub">
+                <span class="ui_icon ui_icon20 ui_icon20_share">
+                </span>
+                <span class="fb vm">
+                  0
+                </span>
+                <span class="vm">
+                  次分享
+                </span>
+              </p>
+            </div>
+          </li>
+          <li class="entry" share_count="24" s-facebook="24">
+            <div class="img ui_imgbg">
+              <a title="白切雞的大廚秘製法!" href="/post_134301.html">
+                <img src="http://s1.buzzhand.net/uploads/63/5/134301/thumb_134301_256x148.jpg">
+              </a>
+              <a class="tips" href="/cate_23/">
+                美食天下
+              </a>
+            </div>
+            <div class="content">
+              <h3 class="mt5 entry-title">
+                <a class="fcEm8" href="/post_134301.html" target="_blank">
+                  白切雞的大廚秘製法!
+                </a>
+              </h3>
+              <p class="mt5 share_stub">
+                <span class="ui_icon ui_icon20 ui_icon20_share">
+                </span>
+                <span class="fb vm">
+                  24
+                </span>
+                <span class="vm">
+                  次分享
+                </span>
+              </p>
+            </div>
+          </li>
+          <!-- end loop list -->
         </ul>
       </div>
+      <!-- end ui_list3 -->
     </div>
+    <!-- end sidebar -->
   </div>
 </div>

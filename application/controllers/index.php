@@ -1,37 +1,41 @@
 <?php
  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'viewbase.php';
-class Maindex extends Viewbase {
+class Index extends Viewbase {
   public function __construct(){
     parent::__construct();
   }
-  public function index()
-  {
+  public function index(){
+   if($this->uid){
+    $output = $this->getIndexData();
+   }else{
     $view = BASEPATH.'../';
     if(!is_writeable($view)){
-       die($view.' is not write!');
+     die($view.' is not write!');
     }
     $view .= 'index.html';
     $lock = $view . '.lock';
     if( !file_exists($view) || (time() - filemtime($view)) > 1*3600 ){
-      if(!file_exists($lock)){
-        //$indexData = $this->emulemodel->getIndexData();
-        $indexData = array();
-        $this->assign(array('_a'=>'index','indexData'=>$indexData));
-        $this->view('maindex_index');
-        $output = $this->output->get_output();
-/*
-        file_put_contents($lock, '');
-        file_put_contents($view, $output);
-        @unlink($lock);
-        @chmod($view, 0777);
-*/
-        echo $output;
-exit;
-        return true;
-      }
+     if(!file_exists($lock)){
+      $output = $this->getIndexData();
+      file_put_contents($lock, '');
+      file_put_contents($view, $output);
+      @unlink($lock);
+      @chmod($view, 0777);
+     }
     }
-    exit();
+    $output = file_get_contents($view);
+   }
+   die($output);
+  }
+  protected function getIndexData(){
+   $this->load->model('articleModel');
+   $indexData = $this->articleModel->getIndexData();
+   $indexData = array();
+   $this->assign(array('_a'=>'index','indexData'=>$indexData));
+   $this->view('index_index');
+   $output = $this->output->get_output();
+   return $output;
   }
   public function show404($goto = ''){
     $goto = '/';

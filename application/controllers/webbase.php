@@ -6,6 +6,7 @@ class Webbase extends CI_Controller {
   protected $redis = '';
   public $viewData = array();
   protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0,'isadmin'=>0);
+  public $uid = 0;
   public $adminList = array(1);
   protected $_c = 'index'; 
   protected $_a = 'index'; 
@@ -37,6 +38,9 @@ class Webbase extends CI_Controller {
       $this->userInfo = $session_uinfo;
     }
     //var_dump($this->userInfo);exit;
+    if($this->userInfo['uid']){
+     $this->uid = $this->userInfo['uid'];
+    }
     $this->_c = $this->segment(1,'maindex');
     $this->_a = $this->segment(2,'index');
     $c = isset($_GET['c'])?$_GET['c']:'';
