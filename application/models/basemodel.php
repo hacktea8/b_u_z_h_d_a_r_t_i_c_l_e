@@ -54,7 +54,7 @@ class baseModel extends CI_Model{
   return $return;
  }
  public function check_id($table = '', $fields,$where){
-  //$table = $table ? $table : $this->_table;
+  $table = $table ? $table : $this->_table;
   $query = $this->select($table, $fields, $where, $order = '', $limit = array(1));
   $row = array();
   if ($query->num_rows() > 0){

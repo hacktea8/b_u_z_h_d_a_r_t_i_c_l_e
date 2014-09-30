@@ -7,8 +7,9 @@ class articleModel extends baseModel{
  }
  public function getIndexData($p = 1){
   $r = array();
-  $r['hot'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'new', $limit = array($p,9));
-  $r['new'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'hot', $limit = array($p,9));
+  $r['hot'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'hot', $limit = array($p,9));
+  $r['new'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'new', $limit = array($p,36));
+  $r['wonderfull'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'wonderfull', $limit = array($p,20));
   return $r;
  }
  public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7)){

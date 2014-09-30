@@ -37,11 +37,6 @@ class Index extends Viewbase {
    $output = $this->output->get_output();
    return $output;
   }
-  public function show404($goto = ''){
-    $goto = '/';
-    $this->assign(array('goto'=>$goto,'seo_title' =>'找不到您需要的页面..现在为您返回首页..'));
-    $this->view('index_show404');
-  }
   public function login(){
 //var_dump($_SERVER);exit;
     $url = $this->viewData['login_url'].urlencode($_SERVER['HTTP_REFERER']);

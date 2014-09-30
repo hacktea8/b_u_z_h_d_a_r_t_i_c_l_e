@@ -5,80 +5,67 @@ class Channel extends Viewbase {
   public function __construct(){
     parent::__construct();
   }
-  public function index($page = 1){
+  public function index($order = 'hot', $show = 'list', $page = 1){
     $page = intval($page);
-    $cid = intval($cid);
-    $cid = $cid < 1 ?1:$cid;
     $page = $page > 0 ? $page: 1;
-    $limit = 12;
-    $channel = &$this->viewData['cate_info'];
-    $atotal = isset($channel[$cid])?$channel[$cid]['atotal']:0;
-    $subcid = $cid;
-    $pcid = 0;
-    if( !$channel[$cid]['pcid']){
-     $pcid = $cid;
-     $subcid = 0;
-    }
-    $pageTotal = ceil($atotal/$limit);
+    $limit = 40;
     $data = array();
+    $this->model('userModel');
+    $atotal = $this->userModel->getChanneCount();
+    $pageTotal = ceil($atotal/$limit);
     if($page <= $pageTotal){
-      
-      $data = $this->emulemodel->getArticleList($pcid,$subcid,$page,$limit);
+     $data = $this->userModel->getChannelList($order,array($page,$limit));
     }
     $data = is_array($data) ? $data : array();
+    $hotArticle = $this->getHotArticle();
     $this->load->library('pagination');
-    $config['base_url'] = sprintf('/maindex/lists/%d/%d/',$cid,$order);
+    $config['base_url'] = sprintf('/channel/index/%s/%s/',$order,$show);
     $config['total_rows'] = $atotal;
     $config['cur_page'] = $page;
     $config['per_page'] = $limit;
     $this->pagination->initialize($config); 
     $page_string = $this->pagination->create_links();
 // seo setting
-    $title = $channel[$cid]['name']."第{$page}页";
+    $title = "頻道第{$page}页";
     $kw = '';
     $keywords = $kw.$this->seo_keywords;
     $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords
-    ,'infolist'=>$data,'pageTotal'=>$pageTotal
-    ,'list_url_tpl'=>$config['base_url']
-    ,'page_string'=>$page_string,'cid'=>$cid));
+    ,'lists'=>$data,'pageTotal'=>$pageTotal,'order'=>$order
+    ,'list_url_tpl'=>$config['base_url'],'show'=>$show,'page'=>$page
+    ,'page_string'=>$page_string,'cid'=>$cid,'hotArticle'=>$hotArticle
+    ));
 #var_dump($this->viewData);exit;
-    $this->view('index_lists');
+    $this->view('channel_index');
   }
-  public function user($uid,$sort,$page = 1){
-    $aid = intval($aid);
-    if($aid <1){
+  public function user($uid,$sort = 'new', $cid = 0,$page = 1){
+    $uid = intval($uid);
+    if($uid <1){
       header('HTTP/1.1 301 Moved Permanently');
       header('Location: /');
       exit;
     }
-    $data = $this->emulemodel->getEmuleTopicByAid($aid,0,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
-    if(empty($data)){
-       header('Location: '.$this->url404);
-       exit;
+    $pLimit = 20;
+    $this->model('userModel');
+    $channel = $this->userModel->getUserChannelInfo($uid);
+    
+    if(empty($channel)){
+     $this->oops('频道不存在');
     }
-    $cid = $data['info']['cid'] ? $data['info']['cid'] : 0;
-    $_key = 'view_rightHot'.$cid;
-    $viewHot = $this->mem->get($_key);
-    if(!$viewHot){
-       $viewHot = $this->emulemodel->getArticleListByCid($cid,2,2,18);
-       $this->mem->set($_key,$viewHot,$this->expirettl['12h']);
-    }
-    $data['info']['intro'] = preg_replace(array('#[a-z]+://[a-z0-9]+\.[a-z0-9-_/\.]+#is','#[a-z0-9]+\.[a-z0-9-_/\.]+#is'),array('',''),$data['info']['intro']);
+    $lists = $this->articleModel->getArticleListByUid($uid,$cid,$sort,array($page,$pLimit));
 // seo setting
-    $kw = $this->viewData['channel'][$cid]['name'];
-    $title = $data['info']['name'];
-    $keywords = sprintf('%s,%s在线观看,%s全集,%s%s,%s下载,%s主题曲,%s剧情,%s演员表',$title,$title,$title,$kw,$title,$title,$title,$title,$title);
-    $seo_description = strip_tags($data['info']['intro']);
+    $kw = '';
+    $title = $channel['title'];
+    $keywords = sprintf('%s',$title);
+    $seo_description = strip_tags($channel['intro']);
     $seo_description = preg_replace('#\s+#Uis','',$seo_description);
     $seo_description = mb_substr($seo_description,0,250);
-    $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
-    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title
+    $this->assign(array('seo_title'=>$title
     ,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info']
     ,'aid'=>$aid,'seo_description'=>$seo_description
-    ,'videovols'=>$data['vols'],'viewHot'=>$viewHot
+    ,'channel'=>$channel,'lists'=>$lists
     )); 
 #echo "<pre>";var_dump($this->viewData);exit;
-    $this->view('index_view');
+    $this->view('channel_user');
   }
   
 }

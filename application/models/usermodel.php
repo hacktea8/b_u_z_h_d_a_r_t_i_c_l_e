@@ -4,14 +4,30 @@ require_once 'basemodel.php';
 
 class userModel extends baseModel{
 
-  public function __construct(){
-    parent::__construct();
+ public function __construct(){
+  parent::__construct();
 
+ }
+ public function getChanneCount(){
+  $f = ' COUNT(*) as total ';
+  $check = $this->check_id(self::$_tUser,$f);
+  return $check['total'];
+ }
+ public function getChannelList($order = 'new',$limit = array(1,8)){
+  $orderMap = array('new'=>'','hot'=>'');
+  $fields = '*';
+  $order = isset($orderMap[$order])? $orderMap[$order]: $orderMap['new'];
+  $query = $this->select(self::$_tUser, $fields, $where = array(), $order, $limit);
+  $list = $query->result_array();
+  foreach($list as &$v){
+   $v['url'] = $this->get_url('uchannel',$v['uid']);
   }
-  public function getUserInfo($uinfo){
-    if( !isset($uinfo['uid']) || !$uinfo['uid']){
-      return false;
-    }
+  return $list;
+ }
+ public function getUserInfo($uinfo){
+  if( !isset($uinfo['uid']) || !$uinfo['uid']){
+   return false;
+  }
     $sql = sprintf("SELECT * FROM `%s` WHERE `uid`=%d LIMIT 1", $this->db->dbprefix('user'), $uinfo['uid']);
     $row = $this->db->query($sql)->row_array();
     $uinfo['isvip'] = 0;

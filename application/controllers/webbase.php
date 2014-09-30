@@ -59,7 +59,12 @@ class Webbase extends CI_Controller {
      ,'_c'=>$this->_c,'_a'=>$this->_a,'current_url'=>$current_url
     ));
   }
-  
+  protected function model($m){
+   if( !is_object($this->$m)){
+    $this->load->model($m);
+   }
+   return $this->$m;
+  }
   protected function checkLogin(){
     if(isset($this->userInfo['uid']) &&$this->userInfo['uid']>0){
       return true;

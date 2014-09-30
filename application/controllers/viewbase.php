@@ -11,23 +11,7 @@ class Viewbase extends Webbase {
   public function __construct(){
     parent::__construct();
     
-    $this->load->helper('rewrite');
-    $this->load->model('cateModel');
-/*
-    $_key = 'top_youMayLike';
-    $youMayLike = $this->mem->get($_key);
-//var_dump($hotTopic);exit;
-    if(empty($youMayLike)){
-      $youMayLike = $this->emulemodel->getTopYouMayLike(10);
-      $this->mem->set($_key,$youMayLike,$this->expirettl['2h']);
-    }
-*/
-    $_key = 'cate_info';
-    $cate_info = $this->mem->get($_key);
-    if( empty($cate_info)){
-      $cate_info = $this->cateModel->getAllCateInfo();
-      $this->mem->set($_key,$cate_info,self::$ttl['3d']);
-    } 
+    $cate_info = $this->getAllCate();
     $this->assign(array(
     'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description
     ,'seo_title'=>$this->seo_title,'cdn_url'=>$this->config->item('cdn_url')
@@ -39,6 +23,33 @@ class Viewbase extends Webbase {
     //$this->_get_postion();
     //$this->_get_ads_link();
 //var_dump($this->viewData);exit;
+  }
+  protected function oops($msg){
+   $this->assign(array('msg'=>$msg,'refreshtime'=>10));
+   $this->view('oops');
+   $output = $this->output->get_output();
+   die($output);
+  }
+  protected function getAllCate(){
+   $_key = 'cate_info';
+   $cate_info = $this->mem->get($_key);
+   if( empty($cate_info)){
+    $this->load->model('cateModel');
+    $cate_info = $this->cateModel->getAllCateInfo();
+    $this->mem->set($_key,$cate_info,self::$ttl['3d']);
+   }
+   return $cate_info;
+  }
+  protected function getHotArticle($pcid = 0, $cid = 0){
+    $_key = sprintf('site_hotArticle_%d_%d',$pcid,$cid);
+    $hotArticle = $this->mem->get($_key);
+//var_dump($hotArticle);exit;
+    if(empty($hotArticle)){
+      $this->load->model('articleModel');
+      $hotArticle = $this->articleModel->getTopYouMayLike(10);
+      $this->mem->set($_key,$hotArticle,self::$ttl['2h']);
+    }
+    return $hotArticle;
   }
   protected function _get_postion($postion = array()){
     $this->assign(array('postion'=>$postion));
