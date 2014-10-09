@@ -35,6 +35,7 @@ class Viewbase extends Webbase {
    $cate_info = $this->mem->get($_key);
    if( empty($cate_info)){
     $this->load->model('cateModel');
+    $this->cateModel->getCateArticleTotals();
     $cate_info = $this->cateModel->getAllCateInfo();
     $this->mem->set($_key,$cate_info,self::$ttl['3d']);
    }
@@ -46,7 +47,7 @@ class Viewbase extends Webbase {
 //var_dump($hotArticle);exit;
     if(empty($hotArticle)){
       $this->load->model('articleModel');
-      $hotArticle = $this->articleModel->getTopYouMayLike(10);
+      $hotArticle = $this->articleModel->getArticleListByCid($pcid ,$cid, $sort = 'hot', array(1,10));;
       $this->mem->set($_key,$hotArticle,self::$ttl['2h']);
     }
     return $hotArticle;

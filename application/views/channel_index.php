@@ -152,7 +152,7 @@
         </h2>
         <ul>
           <!-- loop list -->
-<?php foreach($hotArticle as $v)?>
+<?php foreach($hotArticle as $v){?>
           <li class="entry" share_count="498" s-facebook="486">
             <div class="img ui_imgbg">
               <a title="<?php echo $v['title'];?>" href="<?php echo $v['url'];?>">

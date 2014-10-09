@@ -26,6 +26,7 @@ class articleModel extends baseModel{
   $orderMap = array('wonderful'=>' wonderful DESC ','new'=>' utime DESC ','hot'=>' hits DESC','cold'=>' hits ASC','rand'=>' utime ASC');
   $order = isset($orderMap[$sort])? $orderMap[$sort]: $orderMap['hot'];
   $query = $this->select(self::$_tArtileHead, self::$_fAH, $where, $order, $limit);
+//echo $query;exit;
   $list = array();
   if($query->num_rows()){
    $list = $query->result_array();
@@ -41,7 +42,7 @@ class articleModel extends baseModel{
    if($uid && !$isadmin && $edite)
     $where = sprintf(' AND `uid`=%d',$uid);
 
-   $sql = sprintf('SELECT %s,%s FROM %s as a LEFT JOIN %s as ac ON (a.id=ac.id) WHERE a.id =%d  %s LIMIT 1',self::$_fAH, self::$_fAB, self::$_tArtileHead,self::$_tArtileBody ,$aid,$where);
+   $sql = sprintf('SELECT a.%s,%s FROM %s as a LEFT JOIN %s as ac ON (a.id=ac.id) WHERE a.id =%d  %s LIMIT 1',self::$_fAH, self::$_fAB, self::$_tArtileHead,self::$_tArtileBody ,$aid,$where);
 //echo $sql;exit;
    $data = array();
    $query = $this->db->query($sql);

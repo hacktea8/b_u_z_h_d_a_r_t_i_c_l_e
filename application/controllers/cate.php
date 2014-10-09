@@ -14,18 +14,19 @@ class Cate extends Viewbase {
     $channel = &$this->viewData['cate_info'];
     $atotal = isset($channel[$cid])?$channel[$cid]['total']:0;
     $subcid = $cid;
-    $pcid = 0;
+    $pcid = $channel[$cid]['pcid'];
+    $_pcid = 0;
     if( !$channel[$cid]['pcid']){
-     $pcid = $cid;
+     $_pcid = $pcid = $cid;
      $subcid = 0;
     }
     $pageTotal = ceil($atotal/$limit);
     $data = array();
     if($page <= $pageTotal){
      $this->load->model('articleModel');
-     $data['new'] = $this->articleModel->getArticleListByCid($pcid ,$subcid, $sort = 'new', $limit = array($page,$limit));
-     $data['hot'] = $this->articleModel->getArticleListByCid($pcid ,$subcid, $sort = 'hot', $limit = array($page,8));
-     $wonderfull = $this->articleModel->getArticleListByCid($pcid ,$subcid, $sort = 'wonderful', $limit = array($page,$limit));
+     $data['new'] = $this->articleModel->getArticleListByCid($_pcid ,$subcid, $sort = 'new', array($page,$limit));
+     $data['hot'] = $this->articleModel->getArticleListByCid($_pcid ,$subcid, $sort = 'hot', array($page,8));
+     $wonderfull  = $this->articleModel->getArticleListByCid($_pcid ,$subcid, $sort = 'wonderful', array($page,$limit));
     }
     $this->load->library('pagination');
     $config['base_url'] = sprintf('/cate/index/%d/',$cid);
@@ -39,11 +40,11 @@ class Cate extends Viewbase {
     $kw = '';
     $keywords = $kw.$this->seo_keywords;
     $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords
-    ,'lists'=>$data,'pageTotal'=>$pageTotal,'wonderful'=>$wonderful
+    ,'lists'=>$data,'pageTotal'=>$pageTotal,'wonderful'=>$wonderfull
     ,'list_url_tpl'=>$config['base_url'],'pcid'=>$pcid,'subcid'=>$subcid
     ,'page_string'=>$page_string,'cid'=>$cid,'page'=>$page
     ));
-#var_dump($this->viewData);exit;
+//var_dump($this->viewData);exit;
     $this->view('cate_index');
   }
   

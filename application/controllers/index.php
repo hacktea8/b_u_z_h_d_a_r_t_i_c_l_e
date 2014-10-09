@@ -31,7 +31,6 @@ class Index extends Viewbase {
   protected function getIndexData(){
    $this->load->model('articleModel');
    $indexData = $this->articleModel->getIndexData();
-   $indexData = array();
    $this->assign(array('_a'=>'index','indexData'=>$indexData));
    $this->view('index_index');
    $output = $this->output->get_output();
@@ -51,6 +50,18 @@ class Index extends Viewbase {
     }
     die(json_encode($data));
   }
-  
+  public function clearMemcache($key = 0){
+   $memKey = array('cate_info','writer_groups','site_cates','hot_tags','user_groups');
+   if($key){
+    $memKey = isset($memKey[$key])?array($memKey[$key]):array();
+   }
+   if( !$this->userInfo['isAdmin']){
+     //return 0;
+   }
+   foreach($memKey as $k){
+    $this->mem->set($k, '', 100);
+   }
+   echo 'OK';exit;
+  }
 }
 ?>

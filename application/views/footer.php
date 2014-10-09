@@ -3,7 +3,7 @@
     <div class="footer_block logo" onclick="window.location.href='/'">
       <h2 class="fb">
         <a href="/">
-          <?php echo $web_title;?>
+          <?php echo $site_name;?>
         </a>
       </h2>
       <p class="f18">
@@ -51,10 +51,10 @@
     </div>
     <div class="footer_block info">
       <h2 class="fcEm5 mb5">
-        关于<?php echo $web_title;?>
+        关于<?php echo $site_name;?>
       </h2>
       <p>
-        <?php echo $web_title;?>一个拥有创新精神多用户部落格网络平台，亲爱的网友您可以尽情免费创建自己的部落格频道!
+        <?php echo $site_name;?>一个拥有创新精神多用户部落格网络平台，亲爱的网友您可以尽情免费创建自己的部落格频道!
       </p>
     </div>
     <div class="footer_block info">
@@ -62,7 +62,7 @@
         什么是发文赚钱？
       </h2>
       <p class="mb5">
-        在本网站()分享您的创造，包括文章、图片、或影片即可让您轻松赚取现金收益！
+        在本网站(<?php echo $site_name;?>)分享您的创造，包括文章、图片、或影片即可让您轻松赚取现金收益！
       </p>
       <a class="ui_btn ui_btn_green f12" title="发文赚钱" href="/help/bonus.html">
         了解更多
@@ -71,13 +71,13 @@
   </div>
   <div class="footer_main f12 fcEm7">
     <div class="content">
-      重要声明：本站所有文章由会员即时发表，本站对所有文章的真实性、完整性及立场等，不负任何法律责任。所有文章内容只代表发文者个人意见，亦非本网站之立场，用户不应信赖内容，亦应自行判断内容之真实性。发文者拥有在<?php echo $web_title;?>张贴的文章。
+      重要声明：本站所有文章由会员即时发表，本站对所有文章的真实性、完整性及立场等，不负任何法律责任。所有文章内容只代表发文者个人意见，亦非本网站之立场，用户不应信赖内容，亦应自行判断内容之真实性。发文者拥有在<?php echo $site_name;?>张贴的文章。
       由于本站受到「即时发表」运作方式所规限，故不能完全监察所有即时文章，如有不过当或对于文章出处有疑虑，请联络我们告知，我们将在最短时间内进行撤除。本站有权删除任何留言及拒绝任何人士发文，同时亦有不删除文章的权利。
     </div>
   </div>
   <div class="tc f12 footer_bottom">
     <span class="mr5">
-      ©<?php echo date('Y'),' ',$web_title;?>. All Rights Reserved.
+      ©<?php echo date('Y'),' ',$site_name;?>. All Rights Reserved.
     </span>
     <a rel="nofollow" href="/help/service.html">
       使用条款

@@ -26,12 +26,12 @@
         </a>
       </li>
 <?php foreach($cate_info as $v){
-if($v['pid'] != $pcid){
+if($v['pcid'] != $pcid){
  continue;
 }
 ?>
       <li class="<?php echo $v['cid'] == $subcid?'on':'';?>">
-        <a href="<?php echo $v['title'];?>">
+        <a href="<?php echo $v['url'];?>">
           <?php echo $v['title'];?>
         </a>
       </li>
@@ -138,7 +138,7 @@ if($v['pid'] != $pcid){
           </h2>
         </div>
         <ul>
-<?php foreach($wonderfull as $v){?>
+<?php foreach($wonderful as $v){?>
           <li class="entry" share_count="20" s-facebook="20">
             <div class="img ui_imgbg">
               <a href="<?php echo $v['url'];?>">

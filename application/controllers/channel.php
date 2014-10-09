@@ -34,7 +34,7 @@ class Channel extends Viewbase {
     ,'list_url_tpl'=>$config['base_url'],'show'=>$show,'page'=>$page
     ,'page_string'=>$page_string,'cid'=>$cid,'hotArticle'=>$hotArticle
     ));
-#var_dump($this->viewData);exit;
+//var_dump($this->viewData);exit;
     $this->view('channel_index');
   }
   public function user($uid,$sort = 'new', $cid = 0,$page = 1){

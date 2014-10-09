@@ -89,14 +89,16 @@ class baseModel extends CI_Model{
  /*
 组装SELECT SQL
 */
- public function select($table = '', $fields = '*', $where = array(), $order = '', $limit = array(1)){
+ public function select($table = '', $fields = '*', $where = array(), $order = '', $limit = array(1),$return = 0){
   $limitSql = $this->get_limit($limit);
   $whereSql = $this->get_where($where);
   $whereSql = $whereSql ? 'WHERE '.$whereSql: '';
   $orderSql = $order ? sprintf('ORDER BY %s', $order) : '';
   $table = $table ? $table : $this->_table;
   $sql = sprintf('SELECT %s FROM %s %s %s %s', $fields, $table, $whereSql, $orderSql, $limitSql);
-//echo $sql;exit;
+  if($return){
+   echo $sql;exit;
+  }
   $query = $this->db->query($sql);
   return $query;
  }

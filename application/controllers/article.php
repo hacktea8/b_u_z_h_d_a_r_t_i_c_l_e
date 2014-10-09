@@ -14,6 +14,7 @@ class Article extends Viewbase {
     }
     $this->load->model('articleModel');
     $data = $this->articleModel->getArticleInfoByAid($aid,0,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
+//$this->debug($data);
     if(empty($data)){
        header('Location: '.$this->url404);
        exit;
