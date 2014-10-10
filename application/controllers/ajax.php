@@ -24,7 +24,15 @@ class Ajax extends Webbase {
     }
     $this->load->model('emulemodel');
   }
-  public function clicklog($aid,$uid,$cid){
+  public function clicklog(){
+    $key = $this->input->get_post('key');
+    $str = $this->str_encode($key,'DECODE');
+    list($t,$uk,$gid,$wid,$coop,$aid,$uid,$pcid,$cid) = explode('|',$str);
+    $aid = intval($aid);$uid = intval($uid);
+    $cid = intval($cid);
+    if( !($aid || $uid || $cid )){
+     return 0;
+    }
     $ip = $this->input->ip_address();
     // 检查当前IP是否已使用
     $check_key = sprintf('post_uv_key_%d_%s',$aid,$ip);
@@ -33,7 +41,7 @@ class Ajax extends Webbase {
     }
     //redis file_storge
     $this->redis->set($check_key,1,$this->ttl['1d']);
-    $log_key = sprintf('post_uv:1:%d:%d:%d:%d:%d',$aid,$uid,$cid,date('Ym'),date('Ymd'));
+    $log_key = sprintf('post_click_uv:%d:%d:%d:%d:%d:%d:%d:%d',$t,$uk,$gid,$wid,$coop,$aid,$uid,$pcid,$cid,date('Ym'),date('Ymd'));
     $this->redis->incr($log_key);
   } 
   public function clearcache($type = 'mem',$key = 'all'){

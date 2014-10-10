@@ -8,22 +8,31 @@ $ROOTPATH = dirname(__FILE__).'/';
 
 require_once $ROOTPATH.'../config.php';
 
-$keys = $redis->keys("post_uv:*");
+$keys = $redis->keys("post_click_uv:*");
 //var_dump($keys);exit;
 foreach($keys as $v){
- $click = $redis->get($v);
+ $hits = $redis->get($v);
  $arr = explode(':',$v);
- 
- if(1 == $arr[1]){
+ $type = $arr[1];
+ $cop_uid = $arr[2];
+ $gid = $arr[3];
+ $wid = $arr[4];
+ $cop = $arr[5];
+ $aid = $arr[6];
+ $uid = $arr[7];
+ $pcid = $arr[8];
+ $cid = $arr[9];
+ $Ym  = $arr[10];
+ $Ymd = $arr[11];
+ $flag = 1;
+ if(1 == $type){
   // 统计UV
-  $aid = $arr[2];
-  $uid = $arr[3];
-  $cid = $arr[4];
-  $Ym  = $arr[5];
-  $Ymd = $arr[6];
-  $flag = 1;
-  $param = compact('aid','uid','cid','Ym','Ymd','click','flag');
+  $param = compact('gid','wid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
   $m->setPostLog($param);
+ }elseif(2 == $type){
+  //共推收益
+  $param = compact('cop','gid','wid','cop_uid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
+  $m->setUKPostLog($param);
  }
  $redis->delete($v);
 }

@@ -92,6 +92,7 @@
             <!-- end title_tool -->
           </div>
           <!-- end ui_title -->
+          <div id="article-item-box_static" style="height:0px;width:100%;"></div>
           <!-- content -->
           <div id="detailContent" class="content p20" style="border-bottom: none;">
             <!-- ysm_ad_place1 -->
@@ -319,16 +320,32 @@
 <!-- end container -->
 <!-- adsense_ad_place6 -->
 <!-- all_ad_place2 -->
-<script>
-  document.body.oncopy = function(e) {
-    if (window.clipboardData) {
-      window.clipboardData.clearData();
-    }
-    return false;
-  };
-  document.oncontextmenu = function() {
-    return false;
-  };
+<script type="text/javascript">
+document.body.oncopy = function(e) {
+ if (window.clipboardData) {
+  window.clipboardData.clearData();
+ }
+ return false;
+};
+document.oncontextmenu = function() {
+ return false;
+};
+$(document).scroll(function(){
+ var hMove = document.body.scrollTop;
+ hStatic = $('#article-item-box_static').offset().top;
+ if(hMove > hStatic){
+  setTimeout(function(){
+  $.ajax({
+   type: 'POST',
+   url: '/ajax/clicklog',
+   data: {'key':<?php echo $click_key;?>},
+   success: function(msg){},
+   dataType: 'json'
+  });
+  },15000);
+ }
+
+});
   var fb_page = 'https://www.facebook.com/BuzzHandCom';
   var fb_name = 'BuzzHand'; (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];

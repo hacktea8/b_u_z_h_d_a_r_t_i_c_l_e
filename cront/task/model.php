@@ -9,6 +9,8 @@ class M{
  public $_t_user_group = 'user_group';
  public $_t_writer_group = 'writer_group';
  public $_t_user_day_income = 'user_daily_income';
+ public $_t_ACR = 'article_coop_read';
+ public $_t_AH = 'article_title';
 
  public function __construct(){
   global $active_group,$db;
@@ -16,9 +18,10 @@ class M{
   $this->db = new Dbmysql($config['hostname'],$config['username'],$config['password'],$config['database']);
   
  }
- public function check_id($aid,$date){
+ public function check_id($aid,$date,$table = ''){
   $where = array('aid'=>$aid,'Ymd'=>$date);
-  $sql = $this->db->select_string($this->_table, $fieldsStr = 'id', $limit = array(1), $where)
+  $t = $table?$table:$this->_table;
+  $sql = $this->db->select_string($t, $fieldsStr = 'id', $limit = array(1), $where)
   $row = $this->db->row_array($sql);
   return isset($row['id'])? $row['id']: 0;
  }
@@ -41,15 +44,46 @@ class M{
   $param['Ym'] = date('Ym');
   return $this->db->insert($table,$fields = $param);
  }
+ public function check_exist($t = '',$f,$w){
+  $t = $t?$t:$this->_table;
+  $sql = $this->db->select_string($t, $f, $limit = array(1), $w)
+  $row = $this->db->row_array($sql);
+  return $row;
+ }
+ public function saveCoopUcashByUid($uid,$cash,$Ymd){
+  if( !$uid || !$cash){
+   return 0;
+  }
+  $sql = sprintf("UPDATE %s SET `coop_amount`=`coop_amount`+%f WHERE `uid`=%d AND `Ymd`=%d LIMIT 1",$this->_t_user_day_income,$cash,$uid,$Ymd);
+  $this->db->query($sql);
+ }
+ public function resetCoopULogById($id,$flag = 0){
+  $this->db->update($this->_t_ACR, array('flag'=>$flag), array('id'=>$id));
+  return 1;
+ }
  public function setPostLog($param = array()){
   $id = $this->check_id($param['aid'], $param['Ymd']);
+  
+  $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_AH, $param['click'], $aid);
+  $this->db->query($sql);
   if($id){
-    $sql = sprintf('UPDATE %s SET `click`=`click`+%d WHERE `id`=%d LIMIT 1',$this->_table, $param['click'], $id);
+    $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_table, $param['hits'], $id);
     $this->db->query($sql);
     return $id;
   }
   return $this->db->insert($this->_table,$fields = $param);
  }
+ public function setUKPostLog($param = array()){
+  $id = $this->check_id($param['aid'], $param['Ymd'],$this->_t_ACR);
+  $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_AH, $param['hits'], $aid);
+  $this->db->query($sql);
+  if($id){
+    $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_ACR, $param['hits'], $id);
+    $this->db->query($sql);
+    return $id;
+  }
+  return $this->db->insert($this->_t_ACR,$fields = $param);
+ } 
  public function resetUpdateUserGroupFlag($fields, $where = array()){
   $this->db->update($this->_t_user,$fields, $where);
  }
@@ -152,13 +186,13 @@ class M{
   if( !$uid){
    return 0;
   }
-  $sql = $this->db->select_string($this->_t_user, 'introducer', array(1), array('uid'=>$uid));
+  $sql = $this->db->select_string($this->_t_user, 'invite', array(1), array('uid'=>$uid));
   $row = $this->db->row_array($sql);
-  return $row['introducer'];
+  return $row['invite'];
  }
  //更新上线的提成
- public function updateIntroducerDayliyIncome($deduct_amount, $introducer, $vdate){
-  $sql = sprintf("UPDATE %s SET `deduct_amount`=`deduct_amount`+%d WHERE `uid`=%d AND `Ymd`=%d LIMIT 1", $this->_t_user_day_income, $deduct_amount, $introducer, $vdate);
+ public function updateIntroducerDayliyIncome($deduct_amount, $invite, $vdate){
+  $sql = sprintf("UPDATE %s SET `deduct_amount`=`deduct_amount`+%d WHERE `uid`=%d AND `Ymd`=%d LIMIT 1", $this->_t_user_day_income, $deduct_amount, $invite, $vdate);
   $this->db->query($sql);
   return 1;
  }

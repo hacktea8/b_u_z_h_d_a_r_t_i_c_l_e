@@ -36,14 +36,23 @@ class Article extends Viewbase {
     $seo_description = strip_tags($data['intro']);
     $seo_description = preg_replace('#\s+#Uis','',$seo_description);
     $seo_description = mb_substr($seo_description,0,250);
+    $uk = $this->input->get('uk',0);
+    $uk = intval($uk);
+    $t = $uk?2:1;
+    $this->model('userModel');
+    $postUinfo = $this->userModel->getUinfoByUid('wid,gid', $data['uid']);
+    $str = sprintf('%d|%d|%d|%d|%d|%d|%d|%d|%d',
+    $t,$uk,$postUinfo['gid'],$postUinfo['wid'],$data['coop'],
+    $data['id'],$data['uid'],$data['pcid'],$data['cid']);
+    $click_key = $this->str_encode($str,'ENCODE');
     $isCollect = 0;//$this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['id']);
-    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title
+    $this->assign(array('isCollect'=>$isCollect,'click_key'=>$click_key,'seo_title'=>$title
     ,'seo_keywords'=>$keywords,'cid'=>$cid,'pcid'=>$cpid,'info'=>$data
     ,'aid'=>$aid,'seo_description'=>$seo_description,'top_channel'=>$top_channel
     ,'also_like'=>$also_like,'viewHot'=>$viewHot
     )); 
 //$this->debug($this->viewData);
-    $this->view('index_post');
+    $this->view('article_index');
   }
   
 }

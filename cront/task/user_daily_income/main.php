@@ -33,7 +33,7 @@ while(1){
    }
    foreach($listUid as $vuid){
     //今日组信息
-    $groupInfo = $m->getUserTodayGroup('id,gid,wid,post_amount',array('uid'=>$vuid,'Ymd'=>$vdate));
+    $groupInfo = $m->getUserTodayGroup('id,gid,wid',array('uid'=>$vuid,'Ymd'=>$vdate));
     //今日收益
     $click_amount = 0;
     // start special
@@ -51,7 +51,18 @@ while(1){
     $row = $m->getPostClickLogById($fields,$where);
     $postClick = isset($row['total'])? $row['total']: 0;
     $postClick = $postClick/1000;
-    $click_amount += $postClick * $group['price'];
+    $coop_amount = 0;
+    /*******共推收益计算*****/
+    $coop_list = $m->getUserCoopLogList($vuid,$vdate);
+    foreach($coop_list as $copval){
+     $copCash = $copval['hits']/1000 * $group['price'];
+     $copUcash = $copCash*$copval['cop']/10;
+     $coop_amount += ($copCash-$copUcash);
+     $m->saveCoopUcashByUid($copval['cop_uid'],$copUcash,$vdate);
+     $m->resetCoopULogById($copval['id']);
+    }
+    /*******/
+    $click_amount += ($postClick * $group['price'] + $coop_amount);
     // end General 常规
     if($click_amount){
      $update = array('click_amount'=>$click_amount);
@@ -62,15 +73,15 @@ while(1){
     // end update post_amount  由发文进行统计
     $amount = $post_amount + $click_amount;
     if( $amount){
-     $introducer = $m->getUserIntroducer($vuid);
-     if($introducer){
+     $invite = $m->getUserIntroducer($vuid);
+     if($invite){
       //贡献的金额
       $devote_amount = $amount * 0.15;
       $update = array('devote_amount'=>-$devote_amount);
       $where = array('id'=>$groupInfo['id']);
       $m->updateUserDayliyIncome($update,$where);
       //更新上线的提成
-      $m->updateIntroducerDayliyIncome($deduct_amount,$introducer,$vdate);
+      $m->updateIntroducerDayliyIncome($deduct_amount,$invite,$vdate);
      }
      // end update devote_amount 贡献给上线的金额 负的
     }

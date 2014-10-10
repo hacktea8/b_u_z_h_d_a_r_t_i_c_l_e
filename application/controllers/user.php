@@ -4,6 +4,13 @@ require_once 'usrbase.php';
 class User extends Usrbase {
  public function __construct(){
   parent::__construct();
+  if($this->userInfo['uid']){
+   redirect();
+   exit;
+  }
+  $url = $this->viewData['login_url'].urlencode($_SERVER['HTTP_REFERER']);
+  header('Location: '.$url);
+  exit;
   $goto = $this->input->get_post('goto');
   $goto = $goto? $goto: isset($_SERVER['HTTP_REFERER'])? $_SERVER['HTTP_REFERER']: '/';
   $this->assign(array(

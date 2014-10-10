@@ -136,16 +136,16 @@
           30日點閱數：<span class="fcEm7 fb">0</span>
           </p> -->
           <p>
-            <a href="http://my.buzzhand.com/earnings.html" class="fcEm7 ul mr5">
+            <a href="/console/earnings.html" class="fcEm7 ul mr5">
               收益報告
             </a>
-            <a href="http://my.buzzhand.com/recruit.html" class="fcEm7 ul mr5">
+            <a href="/console/recruit.html" class="fcEm7 ul mr5">
               下线會員
             </a>
-            <a href="http://my.buzzhand.com/index.html" class="fcEm7 ul mr5">
+            <a href="/console/index.html" class="fcEm7 ul mr5">
               會員中心
             </a>
-            <a href="/vb_code" class="fcEm7 ul mr5">
+            <a href="/channel/user/vb_code" class="fcEm7 ul mr5">
               我的频道
             </a>
           </p>
@@ -171,7 +171,7 @@
             </div>
           </div>
         </div>
-        <a class="btn mt5 ml20 mr20 rc5" href="http://my.buzzhand.com/postcreate.html">
+        <a class="btn mt5 ml20 mr20 rc5" href="/console/postcreate.html">
           現在去發文
         </a>
       </div>
@@ -218,7 +218,7 @@
       </div>
     </div>
   </div>
-  <a class="btn mt10 mr20 ml20 rc5" href="http://my.buzzhand.com/user/register.html">
+  <a class="btn mt10 mr20 ml20 rc5" href="/user/register.html">
     我要成為網站作者
   </a>
 </div>

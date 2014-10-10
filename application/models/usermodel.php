@@ -13,6 +13,10 @@ class userModel extends baseModel{
   $check = $this->check_id(self::$_tUser,$f);
   return $check['total'];
  }
+ public function getUinfoByUid($f,$uid){
+  $check = $this->check_id(self::$_tUser,$f,array('uid'=>$uid));
+  return $check;
+ }
  public function getChannelList($order = 'new',$limit = array(1,8)){
   $orderMap = array('new'=>'','hot'=>'');
   $fields = '*';
@@ -28,7 +32,7 @@ class userModel extends baseModel{
   if( !isset($uinfo['uid']) || !$uinfo['uid']){
    return false;
   }
-    $sql = sprintf("SELECT * FROM `%s` WHERE `uid`=%d LIMIT 1", $this->db->dbprefix('user'), $uinfo['uid']);
+    $sql = sprintf("SELECT * FROM `%s` WHERE `uid`=%d LIMIT 1", self::$_tUser, $uinfo['uid']);
     $row = $this->db->query($sql)->row_array();
     $uinfo['isvip'] = 0;
     foreach($uinfo['groups'] as $group){
@@ -41,18 +45,15 @@ class userModel extends baseModel{
       }
     }
     $ip = get_client_ip();
-    $row['groupid'] = $uinfo['groupid'];
+    $row['gid'] = $uinfo['groupid'];
     $row['groups'] = $uinfo['groups'];
-    $introducer = isset($_COOKIE['online'])? intval($_COOKIE['online']): 0;
+    $invite = isset($_COOKIE['invite'])? intval($_COOKIE['invite']): 0;
     if(isset($row['uid'])){
       $update = array();
     if($row['loginip'] != $ip){
       $row['loginip'] = $update['loginip'] = $ip;
     }
     // 更新上线
-    if($introducer && !$row['introducer']){
-     $update['introducer'] = $introducer;
-    }
     if($row['logintime'] != date('Ymd')){
       $row['logintime'] = $update['logintime'] = date('Ymd');
     }
@@ -64,16 +65,21 @@ class userModel extends baseModel{
     }
     if(count($update)){
       $where = sprintf(" `uid` =%d LIMIT 1", $uinfo['uid']);
-      $sql = $this->db->update_string($this->db->dbprefix('user'),$update,$where);
+      $sql = $this->db->update_string(self::$_tUser,$update,$where);
       $this->db->query($sql);
     }
     return $row;
     }else{
-      
-      $sql = sprintf("INSERT INTO %s(`uid`, `uname`, `isvip`, `loginip`, `logintime`, `introducer`) VALUES (%d,'%s',%d,'%s',%d,%d)", $this->db->dbprefix('user'), $uinfo['uid'],mysql_real_escape_string($uinfo['uname']),$uinfo['isvip'],mysql_real_escape_string($ip),date('Ymd'),$introducer);
-      $this->db->query($sql);
+      $insert_data = $uinfo;
+      unset($insert_data['groups']);
+      $insert_data['loginip'] = $ip;
+      $insert_data['logintime'] = date('Ymd');
+      $insert_data['invite'] = $invite;
+var_dump($insert_data);exit;
+      $this->db->insert(self::$_tUser,$insert_data);
+      $this->db->insert(self::$_tUMeta, array('uid'=>$insert_data['uid']));
+      return $insert_data;
     }
-    return $uinfo;
   }
                 
 }

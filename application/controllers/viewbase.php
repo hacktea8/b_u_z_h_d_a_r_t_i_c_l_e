@@ -1,29 +1,33 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'webbase.php';
 class Viewbase extends Webbase {
-  public $url404 = '/maindex/show404'; 
-  public $seo_title = '首页'; 
-  public $seo_keywords = '';
-  public $seo_description = '';
-  public $imguploadapiurl = 'http://img.hacktea8.com/imgapi/upload/?seq=';
-  public $showimgapi = 'http://img.hacktea8.com/showfile.php?key=';
+ public $url404 = '/maindex/show404'; 
+ public $seo_title = '首页'; 
+ public $seo_keywords = '';
+ public $seo_description = '';
+ public $imguploadapiurl = 'http://img.hacktea8.com/imgapi/upload/?seq=';
+ public $showimgapi = 'http://img.hacktea8.com/showfile.php?key=';
 
-  public function __construct(){
-    parent::__construct();
+ public function __construct(){
+  parent::__construct();
     
-    $cate_info = $this->getAllCate();
-    $this->assign(array(
-    'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description
-    ,'seo_title'=>$this->seo_title,'cdn_url'=>$this->config->item('cdn_url')
-    ,'showimgapi'=>$this->showimgapi,'error_img'=>'/public/images/show404.jpg'
-    ,'youMayLike'=>$youMayLike,'cate_info'=>$cate_info
-    ,'pcid'=>0,'cid'=>0
-    ,'editeUrl' => '/edite/index/emuleTopicAdd'
-    ));
-    //$this->_get_postion();
-    //$this->_get_ads_link();
-//var_dump($this->viewData);exit;
+  $cate_info = $this->getAllCate();
+  $this->assign(array(
+  'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description
+  ,'seo_title'=>$this->seo_title,'cdn_url'=>$this->config->item('cdn_url')
+  ,'showimgapi'=>$this->showimgapi,'error_img'=>'/public/images/show404.jpg'
+  ,'youMayLike'=>$youMayLike,'cate_info'=>$cate_info
+  ,'pcid'=>0,'cid'=>0
+  ,'editeUrl' => '/edite/index/emuleTopicAdd'
+  ));
+  $invate = $this->input->get('invite',0);
+  if($invate){
+   $this->cookie('invite', $invate, 86400);
   }
+  //$this->_get_postion();
+  //$this->_get_ads_link();
+//var_dump($this->viewData);exit;
+ }
   protected function oops($msg){
    $this->assign(array('msg'=>$msg,'refreshtime'=>10));
    $this->view('oops');

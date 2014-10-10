@@ -104,4 +104,26 @@ class Webbase extends CI_Controller {
   protected function debug($data){
    echo "<pre>";var_dump($data);exit;
   }
+  protected function str_encode($code,$operation = 'DECODE'){
+   $key = '1MjGbsweYVz678D4S7L0P8BvXryhd641lCdKp';
+   $r = uc_authcode($code, $operation,$key);
+   return $r;
+  }
+  protected function cookie($name,$value = '', $ttl = 3600){
+    if($value){
+     $cookie = array(
+     'name'   => $name,
+     'value'  => $value,
+     'expire' => $ttl,
+     'domain' => '',
+     'path'   => '/',
+     'prefix' => '',
+     'secure' => false
+     );
+     $this->input->set_cookie($cookie);
+     return 1;
+    }
+    $cookie = $this->input->cookie($name);
+    return $cookie;
+  }
 }

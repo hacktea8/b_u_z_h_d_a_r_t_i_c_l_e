@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once 'usrbase.php';
-class My extends Usrbase {
+require_once 'viewbase.php';
+class Console extends Viewbase {
  public function __construct(){
   parent::__construct();
  }
