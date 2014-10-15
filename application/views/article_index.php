@@ -46,7 +46,7 @@
                     <span class="ui_icon ui_icon_level ui_icon_level0">
                     </span>
                     <span class="vm ml5">
-                      奇闻趣事
+                      <?php echo $cate_info[$info['cid']]['title'];?>
                     </span>
                   </a>
                 </li>
@@ -54,7 +54,7 @@
                   <span class="mr5">
                     |
                   </span>
-                  2014-09-24
+                  <?php echo date('Y-m-d',$info['utime']);?>
                 </li>
                 <li class="fcEm4">
                   <span class="mr5">
@@ -81,7 +81,7 @@
                     <span class="ui_icon ui_icon15 ui_icon15_share2">
                     </span>
                     <span class="vm">
-                      790
+                      <?php echo $info['share_count'];?>
                     </span>
                   </a>
                 </li>
@@ -121,7 +121,7 @@
           <!-- ysm_ad_place3 -->
           <!-- fb-comments -->
           <div id="fb-comments-container">
-            <div class="fb-comments" data-href="http://www.buzzhand.com/post_122494.html"
+            <div class="fb-comments" data-href="<?php echo $site_url,$info['url'];?>"
             data-width="100%" data-num-posts="10">
             </div>
           </div>
@@ -189,13 +189,13 @@
                   <div class="mb10">
                     <span class="vm mr10 fcEm7">
                       <a href="/channel_1497.html">
-                        奇闻趣事
+                        <?php echo $cate_info[$info['cid']]['title'];?>
                       </a>
                     </span>
                     <span class="ui_icon ui_icon_level ui_icon_level0">
                     </span>
                     <span class="vm">
-                      探花
+                      <?php echo $writerGroup[$postUinfo['wid']]['title'];?>
                     </span>
                   </div>
                   <div class="post_list">

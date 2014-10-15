@@ -113,8 +113,8 @@
               全部
             </a>
 <?php foreach($userCate as $v){?>
-            <a <?php if( $cid == $v['cid']){?>class="on"<?php }?> href="<?php echo $v['url'];?>">
-              <?php echo $v['title'];?>
+            <a <?php if( $cid == $v){?>class="on"<?php }?> href="<?php echo "/channel/user/{$uid}/{$order}/{$v}/1";?>">
+              <?php echo $cate_info[$v]['title'];?>
             </a>
 <?php }?>
           </div>

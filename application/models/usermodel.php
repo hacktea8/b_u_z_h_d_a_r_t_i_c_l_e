@@ -8,6 +8,26 @@ class userModel extends baseModel{
   parent::__construct();
 
  }
+ public function getUserGroup(){
+  $q = $this->select(self::$_tUGroup, self::$_fUGroup,$w = array('flag='=>1),$order = 'sort ASC');
+  $l = $q->result_array();
+  $r = array();
+  $l = $l?$l:array();
+  foreach($l as $v){
+   $r[$v['gid']] = $v;
+  }
+  return $r;
+ }
+ public function getUserWriterGroup(){
+  $q = $this->select(self::$_tWGroup, self::$_fWGroup,$w = array('flag='=>1),$order = 'sort ASC');
+  $l = $q->result_array();
+  $r = array();
+  $l = $l?$l:array();
+  foreach($l as $v){
+   $r[$v['wid']] = $v;
+  }
+  return $r;
+ }
  public function getChanneCount(){
   $f = ' COUNT(*) as total ';
   $check = $this->check_id(self::$_tUser,$f);

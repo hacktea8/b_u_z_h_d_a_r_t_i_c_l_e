@@ -1,13 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'webbase.php';
 class Viewbase extends Webbase {
- public $url404 = '/maindex/show404'; 
- public $seo_title = '首页'; 
- public $seo_keywords = '';
- public $seo_description = '';
- public $imguploadapiurl = 'http://img.hacktea8.com/imgapi/upload/?seq=';
- public $showimgapi = 'http://img.hacktea8.com/showfile.php?key=';
-
+ static public $seo = array('title'=>'首页','keyword'=>'','description'=>''); 
+ static public $url404 = '/404.html';
+ 
  public function __construct(){
   parent::__construct();
     
@@ -88,6 +84,7 @@ class Viewbase extends Webbase {
     //echo $links[$k];exit;
   }
   public function view($view_file){
+    $this->viewData['seo'] = &self::$seo;
     $this->load->view('header',$this->viewData);
     $this->load->view($view_file);
     $this->load->view('footer');
@@ -103,5 +100,37 @@ class Viewbase extends Webbase {
      }
     }
     return $return;
+  }
+  protected function getUserGroup(){
+   $k = 'site_urser_group';
+   $writerGroup = $this->mem->get($k);
+   if(empty($writerGroup)){
+    $this->model('userModel');
+    $writerGroup = $this->userModel->getUserGroup();
+    $this->mem->set($k,$writerGroup,self::$ttl['3d']);
+   }
+   return $writerGroup;
+  }
+  protected function getUserWriterGroup(){
+   $k = 'site_urser_writer_group';
+   $writerGroup = $this->mem->get($k);
+   if(empty($writerGroup)){
+    $this->model('userModel');
+    $writerGroup = $this->userModel->getUserWriterGroup();
+    $this->mem->set($k,$writerGroup,self::$ttl['3d']);
+   }
+   return $writerGroup;
+  }
+  protected function setseo($title = '',$keyword = '',$description = ''){
+   if($title){
+    $title .= ' | ';
+   }
+   self::$seo['title'] = $title.$this->viewData['site_name'].'';
+   if($keyword){
+    self::$seo['keyword'] = $keyword;
+   }
+   if($description){
+    self::$seo['description'] = $description;
+   }
   }
 }

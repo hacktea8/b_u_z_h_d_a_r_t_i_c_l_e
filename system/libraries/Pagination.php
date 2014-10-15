@@ -28,7 +28,7 @@ class CI_Pagination {
 
 	var $base_url			= ''; // The page we are linking to
 	var $prefix			= ''; // A custom prefix added to the path.
-	var $suffix			= '.shtml'; // A custom suffix added to the path.
+	var $suffix			= '.html'; // A custom suffix added to the path.
 
 	var $total_rows			=  0; // Total number of items (database results)
 	var $per_page			= 12; // Max number of items you want shown per page

@@ -69,14 +69,9 @@ class Channel extends Viewbase {
     }
 // seo setting
     $kw = '';
-    $title = $channel['title'];
-    $keywords = sprintf('%s',$title);
-    $seo_description = strip_tags($channel['intro']);
-    $seo_description = preg_replace('#\s+#Uis','',$seo_description);
-    $seo_description = mb_substr($seo_description,0,250);
-    $this->assign(array('seo_title'=>$title
-    ,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info']
-    ,'aid'=>$aid,'seo_description'=>$seo_description,'page_str'=>$page_string
+    $this->assign(array('page'=>$page
+    ,'cid'=>$cid,'order'=>$sort
+    ,'uid'=>$uid,'page_str'=>$page_string
     ,'channel'=>$channel,'lists'=>$lists,'userCate'=>$userCate
     )); 
 //echo "<pre>";var_dump($this->viewData);exit;
