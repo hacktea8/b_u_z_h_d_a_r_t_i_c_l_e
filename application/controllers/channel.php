@@ -39,6 +39,8 @@ class Channel extends Viewbase {
   }
   public function user($uid,$sort = 'new', $cid = 0,$page = 1){
     $uid = intval($uid);
+    $page = intval($page);
+    $page = $page<1?1:$page;
     if($uid <1){
       header('HTTP/1.1 301 Moved Permanently');
       header('Location: /');
@@ -47,11 +49,24 @@ class Channel extends Viewbase {
     $pLimit = 20;
     $this->model('userModel');
     $channel = $this->userModel->getUserChannelInfo($uid);
-    
     if(empty($channel)){
      $this->oops('频道不存在');
     }
-    $lists = $this->articleModel->getArticleListByUid($uid,$cid,$sort,array($page,$pLimit));
+    $this->model('articleModel');
+    $atotal = $this->articleModel->getArticleCountByUid($uid, $cid);
+    $userCate = $this->articleModel->getArticleCateByUid($uid);
+    $lists = $this->articleModel->getArticleListByUid($uid, $pcid = 0,$cid,$sort,array($page,$pLimit));
+    $lastP = ceil($atotal/$pLimit);
+    $page_string = '';
+    if( $lastP > 1){
+     $this->load->library('pagination');
+     $config['base_url'] = sprintf('/channel/user/%d/%s/%d/', $uid, $order,$cid);
+     $config['total_rows'] = $atotal;
+     $config['cur_page'] = $page;
+     $config['per_page'] = $pLimit;
+     $this->pagination->initialize($config);
+     $page_string = $this->pagination->create_links();
+    }
 // seo setting
     $kw = '';
     $title = $channel['title'];
@@ -61,12 +76,17 @@ class Channel extends Viewbase {
     $seo_description = mb_substr($seo_description,0,250);
     $this->assign(array('seo_title'=>$title
     ,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info']
-    ,'aid'=>$aid,'seo_description'=>$seo_description
-    ,'channel'=>$channel,'lists'=>$lists
+    ,'aid'=>$aid,'seo_description'=>$seo_description,'page_str'=>$page_string
+    ,'channel'=>$channel,'lists'=>$lists,'userCate'=>$userCate
     )); 
-#echo "<pre>";var_dump($this->viewData);exit;
+//echo "<pre>";var_dump($this->viewData);exit;
     $this->view('channel_user');
   }
-  
+  public function ip(){
+   $ip = $this->input->ip_address();
+   echo $ip,"<br />";
+   echo $_SERVER['REMOTE_ADDR'];
+   exit;
+  }
 }
 ?>

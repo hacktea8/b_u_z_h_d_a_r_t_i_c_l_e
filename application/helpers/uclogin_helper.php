@@ -63,9 +63,20 @@ if ( ! function_exists('getSynuserInfo'))
     if( !$uid){
        return false;
     }
-    list($status['uid'],$status['groupid'],$status['groupexpiry'],$status['groups']) = uc_user_info($uid);
-    $status['groups'] = explode(',',$status['groups']);
-    return $status;
+    $status = array();
+    $uinfo = array('isvip' => 0,'isAdmin'=>0);
+    $status = uc_user_info($uid);
+    list($uinfo['uid'],$groupid) = $status;
+    if(in_array($groupid , array(25) )){
+     $uinfo['isvip'] = 1;
+    }elseif( in_array($groupid , array(33) )){
+     $uinfo['isvip'] = 2;
+    }
+    if( in_array($groupid, array(1))){
+     $uinfo['isAdmin'] = 1;
+     $uinfo['isvip'] = 2;
+    }
+    return $uinfo;
   }
 }
 

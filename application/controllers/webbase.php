@@ -7,7 +7,6 @@ class Webbase extends CI_Controller {
   public $viewData = array();
   protected $userInfo = array('uid'=>1,'uname'=>'','isvip'=>0,'isAdmin'=>1);
   public $uid = 0;
-  public $adminList = array(1);
   protected $_c = 'index'; 
   protected $_a = 'index'; 
   protected $_isrobot = 0;
@@ -26,11 +25,12 @@ class Webbase extends CI_Controller {
       if($uinfo){
         $this->userInfo['uname'] = $uinfo['uname'];
         $uinfo = getSynuserInfo($uinfo['uid']);
+        $isAdmin = $uinfo['isAdmin'];
         $uinfo['uname'] = $this->userInfo['uname'];
         $uinfo = $this->usermodel->getUserInfo($uinfo);
         if($uinfo){
           $this->userInfo = array_merge($this->userInfo,$uinfo);
-          $this->userInfo['isadmin'] = $this->checkIsadmin($return = 1);
+          $this->userInfo['isadmin'] = $isAdmin;
           $this->session->set_userdata(array('user_logindata'=>$this->userInfo));
         }
       }

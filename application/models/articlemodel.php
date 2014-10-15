@@ -12,13 +12,38 @@ class articleModel extends baseModel{
   $r['wonderfull'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'wonderfull', $limit = array($p,20));
   return $r;
  }
- public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7)){
+ public function getArticleListByUid($uid,$pcid = 0,$cid = 0, $sort = 'new', $limit = array(1,7)){
+  $r = $this->getArticleListByCid($pcid,$cid, $sort, $limit,$uid);
+  return $r;
+ }
+ public function getArticleCountByUid($uid, $cid = 0){
+  $w = array('uid='=>$uid);
+  if($cid){
+   $w['cid='] = $cid;
+  }
+  $r = $this->check_id(self::$_tArtileHead,'COUNT(*) as total',$w);
+  return $r?$r['total']:0;
+ }
+ public function getArticleCateByUid($uid){
+  $sql = sprintf('SELECT cid FROM %s WHERE uid=%d GROUP BY cid',self::$_tArtileHead, $uid);
+  $list = $this->db->query($sql)->result_array();
+  $r = array();
+  $list = $list?$list:array();
+  foreach($list as $v){
+   $r[] = $v['cid'];
+  }
+  return $r;
+ }
+ public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7),$uid = 0){
   $where = array('flag='=>1);
   $where = array();
   if($pcid){
    $where['pcid='] = $pcid;
   }elseif($cid){
    $where['cid='] = $cid;
+  }
+  if($uid){
+   $where['uid='] = $uid;
   }
   if('wonderful' == $sort){
    $where['wonderful>='] = 0;

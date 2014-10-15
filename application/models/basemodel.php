@@ -42,7 +42,7 @@ class baseModel extends CI_Model{
   }elseif('channel' == $mod){
     $url = sprintf('%s/channel/index/%d/%d/%d%s?%d-%d-%d',$site_url,$p1,$p2,$p3,$suf,$p1,$p2,$p3);
   }elseif('uchannel' == $mod){
-    $url = sprintf('%s/channel/user/%d/%d/%d%s?%d-%d-%d',$site_url,$p1,$p2,$p3,$suf,$p1,$p2,$p3);
+    $url = sprintf('%s/channel/user/%d/0/%d/%d%s?%d-%d-%d',$site_url,$p1,$p2,$p3,$suf,$p1,$p2,$p3);
   }
    return $url;
  }
