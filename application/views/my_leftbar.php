@@ -5,26 +5,26 @@
         <span class="fcEm6">
           HI，
         </span>
-        1187247901
+        <?php echo $uinfo['uname'];?>
       </h3>
       <div class="img mt5 ui_imgbg ui_user_img pr">
         <a>
-          <img src="/themes/default/images/user_def.jpg">
+          <img src="<?php echo $cdn_url;?>/images/user_def.jpg">
         </a>
-        <a href="/my/profile.html" class="ui_btn ui_btn_white">
+        <a href="/<?php echo $_c;?>/profile" class="ui_btn ui_btn_white">
           修改頭像
         </a>
       </div>
       <p class="mt5">
-        <span class="ui_icon ui_icon_level ui_icon_level0">
+        <span class="ui_icon ui_icon_level ui_icon_level<?php echo $writerGroup[$uinfo['wid']]['wid'] - 1;?>">
         </span>
         <span class="vm">
-          書童
+          <?php echo $writerGroup[$uinfo['wid']]['title'];?>
         </span>
       </p>
     </li>
     <li class="home">
-      <a class="f16 icon_nav" href="/my/index.html">
+      <a class="f16 icon_nav" href="/<?php echo $_c;?>/index.html">
         我的帳戶
       </a>
     </li>
@@ -33,18 +33,18 @@
         文章
       </a>
       <ul class="sub">
-        <li>
-          <a class="f16" href="/my/post.html">
+        <li id="c_post">
+          <a class="f16" href="/<?php echo $_c;?>/post">
             我的文章
           </a>
         </li>
-        <li>
-          <a class="f16" href="/my/adult.html">
+        <li id="c_cdult">
+          <a class="f16" href="/<?php echo $_c;?>/adult">
             未確認成人文章
           </a>
         </li>
-        <li>
-          <a class="f16" href="/my/postcreate.html">
+        <li id="c_postcreate">
+          <a class="f16" href="/<?php echo $_c;?>/postcreate">
             發表文章
           </a>
         </li>
@@ -55,28 +55,28 @@
         收益
       </a>
       <ul class="sub">
-        <li>
-          <a class="f16" href="/my/earnings.html">
+        <li id="c_earnings">
+          <a class="f16" href="/<?php echo $_c;?>/earnings">
             收益報告
           </a>
         </li>
-        <li>
-          <a class="f16" href="/my/coopearnings.html">
+        <li id="c_coopearnings">
+          <a class="f16" href="/<?php echo $_c;?>/coopearnings">
             共推收益
           </a>
         </li>
-        <li>
-          <a class="f16" href="/my/recruit.html">
+        <li id="c_recruit">
+          <a class="f16" href="/<?php echo $_c;?>/recruit">
             下線會員
           </a>
         </li>
-        <li>
-          <a href="/my/ranking.html" class="f16">
+        <li id="c_ranking">
+          <a href="/<?php echo $_c;?>/ranking.html" class="f16">
             會員等级
           </a>
         </li>
-        <li>
-          <a href="/my/payrecords.html" class="f16">
+        <li id="c_payrecords">
+          <a href="/<?php echo $_c;?>/payrecords" class="f16">
             匯款記錄
           </a>
         </li>
@@ -87,8 +87,8 @@
         推廣
       </a>
       <ul class="sub">
-        <li>
-          <a class="f16" href="/my/adcode.html">
+        <li id="c_adcode">
+          <a class="f16" href="/<?php echo $_c;?>/adcode">
             廣告代碼
           </a>
         </li>
@@ -99,21 +99,23 @@
         設定
       </a>
       <ul class="sub">
-        <li>
-          <a class="f16" href="/my/channel.html">
+        <li id="c_channel">
+          <a class="f16" href="/<?php echo $_c;?>/channel">
             頻道設定
           </a>
         </li>
-        <li>
-          <a class="f16" href="/my/profile.html">
+        <li id="c_profile">
+          <a class="f16" href="/<?php echo $_c;?>/profile">
             個人資料
           </a>
         </li>
+<?php if(0){?>
         <li>
-          <a class="f16" href="/my/password.html">
+          <a class="f16" href="/<?php echo $_c;?>/password">
             修改密碼
           </a>
         </li>
+<?php }?>
       </ul>
     </li>
     <li class="help on">
@@ -155,3 +157,8 @@
     </li>
   </ul>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#c_'+_method).addClass('on');
+});
+</script>

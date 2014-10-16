@@ -293,3 +293,8 @@ if($v['pid']){
           </div>
         </header>
         <!-- end header -->
+<script type="text/javascript">
+var _action = '<?php echo $_c;?>';
+var _method = '<?php echo $_a;?>';
+var _cdn_url = '<?php echo $cdn_url;?>';
+</script>

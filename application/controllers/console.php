@@ -4,6 +4,12 @@ require_once 'viewbase.php';
 class Console extends Viewbase {
  public function __construct(){
   parent::__construct();
+  if( !$this->uid){
+   redirect();
+  }
+ }
+ public function index(){
+  $this->view('my_index');
  }
  public function profile(){
   $this->view('my_profile');
