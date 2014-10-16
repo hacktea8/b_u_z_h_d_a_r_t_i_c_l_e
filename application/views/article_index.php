@@ -164,10 +164,11 @@
               <ul>
                 <li>
                   <div class="img ui_imgbg ui_user_img">
-                    <a href="/channel_1497.html">
+                    <a href="/channel/user/<?php echo $info['uid'];?>">
                       <img src="<?php echo $cdn_url;?>/images/user_img_def.png" />
                     </a>
                   </div>
+<?php if(0){?>
                   <div class="mt10">
                     <a class="ui_btn ui_btn_white" href="#" id="yt1">
                       <span class="ui_icon ui_icon15 ui_icon15_article">
@@ -176,7 +177,7 @@
                         訂閱
                       </span>
                     </a>
-                    <a class="ui_btn ui_btn_white" href="http://my.buzzhand.com/message/sendletter.html?id=1497">
+                    <a class="ui_btn ui_btn_white" href="/message/sendletter/<?php echo $info['uid'];?>">
                       <span class="ui_icon ui_icon15 ui_icon15_mail">
                       </span>
                       <span class="vm">
@@ -184,6 +185,7 @@
                       </span>
                     </a>
                   </div>
+<?php }?>
                 </li>
                 <li>
                   <div class="mb10">
@@ -203,32 +205,19 @@
                       <h3 class="fl">
                         該作者的文章
                       </h3>
-                      <a class="fr" href="/channel_1497.html">
+                      <a class="fr" href="/channel/user/<?php echo $info['uid'];?>">
                         更多»
                       </a>
                     </div>
                     <ul class="list">
-                      <!-- loop list -->
+                      <!-- 4 loop list -->
+<?php foreach($author_other_article as $v){?>
                       <li>
-                        <a title="13款酥酥脆脆的酥餅食譜~" href="/post_119565.html">
-                          13款酥酥脆脆的酥餅食譜~
+                        <a title="<?php echo $v['title'];?>" href="<?php echo $v['url'];?>">
+                          <?php echo $v['title'];?>
                         </a>
                       </li>
-                      <li>
-                        <a title="11款雞排的做法~你是不是流口水了呢？嘿嘿~" href="/post_119462.html">
-                          11款雞排的做法~你是不是流口水了呢？嘿嘿~
-                        </a>
-                      </li>
-                      <li>
-                        <a title="15種傳統糕點的做法~" href="/post_116860.html">
-                          15種傳統糕點的做法~
-                        </a>
-                      </li>
-                      <li>
-                        <a title="12款西式甜點的食譜~（第三篇）" href="/post_116804.html">
-                          12款西式甜點的食譜~（第三篇）
-                        </a>
-                      </li>
+<?php }?>
                       <!-- end loop list -->
                     </ul>
                   </div>
@@ -250,16 +239,19 @@
           <!-- end author -->
           <!-- post_nav -->
           <div class="post_nav clearfix">
-            <a class="fl prev" href="/post_122493.html">
+<?php if($info['pre']){?>
+            <a class="fl prev" href="<?php echo $info['pre']['url'];?>">
               <span class="vm f16">
-                孩子多咀嚼，能聰明，你信嗎？
+                <?php echo $info['pre']['title'];?>
               </span>
             </a>
-            <a class="fr next" href="/post_124536.html">
+<?php }if($info['nxt']){?>
+            <a class="fr next" href="<?php echo $info['nxt']['url'];?>">
               <span class="vm f16">
-                專家爲妳揭秘女性睡覺前喝水到底好不好
+                <?php echo $info['nxt']['title'];?>
               </span>
             </a>
+<?php }?>
           </div>
           <!-- end post_nav -->
           <div id="ac_place_blue" style="display:none">

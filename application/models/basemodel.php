@@ -106,5 +106,56 @@ class baseModel extends CI_Model{
   $url = 'http://i2.tietuku.com/a931825cefd0efe3.png';
   return $url;
  }
+  public function checkArticleByOname($name){
+     if(!$name){
+       return array();
+     }
+     $sql = sprintf("SELECT `id` FROM `%s` WHERE  `title`='%s' LIMIT 1",self::$_tArtileHead,mysql_real_escape_string($name));
+    $row = $this->db->query($sql)->row_array();
+    return $row['id']? $row['id']: 0;
+  }
+  public function addArticle($data){
+    if(empty($data['title'])){
+      return 0;
+    }
+    $head = $this->copy_array($data,array('title','pcid','uid','chid','cid','thum'
+    ,'ourl','ptime','utime'));
+    if( !isset($head['flag'])){
+     //图片待处理
+     $head['flag'] = 5;
+    }
+    $contents = $this->copy_array($data,array('intro'));
+    $sql = $this->db->insert_string(self::$_tArtileHead,$head);
+//echo $sql;exit;
+    $this->db->query($sql);
+    $id = $this->db->insert_id();
+    if(!$id){
+       return false;
+    }
+    $contents['id'] = $id;
+    $table = $this->get_content_table($id);
+    $sql = $this->db->insert_string($this->db->dbprefix($table),$contents);
+    $this->db->query($sql);
+    // update pre next link
+    $this->updateArticlePreNxtLink($head);
+    return $id;
+  }
+  public function updateArticlePreNxtLink($data){
+   if( 1 != $data['flag']){
+    return 1;
+   }
+   $table = $this->get_content_table($data['id']);
+   $sql = sprintf("UPDATE %s SET `prelink`=(SELECT id FROM %s WHERE id<%d AND uid=%d AND flag=1 ORDER BY id DESC LIMIT 1),`nextlink`=(SELECT id FROM %s WHERE id>%d AND uid=%d AND flag=1 ORDER BY id ASC LIMIT 1) WHERE id=%d LIMIT 1",
+   $table, self::$_tArtileHead,$data['id'],$data['uid'],self::$_tArtileHead,$data['id'],$data['uid'],$data['id']);
+   $this->db->query($sql);
+  }
+  // use del article
+  public function fixArticlePreNxtLink($data){
+   $table = $this->get_content_table($data['prelink']);
+   $this->db->update($table,array('nextlink'=>$data['nextlink']),array('id'=>$data['prelink']));
+   $table = $this->get_content_table($data['nextlink']);
+   $this->db->update($table,array('prelink'=>$data['prelink']),array('id'=>$data['nextlink']));
+   return 1;
+  }
 }
 ?>

@@ -62,6 +62,16 @@ class articleModel extends baseModel{
   }
   return $list;
  }
+ public function getArticleLink($aid){
+  if( !$aid){
+   return 0;
+  }
+  $r = $this->check_id(self::$_tArtileHead,'title',$w=array('id='=>$aid));
+  if($r){
+   $r['url'] = $this->get_url('article', $aid);
+  }
+  return $r;
+ }
  public function getArticleInfoByAid($aid, $uid = 0, $isadmin = false, $edite = 1, $view = 1){
    $where = '';
    if($uid && !$isadmin && $edite)
@@ -75,6 +85,8 @@ class articleModel extends baseModel{
     $data = $query->row_array();
     $data['id'] = $aid;
     $data['url'] = $this->get_url('article', $aid);
+    $data['pre'] = $this->getArticleLink($data['prelink']);
+    $data['nxt'] = $this->getArticleLink($data['nextlink']);
    }
    return $data;
  }
