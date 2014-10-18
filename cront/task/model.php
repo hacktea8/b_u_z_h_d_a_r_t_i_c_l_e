@@ -21,7 +21,7 @@ class M{
  public function check_id($aid,$date,$table = ''){
   $where = array('aid'=>$aid,'Ymd'=>$date);
   $t = $table?$table:$this->_table;
-  $sql = $this->db->select_string($t, $fieldsStr = 'id', $limit = array(1), $where)
+  $sql = $this->db->select_string($t, $fieldsStr = 'id', $limit = array(1), $where);
   $row = $this->db->row_array($sql);
   return isset($row['id'])? $row['id']: 0;
  }
@@ -31,7 +31,7 @@ class M{
   }
   $table = $this->_t_user_day_income;
   $where = array('uid'=>$param['uid'],'Ymd'=>date('Ymd'));
-  $sql = $this->db->select_string($table, $fieldsStr = 'id,gid,wid', $limit = array(1), $where)
+  $sql = $this->db->select_string($table, $fieldsStr = 'id,gid,wid', $limit = array(1), $where);
   $row = $this->db->row_array($sql);
   if( isset($row['id'])){
     if( !($row['gid'] || $row['wid']) ){
@@ -46,7 +46,7 @@ class M{
  }
  public function check_exist($t = '',$f,$w){
   $t = $t?$t:$this->_table;
-  $sql = $this->db->select_string($t, $f, $limit = array(1), $w)
+  $sql = $this->db->select_string($t, $f, $limit = array(1), $w);
   $row = $this->db->row_array($sql);
   return $row;
  }
@@ -89,7 +89,7 @@ class M{
  }
  public function getNoUpdateGroupUserList($limit = 100, $where = array('isupgroup'=>0)){
   $fieldsStr = 'uid,groupid,writerid';
-  $sql = $this->db->select_string($this->_t_user, $fieldsStr, $limit = array($limit), $where)
+  $sql = $this->db->select_string($this->_t_user, $fieldsStr, $limit = array($limit), $where);
   $list = $this->db->result_array($sql);
   return $list;
  }
@@ -111,7 +111,7 @@ class M{
  public function checkUserOfflineAmount($amount, $where = array()){
   $whereStr = array();
   foreach($where as $k => $v){
-   $whereStr .= ' AND '.$k.' '.$v
+   $whereStr .= ' AND '.$k.' '.$v;
   }
   $sql = sprintf("SELECT COUNT(*) as total FROM %s WHERE SUM(amount) > %s %s", $this->_t_user_day_income, $amount, $whereStr);
   $row = $this->db->row_array($sql);

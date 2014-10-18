@@ -48,7 +48,7 @@
           </h2>
         </div>
         <div class="p20">
-          <form enctype="multipart/form-data" id="Post-form" action="/postcreate.html"
+          <form enctype="multipart/form-data" id="Post-form" action="/console/postcreate"
           method="post">
             <div class="ui_warning">
               發文章前請確認您已經仔細閱讀過

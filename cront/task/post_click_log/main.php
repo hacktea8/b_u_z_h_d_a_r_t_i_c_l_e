@@ -34,6 +34,7 @@ foreach($keys as $v){
   $param = compact('cop','gid','wid','cop_uid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
   $m->setUKPostLog($param);
  }
+ echo "\n==== Key $v Value $hits ======\n";
  $redis->delete($v);
 }
 

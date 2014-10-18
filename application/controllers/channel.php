@@ -79,8 +79,10 @@ class Channel extends Viewbase {
   }
   public function ip(){
    $ip = $this->input->ip_address();
-   echo $ip,"<br />";
-   echo $_SERVER['REMOTE_ADDR'];
+   echo "<pre>",$ip,"<br />";
+   echo $_SERVER['REMOTE_ADDR'],"<br />";
+   echo $_SERVER["HTTP_CF_IPCOUNTRY"];
+var_dump($_SERVER);exit;
    exit;
   }
 }
