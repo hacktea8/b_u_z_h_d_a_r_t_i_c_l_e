@@ -25,14 +25,15 @@
 	    						會員種類
 	    					</th>
 	    					<td width="85%">
-								普通會員	    					</td>
+								<?php echo $userGroup[$uinfo['gid']]['title'];?>
+                            </td>
 	    				</tr>
 	    				<tr>
 	    					<th width="15%">
 	    						點閱收益
 	    					</th>
 	    					<td width="85%">
-	    						$2 / 千點閱
+	    						$<?php echo $userGroup[$uinfo['gid']]['price'];?> / 千點閱
 	    					</td>
 	    				</tr>
 	    				<tr>
@@ -41,8 +42,8 @@
 	  						您的等級
 	    		  		</th>
 	    					<td width="85%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level0"></span>
-	    						<span class="vm">書童</span>
+	    						<span class="ui_icon ui_icon_level ui_icon_level<?php echo $uinfo['wid']-1;?>"></span>
+	    						<span class="vm"><?php echo $writerGroup[$uinfo['wid']]['title'];?></span>
 	    					</td>
 	    				</tr>
 	    				<tr>
@@ -50,7 +51,8 @@
 	    						30天點閱數
 	    					</th>
 	    					<td width="85%">
-	    						0	    					</td>
+	    					0_0	
+                            </td>
 	    				</tr>
 	    				<tr>
 	    					<th width="15%">
@@ -59,7 +61,7 @@
 	    					<td width="85%">
 	    						100個點閱數後升級
 	    						<div class="ui_progress_bar mt10">
-	    							    							<div class="bar_bg" style="width:0%;"> </div>
+	    							<div class="bar_bg" style="width:0%;"> </div>
 	    							<div class="bar_text rc5">
 	    								0%
 	    							</div>
@@ -89,39 +91,18 @@
 	    				</tr>
 	    			</thead>
 	    			<tbody>
-	    					    				<tr>
+<?php foreach($userGroup as $v){?>
+	    				<tr>
 	    					<td width="15%">
-	    						普通會員	    					</td>
+	    					<?php echo $v['title'];?>
+                            </td>
 	    					<td width="15%">
-	    						US $2	    					</td>
+	    						US $<?php echo $v['price'];?></td>
 	    					<td width="70%">
-	    						無	    					</td>
+	    						<?php echo $v['note'];?></td>
 	    				</tr>
-	    					    				<tr>
-	    					<td width="15%">
-	    						資深會員	    					</td>
-	    					<td width="15%">
-	    						US $2.5	    					</td>
-	    					<td width="70%">
-	    						發表50篇文章並擁有6個收益$2以上之下線	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="15%">
-	    						白金會員	    					</td>
-	    					<td width="15%">
-	    						US $3	    					</td>
-	    					<td width="70%">
-	    						發表100篇文章並擁有30個收益$2以上之下線	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="15%">
-	    						翡翠會員	    					</td>
-	    					<td width="15%">
-	    						US $3.5	    					</td>
-	    					<td width="70%">
-	    						發表200篇文章並擁有100個收益$2以上之下線	    					</td>
-	    				</tr>
-	    					    			</tbody>
+<?php }?>
+	    			</tbody>
 	    		</table>
 	    	</div>
 	    	
@@ -144,139 +125,20 @@
 	    				</tr>
 	    			</thead>
 	    			<tbody>
-	    					    				<tr>
+<?php foreach($writerGroup as $k =>$v){?>
+	    				<tr>
 	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level0"></span>
-	    						<span class="vm">書童</span>
+	    						<span class="ui_icon ui_icon_level ui_icon_level<?php echo $k-1;?>"></span>
+	    						<span class="vm"><?php echo $v['title'];?></span>
 	    					</td>
 	    					<td width="33%">
-	    						0	    					</td>
+	    						<?php echo $v['hits'];?></td>
 	    					<td width="33%">
-	    						0%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level1"></span>
-	    						<span class="vm">書生</span>
-	    					</td>
-	    					<td width="33%">
-	    						100	    					</td>
-	    					<td width="33%">
-	    						0%
+	    						<?php echo $v['award'];?>%
 	    					</td>
 	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level2"></span>
-	    						<span class="vm">秀才</span>
-	    					</td>
-	    					<td width="33%">
-	    						500	    					</td>
-	    					<td width="33%">
-	    						1%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level3"></span>
-	    						<span class="vm">舉人</span>
-	    					</td>
-	    					<td width="33%">
-	    						1000	    					</td>
-	    					<td width="33%">
-	    						2%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level4"></span>
-	    						<span class="vm">解元</span>
-	    					</td>
-	    					<td width="33%">
-	    						2000	    					</td>
-	    					<td width="33%">
-	    						3%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level5"></span>
-	    						<span class="vm">貢士</span>
-	    					</td>
-	    					<td width="33%">
-	    						5000	    					</td>
-	    					<td width="33%">
-	    						4%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level6"></span>
-	    						<span class="vm">會元</span>
-	    					</td>
-	    					<td width="33%">
-	    						10000	    					</td>
-	    					<td width="33%">
-	    						5%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level7"></span>
-	    						<span class="vm">進士</span>
-	    					</td>
-	    					<td width="33%">
-	    						25000	    					</td>
-	    					<td width="33%">
-	    						6%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level8"></span>
-	    						<span class="vm">探花</span>
-	    					</td>
-	    					<td width="33%">
-	    						50000	    					</td>
-	    					<td width="33%">
-	    						7%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level9"></span>
-	    						<span class="vm">榜眼</span>
-	    					</td>
-	    					<td width="33%">
-	    						100000	    					</td>
-	    					<td width="33%">
-	    						8%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level10"></span>
-	    						<span class="vm">狀元</span>
-	    					</td>
-	    					<td width="33%">
-	    						200000	    					</td>
-	    					<td width="33%">
-	    						9%
-	    					</td>
-	    				</tr>
-	    					    				<tr>
-	    					<td width="33%">
-	    						<span class="ui_icon ui_icon_level ui_icon_level11"></span>
-	    						<span class="vm">文曲星</span>
-	    					</td>
-	    					<td width="33%">
-	    						500000	    					</td>
-	    					<td width="33%">
-	    						10%
-	    					</td>
-	    				</tr>
-	    					    			</tbody>
+<?php }?>
+	    			</tbody>
 	    		</table>
 	    	</div>
 	    	

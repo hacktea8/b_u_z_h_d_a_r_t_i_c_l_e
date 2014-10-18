@@ -3,44 +3,7 @@
   <div class="main fl">
     <!-- main_wrap -->
 <div class="main_wrap">
-  <div class="mt20 ui_blockbg member_block p20">
-    <h2>
-      最新公告
-    </h2>
-    <ul class="newlist mt5">
-      <!-- loop list -->
-      <li>
-        <a href="/forum/post_79.html">
-          第一月結算公告
-        </a>
-      </li>
-      <li>
-        <a href="/forum/post_75.html">
-          有關發文時是否需要勾取“文章分級”的通知
-        </a>
-      </li>
-      <!-- end loop list -->
-    </ul>
-    <p class="mt10 member_remind">
-      您尚未設置您的頻道圖示
-      <a href="/my/channel.html">
-        馬上設置
-      </a>
-    </p>
-    <p class="mt10 member_remind">
-      請至
-      <a href="/my/profile.html">
-        帳號設定
-      </a>
-      輸入您的收款資訊
-    </p>
-    <p class="mt10 member_warning">
-      聯絡資訊未齊全(聯絡電話/行動電話必須填寫一個)，您必須輸入您的聯絡資訊才能收到本站匯款，
-      <a href="/my/profile.html">
-        更新聯絡資訊
-      </a>
-    </p>
-  </div>
+<?php require_once 'my_rightbar.php';?>
   <!-- member_block -->
   <div class="mt20 ui_blockbg member_block">
     <h2 class="title">
@@ -72,6 +35,46 @@
         </thead>
         <tbody>
           <!-- loop list -->
+<?php foreach($list as $v){?>
+<tr>
+  <td width="42%">
+    <a href="<?php echo $v['url'];?>" target="_blank">
+      <?php echo $v['title'];?>
+    </a>
+  </td>
+  <td width="10%">
+    <?php echo $v['hits'];?>
+  </td>
+  <td width="10%">
+    <?php echo $v['coop_hits'];?>
+  </td>
+  <td width="10%" class="fcEm6">
+    US $<?php echo $userGroup[$uinfo['gid']]['price']*$v['hits']/1000;?>/<?php echo (1-$v['coop'])*$userGroup[$uinfo['gid']]['price']*$v['coop_hits']/1000;?>
+  </td>
+  <td width="15%">
+    <?php echo $v['ptime'];?>
+  </td>
+  <td width="13%">
+    <a class="ui_icon ui_icon20" style="text-indent:0;padding-top:5px">
+      <div class="addthis_sharing_toolbox" data-url="/console/post"
+      data-title="我的文章 - <?php echo $site_name;?>">
+        <div id="atstbx" class="at-share-tbx-element addthis-smartlayers animated at4-show">
+          <a class="at-share-btn at-svc-compact">
+            <span class="at300bs at15nc at15t_compact" title="More">
+            </span>
+          </a>
+        </div>
+      </div>
+    </a>
+    <a href="/console/postedit/<?php echo $v['id'];?>" class="ui_icon ui_icon20 ui_icon20_edit ml5 mr5">
+      編輯
+    </a>
+    <a class="ui_icon ui_icon20 ui_icon20_del" onclick="delConfirm(<?php echo $v['id'];?>, '/console/postdelete/<?php echo $v['id'];?>');">
+      刪除
+    </a>
+  </td>
+</tr>
+<?php }?>
           <!-- end loop list -->
         </tbody>
       </table>

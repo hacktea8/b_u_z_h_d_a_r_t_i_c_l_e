@@ -6,21 +6,19 @@ class Viewbase extends Webbase {
  
  public function __construct(){
   parent::__construct();
-    
+  $writerGroup = $this->getUserWriterGroup();  
+  $userGroup = $this->getUserGroup();  
   $cate_info = $this->getAllCate();
   $this->assign(array(
-  'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description
-  ,'seo_title'=>$this->seo_title,'cdn_url'=>$this->config->item('cdn_url')
-  ,'showimgapi'=>$this->showimgapi,'error_img'=>'/public/images/show404.jpg'
-  ,'youMayLike'=>$youMayLike,'cate_info'=>$cate_info
+  'cdn_url'=>$this->config->item('cdn_url'),'writerGroup'=>$writerGroup
+  ,'error_img'=>'/public/images/show404.jpg','userGroup'=>$userGroup
+  ,'cate_info'=>$cate_info
   ,'pcid'=>0,'cid'=>0
-  ,'editeUrl' => '/edite/index/emuleTopicAdd'
   ));
   $invate = $this->input->get('invite',0);
   if($invate){
    $this->cookie('invite', $invate, 86400);
   }
-  //$this->_get_postion();
   //$this->_get_ads_link();
 //var_dump($this->viewData);exit;
  }
@@ -51,9 +49,6 @@ class Viewbase extends Webbase {
       $this->mem->set($_key,$hotArticle,self::$ttl['2h']);
     }
     return $hotArticle;
-  }
-  protected function _get_postion($postion = array()){
-    $this->assign(array('postion'=>$postion));
   }
   protected function _get_ads_link(){
    $click_ad_link = '';

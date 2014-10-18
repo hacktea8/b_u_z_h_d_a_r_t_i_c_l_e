@@ -7,6 +7,7 @@ class Console extends Viewbase {
   if( !$this->uid){
    redirect();
   }
+  $this->model('consoleModel');
  }
  public function index(){
   $this->view('my_index');
@@ -21,10 +22,21 @@ class Console extends Viewbase {
   $this->view('my_adcode');
  }
  public function post(){
+  $pLimit = 8;
+  $list = $this->consoleModel->getMyArticleList($this->uid,array($page, $pLimit));
+  $this->assign(array('list'=>$list));
   $this->view('my_post');
  }
  public function adult(){
   $this->view('my_adult');
+ }
+ public function postdelete($aid = 0){
+  
+  $this->view('my_postcreate');
+ }
+ public function postedit($aid = 0){
+  
+  $this->view('my_postcreate');
  }
  public function postcreate(){
   $this->view('my_postcreate');
