@@ -12,7 +12,7 @@ class adsModel extends baseModel {
    return $return;
   }
   $where = array('uid='=>$uid, 'flag='=>1);
-  $fields = 'id,title,summary,thumb,cover,host';
+  $fields = 'id,title,summary,iscover,cover,host';
   $order = isset(self::$sort[$order])? self::$sort[$order]: self::$sort['hot'];
   $query = $this->select(self::$_tArtileHead, $fields, $where, $order, $limit = array($limit));
   if($query->num_rows()){

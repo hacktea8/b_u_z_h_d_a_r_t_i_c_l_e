@@ -20,8 +20,7 @@ class Ads extends Viewbase {
    $list = $this->mem->get($key);
    if( empty($list) ){
     $list = $this->adsModel->getUserAds($uid);
-    $ttl = $this->_mem->ttls('5m');
-    $this->_mem->set($key, $list, $ttl);
+    $this->mem->set($key, $list, self::$ttl['5m']);
    }
    $num = self::$size[$size];
    $list = self::rand_array($list, $num);

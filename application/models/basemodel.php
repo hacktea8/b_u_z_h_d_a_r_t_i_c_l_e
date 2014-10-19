@@ -11,7 +11,7 @@ class baseModel extends CI_Model{
  static public $_fTag = '`tid`, `title`, `total`';
  static public $_tTA = '`article_tag`';
  static public $_tUser = '`user`';
- static public $_fUser = '`uid`, `uname`, `gid`, `introducer`, `visitors`, `prevgains`, `prev_visitors`, `isvip`, `loginip`, `logintime`';
+ static public $_fUser = '`uid`, `uname`, `gid`, `invite`,month_hits,amount, `hits`, `click_count`,isAdmin,post_count,wid, `isvip`, `loginip`, `logintime`';
  static public $_tUMeta = '`user_meta`';
  static public $_fUMeta = '`uid`, `fname`, `lname`, `cover`, `mobile`, `county`, `pay_method`, `pay_account`';
  static public $_tUGroup = '`user_group`';
@@ -19,13 +19,15 @@ class baseModel extends CI_Model{
  static public $_tUPC = '`user_pay_records`';
  static public $_fUPC = '`id`, `uid`, `dateline`, `code`, `account`, `amount`';
  static public $_tUDI = '`user_daily_income`';
- static public $_fUDI = '`id`, `uid`, `gid`, `wid`, `amount`, `post_amount`, `deduct_amount`, `click_amount`, `writer_amount`, `devote_amount`, `post_count`, `Ym`, `Ymd`';
+ static public $_fUDI = '`id`, `uid`, `amount`, `post_amount`,coop_hits,`coop_amount`, `click_amount`, `writer_amount`, `devote_amount`, `post_count`,click_count, `Ym`, `Ymd`';
  static public $_tWGroup = 'writer_group';
- static public $_fWG = '`id`, `title`, `hits`, `award`';
+ static public $_fWGroup = '`wid`, `title`, `hits`, `award`';
  static public $_tADR = '`article_dayily_read`';
- static public $_fADR = '`id`, `aid`, `uid`, `cid`, `Ym`, `Ymd`, `click`';
+ static public $_fADR = '`id`, `aid`, `uid`,gid,wid,pcid,`cid`,`Ym`,`Ymd`,`hits`,hits_amount';
  static public $_tACR = '`article_coop_read`';
  static public $_fACR = '`id`, `aid`, `uid`,`cop_uid`, `referer`, `total`';
+ static public $_tUDC = '`user_daily_coop`';
+ static public $_fUDC = '`id`, `uid`, `hits`, `amount`, `coop`, `Ym`, `Ymd`';
  
  public function __construct(){
   parent::__construct();

@@ -16,23 +16,26 @@
           </li>
           <!-- end loop list -->
         </ul>
+<?php if(!$checkSetting['pic']){?>
         <p class="mt10 member_remind">
           您尚未設置您的頻道圖示
-          <a href="/my/channel.html">
+          <a href="/console/channel.html">
             馬上設置
           </a>
         </p>
+<?php }if( !$checkSetting['account']){?>
         <p class="mt10 member_remind">
           請至
-          <a href="/my/profile.html">
+          <a href="/console/profile.html">
             帳號設定
           </a>
           輸入您的收款資訊
         </p>
         <p class="mt10 member_warning">
           聯絡資訊未齊全，您必須輸入您的聯絡資訊才能收到本站匯款，
-          <a href="/my/profile.html">
+          <a href="/console/profile.html">
             更新聯絡資訊
           </a>
         </p>
+<?php }?>
       </div>

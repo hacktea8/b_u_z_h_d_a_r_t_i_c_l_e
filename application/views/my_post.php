@@ -49,23 +49,12 @@
     <?php echo $v['coop_hits'];?>
   </td>
   <td width="10%" class="fcEm6">
-    US $<?php echo $userGroup[$uinfo['gid']]['price']*$v['hits']/1000;?>/<?php echo (1-$v['coop'])*$userGroup[$uinfo['gid']]['price']*$v['coop_hits']/1000;?>
+    US $<?php echo $v['hits_money']+$v['coop_money'];?>
   </td>
   <td width="15%">
     <?php echo $v['ptime'];?>
   </td>
   <td width="13%">
-    <a class="ui_icon ui_icon20" style="text-indent:0;padding-top:5px">
-      <div class="addthis_sharing_toolbox" data-url="/console/post"
-      data-title="我的文章 - <?php echo $site_name;?>">
-        <div id="atstbx" class="at-share-tbx-element addthis-smartlayers animated at4-show">
-          <a class="at-share-btn at-svc-compact">
-            <span class="at300bs at15nc at15t_compact" title="More">
-            </span>
-          </a>
-        </div>
-      </div>
-    </a>
     <a href="/console/postedit/<?php echo $v['id'];?>" class="ui_icon ui_icon20 ui_icon20_edit ml5 mr5">
       編輯
     </a>

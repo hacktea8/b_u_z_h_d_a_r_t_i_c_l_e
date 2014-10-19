@@ -12,15 +12,18 @@
     />
 <?php }?>
     <meta property="og:site_name" content="<?php echo $site_name?>" />
-    <meta property="og:title" content="<?php echo $seo_title;?>" />
-    <meta property="article:section" content="社會萬象" />
-    <meta property="og:description" content="<?php echo $seo_description;?>"
+    <meta property="og:title" content="<?php echo $info['title'];?>" />
+    <meta property="article:section" content="<?php echo $cate_info[$info['cid']]['title'];?>" />
+    <meta property="og:description" content="<?php echo $info['summary'];?>"
     />
     <meta property="og:locale" content="zh_TW" />
     <title>
-     <?php echo $seo_title;?> - <?php echo $site_name;?>
+     <?php echo $seo['title'];?> - <?php echo $site_name;?>
     </title>
     <meta charset="utf-8">
+    <meta name="description" content="<?php echo $seo['description'];?>" />
+    <meta name="keywords" content="<?php echo $seo['keyword'];?>" />
+    <meta name="robots" content="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="tencent-x5-page-direction" content="landscape">
     <meta name="distribution" content="Taiwan" />
@@ -105,12 +108,12 @@ if($v['pid']){
             個人中心
           </li>
           <li>
-            <a href="/vb_code" title="我的頻道">
+            <a href="<?php echo $uinfo['url'];?>" title="我的頻道">
               我的頻道
             </a>
           </li>
           <li>
-            <a title="收益" href="http://my.buzzhand.com/earnings.html">
+            <a title="收益" href="/console/earnings.html">
               收益
             </a>
           </li>
@@ -164,7 +167,7 @@ if($v['pid']){
                       </a>
                     </li>
                     <li>
-                      <a class="fcEm7" href="/vb_code">
+                      <a class="fcEm7" href="<?php echo $uinfo['url'];?>">
                         <span class="ui_icon ui_icon20 ui_icon20_mac">
                         </span>
                         我的頻道
@@ -178,7 +181,7 @@ if($v['pid']){
                       </a>
                     </li>
                     <li>
-                      <a class="fcEm7" href="http://my.buzzhand.com/user/logout.html">
+                      <a class="fcEm7" href="/user/logout.html">
                         <span class="ui_icon ui_icon20 ui_icon20_power">
                         </span>
                         登出
@@ -281,7 +284,7 @@ if($v['pid']){
                 </a>
               </li>
               <li class="vertical pub">
-                <a class="center ui_btn ui_btn_green f12" href="http://my.buzzhand.com/postcreate.html">
+                <a class="center ui_btn ui_btn_green f12" href="/console/postcreate.html">
                   <span class="ui_icon ui_icon15 ui_icon15_edit mr5">
                   </span>
                   <span class="vm">

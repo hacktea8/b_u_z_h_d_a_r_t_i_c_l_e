@@ -51,7 +51,7 @@
 	    						30天點閱數
 	    					</th>
 	    					<td width="85%">
-	    					0_0	
+	<?php echo $uinfo['month_hits'];?>
                             </td>
 	    				</tr>
 	    				<tr>

@@ -3,44 +3,7 @@
   <div class="main fl">
     <!-- main_wrap -->
 <div class="main_wrap">
-  <div class="mt20 ui_blockbg member_block p20">
-    <h2>
-      最新公告
-    </h2>
-    <ul class="newlist mt5">
-      <!-- loop list -->
-      <li>
-        <a href="/forum/post_79.html">
-          第一月結算公告
-        </a>
-      </li>
-      <li>
-        <a href="/forum/post_75.html">
-          有關發文時是否需要勾取“文章分級”的通知
-        </a>
-      </li>
-      <!-- end loop list -->
-    </ul>
-    <p class="mt10 member_remind">
-      您尚未設置您的頻道圖示
-      <a href="/my/channel.html">
-        馬上設置
-      </a>
-    </p>
-    <p class="mt10 member_remind">
-      請至
-      <a href="/my/profile.html">
-        帳號設定
-      </a>
-      輸入您的收款資訊
-    </p>
-    <p class="mt10 member_warning">
-      聯絡資訊未齊全(聯絡電話/行動電話必須填寫一個)，您必須輸入您的聯絡資訊才能收到本站匯款，
-      <a href="/my/profile.html">
-        更新聯絡資訊
-      </a>
-    </p>
-  </div>
+<?php require_once 'my_rightbar.php';?>
   <!-- member_block -->
   <div class="mt20 ui_blockbg member_block p20">
     <div>
@@ -50,7 +13,9 @@
       <p class="mt5 member_warning">
         匯款訊息
         <br>
-        您累積至 2014/09/05 的收益尚未達到最低匯款金額 US $5.00。本月您不會收到匯款，您的收益將會累積至下個月份。
+<?php if($uinfo['amount']<$low_money){?>
+        您累積至 <?php echo date('Y/m/d');?> 的收益尚未達到最低匯款金額 US $<?php echo $low_money;?>。本月您不會收到匯款，您的收益將會累積至下個月份。
+<?php }?>
       </p>
       <table class="member_table remind mt20">
         <thead>
@@ -69,13 +34,13 @@
         <tbody>
           <tr>
             <td width="33%" class="fcEm7">
-              US $0
+              US $<?php echo $rinfo['next'];?>
             </td>
             <td width="33%" class="fcEm7">
-              US $0
+              US $<?php echo $rinfo['pre'];?>
             </td>
             <td width="33%" class="fcEm7">
-              US $0
+              US $<?php echo $rinfo['all'];?>
             </td>
           </tr>
         </tbody>
@@ -107,6 +72,22 @@
         </thead>
         <tbody>
           <!-- loop list -->
+<?php foreach($list as $v){?>
+<tr>
+  <td width="20%">
+    <?php echo $v['dateline'];?>
+  </td>
+  <td width="30%">
+    <?php echo $v['code'];?>
+  </td>
+  <td width="30%">
+    <?php echo $v['account'];?>
+  </td>
+  <td width="20%">
+    <?php echo $v['amount'];?>
+  </td>
+</tr>
+<?php }?>
           <!-- end loop list -->
         </tbody>
       </table>

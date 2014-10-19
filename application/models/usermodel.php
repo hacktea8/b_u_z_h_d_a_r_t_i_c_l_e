@@ -9,7 +9,7 @@ class userModel extends baseModel{
 
  }
  public function getUserGroup(){
-  $q = $this->select(self::$_tUGroup, self::$_fUGroup,$w = array('flag='=>1),$order = 'sort ASC');
+  $q = $this->select(self::$_tUGroup, self::$_fUGroup,$w = array('flag='=>1),$order = 'sort ASC',$limit = array());
   $l = $q->result_array();
   $r = array();
   $l = $l?$l:array();
@@ -19,7 +19,7 @@ class userModel extends baseModel{
   return $r;
  }
  public function getUserWriterGroup(){
-  $q = $this->select(self::$_tWGroup, self::$_fWGroup,$w = array('flag='=>1),$order = 'sort ASC');
+  $q = $this->select(self::$_tWGroup, self::$_fWGroup,$w = array('flag='=>1),$order = 'sort ASC',$limit = array());
   $l = $q->result_array();
   $r = array();
   $l = $l?$l:array();
@@ -57,8 +57,7 @@ class userModel extends baseModel{
   if( !isset($uinfo['uid']) || !$uinfo['uid']){
    return false;
   }
-  $sql = sprintf("SELECT * FROM %s WHERE `uid`=%d LIMIT 1", self::$_tUser, $uinfo['uid']);
-  $row = $this->db->query($sql)->row_array();
+  $row = $this->check_id(self::$_tUser,self::$_fUser,array('uid='=>$uinfo['uid']));
   $ip = get_client_ip();
   $invite = isset($_COOKIE['invite'])? intval($_COOKIE['invite']): 0;
   if(isset($row['uid'])){
@@ -88,6 +87,8 @@ class userModel extends baseModel{
    $insert_data['loginip'] = $ip;
    $insert_data['logintime'] = date('Ymd');
    $insert_data['invite'] = $invite;
+   $insert_data['month_hits'] = 0;
+   $insert_data['amount'] = 0;
    $this->db->insert(self::$_tUser,$insert_data);
    $meta = array('uid'=>$insert_data['uid'],'title'=>$uinfo['uname']);
    $this->db->insert(self::$_tUMeta, $meta);

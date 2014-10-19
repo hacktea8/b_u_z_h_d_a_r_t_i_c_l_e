@@ -32,16 +32,16 @@
             <tbody>
               <tr>
                 <td width="25%" class="fcEm7">
-                  US $0
+                  US $<?php echo $userProfit['total']['cash']['now'];?>
                 </td>
                 <td width="25%" class="fcEm7">
-                  US $0
+                  US $<?php echo $userProfit['total']['cash']['pre'];?>
                 </td>
                 <td width="25%" class="fcEm7">
-                  US $0
+                  US $<?php echo $userProfit['total']['cash']['month'];?>
                 </td>
                 <td width="25%" class="fcEm7">
-                  US $0
+                  US $<?php echo $userProfit['total']['cash']['all'];?>
                 </td>
               </tr>
             </tbody>
@@ -71,16 +71,16 @@
             <tbody>
               <tr>
                 <td width="25%">
-                  0
+                  <?php echo $userProfit['total']['hit']['now'];?>
                 </td>
                 <td width="25%">
-                  0
+                  <?php echo $userProfit['total']['hit']['pre'];?>
                 </td>
                 <td width="25%">
-                  0
+                  <?php echo $userProfit['total']['hit']['month'];?>
                 </td>
                 <td width="25%">
-                  0
+                  <?php echo $userProfit['total']['hit']['all'];?>
                 </td>
               </tr>
             </tbody>
@@ -96,28 +96,62 @@
         <table class="member_table list mt5">
           <thead>
             <tr>
-              <th width="42%">
+              <th width="36%">
                 標題
               </th>
               <th width="10%">
-                回覆
+                共推點閱
               </th>
               <th width="10%">
                 點閱
               </th>
-              <th width="10%">
+              <th width="15%">
                 收益
               </th>
               <th width="15%">
                 發佈日期
               </th>
-              <th width="13%">
+              <th width="16%">
                 動作
               </th>
             </tr>
           </thead>
           <tbody>
             <!-- loop list -->
+<?php foreach($list as $v){?>
+<tr>
+  <td width="36%">
+    <a href="<?php echo $v['url'];?>" target="_blank">
+      <?php echo $v['title'];?>
+    </a>
+  </td>
+  <td width="10%">
+    <?php echo $v['hits'];?>
+  </td>
+  <td width="10%">
+    <?php echo $v['coop_hits'];?>
+  </td>
+  <td width="15%" class="fcEm6">
+    US $<?php echo $v['hits_money'];?>/<?php echo $v['coop_money'];?>
+  </td>
+  <td width="15%">
+    <?php echo $v['ptime'];?>
+  </td>
+  <td width="16%">
+<a class="ui_icon ui_icon20" style="text-indent:0;padding-top:5px">
+  <div class="addthis_sharing_toolbox" addthis:url="<?php echo $site_url,$v['url'];?>"
+  addthis:title="<?php echo $v['title'];?>">
+  </div>
+</a>
+<a href="/console/postedit/<?php echo $v['id'];?>" class="ui_icon ui_icon20 ui_icon20_edit ml5 mr5">
+  編輯
+</a>
+<a class="ui_icon ui_icon20 ui_icon20_del" onclick='delConfirm( <?php echo $v['id'];?>, "/console/postdelete/<?php echo $v['id'];?>");'>
+  刪除
+</a>
+  </td>
+</tr>
+<?php }?>
             <!-- end loop list -->
           </tbody>
         </table>

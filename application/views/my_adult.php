@@ -27,8 +27,23 @@
     					</tr>
     				</thead>
     				<tbody>
-    					<!-- loop list -->
-    					    					<!-- end loop list -->
+<!-- loop list -->
+<?php foreach($list as $v){?> 
+ <tr>
+   <td width="70%" style="text-align:left">
+   <?php echo $v['title'];?>
+   </td>
+   <td width="30%">
+ <a href="/console/postedit/<?php echo $v['id'];?>" class="ui_icon ui_icon20 ui_icon20_edit ml5 mr5">
+  編輯
+</a>
+<a class="ui_icon ui_icon20 ui_icon20_del" onclick='delConfirm( <?php echo $v['i
+d'];?>, "/console/postdelete/<?php echo $v['id'];?>");'>
+  刪除
+</a>   
+   </td>
+ </tr>
+<?php }?>   					    					<!-- end loop list -->
     				</tbody>
     			</table>
     			<div class="ui_pagination mt10 tr">
