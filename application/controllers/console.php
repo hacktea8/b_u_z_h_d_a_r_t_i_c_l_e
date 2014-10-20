@@ -25,7 +25,80 @@ class Console extends Viewbase {
  public function profile(){
   $this->view('my_profile');
  }
+ public function cropPic(){
+  $x1 = $this->input->post('x1');
+  die("$x1");
+ }
+ public function upAvatar(){
+  $config['upload_path'] = APPPATH.'../public/uploads/images/';
+  $config['allowed_types'] = 'gif|jpg|png|jpeg';
+  $config['max_size'] = '1000';
+  $config['max_width']  = '2048';
+  $config['max_height']  = '2048';
+  $this->load->library('upload', $config);
+  if ( ! $this->upload->do_upload('avatar')){
+   $error = array('error' => $this->upload->display_errors());
+   die(json_encode(array('status'=>0,'msg'=>$error)));
+  }
+/*
+Array
+(
+    [file_name]    => mypic.jpg
+    [file_type]    => image/jpeg
+    [file_path]    => /path/to/your/upload/
+    [full_path]    => /path/to/your/upload/jpg.jpg
+    [raw_name]     => mypic
+    [orig_name]    => mypic.jpg
+    [client_name]    => mypic.jpg
+    [file_ext]     => .jpg
+    [file_size]    => 22.2
+    [is_image]     => 1
+    [image_width]  => 800
+    [image_height] => 600
+    [image_type]   => jpeg
+    [image_size_str] => width="800" height="200"
+)
+*/
+  $upload_data = $this->upload->data();
+  @chmod($upload_data['full_path'], 0777);
+  for($i = 0;$i<3;$i++){
+   $return = ($upload_data['full_path']);
+   if($return){
+    break;
+   }
+  }
+  @unlink($upload_data['full_path']);
+  die(json_encode(array('status'=>0,'msg'=>'111')));
+ }
  public function channel(){
+  $post = $this->input->post('Channel');
+  if($post){
+   $post['uid'] = $this->uid;
+   if($post['urlkey']){
+    $len = strlen($post['urlkey']);
+    if( $len<3 || $len>36){
+     $post['urlkey'] = '';
+    }else{
+     $check = preg_replace('#[\dA-Za-z_]+#is','',$post['urlkey']);
+     if($check){
+      $post['urlkey'] = '';
+     }else{
+      $check = preg_replace('#[\d]+#is','',$post['urlkey']);
+      if( !$check){
+       $post['urlkey'] = '';
+      }
+     }
+    }
+    
+   }
+   $this->consoleModel->setUserChannelInfo($post);
+   if($this->input->is_ajax_request()){
+    die('1');
+   }
+   redirect('/console/channel');
+  }
+  $rinfo = $this->consoleModel->getUserChannelInfo($this->uid);
+  $this->assign(array('channel'=>$rinfo));
   $this->view('my_channel');
  }
  public function adcode(){

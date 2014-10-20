@@ -48,6 +48,7 @@
       </script>
     <![endif]-->
     <script type="text/javascript">
+      window.jlang = 'www';
       var fb_page = 'https://www.facebook.com/BuzzHandCom';
       var fb_name = 'BuzzHand';
       window.isMobile = false;

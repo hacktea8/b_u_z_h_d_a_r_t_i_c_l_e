@@ -1,7 +1,163 @@
-      <fieldset>
-        <legend>
-          匯款資料
-        </legend>
+<div id="container" class="clearfix member_wrap">
+    <!-- main -->
+    <div class="main fl">
+    <!-- main_wrap -->
+    <div class="main_wrap">
+<?php require_once 'my_rightbar.php';?>
+      <!-- member_block -->
+      <div class="mt20 ui_blockbg member_block p20">
+        <form enctype="multipart/form-data" id="User-form" action="/profile.html"
+        method="post">
+          <fieldset>
+            <legend>
+              個人資料
+            </legend>
+            <div class="ui_text_block">
+              <label for="User_email" class="fcEm3 title">
+                Email：
+              </label>
+              <?php echo $uinfo['email'];?>
+            </div>
+            <div class="ui_text_block">
+              <label class="fcEm3 title" for="User_nickname">
+                *暱稱：
+              </label>
+              <input class="ui_text_input" name="User[nickname]" id="User_nickname"
+              type="text" maxlength="50" value="<?php echo $channel['nickname'];?>" />
+            </div>
+            <div class="ui_text_block">
+              <label for="User_lastname" class="fcEm3 title">
+                姓：
+              </label>
+              <input class="ui_text_input" name="User[lastname]" id="User_lastname"
+              type="text" maxlength="50" value="<?php echo $channel['lastname'];?>" />
+            </div>
+            <div class="ui_text_block">
+              <label for="User_firstname" class="fcEm3 title">
+                名：
+              </label>
+              <input class="ui_text_input" name="User[firstname]" id="User_firstname"
+              type="text" maxlength="50" value="<?php echo $channel['firstname'];?>" />
+            </div>
+            <div class="ui_text_block">
+              <label class="fcEm3 title vt">
+                *目前使用大頭照：
+              </label>
+              <div class="ib tc">
+                <div class="block img ui_imgbg mb5 avatar">
+                  <a>
+                    <img id="user_logo" src="<?php echo $channel['avatar'];?>" />
+                  </a>
+                </div>
+                <a class="ui_btn ui_btn_white" href="#" id="yt0">
+                  清除圖示
+                </a>
+              </div>
+            </div>
+            <div class="ui_text_block">
+              <label class="fcEm3 title vt" for="pubTag">
+                *更新大頭照：
+              </label>
+              <!-- <input type="file" name="Userlogo"> -->
+              <div class="ib ui_uploadimg" id="uploadImgWrap">
+                <div id="uploadImg">
+                </div>
+                <div class="mt10 mb10">
+                  <div id="curImg" class="cur_img ui_imgbg">
+                  </div>
+                  <div id="previewImg" class="preview_img ui_imgbg avatar" data-width="144"
+                  data-height="144">
+                  </div>
+                </div>
+                <a class="ui_btn ui_btn_upload" data-wrap="user_logo">
+                  保存頭像
+                </a>
+              </div>
+            </div>
+            <div class="ui_text_block">
+              <label for="User_years" class="fcEm3 title">
+                生日：
+              </label>
+              <span class="ui_text_input">
+                <input readonly="readonly" style="width:90px;" id="User_birthday" name="User[birthday]"
+                type="text" value="<?php echo $channel['birthday'];?>"/>
+              </span>
+            </div>
+            <div class="ui_text_block">
+              <label for="User_address" class="fcEm3 title">
+                地址：
+              </label>
+              <input class="ui_text_input" name="User[address]" id="User_address" type="text"
+              maxlength="100" value="<?php echo $channel['address'];?>" />
+            </div>
+            <div class="ui_text_block">
+              <label for="User_country" class="fcEm3 title">
+                *國家：
+              </label>
+              <select class="ui_text_select" name="User[country_id]" id="User_country_id">
+                <option value="">
+                  == 請選擇 ==
+                </option>
+                <option value="0">
+                  台灣
+                </option>
+                <option value="1">
+                  香港
+                </option>
+                <option value="2" selected="selected">
+                  中國（大陸）
+                </option>
+                <option value="3">
+                  馬來西亞
+                </option>
+                <option value="4">
+                  新加坡
+                </option>
+                <option value="5">
+                  其他
+                </option>
+              </select>
+            </div>
+            <div class="ui_text_block">
+              <label for="User_phone" class="fcEm3 title">
+                聯絡電話：
+              </label>
+              <input class="ui_text_input" name="User[telephone]" id="User_telephone"
+              type="text" maxlength="20" value="<?php echo $channel['telephone'];?>" />
+            </div>
+            <div class="ui_text_block">
+              <label for="User_phone2" class="fcEm3 title">
+                行動電話：
+              </label>
+              <input class="ui_text_input" name="User[mobile]" id="User_mobile" type="text"
+              value="<?php echo $channel['mobile'];?>" />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>
+              匯款資料
+            </legend>
+<?php if($channel['pay_account']){?>
+            <div class="ui_text_block">
+              <label for="User_pay_method" class="fcEm3 title">
+                收款方式：
+              </label>
+              支付寶
+            </div>
+            <div class="ui_text_block">
+              <label class="fcEm3 title">
+                帳號：
+              </label>
+              <label class="fcEm3">
+                <?php echo $channel['pay_account'];?>
+              </label>
+              <label class="fcEm3" style="margin-right: 140px;float: right;">
+                <a onclick='delConfirm(1182,"/changepaymethod.html?id=1182");' style="background-color: #159881; width:100px; padding: 5px 15px; color:#b4fff2">
+                  申請修改匯款資料
+                </a>
+              </label>
+            </div>
+<?php }else{?>
         <p class="ui_text_block">
           <label for="User_pay_method" class="fcEm3 title">
             收款方式：
@@ -73,188 +229,10 @@
         </p>
       </fieldset>
       <fieldset>
-        <legend>
-          郵件通知
-        </legend>
-        <p class="ui_text_block">
-          <label class="block fcEm3">
-            <input id="ytUser_accept_email" type="hidden" value="0" name="User[accept_email]">
-            <input class="mr5" name="User[accept_email]" id="User_accept_email" value="1"
-            checked="checked" type="checkbox">
-            當我收到站內訊息時，發電子郵件通知我。
-          </label>
-        </p>
-      </fieldset>
-      <p class="ui_text_block">
-        <input onclick="return confirm(&quot;請確認匯款資料填寫是否准確，一旦提交不能修改，是否現在提交？&quot;)"
-        type="submit" class="ui_btn ui_btn_green2 ui_text_tips f16 fb" name="submit"
-        value="更新資料">
-      </p>
-    </form>
-  </div>
-  <!-- end member_block -->
-</div>
 
-
-<div id="container" class="clearfix member_wrap">
-  <!-- main -->
-  <div class="main fl">
-    <!-- main_wrap -->
-<?php require_once 'my_rightbar.php';?>
-      <!-- member_block -->
-      <div class="mt20 ui_blockbg member_block p20">
-        <form enctype="multipart/form-data" id="User-form" action="/profile.html"
-        method="post">
-          <fieldset>
-            <legend>
-              個人資料
-            </legend>
+<?php }?>
             <div class="ui_text_block">
-              <label for="User_email" class="fcEm3 title">
-                Email：
-              </label>
-              1187247901@qq.com
-            </div>
-            <div class="ui_text_block">
-              <label class="fcEm3 title" for="User_nickname">
-                *暱稱：
-              </label>
-              <input class="ui_text_input" name="User[nickname]" id="User_nickname"
-              type="text" maxlength="50" value="1187247901" />
-            </div>
-            <div class="ui_text_block">
-              <label for="User_lastname" class="fcEm3 title">
-                姓：
-              </label>
-              <input class="ui_text_input" name="User[lastname]" id="User_lastname"
-              type="text" maxlength="50" value="" />
-            </div>
-            <div class="ui_text_block">
-              <label for="User_firstname" class="fcEm3 title">
-                名：
-              </label>
-              <input class="ui_text_input" name="User[firstname]" id="User_firstname"
-              type="text" maxlength="50" value="" />
-            </div>
-            <div class="ui_text_block">
-              <label class="fcEm3 title vt">
-                *目前使用大頭照：
-              </label>
-              <div class="ib tc">
-                <div class="block img ui_imgbg mb5 avatar">
-                  <a>
-                    <img id="user_logo" src="/themes/default/images/user_img_def.png" />
-                  </a>
-                </div>
-                <a class="ui_btn ui_btn_white" href="#" id="yt0">
-                  清除圖示
-                </a>
-              </div>
-            </div>
-            <div class="ui_text_block">
-              <label class="fcEm3 title vt" for="pubTag">
-                *更新大頭照：
-              </label>
-              <!-- <input type="file" name="Userlogo"> -->
-              <div class="ib ui_uploadimg" id="uploadImgWrap">
-                <div id="uploadImg">
-                </div>
-                <div class="mt10 mb10">
-                  <div id="curImg" class="cur_img ui_imgbg">
-                  </div>
-                  <div id="previewImg" class="preview_img ui_imgbg avatar" data-width="144"
-                  data-height="144">
-                  </div>
-                </div>
-                <a class="ui_btn ui_btn_upload" data-wrap="user_logo">
-                  保存頭像
-                </a>
-              </div>
-            </div>
-            <div class="ui_text_block">
-              <label for="User_years" class="fcEm3 title">
-                生日：
-              </label>
-              <span class="ui_text_input">
-                <input readonly="readonly" style="width:90px;" id="User_birthday" name="User[birthday]"
-                type="text" />
-              </span>
-            </div>
-            <div class="ui_text_block">
-              <label for="User_address" class="fcEm3 title">
-                地址：
-              </label>
-              <input class="ui_text_input" name="User[address]" id="User_address" type="text"
-              maxlength="100" value="" />
-            </div>
-            <div class="ui_text_block">
-              <label for="User_country" class="fcEm3 title">
-                *國家：
-              </label>
-              <select class="ui_text_select" name="User[country_id]" id="User_country_id">
-                <option value="">
-                  == 請選擇 ==
-                </option>
-                <option value="0">
-                  台灣
-                </option>
-                <option value="1">
-                  香港
-                </option>
-                <option value="2" selected="selected">
-                  中國（大陸）
-                </option>
-                <option value="3">
-                  馬來西亞
-                </option>
-                <option value="4">
-                  新加坡
-                </option>
-                <option value="5">
-                  其他
-                </option>
-              </select>
-            </div>
-            <div class="ui_text_block">
-              <label for="User_phone" class="fcEm3 title">
-                聯絡電話：
-              </label>
-              <input class="ui_text_input" name="User[telephone]" id="User_telephone"
-              type="text" maxlength="20" value="18058148753" />
-            </div>
-            <div class="ui_text_block">
-              <label for="User_phone2" class="fcEm3 title">
-                行動電話：
-              </label>
-              <input class="ui_text_input" name="User[mobile]" id="User_mobile" type="text"
-              value="" />
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>
-              匯款資料
-            </legend>
-            <div class="ui_text_block">
-              <label for="User_pay_method" class="fcEm3 title">
-                收款方式：
-              </label>
-              支付寶
-            </div>
-            <div class="ui_text_block">
-              <label class="fcEm3 title">
-                帳號：
-              </label>
-              <label class="fcEm3">
-                1187247901@qq.com
-              </label>
-              <label class="fcEm3" style="margin-right: 140px;float: right;">
-                <a onclick='delConfirm(1182,"/changepaymethod.html?id=1182");' style="background-color: #159881; width:100px; padding: 5px 15px; color:#b4fff2">
-                  申請修改匯款資料
-                </a>
-              </label>
-            </div>
-            <div class="ui_text_block">
-              <input type="submit" class="ui_btn ui_btn_green2 ui_text_tips f16 fb"
+              <input onclick="return confirm(&quot;請確認匯款資料填寫是否准確，一旦提交不能修改，是否現在提交？&quot;)" type="submit" class="ui_btn ui_btn_green2 ui_text_tips f16 fb"
               name="submit" value="更新資料">
             </div>
         </form>

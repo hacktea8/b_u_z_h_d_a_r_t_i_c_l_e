@@ -5,6 +5,48 @@ class consoleModel extends baseModel{
  public function __construct(){
   parent::__construct();
  }
+ public function getUserChannelInfo($uid){
+  $r = $this->check_id(self::$_tUMeta,self::$_fUMeta,array('uid='=>$uid));
+  if($r['iscover'] == 1){
+   $r['pic'] = '';
+  }else{
+   $r['pic'] = '';
+  }
+  return $r;
+ }
+ public function checkUserChannelUrlkey($urlkey){
+  if( empty($urlkey)){
+   return 0;
+  }
+  $r = $this->check_id(self::$_tUMeta,'uid',array('urlkey='=>$urlkey));
+  return $r;
+ }
+ public function setUserChannelInfo($info){
+  $uid = $info['uid'];
+  $meta = $this->filter($info, array('fname', 'lname', 'iscover', 'mobile', 'county', 'title', 'intro', 'pic', 'host'));
+  $flag1 = $flag2 = 0;
+  if( isset($info['pay_account']) && $info['pay_account']){
+   $flag1 = 1;
+  }
+  if(isset($info['urlkey']) && $info['urlkey']){
+   $flag2 = 2;
+  }
+  if($flag1 || $flag2){
+   $check = $this->check_id(self::$_tUMeta,'pay_account,urlkey',array('uid='=>$uid));
+  }
+  if( empty($check['pay_account']) && $flag1){
+   $meta['pay_account'] = $info['pay_account'];
+   $meta['pay_method'] = $info['pay_method'];
+  }
+  if( empty($check['urlkey']) && $flag2){
+   $exist = $this->checkUserChannelUrlkey($info['urlkey']);
+   if( empty($exist['urlkey'])){
+    $meta['urlkey'] = $info['urlkey'];
+   }
+  }
+  $this->db->update(self::$_tUMeta,$meta,array('uid'=>$uid));
+  return $uid;
+ }
  public function getArticleProfitList($uid, $limit = array(1,7)){
   $where = array('uid='=>$uid);
   $_fAH = 'id,title,hits,coop_money,hits_money,coop_hits,ptime';

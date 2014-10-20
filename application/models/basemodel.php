@@ -13,7 +13,7 @@ class baseModel extends CI_Model{
  static public $_tUser = '`user`';
  static public $_fUser = '`uid`, `uname`, `gid`, `invite`,month_hits,amount, `hits`, `click_count`,isAdmin,post_count,wid, `isvip`, `loginip`, `logintime`';
  static public $_tUMeta = '`user_meta`';
- static public $_fUMeta = '`uid`, `fname`, `lname`, `cover`, `mobile`, `county`, `pay_method`, `pay_account`';
+ static public $_fUMeta = '`uid`, `fname`,urlkey,`lname`,host,iscover,intro,title,pic, `mobile`, `county`, `pay_method`, `pay_account`';
  static public $_tUGroup = '`user_group`';
  static public $_fUGroup = '`gid`, `title`, `price`, `note`, `post_count`, `offline_count`, `offline_amount`';
  static public $_tUPC = '`user_pay_records`';
@@ -51,13 +51,15 @@ class baseModel extends CI_Model{
  public function filter(&$data, $filter = array()){
   $return = array();
   foreach($filter as $k){
-   $return[$k] = $data[$k];
+   if(isset($data[$k])){
+    $return[$k] = $data[$k];
+   }
   }
   return $return;
  }
- public function check_id($table = '', $fields,$where){
+ public function check_id($table = '', $fields,$where, $return = 0){
   $table = $table ? $table : $this->_table;
-  $query = $this->select($table, $fields, $where, $order = '', $limit = array(1));
+  $query = $this->select($table, $fields, $where, $order = '', $limit = array(1), $return);
   $row = array();
   if ($query->num_rows() > 0){
    $row = $query->row_array();
@@ -104,8 +106,11 @@ class baseModel extends CI_Model{
   $query = $this->db->query($sql);
   return $query;
  }
- public function get_pic(){
+ public function get_pic($t = 'article',$p1 = 0,$p2 = 0,$p3 = 0,$p4 = 0){
   $url = 'http://i2.tietuku.com/a931825cefd0efe3.png';
+  if('user' == $t){
+   $url = '/public/images/user_img_def.png';
+  }
   return $url;
  }
   public function checkArticleByOname($name){

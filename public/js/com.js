@@ -1,9 +1,17 @@
+
+var messages={
+	'www':{'like_article':'喜歡這篇文章嗎？','share_tofb':'分享到facebook','no_thanks':'不了，謝謝'},
+	'chs':{'like_article':'喜欢这篇文章吗?','share_tofb':'分享到facebook','no_thanks':'不了，謝謝'},
+}
+
+
+
+
 /**
  * @author Vickyhuang
  */
 var Com = {
 	init: function() {
-
 
 		//初始化导航
 		Com.initMenu();
@@ -21,19 +29,15 @@ var Com = {
 /**
 *@author tim.yang
 */
-
 	initMenu: function() {
 
-
 		$("#header .main_nav > li.search").append('<div class="submenu_content"><form class="search_form pr" action="/" method="get"><div class="search_input"><input id="s" type="text" name="keyword" value="" placeholder="搜尋..." autocomplete="off"></div><input type="submit" value="搜尋" class="search_btn" onclick="return searchSubmit();"/></form></div>');
-
-
 
 		$("#header .main_nav > li.submenu").each(function(){
 			listID = $(this).attr("list-id") || null;
 			if(listID!==null && $(this).find(".submenu_content").length == 0){
-			var subcontent = '<div class="submenu_content"><div class="cleafix"><ul class="sidebar"></ul><div class="main"></div></div></div>';
-			$(this).append(subcontent);
+				var subcontent = '<div class="submenu_content"><div class="cleafix"><ul class="sidebar"></ul><div class="main"></div></div></div>';
+				$(this).append(subcontent);
 			}
 		});
 	},
@@ -120,12 +124,12 @@ var Com = {
 				var target = this,
 					listID = $(target).attr("list-id") || null;
 
-					if($(this).hasClass("follow")){
-						if($(this).find(".submenu_content").length == 0){
-						$(this).append("<div class='submenu_content'><iframe frameborder='0' allowtransparency='true' style='border:none; overflow:hidden; width:88px; height:21px;' scrolling='no' src='//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2FBuzzHandCom&amp;send=false&amp;layout=button_count&amp;width=88&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=184373368282608'></iframe><a href='https://twitter.com/buzzhand' class='twitter-follow-button' data-show-count='false' data-lang='zh-tw'>跟隨 @BuzzHand</a><div class='g-follow' data-annotation='bubble' data-height='20' data-href='//plus.google.com/+Mashable' data-rel='author'></div><div class='g-override-container'><div class='g-ytsubscribe' data-channel='buzzhand'></div></div><a href='http://www.buzzhand.com/site/feed' target='_blank' class='fr ui_btn ui_btn_green2'><span class='ui_icon ui_icon15 ui_icon15_rss'>rss</span></a></div>");
+				if($(this).hasClass("follow")){
+					if($(this).find(".submenu_content").length == 0){
+						$(this).append("<div class='submenu_content'><iframe frameborder='0' allowtransparency='true' style='border:none; overflow:hidden; width:88px; height:21px;' scrolling='no' src='//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2FBuzzHandCom&amp;send=false&amp;layout=button_count&amp;width=88&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=184373368282608'></iframe><a href='https://twitter.com/buzzhand' class='twitter-follow-button' data-show-count='false' data-lang='zh-tw'>跟隨 @BuzzHand</a><div class='g-follow' data-annotation='bubble' data-height='20' data-href='//plus.google.com/+Mashable' data-rel='author'></div><div class='g-override-container'><div class='g-ytsubscribe' data-channel='buzzhand'></div></div><a href='"+window.base_url+"site/feed' target='_blank' class='fr ui_btn ui_btn_green2'><span class='ui_icon ui_icon15 ui_icon15_rss'>rss</span></a></div>");
 						loadScriptAsync('twitter');
-						}
 					}
+				}
 
 				if(!submenuLock){
 					submenuLock = true;
@@ -496,7 +500,7 @@ var Com = {
 		                    			var	itemHtml = '<li class="entry"  share_count="'+ item.share_count +'" s-facebook="'+ item.share_facebook +'" s-google="'+ item.share_google +'" s-linkin="'+ item.share_linkin +'" s_twitter="'+ item.share_twitter +'">'
 													+ '<div class="img ui_imgbg">'
 													+ '<a title="'+ item.title +'" href="'+ item.url +'">'
-													+ '<img src="'+ item.img +'" />'
+													+ '<img src="'+ item.limg +'" />'
 													+ '</a><a class="tips triangle" href="'+ item.curl +'">'+ item.cname +'</a></div>'
 													+ '<h3 class="mt5 entry-title"><a class="fcEm8" title="'+ item.title +'" href="'+ item.url +'">'+ item.title +'</h3></a>'
 													+ '<p class="mt5 share_stub"><span class="ui_icon ui_icon20 ui_icon20_share"></span>'
@@ -514,11 +518,11 @@ var Com = {
 		                    			_html = "";
 		                    		for(var i = 0; i < listLen; i++){
 		                    			var item = list[i],
-		                    				itemHtml = '<li class="entry"  share_count="'+ item.share_count +'" s-facebook="'+ item.share_facebook +'" s-google="'+ item.share_google +'" s-linkin="'+ item.share_linkin +'" s_twitter="'+ item.share_twitter +'">';
+		                    				itemHtml = '<li class="entry"  share_count="'+ item.share_count +'" s-facebook="'+ item.share_facebook  +'">';
 										if(item.img){
 											itemHtml += '<div class="img ui_imgbg">'
 													+ '<a title="'+ item.title +'" href="'+ item.url +'">'
-													+ '<img src="'+ item.img +'" />'
+													+ '<img src="'+ item.simg +'" />'
 													+ '</a></div>';
 										}
 										itemHtml += '<div class="content" ><h3 class="mt5 entry-title"><a class="fcEm" title="'+ item.title +'" href="'+ item.url +'">'+ item.title +'</h3></a>'
@@ -531,23 +535,34 @@ var Com = {
 		                    		$("#column_new").find("ul").append(_html);
 		                    	}
 
-		                    	// 精彩文章
-		                    	if(json.wonderfull){
-		                    		var list = json.wonderfull,
+
+		                    	// 原創文章
+		                    	if(json.original){
+		                    		var list = json.original,
 		                    			listLen = list.length,
 		                    			_html = "";
 		                    		for(var i = 0; i < listLen; i++){
 		                    			var item = list[i],
-		                    				itemHtml = '<li class="entry"  share_count="'+ item.share_count +'" s-facebook="'+ item.share_facebook +'" s-google="'+ item.share_google +'" s-linkin="'+ item.share_linkin +'" s_twitter="'+ item.share_twitter +'"><div class="img ui_imgbg">';
-													+ '<a title="'+ item.title +'" href="'+ item.url +'">'
-													+ '<img src="'+ item.img +'" />'
-													+ '</a></div><h3 class="mt5 entry-title">'
-													+ '<a class="fcEm" title="'+ item.title +'" href="'+ item.url +'">'+ item.title +'</h3></a>'
-													+ '<p class="mt5 fcEm4">'+ item.time +'</p></li>';
+		                    				itemHtml = '<li class="entry"  share_count="'+ item.share_count +'" s-facebook="'+ item.share_facebook +'">'
+		                    					+ '<div class="img ui_imgbg">'
+		    		                    		+ '<a title="'+ item.title +'" href="'+ item.url +'">'
+		    		                    		+ '<img src="'+ item.simg +'" />'
+		    		                    		+ '</a></div><div class="content"><h3 class="entry-title">'
+		    		                    		+ '<a class="fcEm" title="'+ item.title +'" href="'+ item.url +'">'+ item.title +'</a></h3>'
+		    		                    		+ '<p class="mt5 share_stub">'
+		    		                    		+ '<span class="ui_icon ui_icon20 ui_icon20_share"></span>'
+		    		                    		+ '<span class="fb vm">'+ item.share_count +'</span>'
+		    		                    		+ '<span class="vm">'
+		    		                    		+ '次分享'
+		    		                    		+ ' /'
+		    		                    		+ '</span>'
+		    		                    		+ '<span class="fcEm4">'+ item.time +'</span></p></div></li>';
 										_html += itemHtml;
 		                    		}
-		                    		$("#column_wonderfull").find("ul").append(_html);
+
+		                    		$("#column_original").find("ul").append(_html);
 		                    	}
+
 		                    break;
 		                    default:
 								var list = json.list,
@@ -610,7 +625,187 @@ var Com = {
 			curClass = args.curClass || "cur";
 		$(target).addClass(curClass).siblings().removeClass(curClass);
 		$(args.childId).show().siblings().hide();
+	},
+
+    // 複製到剪贴板
+	fnCopyToClipboard: function(args) {
+		var txt = args.txt,
+			$wrapId = typeof args.wrapId === "object" ? args.wrapId : $("#" + args.wrapId);
+		// if (window.clipboardData) {
+			// window.clipboardData.clearData();
+			// clipboardData.setData("Text", txt);
+			// (txt != "") && alert("複製成功！");
+		// }else{
+			$wrapId.zclip({
+			    path: args.path,
+			    copy: txt,
+				afterCopy: function(){
+					var popHtml = '<div class="tc pt10"><h2 class="mb5 fcEm7 fb f20">複製成功。</h2></div>'
+					Com.fnPopupWin({id:"win_copyToClipboard", content: popHtml, expiry: 1000});
+				}
+			});
+		// }
+
+	},
+
+/**
+ * @author VickyHuang
+ * @param {Object} options include: "args" :
+ * @description 上傳圖片 裁剪
+ */
+	fnUploadImg: {
+		cutJson: {},
+		init: function() {
+			var uploadImg = $("#uploadImg").Huploadify({
+				auto : false, //是否开启自动上传
+				fileTypeExts : "*.gif; *.jpg; *.png; *.jpeg",//允许上传的文件类型，格式"*.jpg;*.doc"
+				multi : false,//是否允许选择多个文件
+				showUploadedPercent : false,//是否实时显示上传的百分比，如20%
+				uploader : "/console/upAvatar",//文件提交的地址
+				fileObjName:"avatar",//在后端接受文件的参数名称，如PHP中的$_FILES["file"]
+				formData:{
+					rnd: Math.random()
+				},//发送给服务端的参数，格式：{key1:value1,key2:value2}
+				buttonText:"選擇圖片",//上传按钮上的文字
+				queueSizeLimit: 1,//最多能选择加入的文件数量
+				useTemplate: false,
+				onSelect : function(file) {//选择文件后的触发事件
+					//console.log(file.name + "加入上传队列");
+					Com.fnLoading({"wrapId": $("#uploadImgWrap"), "mask": true});
+					uploadImg.upload("*");
+				},
+				onUploadSuccess : function(file, data, response) {//上传成功后的触发事件
+					// console.log("上传完成data" + data);
+					data = JSON.parse(data);
+					if(data.state == "SUCCESS"){
+						//data为接收方(receivePic.php)返回的数据
+						Com.fnUploadImg.curImage(data);
+					}
+				}
+			});
+		},
+		curImage: function(data){
+			//对取回的数据处理出需要的图片名，宽高，并计算出原图比例尺，开始设定裁剪需要的计算量
+			var image = new Image();
+			image.src = data.url;
+			image.onload = function(){
+				var orignW = image.width, //存储原图的宽高，用于计算
+					orignH = image.height,
+					$imgTar = $("#previewImg", "#uploadImgWrap"),
+					$imgCut = $("#curImg", "#uploadImgWrap"),
+					prevW = parseInt($imgTar.attr("data-width"), 10),
+					prevH = parseInt($imgTar.attr("data-height"), 10),
+					aspectRatio = prevW / prevH, //提前设定的裁剪宽高比，规定随后裁剪的宽高比例
+					prevFrameW = prevW, //预览图容器的高宽，宽度固定，高为需要裁剪的宽高比决定
+					prevFrameH = prevH / aspectRatio,
+					rangeX = 1, //初始缩放比例
+					rangeY = 1,
+					frameW = 300,  //原图的缩略图固定宽度，作为一个画布，限定宽度，高度自适应，保证了原图比例
+            		frameH = Math.round(frameW*orignH/orignW);//根据原图宽高比和画布固定宽计算画布高，即$imgTar加载上传图后的高。此处不能简单用.height()获取，有DOM加载的延迟,
+					prevImgW = prevFrameW, //初始裁剪预览图宽高
+					prevImgH = prevFrameW;
+
+				$imgTar.html("<img src='"+ data.url +"'/>");
+				$imgCut.html("<img src='"+ data.url +"'/>");
+				
+			    var maxW = $imgCut.find("img").width() < $imgCut.outerWidth(true) ? $imgCut.find("img").width() : $imgCut.outerWidth(true),
+			     	maxH = $imgCut.find("img").height() < $imgCut.outerHeight(true) ? $imgCut.find("img").height() : $imgCut.outerHeight(true),
+			     	_x1 = maxW > prevW ? ((maxW - prevW)/2) : 0,
+			     	_y1 = maxH > prevH ? ((maxH - prevH)/2) : 0,
+			     	_x2 = maxW > prevW ? (_x1 + prevW) : maxW,
+			     	_y2 = maxW > prevH ? (_y1 + prevH) : maxW;
+			     	
+				// Com.fnUploadImg.setData.imgArea.cancelSelection();
+				//准备好数据后，开始配置imgAreaSelect使得图片可选区
+				var imgArea = $imgCut.find("img").imgAreaSelect({//配置imgAreaSelect
+					instance : true, //配置为一个实例，使得绑定的imgAreaSelect对象可通过imgArea来设置
+					handles : true, //选区样式，四边上8个方框,设为corners 4个
+					fadeSpeed: 200, //选区阴影建立和消失的渐变
+					aspectRatio : '1:' + (1 / aspectRatio), //比例尺
+					x1: _x1,
+					y1: _y1,
+					x2: _x2,
+					y2: _y2,
+					onInit : function(img, selection){
+						frameW = $imgCut.find("img").width();
+		            	frameH = Math.round(frameW*orignH/orignW);
+		            	
+						this.onSelectChange(img, selection);
+						this.onSelectEnd(img, selection);
+					},
+					onSelectChange : function(img, selection) {//选区改变时的触发事件
+						if (!selection.width || !selection.height){
+							return;
+						}
+		            	/*selection包括x1,y1,x2,y2,width,height几个量，分别为选区的偏移和高宽。*/
+		                rangeX = selection.width/frameW;  //依据选取高宽和画布高宽换算出缩放比例
+		                rangeY = selection.height/frameH;
+		                prevImgW = prevFrameW/rangeX; //根据缩放比例和预览图容器高宽得出预览图的高宽
+		                prevImgH = prevFrameH/rangeY;
+					
+						//实时调整预览图预览裁剪后效果，可参见http://odyniec.net/projects/imgareaselect/ 的Live Example
+		                $imgTar.find("img").css({
+					    	"max-width": "none",
+					    	"max-height": "none",
+		                    "width" : Math.round(prevImgW)+"px",
+		                    "height" : Math.round(prevImgH)+"px",
+		                    "margin-left":"-"+Math.round((prevFrameW/selection.width)*selection.x1)+"px",
+		                    "margin-top" :"-"+Math.round((prevFrameH/selection.height)*selection.y1)+"px"
+		                });
+					},
+					onSelectEnd : function(img, selection) {//放开选区后的触发事件
+						//计算实际对于原图的裁剪坐标
+		                Com.fnUploadImg.cutJson.x1 = Math.round(orignW*selection.x1/frameW);
+		                Com.fnUploadImg.cutJson.y1 = Math.round(orignH*selection.y1/frameH);
+		                Com.fnUploadImg.cutJson.x2 = Math.round(orignW*selection.x2/frameW);
+		                Com.fnUploadImg.cutJson.y2 = Math.round(orignH*selection.y2/frameH);
+		                Com.fnUploadImg.cutJson.width  = Math.round(orignW);
+		                Com.fnUploadImg.cutJson.height = Math.round(orignH);
+					}
+				});
+
+				$(".ui_btn_upload", "#uploadImgWrap").off().on("click", function(){
+					Com.fnLoading({"wrapId": $("#uploadImgWrap"), "mask": true});
+					var $wrap = $("#" + $(this).attr("data-wrap"));
+					Com.fnUploadImg.cutJson.img = data.url;
+					VK.doAjax({
+						success: function(json){
+							if(json.state == "SUCCESS"){
+								$wrap.attr("src", json.url);
+								imgArea.cancelSelection();
+								$imgTar.html("");
+								$imgCut.html("");
+							}
+							Com.fnLoading({"closeLoad": true});
+						},
+						options: {
+							url: "/console/cropPic?type=" + $(this).attr("data-wrap"),
+							data: Com.fnUploadImg.cutJson
+						}
+					});
+				});
+				$("#uploadImg").off().on("click", function(){
+					imgArea.cancelSelection();
+				});
+				Com.fnLoading({"closeLoad": true});
+			};
+		}
+	},
+	
+
+/**
+ * @author VickyHuang
+ * @param {Object} options include: "args" :
+ * @description 滚动
+ */
+	fnOnScroll: function(fn){
+		var oldMethod = window.onscroll;
+		window.onscroll = function() {
+			(typeof oldMethod === "function") && oldMethod.call(this);
+			(typeof fn === "function") && fn.call(this);
+		}
 	}
+
 };
 
 
@@ -817,47 +1012,6 @@ var Members = {
 		if($(".error").length > 0){
 			Com.fnGoTop($(".error").eq(0).offset().top - 45);
 		}
-	},
-
-    // 會員頁 - 複製  by: tim.yang
-	fnCopyToClipboard: function(txt) {
-
-		if (window.clipboardData) {
-			window.clipboardData.clearData();
-			clipboardData.setData("Text", txt);
-			alert("複製成功！");
-		} else if (navigator.userAgent.indexOf("Opera") != -1) {
-			window.location = txt;
-		} else if (window.netscape) {
-			try {
-				netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-			} catch (e) {
-				alert("被瀏覽器拒絕！\n請在瀏覽器地址欄'about:config'並回車\n然後將 'signed.applets.codebase_principal_support'設置為'true'");
-			}
-			var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
-			if (!clip) {
-				return;
-			}
-			var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
-			if (!trans) {
-				return;
-			}
-			trans.addDataFlavor("text/unicode");
-			var str = new Object();
-			var len = new Object();
-			var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-			var copytext = txt;
-			str.data = copytext;
-			trans.setTransferData("text/unicode", str, copytext.length * 2);
-			var clipid = Components.interfaces.nsIClipboard;
-			if (!clip) {
-				return false;
-			}
-			clip.setData(trans, null, clipid.kGlobalClipboard);
-			alert("複製成功！");
-		}
-
-
 	}
 };
 
@@ -905,33 +1059,100 @@ var Bbs = {
 *@param {Object} options include:
 *@description article
 $("body").append('<div class="fixedbar" style="height:45px;background:#fff;"><div id="mobileFBLike" class="mobile-fb-like-box" ><span class="mobile-join-fb-text">讚一下'+fb_name+'吧:)</span><div class="fb-like mobile-fb-like" data-href='+fb_page+' data-send="false" data-width="60" data-show-faces="false" layout="button_count"></div></div></div>');
+
+
+
+$("body").append('<div class="fixedbar" style="background:#fff;text-align:center;line-height: 0px;padding:0"><iframe width="300" scrolling="no" height="50" frameborder="0" src="http://56.adsbro.com/ydr_bh.php?w=300&h=50" marginheight="0" marginwidth="0"></iframe></div>');
+
+$("body").append('<div class="fixedbar"><div class="floatingbox"><ul id="tips"><li style="float: left;"><a class="hoverable share-fb sticky-bot-fb" id="botFbShare" onclick="return false();" href="#"><img src="/images/facebook.png"></a></li></ul></div></div>');
+		jQuery('#botFbShare').on("click",function(event){event.preventDefault();var child=window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href+'#bottom'),'facebook-share-dialog','width=626,height=436');});
+
+	   setTimeout('show_like()', 38000);
+	   $('#article-finished').toggleClass('hiding', direction === 'up');
 */
 var Article = {
-	init: function(){
-
-		if(window.isMobile){
-		$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a>');
-		$('#mobileFBLike').show();
-
-		$("body").append('<div class="fixedbar"><div class="floatingbox"><ul id="tips"><li style="float: left;"><a class="hoverable share-fb sticky-bot-fb" id="botFbShare" onclick="return false();" href="#"><img src="/images/facebook.png"></a></li></ul></div></div>');
-		jQuery('#botFbShare').on("click",function(event){event.preventDefault();var child=window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'facebook-share-dialog','width=626,height=436');});
-
-	   setTimeout('show_like()', 28000);
-		}else{
 
 
-	   setTimeout('show_like()', 28000);
+	ping_track: function() {
 
+		if("4" == $.cookie("bh_tracked")) 
+		{
+			return;
+		}	
 
+		if( $("#ac").length > 0 && top == self ){
 
-		$('#mobileFBLike').hide();
-		$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a><a class="ui_btn ui_btn_red mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a><span class="othershare none"><a class="ui_btn ui_btn_cyanblue mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_t">Share on Twitter</span></a><a class="ui_btn ui_btn_blue2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_i">Share on LinkedIn</span></a><a class="ui_btn ui_btn_red2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_p">Share on pinterest</span></a></span><span class="addmore" onclick="Com.fnShowOther({\'target\': this, \'showDiv\': \'.othershare\'});">+</span>');
+			setTimeout(function(){
+			article_container = $("#ac");
+			var _img = 'http://my.buzzhand.com/images/2014' + article_container.attr("p") +  '042906669009' +  article_container.attr("ac") + '.png';
+			article_container.append("<img src=\""+_img+"\" width=\"1\" height=\"1\">");
+			},7000);
+
+			var exp  = new Date(); 
+			exp.setTime(exp.getTime() + 60*60*1000);
+
+			$.cookie("bh_tracked", "4", {
+                expires: exp,
+                path: "/"
+            });
 		}
+	},
+
+
+	init: function(){
+		if (window.isMobile) {
+			$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a>');
+			if("1" !== $.cookie("facebook_liked")) 
+			{
+				$('#mobileFBLike').show();
+			} else {
+				$('#mobileFBLike').hide();
+			}
+		} else {
+			$('#mobileFBLike').hide();
+			$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a><a class="ui_btn ui_btn_red mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a><span class="othershare none"><a class="ui_btn ui_btn_cyanblue mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_t">Share on Twitter</span></a><a class="ui_btn ui_btn_blue2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_i">Share on LinkedIn</span></a><a class="ui_btn ui_btn_red2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_p">Share on pinterest</span></a></span><span class="addmore" onclick="Com.fnShowOther({\'target\': this, \'showDiv\': \'.othershare\'});">+</span>');
+		}
+		
+		//Article.showSidebarShare();
+		Article.showMobileHeader();
+
+		//Article.ping_track();
+		//var bh_pingTrack= false;
+		 //Com.fnOnScroll(function(){
+
+		//	if(bh_pingTrack){
+		//		return;
+		//	}
+
+		//	Article.ping_track();
+		//	bh_pingTrack= true;
+		//});
+
+		//$('#detailContent').waypoint(function() {
+		 $(window.document).scroll(function() {
+		 if (!window.bh_track){
+				Article.ping_track();
+				 window.bh_track = true;
+			}
+		}); 
+
+
+		setTimeout('show_like()', 30000);
+		$('#articleContent').waypoint(function(direction) {
+		 if (!window.i) {
+				 setTimeout('show_share()', 34000);
+				 window.i = true;
+			}
+		}, {
+		 offset : function() {
+				return $.waypoints('viewportHeight') - $(this).height();
+			}
+		}); 
 
 		$("#detailContent").find("a.post_img").off().on({
 			mouseenter: function() {
 				if ($("#imgShare").length === 0) {
-					var imgShareHtml = '<div id="imgShare" class="btn_img_share"><p><a  href="javascript:void(0);" onclick="javascript:shareToFb(\''+window.location.pathname+'\');" class="ui_btn ui_btn_blue">Facebook</a></p><p><a   href="javascript:void(0);" onclick="javascript:shareToGoogle(\''+window.location.pathname+'\');"  class="ui_btn ui_btn_red">Google Plus</a></p></div>';
+					var imgShareHtml = '<div id="imgShare" class="btn_img_share"><p><a  href="javascript:void(0);" onclick="javascript:shareToFb(\''+window.location.pathname+'\');" class="ui_btn ui_btn_blue">Facebook</a></p><p><a href="javascript:void(0);" onclick="javascript:shareToGoogle(\''+window.location.pathname+'\');"  class="ui_btn ui_btn_red">Google Plus</a></p></div>';
 					$(this).addClass("imgShare").append(imgShareHtml);
 				}
 			},
@@ -965,15 +1186,137 @@ var Article = {
 				 return shareToPinterest(window.location.pathname);
 		 });
 
-		if( $("#ac").length > 0 && top == self ){
-		setTimeout(function(){
-			article_container = $("#ac");
-			var _img = '/images/2014' + article_container.attr("p") +  '042906669009' +  article_container.attr("ac") + '.png';
-			article_container.append("<img src=\""+_img+"\" width=\"1\" height=\"1\">");
-		},8000);
+	},
+
+	showSidebarShare: function(){
+		var sidebarShareHtml = "",
+			_left = 0;
+		if(!VK.os.desktop){
+			sidebarShareHtml = '<div id="sidebarShare"><p class="mt5 mb5">'
+							+ '<a href="javascript:void(0);" onclick="javascript:shareToFb(\''+window.location.pathname+'\');" class="ui_btn ui_btn_blue">'
+							+ '<span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span></a></p></div>';
+		}else{
+			sidebarShareHtml = '<div id="sidebarShare"><p class="mt5 mb5">'
+							+ '<a href="javascript:void(0);" onclick="javascript:shareToFb(\''+window.location.pathname+'\');" class="ui_btn ui_btn_blue">'
+							+ '<span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span>&nbsp;Share'
+							+ '</a></p><p class="mt5 mb5">'
+							+ '<a href="javascript:void(0);" onclick="javascript:shareToGoogle(\''+window.location.pathname+'\');" class="ui_btn ui_btn_red">'
+							+ '<span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span>&nbsp;Share</a></p></div>';
+		}
+		$(".main_wrap").append(sidebarShareHtml);
+		_left = ( ( $(window).width() - $("#container").width() ) / 2 ) - $("#sidebarShare").width(),
+		$("#sidebarShare").css({
+			"left": _left > 0 ? _left : 0,
+			"margin-top": - ( $("#sidebarShare").height() / 2 )
+		});
+	},
+	showMobileHeader: function(){
+		if(!VK.os.desktop){
+			var $detailContentTop = $("#detailContent").offset().top
+				scrollTop = $detailContentTop - 45,
+				mobileHeaderHtml = '<div id="mobileHeader">'
+										+ '<ul class="main_nav clearfix">'
+										+ '<li class="vertical logo"><h2 class="center"><a href="/">B</a></h2></li><li class="vertical nav_r">'
+										+ '<a href="javascript:void(0);" onclick="javascript:shareToGoogle(\''+window.location.pathname+'\');" class="ui_btn ui_btn_red">'
+										+ '<span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span>&nbsp;Share</a></li>'
+										+ '<li class="vertical nav_r"><a href="javascript:void(0);" onclick="javascript:shareToFb(\''+window.location.pathname+'\');" class="ui_btn ui_btn_blue">'
+										+ '<span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span>&nbsp;Share'
+										+ '</a></li></ul></div>';
+			$("#header").after(mobileHeaderHtml);
+			var $mobileHeader = $("#mobileHeader");
+			Com.fnOnScroll(function(){
+				if($(window).scrollTop() >= scrollTop){
+					$mobileHeader.addClass("show");
+					if(!$mobileHeader.hasClass("show")){
+						$mobileHeader.css({
+					    	"-moz-transform": "translateY(-500px)",
+							"-webkit-transform": "translateY(-500px)",
+							"-o-transform": "translateY(-500px)",
+							"-ms-transform": "translateY(-500px)",
+						 	"transform": "translateY(-500px)"
+					    });
+						setTimeout(function(){
+							$mobileHeader.css({
+						    	"-moz-transform": "translateY(0)",
+								"-webkit-transform": "translateY(0)",
+								"-o-transform": "translateY(0)",
+								"-ms-transform": "translateY(0)",
+							 	"transform": "translateY(0)",
+	
+						    	"-moz-transition": "-moz-transform 290ms ease",
+							    "-webkit-transition": "-webkit-transform 290ms ease",
+							    "-o-transition": "-o-transform 290ms ease",
+							    "-ms-transition": "-ms-transform 290ms ease",
+							    "transition": "transform 290ms ease"
+						    });
+						    setTimeout(function(){
+						    	$mobileHeader.css({
+							    	"-moz-transition": "",
+								    "-webkit-transition": "",
+								    "-o-transition": "",
+								    "-ms-transition": "",
+								    "transition": ""
+							    });
+						    }, 290);
+						}, 1);
+					}
+				}else{
+					$mobileHeader.removeClass("show");
+				}
+			});
 		}
 	}
+};
 
+
+
+/**
+*@author VickyHuang
+*@param {Object} options include:
+*@description Contributing
+*/
+var Contributing = {
+	init: function(args) {
+		Contributing.fnSetTag();
+	},
+
+	fnSetTag: function(args) {
+		var $tagSettingText = $("#tagWrap").find("#tagSettingText"),
+			$tagSettingTextVal = $tagSettingText.val();
+
+		var setArr = $tagSettingTextVal != "" ? $tagSettingTextVal.split(",") : [];
+		$("#tagWrap").off().on("click","li", function(){
+			var $this = $(this),
+				$className = $this.attr("class"),
+				$text = $this.text(),
+				$selectIndex = $this.index();
+
+			switch($className){
+				case "select":
+					$("<li class='selected' selectIndex='"+ $selectIndex +"'>" + $text + "</li>").insertBefore("#tagSelected>li.last");
+					setArr.push($text);
+				break;
+				case "selected":
+					$this.remove();
+					if($selectIndex){
+						$("#tagSelect>li").eq($selectIndex).removeClass("cur");
+					}
+					setArr.remove($text);
+				break;
+		        default:
+				break;
+			}
+			$tagSettingText.val(setArr.join(","));
+		});
+		$("#setTag", "#tagWrap").click(function(e){
+			var $input = $(this).parent().find("#tag"),
+				$text = $input.val();
+			$("<li class='selected'>" + $text + "</li>").insertBefore($("#tagSelected>li.last"));
+			setArr.push($text);
+			$tagSettingText.val(setArr.join(","));
+			$input.val("");
+		});
+	}
 };
 
 
@@ -994,9 +1337,15 @@ if(fb_name != 'BuzzHand'){
 }
 
 var templates = {};
-templates["templates/lightbox"] = "<div class='mash-lightbox small-white-dialog'>\n  <div class='mash-lightbox-content-wrap'>\n    <a class='mash-lightbox-close' href='#'></a>\n    <div class='mash-lightbox-content'></div>\n  </div>\n</div>";
+templates["templates/lightbox"] = "<div class='mash-lightbox small-white-dialog'>\n<div class='mash-lightbox-content-wrap'>\n<a class='mash-lightbox-close' href='#'></a>\n<div class='mash-lightbox-content'></div>\n</div>\n</div>";
 
-templates["templates/shared/like_us_on_facebook"] = "<div id='like-encourager'><a class='mash-lightbox-close  icon_close'></a><hgroup>\n    <h1 class='first'>喜歡我們分享的文章嗎?</h1>\n    <h1>立即按讚接收更多吧!</h1>\n  </hgroup>\n<iframe src='//www.facebook.com/plugins/like.php?href="+ encodeURIComponent(fb_page) +"&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; height:21px;width: 88px;display: block;margin: 0 auto;' allowTransparency='true'> </iframe>\n</div>";
+//templates["templates/shared/like_us_on_facebook"] = "<div id='like-encourager'><a class='mash-lightbox-close  icon_close'></a><hgroup>\n    <h1 class='first'>喜歡這篇文章嗎?</h1>\n    <h1>立即按讚接收更多吧!</h1>\n  </hgroup>\n<br><iframe src='//www.facebook.com/plugins/like.php?href="+ encodeURIComponent(fb_page) +"&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; height:21px;width: 88px;display: block;margin: 0 auto;' allowTransparency='true'> </iframe>\n</div>";
+
+
+templates["templates/shared/like_us_on_facebook"] = '<div id="like-encourager"><a class="mash-lightbox-close  icon_close"></a><hgroup>\n<iframe frameborder="0" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" hspace="0" vspace="0" class="fancybox-iframe" name="fancybox-frame1411112158794" id="fancybox-frame1411112158794" scrolling="auto" src="/like.php?lang='+ window.jlang +'&page='+ encodeURIComponent(fb_page) +'"></iframe>\n</div>';
+
+
+templates["templates/shared/share_on_facebook"] = "<div id='like-encourager' style='text-align:center;'><a class='mash-lightbox-close  icon_close'></a><hgroup>\n<h1 class='first'>"+messages[window.jlang]['like_article']+"</h1>\n</hgroup>\n<a style='padding:10px 0 5px;font-size:18px;width: 80%' onclick='share_tofb()' class='ui_btn ui_btn_blue ml5 mr5'><span style='margin-right:4px' class='ui_icon ui_icon_third20 ui_icon_third20_f'></span> "+messages[window.jlang]['share_tofb']+"</a><br><p class='opt-out' id='opt-out'>"+messages[window.jlang]['no_thanks']+"</p></div>";
 
 
 var shareTrack = function(type, path) {
@@ -1101,8 +1450,7 @@ var Lightbox = {
 
 		$("#like-encourager").find(".opt-out").on("click",
         function() {
-            $.cookie("fb_like_optout", "1", {
-                expires: 7300,
+            $.cookie("fb_like_optout", "2", {
                 path: "/"
             })
 			Lightbox.hide();
@@ -1137,7 +1485,15 @@ var facebook = {
 		}
 		this.showed = 1;
 		return Lightbox.show(templates["templates/shared/like_us_on_facebook"]),
-			   loadScriptAsync('facebook'),
+			   this.content = $("#like-encourager").html()
+	},
+
+	show_share : function() {
+		if( this.showed == 1 ) {
+			return;
+		}
+		this.showed = 1;
+		return Lightbox.show(templates["templates/shared/share_on_facebook"]),
 			   this.content = $("#like-encourager").html()
 	}
 }
@@ -1154,14 +1510,27 @@ var isReferreredFrom = function(e){
 
 
 var show_like = function() {
-        return ("1" !== $.cookie("fb_like_optout")) ? (
-        facebook.show(),
-		$.cookie("fb_like_optout", "1", {
-                expires: 3864000,
-                path: "/"
-            })
-		) : void 0
+		
+    if("1" !== $.cookie("is_author") &&  "1" !== $.cookie("facebook_liked")) {
+		facebook.show()
+	}
 }
+
+var share_tofb = function() {
+	$.cookie("fb_like_optout", "2", {
+                path: "/"
+     });
+	Lightbox.hide();
+	shareToFb(window.location.pathname + '?from=pu');
+}
+
+var show_share = function() {
+        if("1" !== $.cookie("is_author") &&  "2" !== $.cookie("fb_like_optout")) {
+        	facebook.show_share()
+		}
+}
+
+
 
 var after = function(e) {
 		var t;
@@ -1177,12 +1546,12 @@ var after = function(e) {
 
 
 var shareToPinterest = function(url) {
-			return n = "http://pinterest.com/pin/create/button/?url=" + encodeURIComponent("http://www.buzzhand.com" + url),
+			return n = "http://pinterest.com/pin/create/button/?url=" + encodeURIComponent(window.base_url + url),
             popupCenter(n, 685, 500);
 }
 
 var shareToFb = function(url) {
-		return n = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("http://www.buzzhand.com" + url),
+		return n = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.base_url + url),
         popupCenter(n, 685, 500),
 		shareTrack('facebook', url),
 		t = $([window, document]),
@@ -1199,7 +1568,7 @@ var shareToFb = function(url) {
 
 
 var shareToGoogle = function(url) {
-		var encoded_url = encodeURIComponent("http://www.buzzhand.com" + url);
+		var encoded_url = encodeURIComponent(window.base_url + url);
 		n = "https://plus.google.com/share?url=" + encoded_url;
 		popupCenter(n, 600, 600),
         shareTrack('google', url);
@@ -1207,7 +1576,7 @@ var shareToGoogle = function(url) {
 
 
 var shareToLinkin= function(url) {
-		var encoded_url = encodeURIComponent("http://www.buzzhand.com" + url);
+		var encoded_url = encodeURIComponent(window.base_url + url);
 		var n = "http://www.linkedin.com/cws/share?url=" + encoded_url + "&original_referer=" + encodeURIComponent(window.location.href) + "&isFramed=false&ts=" + (new Date).getTime();
         popupCenter(n, 505, 360),
         shareTrack('linkin', url);
@@ -1215,7 +1584,7 @@ var shareToLinkin= function(url) {
 
 
 var shareToTwitter= function(url,title) {
-var encoded_url = encodeURIComponent("http://www.buzzhand.com" + url);
+var encoded_url = encodeURIComponent(window.base_url + url);
 i = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(title) + "&url=" + encoded_url;
 popupCenter(i, 685, 500);
 shareTrack('twitter', url);
