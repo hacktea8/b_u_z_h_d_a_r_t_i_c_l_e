@@ -94,7 +94,7 @@
               <label for="User_country" class="fcEm3 title">
                 *國家：
               </label>
-              <select class="ui_text_select" name="User[country_id]" id="User_country_id">
+              <select class="ui_text_select" name="User[country]" id="User_country_id">
                 <option value="">
                   == 請選擇 ==
                 </option>
@@ -188,7 +188,7 @@
             PayPal信箱：
           </label>
           <input type="text" maxlength="100" size="40" value="" id="paypal" class="ui_text_select"
-          name="paypal">
+          name="User[pay_account]">
         </p>
         <p class="ui_text_block hiddenoption" style="display: none;" id="payoption2">
           <span class="block fcEm4 ui_text_tips">
@@ -203,7 +203,7 @@
             支付寶帳號：
           </label>
           <input type="text" maxlength="100" value="" id="alipay" class="ui_text_select"
-          name="alipay">
+          name="User[pay_account]">
         </p>
         <p class="ui_text_block hiddenoption" style="display: none;" id="payoption4">
           <label for="User_paypal" class="fcEm3 title">

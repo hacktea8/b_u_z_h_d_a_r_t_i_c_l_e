@@ -23,6 +23,13 @@ class Console extends Viewbase {
   $this->view('my_index');
  }
  public function profile(){
+  $post = $this->input->post('User');
+  if($post){
+   $this->consoleModel->setUserChannelInfo($post);
+   redirect('/console/profile');
+  }
+  $channel = $this->consoleModel->getUserChannelInfo($this->uid);
+  $this->assign(array('channel'=>$channel));
   $this->view('my_profile');
  }
  public function cropPic(){

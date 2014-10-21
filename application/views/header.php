@@ -72,7 +72,7 @@
             導航
           </li>
           <li>
-            <a title="首頁" href="http://www.buzzhand.com">
+            <a title="首頁" href="/">
               首頁
             </a>
           </li>
@@ -144,6 +144,7 @@ if($v['pid']){
                   </a>
                 </h2>
               </li>
+<?php if($uinfo['uid']){?>
               <li class="vertical nav_r submenu small user">
                 <a class="center" href="http://my.buzzhand.com/index.html">
                   <img alt="1187247901" title="1187247901" src="<?php echo $cdn_url;?>/images/user_img_def.png"
@@ -153,15 +154,17 @@ if($v['pid']){
                 </a>
                 <div class="submenu_content">
                   <ul>
+<?php if(0){?>
                     <li>
-                      <a class="fcEm7" href="http://my.buzzhand.com/message/index.html">
+                      <a class="fcEm7" href="/message/index.html">
                         <span class="ui_icon ui_icon20 ui_icon20_msg">
                         </span>
                         個人訊息
                       </a>
                     </li>
+<?php }?>
                     <li>
-                      <a class="fcEm7" href="http://my.buzzhand.com/index.html">
+                      <a class="fcEm7" href="/console">
                         <span class="ui_icon ui_icon20 ui_icon20_user2">
                         </span>
                         會員中心
@@ -174,13 +177,15 @@ if($v['pid']){
                         我的頻道
                       </a>
                     </li>
+<?php if(0){?>
                     <li>
-                      <a class="fcEm7" href="http://my.buzzhand.com/follow/index.html">
+                      <a class="fcEm7" href="/follow/index.html">
                         <span class="ui_icon ui_icon20 ui_icon20_file">
                         </span>
                         我的訂閱
                       </a>
                     </li>
+<?php }?>
                     <li>
                       <a class="fcEm7" href="/user/logout.html">
                         <span class="ui_icon ui_icon20 ui_icon20_power">
@@ -192,6 +197,11 @@ if($v['pid']){
                 </div>
                 <!-- login -->
               </li>
+<?php }else{?>
+<li class="vertical nav_r small user">
+ <a href="/user/login.html" class="center ui_icon ui_icon20 ui_icon20_user">用戶</a>
+</li>
+<?php }?>
               <li class="vertical nav_r submenu small search">
                 <a id="showSearch" class="center ui_icon ui_icon20 ui_icon20_search">
                   搜尋

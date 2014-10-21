@@ -4,8 +4,7 @@ defined('P_W') || define('P_W', '1');
 require_once BASEPATH.'../config_ucenter.php';
 require_once BASEPATH.'../uc_client/client.php';
 
-if ( ! function_exists('strcode'))
-{
+if ( ! function_exists('strcode')){
  function strcode($string, $encode = true, $apikey = '') {
     $uc_key = getKeyBydomain();
     $apikey = $apikey ? $apikey: $uc_key;
@@ -22,8 +21,7 @@ if ( ! function_exists('strcode'))
   } 
 }
 
-if ( ! function_exists('getcode'))
-{
+if ( ! function_exists('getcode')){
   function getcode($len = 6){
     $str = 'qwertyuioplkjhgfdsazxcvbnm1234567890,.?;:!@#$%^&*()-=+';
     $length = strlen($str) - 1;
@@ -35,16 +33,14 @@ if ( ! function_exists('getcode'))
   }
 }
 
-if ( ! function_exists('get_client_ip'))
-{
+if ( ! function_exists('get_client_ip')){
   function get_client_ip(){
     $ip = $_SERVER['REMOTE_ADDR'];
     return $ip;
   }
 }
 
-if ( ! function_exists('getSynuserUid'))
-{
+if ( ! function_exists('getSynuserUid')){
   function getSynuserUid($cookie_key = 'hk8_auth'){
     if(isset($_COOKIE[$cookie_key])){
       $code = $_COOKIE[$cookie_key];
@@ -57,8 +53,7 @@ if ( ! function_exists('getSynuserUid'))
   }
 }
 
-if ( ! function_exists('getSynuserInfo'))
-{
+if ( ! function_exists('getSynuserInfo')){
   function getSynuserInfo($uid){
     if( !$uid){
        return false;
@@ -66,7 +61,9 @@ if ( ! function_exists('getSynuserInfo'))
     $status = array();
     $uinfo = array('isvip' => 0,'isAdmin'=>0);
     $status = uc_user_info($uid);
+    $userInfo =  uc_get_user($uid, 1);
     list($uinfo['uid'],$groupid) = $status;
+    list(,,$uinfo['email']) = $userInfo;
     if(in_array($groupid , array(25) )){
      $uinfo['isvip'] = 1;
     }elseif( in_array($groupid , array(33) )){
@@ -80,8 +77,7 @@ if ( ! function_exists('getSynuserInfo'))
   }
 }
 
-if ( ! function_exists('strtrip'))
-{
+if ( ! function_exists('strtrip')){
   function strtrip($request,$uckey){
     ksort($request);
     reset($request);

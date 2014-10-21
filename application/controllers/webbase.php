@@ -5,7 +5,7 @@ class Webbase extends CI_Controller {
   protected $mem = '';
   protected $redis = '';
   public $viewData = array();
-  protected $userInfo = array('uid'=>1,'uname'=>'','isvip'=>0,'isAdmin'=>1);
+  protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0,'isAdmin'=>0);
   public $uid = 0;
   protected $_c = 'index'; 
   protected $_a = 'index'; 
@@ -37,10 +37,10 @@ class Webbase extends CI_Controller {
     }else{
       $this->userInfo = $session_uinfo;
     }
-    //var_dump($this->userInfo);exit;
     if($this->userInfo['uid']){
      $this->uid = $this->userInfo['uid'];
     }
+//$this->debug($this->userInfo);
     $this->_c = $this->segment(1,'maindex');
     $this->_a = $this->segment(2,'index');
     $c = isset($_GET['c'])?$_GET['c']:'';

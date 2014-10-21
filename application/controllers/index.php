@@ -36,13 +36,6 @@ class Index extends Viewbase {
    $output = $this->output->get_output();
    return $output;
   }
-  public function login(){
-//var_dump($_SERVER);exit;
-    $url = $this->viewData['login_url'].urlencode($_SERVER['HTTP_REFERER']);
-//echo $url;exit;
-    header('Location: '.$url);
-    exit;
-  }
   public function isUserInfo(){
     $data = array('status'=>0);
     if( isset($this->userInfo['uid']) && $this->userInfo['uid']){

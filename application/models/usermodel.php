@@ -59,7 +59,6 @@ class userModel extends baseModel{
   }
   $row = $this->check_id(self::$_tUser,self::$_fUser,array('uid='=>$uinfo['uid']));
   $ip = get_client_ip();
-  $invite = isset($_COOKIE['invite'])? intval($_COOKIE['invite']): 0;
   if(isset($row['uid'])){
    $update = array();
   if($row['loginip'] != $ip){
@@ -82,6 +81,7 @@ class userModel extends baseModel{
   }
   return $row;
   }else{
+   $invite = isset($_COOKIE['invite'])? intval($_COOKIE['invite']): 0;
    $insert_data = $uinfo;
    unset($insert_data['groups']);
    $insert_data['loginip'] = $ip;
@@ -90,7 +90,7 @@ class userModel extends baseModel{
    $insert_data['month_hits'] = 0;
    $insert_data['amount'] = 0;
    $this->db->insert(self::$_tUser,$insert_data);
-   $meta = array('uid'=>$insert_data['uid'],'title'=>$uinfo['uname']);
+   $meta = array('uid'=>$insert_data['uid'],'title'=>$uinfo['uname'],'nickname'=>$uinfo['uname']);
    $this->db->insert(self::$_tUMeta, $meta);
    return $insert_data;
   }
