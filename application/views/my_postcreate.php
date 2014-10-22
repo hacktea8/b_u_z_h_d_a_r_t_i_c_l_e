@@ -3,44 +3,15 @@
   <div class="main fl">
     <!-- main_wrap -->
     <div class="main_wrap">
-      <div class="mt20 ui_blockbg member_block p20">
-        <h2>
-          最新公告
-        </h2>
-        <ul class="newlist mt5">
-          <!-- loop list -->
-          <li>
-            <a href="/forum/post_286.html">
-              buzzhand開始嚴厲打擊作弊行為
-            </a>
-          </li>
-          <li>
-            <a href="/forum/post_245.html">
-              9月佣金發放中
-            </a>
-          </li>
-          <li>
-            <a href="/forum/post_237.html">
-              統計暫停公告
-            </a>
-          </li>
-          <!-- end loop list -->
-        </ul>
-        <p class="mt10 member_remind">
-          您尚未設置您的頻道圖示
-          <a href="/channel.html">
-            馬上設置
-          </a>
-        </p>
-      </div>
+<?php require_once 'my_rightbar.php';?>
       <!-- member_block -->
       <div class="mt20 ui_blockbg member_block">
         <div class="title clearfix">
           <a style="color: #357fc6; font-size: 11px; margin-top: 7px;" class="fn ul fr fcEm7 mt5"
-          href="http://www.buzzhand.com/forum/post_198.html">
+          href="/forum/post_198.html">
             (了解什麼是免審核作者？)
           </a>
-          <a class="fn ul fr fcEm7 mt5" href="/freeaudits.html?id=1182">
+          <a class="fn ul fr fcEm7 mt5" href="/console/freeaudits">
             申請免審核 &nbsp;&nbsp;
           </a>
           <h2 class="title">

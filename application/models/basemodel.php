@@ -52,7 +52,7 @@ class baseModel extends CI_Model{
   $return = array();
   foreach($filter as $k){
    if(isset($data[$k])){
-    $return[$k] = $data[$k];
+    $return[$k] = trim($data[$k]);
    }
   }
   return $return;
@@ -152,16 +152,31 @@ class baseModel extends CI_Model{
     return 1;
    }
    $table = $this->get_content_table($data['id']);
-   $sql = sprintf("UPDATE %s SET `prelink`=(SELECT id FROM %s WHERE id<%d AND uid=%d AND flag=1 ORDER BY id DESC LIMIT 1),`nextlink`=(SELECT id FROM %s WHERE id>%d AND uid=%d AND flag=1 ORDER BY id ASC LIMIT 1) WHERE id=%d LIMIT 1",
-   $table, self::$_tArtileHead,$data['id'],$data['uid'],self::$_tArtileHead,$data['id'],$data['uid'],$data['id']);
-   $this->db->query($sql);
+   $sql = sprintf("SELECT id FROM %s WHERE id<%d AND uid=%d AND flag=1 ORDER BY id DESC LIMIT 1",$table,$data['id'],$data['uid']);
+   $row = $this->db->query($sql)->row_array();
+   if( empty($row)){
+    return 0;
+   }
+   $this->db->update(self::$_tArtileBody,array('nextlink'=>$data['id']),array('id'=>$row['id']));
+   $this->db->update(self::$_tArtileBody,array('prelink'=>$row['id']),array('id'=>$data['id']));
+   return 1;
   }
   // use del article
   public function fixArticlePreNxtLink($data){
-   $table = $this->get_content_table($data['prelink']);
-   $this->db->update($table,array('nextlink'=>$data['nextlink']),array('id'=>$data['prelink']));
-   $table = $this->get_content_table($data['nextlink']);
-   $this->db->update($table,array('prelink'=>$data['prelink']),array('id'=>$data['nextlink']));
+   //pre
+   $sql = sprintf("SELECT id FROM %s WHERE id<%d AND uid=%d AND flag=1 ORDER BY id DESC LIMIT 1",self::$_tArtileHead,$data['id'],$data['uid']);
+   $row = $this->db->query($sql)->row_array();
+   $pre_aid = isset($row['id'])?$row['id']:0;
+   //next
+   $sql = sprintf("SELECT id FROM %s WHERE id>%d AND uid=%d AND flag=1 ORDER BY id ASC LIMIT 1",self::$_tArtileHead,$data['id'],$data['uid']);
+   $row = $this->db->query($sql)->row_array();
+   $next_aid = isset($row['id'])?$row['id']:0;
+   if($pre_aid){
+    $this->db->update(self::$_tArtileBody,array('nextlink'=>$next_aid),array('id'=>$pre_aid));
+   }
+   if($next_aid){
+    $this->db->update(self::$_tArtileBody,array('prelink'=>$pre_aid),array('id'=>$next_aid));
+   }
    return 1;
   }
 }

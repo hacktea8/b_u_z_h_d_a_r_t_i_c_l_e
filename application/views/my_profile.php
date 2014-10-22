@@ -288,7 +288,8 @@
 </script>
 <script type="text/javascript">
   function delConfirm(user_id, url) {
-    var pop_html = '<div class="pt10"><p class="f16">已經將修改匯款資料鏈接地址發送到您的註冊郵箱，</p><p class="f16">請登錄您的郵箱進行修改匯款資料的操作。</p><p class="f16"><a style="float:right;margin-top: 20px;" href="' + url + '" class="ui_btn ui_btn_green2 ml10 mr10">Close</a></p></div>'Com.fnPopupWin({
+    var pop_html = '<div class="pt10"><p class="f16">已經將修改匯款資料鏈接地址發送到您的註冊郵箱，</p><p class="f16">請登錄您的郵箱進行修改匯款資料的操作。</p><p class="f16"><a style="float:right;margin-top: 20px;" href="' + url + '" class="ui_btn ui_btn_green2 ml10 mr10">Close</a></p></div>';
+    Com.fnPopupWin({
       id: "win_delTips_" + user_id,
       content: pop_html,
       expiry: 15000,

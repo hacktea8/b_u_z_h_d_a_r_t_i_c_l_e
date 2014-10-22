@@ -125,10 +125,21 @@ Array
   $this->view('my_postcreate');
  }
  public function postedit($aid = 0){
-  
-  $this->view('my_postcreate');
+  $this->postcreate($aid);
+  //$this->view('my_postcreate');
  }
- public function postcreate(){
+ public function postcreate($aid = 0){
+  $post = $this->input->post('Post');
+  if($post){
+   $post['uid'] = $this->uid;
+   $this->consoleModel->setArticleInfoByData($post);
+   redirect('/console/post');
+  }
+  $rinfo = array();
+  if($aid){
+   $this->consoleModel->getArticleInfoById($aid,$this->uid);
+  }
+  $this->assign(array('rinfo'=>$rinfo));
   $this->view('my_postcreate');
  }
  public function earnings(){
