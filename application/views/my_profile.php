@@ -297,6 +297,7 @@
     });
   }
 </script>
+<link rel="Stylesheet" type="text/css" href="<?php echo $cdn_url;?>/css/jquery-ui.css">
 <script type="text/javascript" src="<?php echo $cdn_url;?>/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?php echo $cdn_url;?>/js/jquery-ui-i18n.min.js"></script>
 <script type="text/javascript">
