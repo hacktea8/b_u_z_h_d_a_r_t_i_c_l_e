@@ -8,6 +8,13 @@ class Upload extends Webbase {
  public function __construct(){
   parent::__construct();
  }
+ public function cropPic(){
+  $x1 = $this->input->post('x1');
+ }
+ public function upAvatar(){
+  $imgfile = $this->getTmpImage($post_filename = 'pfile');
+  
+ }
  public function index(){
   $imgfile = $this->getTmpImage($post_filename = 'pfile');
   if( !$imgfile){
@@ -15,18 +22,22 @@ class Upload extends Webbase {
   }
   $this->load->library('img_imagick');
   $param = $this->input->post('param');
-  if( !isset($param['lx'])){
-   //crop w_h
-   $this->img_imagick->resizeImage($imgfile, $width, $height, $out = '');
-  }else{
-   //crop pos_w_h
-   $this->img_imagick->cropImage($img,$width,$height,$lx,$ly,$out = '');
-   //$this->img_imagick->cropThumbImage($img, $width = '', $height = '', $out = '');
+  if($param['crop']){
+   if( !isset($param['lx'])){
+    //crop w_h
+    $this->img_imagick->resizeImage($imgfile, $width, $height, $out = '');
+   }else{
+    //crop pos_w_h
+    $this->img_imagick->cropImage($img,$width,$height,$lx,$ly,$out = '');
+    //$this->img_imagick->cropThumbImage($img, $width = '', $height = '', $out = '');
+   }
   }
-/*
-  $this->img_imagick->setWaterMark($img);
-  $this->img_imagick->waterMark($img,$out = '', $wmpos = 0);
-*/
+  $imgick = &$this->img_imagick;
+  $waterimg = APPPATH.'../public/images/watermark/watermark.png';
+  $imgick->setWaterMark($waterimg);
+  //15右中 13上中 12下中 14左中 右下
+  $saveF = dirname($imgfile).'/water_'.$upload_data['orig_name'];
+  $imgick->waterMark($imgfile, $saveF, $wmpos = 0);
   //save pic
   $this->load->library('tietuku');
   $type = $this->input->get_post('album');
@@ -35,9 +46,18 @@ class Upload extends Webbase {
    $k = 'w'.date('w');
    $albumid = self::$album[$k];
   }
-  $r = $this->tietuku->uploadFile($albumid,$filename);
+  $ttk = &$this->tietuku;
+  for($i = 0;$i<3;$i++){
+   $return = $ttk->uploadFile($albumid, $saveF);
+   if($return){
+    break;
+   }
+  }
   //$r = $this->tietuku->uploadRemoteFile($albumid,$url);
   
+  @unlink($saveF);
+  @unlink($imgfile);
+  var_dump($return);exit;
   return $img_url;
  }
  protected function getTmpImage($post_filename = ''){

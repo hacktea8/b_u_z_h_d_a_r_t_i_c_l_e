@@ -6,15 +6,23 @@ install http://www.hacktea8.com/forum.php?mod=viewthread&tid=9787
 class Img_imagick{
  public $wim = '';
 
+ static public function getObj($img){
+  try{
+   $im = new imagick($img);
+  }catch(Exception $e){
+   echo $e->getMessage();exit;
+  }
+  return $im;
+ }
  public function setWaterMark($img){
-  $this->wim = new imagick($img);
+  $this->wim = self::getObj($img);
   return $this->wim;
  }
  public function cropThumbImage($img, $width = '', $height = '', $out = ''){
   if( !file_exists($img)){
    return false;
   }
-  $im = new imagick($img);
+  $im = self::getObj($img);
   $im->cropThumbnailImage($width, $height);
   $out = $out?$out:$img;
   $im->writeImages($out, true);
@@ -23,13 +31,13 @@ class Img_imagick{
  public function convert($img,$out = ''){
   $out = $out?$out:$img;
   $shell = sprintf('/usr/bin/convert -strip %s %s',$img, $out);
-  exec($shell);
+  @exec($shell);
  }
  public function cropImage($img,$width,$height,$lx,$ly,$out = ''){
   if( !file_exists($img)){
    return false;
   }
-  $im = new imagick($img);
+  $im = self::getObj($img);
   $im->cropImage( $width ,$height ,$lx ,$ly );
   $out = $out?$out:$img;
   $im->writeImages($out, true);
@@ -39,14 +47,14 @@ class Img_imagick{
   if( !file_exists($img)){
    return false;
   }
-  $im = new imagick($img);
+  $im = self::getObj($img);
   $im->resizeImage($width, $height, imagick::FILTER_LANCZOS, 1, true);
   $out = $out?$out:$img;
   $im->writeImages($out, true);
   return $out;
  }
  public function waterMark($img,$out = '', $wmpos = 0){
-  $im = new imagick($img);
+  $im = self::getObj($img);
   $size = $this->getmarklocation($im, $this->wim, $wmpos);
   $im->compositeImage($this->wim, imagick::COMPOSITE_OVER, $size['w'] , $size['h'] );
   $out = $out?$out:$img;

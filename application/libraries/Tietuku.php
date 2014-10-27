@@ -1,4 +1,5 @@
 <?php
+//1695588688@qq.com
 include_once('TieTuKu.class.php');
 define('MY_ACCESSKEY', '54974d213fed3ab4ed15d1d6fd08335debbb71ca');
 //获取地址:http://open.tietuku.com/manager
@@ -115,7 +116,7 @@ class Tietuku{
   * @return string 如果$file!=null 返回请求接口的json数据否则只返回Token
   */
  public function uploadFile($albumid,$filename){
-  $r = self::$ttk->uploadFile('相册ID',$_FILES['file']['tmp_name']);
+  $r = self::$ttk->uploadFile($albumid, $filename);
   $r = json_decode($r, 1);
   return $r;
  }
