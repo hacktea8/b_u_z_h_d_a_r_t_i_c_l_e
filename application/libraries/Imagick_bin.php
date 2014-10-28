@@ -3,62 +3,45 @@
 install http://www.hacktea8.com/forum.php?mod=viewthread&tid=9787
 */
 
-class Img_imagick{
- public $wim = '';
-
- public function getObj($img){
-  try{
-   $im = new imagick($img);
-  }catch(Exception $e){
-   echo 'Error '.$e->getMessage();exit;
-  }
-  return $im;
- }
- public function setWaterMark($img){
-  $this->wim = $this->getObj($img);
-  return $this->wim;
- }
+class Imagick_bin{
+ static public $convert = '/usr/local/bin/convert';
+ 
  public function cropThumbImage($img, $width = '', $height = '', $out = ''){
   if( !file_exists($img)){
    return false;
   }
-  $im = $this->getObj($img);
-  $im->cropThumbnailImage($width, $height);
   $out = $out?$out:$img;
-  $im->writeImages($out, true);
+  $cmd = sprintf('%s %s -resize %sx%s -gravity center +profile "*" %s',self::$convert,$img,$width,$height,$out);
+  @exec($cmd);
   return $out;
  }
  public function convert($img,$out = ''){
   $out = $out?$out:$img;
-  $shell = sprintf('/usr/bin/convert -strip %s %s',$img, $out);
-  @exec($shell);
+  $cmd = sprintf('%s -strip +profile "*" %s %s',self::$convert,$img, $out);
+  @exec($cmd);
  }
  public function cropImage($img,$width,$height,$lx,$ly,$out = ''){
   if( !file_exists($img)){
    return false;
   }
-  $im = $this->getObj($img);
-  $im->cropImage( $width ,$height ,$lx ,$ly );
   $out = $out?$out:$img;
-  $im->writeImages($out, true);
+  $cmd = sprintf('%s -crop %dx%d+%d+%d +profile "*" %s %s',self::$convert,$width,$height,$lx,$ly,$img,$out);
   return $out;
  }
  public function resizeImage($img,$width,$height,$out = ''){
   if( !file_exists($img)){
    return false;
   }
-  $im = $this->getObj($img);
-  $im->resizeImage($width, $height, imagick::FILTER_LANCZOS, 1, true);
   $out = $out?$out:$img;
-  $im->writeImages($out, true);
+  $cmd = sprintf('%s -resize %sx%s +profile "*" %s %s',self::$convert,$width,$height,$img,$out);
+  @exec($cmd);
   return $out;
  }
- public function waterMark($img,$out = '', $wmpos = 0){
-  $im = $this->getObj($img);
-  $size = $this->getmarklocation($im, $this->wim, $wmpos);
-  $im->compositeImage($this->wim, imagick::COMPOSITE_OVER, $size['w'] , $size['h'] );
+ public function waterMark($img,$wimg,$out = '', $wmpos = 0){
+  //$size = $this->getmarklocation($im, $this->wim, $wmpos);
   $out = $out?$out:$img;
-  $im->writeImages($out, true);
+  $cmd = sprintf('%s %s %s -gravity southeast -geometry +5+10 -composite %s',self::$convert,$img,$wimg,$out);
+  @exec($cmd);
   return $out;
  }
  private function getmarklocation(&$imgsize,&$watersize,$wmpos = 0){

@@ -2,3 +2,6 @@
 *.swo
 *.bak
 *.sql*
+cover/!index.html
+channel/!index.html
+avatar/!index.html
