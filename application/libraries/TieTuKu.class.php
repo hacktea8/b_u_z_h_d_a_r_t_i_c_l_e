@@ -120,7 +120,7 @@ class TTKClient{
 	 *
 	 * @ignore
 	 */
-	public $timeout = 60;
+	public $timeout = 3660;
 	/**
 	 * Set CURL timeout.
 	 *

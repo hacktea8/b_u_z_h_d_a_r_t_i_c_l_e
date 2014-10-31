@@ -55,7 +55,7 @@ class Webbase extends CI_Controller {
      'admin_email'=>$this->config->item('admin_email'),'errorimg'=>'/public/images/show404.jpg',
        
      'toptips'=>$this->config->item('toptips'),'site_name'=>$this->config->item('web_title')
-     ,'version'=>20140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
+     ,'version'=>10120140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
      ,'_c'=>$this->_c,'_a'=>$this->_a,'current_url'=>$current_url
     ));
   }
@@ -109,21 +109,31 @@ class Webbase extends CI_Controller {
    $r = uc_authcode($code, $operation,$key);
    return $r;
   }
-  protected function cookie($name,$value = '', $ttl = 3600){
-    if($value){
-     $cookie = array(
-     'name'   => $name,
-     'value'  => $value,
-     'expire' => $ttl,
-     'domain' => '',
-     'path'   => '/',
-     'prefix' => '',
-     'secure' => false
-     );
-     $this->input->set_cookie($cookie);
-     return 1;
-    }
-    $cookie = $this->input->cookie($name);
-    return $cookie;
+ protected function cookie($name,$value = '', $ttl = 3600){
+  if($value){
+   $cookie = array(
+   'name'   => $name,
+   'value'  => $value,
+   'expire' => $ttl,
+   'domain' => '',
+   'path'   => '/',
+   'prefix' => '',
+   'secure' => false
+   );
+   $this->input->set_cookie($cookie);
+   return 1;
   }
+  $cookie = $this->input->cookie($name);
+  return $cookie;
+ }
+ protected function getUploadTtkToken(){
+  $k = 'site_upload_ttk_token';
+  $token = $this->mem->get($k);
+  if( !$token){
+   $this->load->library('tietuku');
+   $token = $this->tietuku->uploadFile($album = 0,$filename = 0);
+   $this->mem->get($k, $token, 3600);
+  }
+  return $token;
+ }
 }

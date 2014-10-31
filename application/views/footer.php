@@ -111,29 +111,11 @@
 </div>
 <div id="fb-root">
 </div>
-<script src="<?php echo $cdn_url;?>/js/lib/jquery.cookie.js">
-</script>
-<script src="<?php echo $cdn_url;?>/js/topList.js">
-</script>
-<script src="<?php echo $cdn_url;?>/js/com.js">
-</script>
-<script>
-  $(document).ready(function() {
-    Index.init();
-    Com.init();
-    window.onresize = function() {
-      $("#indexBanner").get(0) && BannerEffect.reset();
-    };
-  });
-</script>
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/lib/jquery.cookie.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/topList.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/com.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-43439571-5', 'auto');
-ga('send', 'pageview');
-
 </script>
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/footer.js?v=<?php echo $version;?>"></script>
 </body>
 </html>

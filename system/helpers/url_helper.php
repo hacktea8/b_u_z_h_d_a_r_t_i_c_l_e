@@ -46,6 +46,24 @@ if ( ! function_exists('site_url'))
 	}
 }
 
+if ( ! function_exists('parse_cover')){
+ function parse_cover($url){
+  $uinfo = parse_url($url);
+  $r = array();
+  $host = @$uinfo['host'];
+  $host = explode('.',$host);
+  $r['host'] = @$host[0];
+  $host = ltrim(@$uinfo['path'],'/');
+  $host = explode('.',$host);
+  $r['key'] = @$host[0];
+  if( !$r['host'] || !$r['key']){
+   return 0;
+  }
+  $r['url'] = $url;
+  return $r;
+ }
+}
+
 // ------------------------------------------------------------------------
 
 /**

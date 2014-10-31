@@ -23,25 +23,35 @@
     	<img id="logo" src="<?php echo $channel['pic'];?>" />
     	</a>
     	</div>
-    	<a class="ui_btn ui_btn_white" href="#" id="yt0">清除圖示</a>
-    		</div>
-    		</div>
-    		<div class="ui_text_block">
-    			<label class="fcEm3 title vt" for="pubTag">*頻道圖示：</label>
-    			<!-- <input type="file" name="logo" id="uploadify"> -->
-			<div class="ib ui_uploadimg" id="uploadImgWrap">
-		    	<div id="uploadImg"></div>
-			<div class="mt10 mb10">
-			<div id="curImg" class="cur_img ui_imgbg">
-
-		</div>
-		<div id="previewImg" class="preview_img ui_imgbg channel" data-width="164" data-height="164">
-
-		</div>
-	</div>
-	<a class="ui_btn ui_btn_upload" data-wrap="logo">保存頻道圖示</a>
+    	<a class="ui_btn ui_btn_white hide" href="#" id="yt0">清除圖示</a>
+    	 </div>
+    	</div>
+<?php if(0){?>
+    	<div class="ui_text_block">
+    	 <label class="fcEm3 title vt" for="pubTag">*頻道圖示：</label>
+    	 <!-- <input type="file" name="logo" id="uploadify"> -->
+	 <div class="ib ui_uploadimg" id="uploadImgWrap">
+	  <div class="mt10 mb10">
+	   <div id="curImg" class="cur_img ui_imgbg">
+           </div>
+	   <div id="previewImg" class="preview_img ui_imgbg channel" data-width="164" data-height="164">
+	   </div>
+	  </div>
+	  <a class="ui_btn ui_btn_upload" data-wrap="logo">保存頻道圖示</a>
 	</div>
     	</div>
+<?php }else{?>
+<?php }?>
+<div class="ui_text_block"> 
+ <label class="fcEm3 title" for="pubTitle">*頻道封面：</label>
+ <input class="ui_text_input" name="Channel[cover]" id="input_cover" type="text" maxlength="100" value="<?php echo $channel['pic'];?>">
+	  <div id="uploadImg">
+<img src="http://i2.tietuku.com/674a895eaa333a88.png" alt ="tietuku" style ="cursor:pointer" onclick="tietuku_upload()"/>
+<script language = "javascript" type = "text/javascript"  src="http://static.tietuku.com/static/open/tietuku.jquery.min.js"></script>
+<script language = "javascript" type = "text/javascript"  src="http://static.tietuku.com/static/open/tietuku.dialog.js"></script>
+<script type = "text/javascript"  src="<?php echo $cdn_url,'/js/ttk_upload.js?v=',$version;?>"></script>
+         </div>
+</div>
     	<div class="ui_text_block">
     			
         <label class="fcEm3 title">自定義頻道網址：</label>
@@ -74,57 +84,6 @@
 </div>
 <!-- end container -->
 
-<script src="<?php echo $cdn_url;?>/js/jquery.Huploadify.js"></script>
-<script src="<?php echo $cdn_url;?>/js/jquery.imgareaselect.min.js"></script>
-<link href="<?php echo $cdn_url;?>/css/Huploadify.css" rel="stylesheet">
-<script>
-window.submitFlag = 0;
-$(document).ready(function() {
- Com.fnUploadImg.init();
- $('#Channel-form').submit(function(){
-  window.submitFlag = 0;
-  var urlkey = $('#Channel_urlkey').val();
-  if(urlkey){
-   if(urlkey.length<3 || urlkey.length>36){
-    window.submitFlag = 1;
-    alert('urlkey 長度不符合要求');
-   }
-   var check = urlkey.replace(/[a-zA-Z\d_]+/g,'');
-   if(check){
-    window.submitFlag = 1;
-    alert('urlkey 格式不正確');
-   }else{
-    check = urlkey.replace(/[\d]+/g,'');
-    if( !check){
-     window.submitFlag = 1;
-     alert('urlkey 不可以為純數字');
-    }
-   }
-   $.ajax({
-    type: 'POST',
-    url: '/ajax/checkUserChannelUrlkey',
-    data: {'urlkey':urlkey},
-    success: function(data){
-     if(data.status == 1){
-      window.submitFlag = 1;
-      alert('urlkey 已經存在');
-     }
-    },
-    dataType: 'json'
-   });
-  }
-  if(window.submitFlag){
-   return false;
-  }
- });
-});
-/*<![CDATA[*/
-jQuery(function($) {
-jQuery('body').on('click','#yt0',function(){jQuery.ajax({'success':function(res){
- if (res.status="success"){
-  $("#logo").attr("src", res.src );
- }
-},'type':'POST','dataType':'json','url':'/clearlogo.html?type=channel','cache':false,'data':jQuery(this).parents("form").serialize()});return false;});
-});
-/*]]>*/
-</script>
+<link href="<?php echo $cdn_url;?>/js/uploadify/uploadify.css?v=<?php echo $version;?>" rel="stylesheet">
+<script src="<?php echo $cdn_url;?>/js/uploadify/jquery.uploadify.min.js?v=<?php echo $version;?>"></script>
+<script src="<?php echo $cdn_url;?>/js/console_channel.js?v=<?php echo $version;?>"></script>

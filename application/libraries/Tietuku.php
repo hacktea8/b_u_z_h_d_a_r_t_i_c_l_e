@@ -7,6 +7,7 @@ define('MY_SECRETKEY', '17f987cc028d3ceaad38e612eda11e5c0da5b1d7');
 //获取地址:http://open.tietuku.com/manager
 class Tietuku{
  static public $ttk = '';
+ static public $ablum = array('cover'=>0,'w0'=>0,'w1'=>0,'w2'=>0,'w3'=>0,'w4'=>0,'w5'=>0,'w6'=>0);
  
 /**
  * 构造函数
@@ -115,9 +116,18 @@ class Tietuku{
   * @param array $file 上传的文件。
   * @return string 如果$file!=null 返回请求接口的json数据否则只返回Token
   */
- public function uploadFile($albumid,$filename){
-  $r = self::$ttk->uploadFile($albumid, $filename);
-  $r = json_decode($r, 1);
+ public function uploadFile($album = 0,$filename = 0){
+  if( isset(self::$ablum[$album])){
+   $albumid = self::$ablum[$album];
+  }else{
+   $k = 'w'.date('w');
+   $albumid = self::$ablum[$k];
+  }
+  $h = self::$ttk->uploadFile($albumid, $filename);
+  $r = json_decode($h, 1);
+  if( !$r){
+   return $h;
+  }
   return $r;
  }
  /**

@@ -656,32 +656,38 @@ var Com = {
 	fnUploadImg: {
 		cutJson: {},
 		init: function() {
-			var uploadImg = $("#uploadImg").Huploadify({
-				auto : false, //是否开启自动上传
-				fileTypeExts : "*.gif; *.jpg; *.png; *.jpeg",//允许上传的文件类型，格式"*.jpg;*.doc"
-				multi : false,//是否允许选择多个文件
-				showUploadedPercent : false,//是否实时显示上传的百分比，如20%
-				uploader : "/console/upAvatar",//文件提交的地址
-				fileObjName:"avatar",//在后端接受文件的参数名称，如PHP中的$_FILES["file"]
-				formData:{
-					rnd: Math.random()
-				},//发送给服务端的参数，格式：{key1:value1,key2:value2}
-				buttonText:"選擇圖片",//上传按钮上的文字
-				queueSizeLimit: 1,//最多能选择加入的文件数量
-				useTemplate: false,
-				onSelect : function(file) {//选择文件后的触发事件
-					//console.log(file.name + "加入上传队列");
-					Com.fnLoading({"wrapId": $("#uploadImgWrap"), "mask": true});
-					uploadImg.upload("*");
-				},
-				onUploadSuccess : function(file, data, response) {//上传成功后的触发事件
-					// console.log("上传完成data" + data);
-					data = JSON.parse(data);
-					if(data.state == "SUCCESS"){
-						//data为接收方(receivePic.php)返回的数据
-						Com.fnUploadImg.curImage(data);
-					}
-				}
+			var uploadImg = $("#uploadImg").uploadify({
+                //指定swf文件
+                'swf': cdn_url+'/js/uploadify/uploadify.swf',
+                //后台处理的页面
+                'uploader': 'http://up.tietuku.com/',
+                //按钮显示的文字
+                'buttonText': '選擇文件',
+                //显示的高度和宽度，默认 height 30；width 120
+                //'height': 15,
+                //'width': 80,
+                //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
+                //在浏览窗口底部的文件类型下拉菜单中显示的文本
+                'fileTypeDesc': 'Image Files',
+                //允许上传的文件后缀
+                'fileTypeExts': '*.gif; *.jpg; *.png;*.jpeg',
+                //发送给后台的其他参数通过formData指定
+                'formData': { 'Token': ttk_token },
+                'fileObjName': 'file',
+                //上传文件页面中，你想要用来作为文件队列的元素的id, 默认为false  自动生成,  不带#
+                //'queueID': 'fileQueue',
+                //选择文件后自动上传
+                'auto': true,
+                //设置为true将允许多文件上传
+                'multi': false,
+                'onUploadSuccess': function(file,data,response){
+console.log(file);
+console.log(data);
+console.log(response);
+                 //$('#'+file.id).find('.data').html('上傳完畢');
+                 $('#showUpCover').attr('src',data.linkurl);
+                 $('#input_cover').val(data.linkurl);
+                }
 			});
 		},
 		curImage: function(data){

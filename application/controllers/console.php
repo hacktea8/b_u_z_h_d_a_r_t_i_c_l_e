@@ -12,9 +12,10 @@ class Console extends Viewbase {
   $this->model('consoleModel');
   $checkSetting = $this->checkUserSetTips();
   $userProfit = $this->getUserProfitReport();
+  $ttk_token = $this->getUploadTtkToken();
   $this->assign(array(
   'checkSetting'=>$checkSetting,'userProfit'=>$userProfit
-  ,'low_money'=>self::$low_money
+  ,'low_money'=>self::$low_money,'ttk_token'=>$ttk_token
   ));
  }
  public function index(){
