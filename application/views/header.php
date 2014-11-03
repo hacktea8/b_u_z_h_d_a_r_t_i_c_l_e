@@ -2,20 +2,15 @@
 <html>
   <head>
 <?php if('article' == $_a){?>
- <?php foreach($intro_img as $v){?>
-    <meta property="og:image" content="<?php echo $v;?>"
-    />
- <?php }?>
+    <meta property="og:image" content="<?php echo $info['pic'];?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="<?php echo $site_url;$info['url'];?>" />
-    <meta property="article:publisher" content="https://www.facebook.com/<?php echo $fans_page;?>"
-    />
+    <meta property="og:url" content="<?php echo $info['url'];?>" />
+    <meta property="article:publisher" content="https://www.facebook.com/<?php echo $fans_page;?>" />
 <?php }?>
     <meta property="og:site_name" content="<?php echo $site_name?>" />
     <meta property="og:title" content="<?php echo $info['title'];?>" />
     <meta property="article:section" content="<?php echo $cate_info[$info['cid']]['title'];?>" />
-    <meta property="og:description" content="<?php echo $info['summary'];?>"
-    />
+    <meta property="og:description" content="<?php echo $info['summary'];?>" />
     <meta property="og:locale" content="zh_TW" />
     <title>
      <?php echo $seo['title'];?> - <?php echo $site_name;?>
@@ -62,17 +57,17 @@ var ttk_token = '<?php echo $ttk_token;?>';
             </a>
           </li>
           <li>
-            <a title="熱門文章" href="/post/hots.html?date=daily">
+            <a title="熱門文章" href="/article/hots/daily.html">
               熱門
             </a>
           </li>
           <li>
-            <a title="原創文章" href="/post/original.html">
+            <a title="原創文章" href="/article/original.html">
               原創
             </a>
           </li>
           <li>
-            <a title="最新文章" href="/post/news.html">
+            <a title="最新文章" href="/article/news.html">
               最新
             </a>
           </li>
@@ -131,8 +126,8 @@ if($v['pid']){
               </li>
 <?php if($uinfo['uid']){?>
               <li class="vertical nav_r submenu small user">
-                <a class="center" href="http://my.buzzhand.com/index.html">
-                  <img alt="1187247901" title="1187247901" src="<?php echo $cdn_url;?>/images/user_img_def.png"
+                <a class="center" href="/console/index.html">
+                  <img alt="<?php echo $uinfo['uname'];?>" title="<?php echo $uinfo['uname'];?>" src="<?php echo $cdn_url;?>/images/user_img_def.png"
                   width="30px" height="30px" />
                   <span class="ui_point ui_point_down">
                   </span>
@@ -206,12 +201,12 @@ if($v['pid']){
                 </div>
               </li>
               <li class="vertical">
-                <a class="center" href="/post/hots.html?date=daily">
+                <a class="center" href="/article/hots/daily.html">
                   熱門
                 </a>
               </li>
               <li class="vertical">
-                <a class="center" href="/post/news.html">
+                <a class="center" href="/article/news.html">
                   最新
                 </a>
               </li>
@@ -238,32 +233,32 @@ if($v['pid']){
                 <div class="submenu_content">
                   <ul>
                     <li>
-                      <a href="http://my.buzzhand.com/forum/cate_1.html">
+                      <a href="/forum/cate_1.html">
                         常見問題
                       </a>
                     </li>
                     <li>
-                      <a href="http://my.buzzhand.com/forum/cate_10.html">
+                      <a href="/forum/cate_10.html">
                         經驗分享
                       </a>
                     </li>
                     <li>
-                      <a href="http://my.buzzhand.com/forum/cate_11.html">
+                      <a href="/forum/cate_11.html">
                         曬收入
                       </a>
                     </li>
                     <li>
-                      <a href="http://my.buzzhand.com/forum/cate_12.html">
+                      <a href="/forum/cate_12.html">
                         提問題
                       </a>
                     </li>
                     <li>
-                      <a href="http://my.buzzhand.com/forum/cate_13.html">
+                      <a href="/forum/cate_13.html">
                         文章共推
                       </a>
                     </li>
                     <li>
-                      <a href="http://my.buzzhand.com/forum/cate_14.html">
+                      <a href="/forum/cate_14.html">
                         網站公告
                       </a>
                     </li>

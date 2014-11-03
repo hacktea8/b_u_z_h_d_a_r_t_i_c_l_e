@@ -2,9 +2,9 @@
 class baseModel extends CI_Model{
  public $db;
  static public $_tArtileHead = 'article_title';
- static public $_fAH = ' id,`pcid`, `cid`, `uid`, `title`, `cover`, `ourl`, `coop`, `hits`, `iscover`, `ptime`, `utime`';
+ static public $_fAH = ' id,`pcid`, `cid`,is_original, `uid`, `title`, `cover`,host,ext, `coop`, `hits`, `ptime`, `utime`';
  static public $_tArtileBody = 'article_content';
- static public $_fAB = '`source_site`, `source_link`, `intro`, `tags`, `prelink`, `nextlink`';
+ static public $_fAB = 'no_infringement,original_url, `intro`, `tags`, `prelink`, `nextlink`';
  static public $_tCate = 'cate';
  static public $_fCate = '`cid`, `pcid`, `title`, `sort`, `adult`, `total`';
  static public $_tTag = '`tags`';
@@ -106,12 +106,18 @@ class baseModel extends CI_Model{
   $query = $this->db->query($sql);
   return $query;
  }
- public function get_pic($t = 'article',$p1 = 0,$p2 = 0,$p3 = 0,$p4 = 0){
+ public function get_pic($p1 = 0,$p2 = 0,$p3 = 0){
   $url = 'http://i2.tietuku.com/a931825cefd0efe3.png';
-  if('user' == $t){
-   $url = '/public/images/user_img_def.png';
+  $url = $cdn_url.'/public/images/user_img_def.png';
+  $pic = array('o'=>$url,'s'=>$url,'t'=>$url);
+  global $cdn_url;
+  $tpl = 'http://%s.tietuku.com/%s.%s';
+  if($p1){
+   $pic['o'] = sprintf($tpl,$p1,$p2,$p3);
+   $pic['s'] = sprintf($tpl,$p1,$p2.'s',$p3);
+   $pic['t'] = sprintf($tpl,$p1,$p2.'t',$p3);
   }
-  return $url;
+  return $pic['o'];
  }
   public function checkArticleByOname($name){
      if(!$name){

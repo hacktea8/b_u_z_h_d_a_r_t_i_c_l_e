@@ -14,6 +14,7 @@ class Article extends Viewbase {
   }
   $this->model('articleModel');
   $data = $this->articleModel->getArticleInfoByAid($aid,0,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
+//$this->debug($data);
   if(empty($data)){
     header('Location: '.self::$url404);
     exit;
@@ -66,6 +67,18 @@ class Article extends Viewbase {
   //$this->debug($this->viewData);
   $this->view('article_index');
   }
-  
+ public function hots($where = 'daily'){
+  $this->assign();
+  $this->view('article_hots');
+ }
+ public function news(){
+  $this->assign();
+  $this->view('article_news');
+ }
+ public function original(){
+  $this->assign();
+  $this->view('article_original');
+ }
+ 
 }
 ?>

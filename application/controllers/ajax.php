@@ -58,7 +58,7 @@ class Ajax extends Webbase {
  public function topList_data(){
   $ttl = 3600;
   $file = APPPATH.'../public/js/toplist_data.js';
-  if( file_exists($file) && (time() - filemtime($file)) > $ttl{
+  if( file_exists($file) && (time() - filemtime($file)) > $ttl){
    $cate_list = $this->mem->get('cate_info');
    $return = array();
    if(empty($return)){

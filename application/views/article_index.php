@@ -322,19 +322,24 @@ document.body.oncopy = function(e) {
 document.oncontextmenu = function() {
  return false;
 };
+var slog = 0;
 $(document).scroll(function(){
  var hMove = document.body.scrollTop;
  hStatic = $('#article-item-box_static').offset().top;
  if(hMove > hStatic){
+  if(slog){
+   return 0;
+  }
   setTimeout(function(){
   $.ajax({
    type: 'POST',
    url: '/ajax/clicklog',
-   data: {'key':<?php echo $click_key;?>},
+   data: {'key':'<?php echo $click_key;?>'},
    success: function(msg){},
    dataType: 'json'
   });
   },15000);
+   slog = 1;
  }
 
 });

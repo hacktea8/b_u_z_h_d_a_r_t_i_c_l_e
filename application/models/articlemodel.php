@@ -57,7 +57,7 @@ class articleModel extends baseModel{
    $list = $query->result_array();
    foreach($list as &$v){
     $v['url'] = $this->get_url('article',$v['id']);
-    $v['cover'] = '';
+    $v['pic'] = $this->get_pic($v['host'],$v['cover'],$v['ext']);
    }
   }
   return $list;
@@ -87,6 +87,7 @@ class articleModel extends baseModel{
     $data['url'] = $this->get_url('article', $aid);
     $data['pre'] = $this->getArticleLink($data['prelink']);
     $data['nxt'] = $this->getArticleLink($data['nextlink']);
+    $data['pic'] = $this->get_pic($data['host'],$data['cover'],$data['ext']);
    }
    return $data;
  }

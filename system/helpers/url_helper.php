@@ -59,6 +59,7 @@ if ( ! function_exists('parse_cover')){
   if( !$r['host'] || !$r['key']){
    return 0;
   }
+  $r['ext'] = @$host[1];
   $r['url'] = $url;
   return $r;
  }

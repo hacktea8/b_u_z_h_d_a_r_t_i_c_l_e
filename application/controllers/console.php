@@ -37,6 +37,19 @@ class Console extends Viewbase {
   $post = $this->input->post('Channel');
   if($post){
    $post['uid'] = $this->uid;
+   if($post['pic']){
+    $pinfo = parse_cover($post['pic']);
+    unset($post['pic']);
+    if($pinfo){
+     $post['host'] = $pinfo['host'];
+     $post['pic'] = $pinfo['key'];
+     $post['ext'] = $pinfo['ext'];
+    }
+   }else{
+    unset($post['host']);
+    unset($post['pic']);
+    unset($post['ext']);
+   }
    if($post['urlkey']){
     $len = strlen($post['urlkey']);
     if( $len<3 || $len>36){
@@ -88,7 +101,28 @@ class Console extends Viewbase {
   $post = $this->input->post('Post');
   if($post){
    $post['uid'] = $this->uid;
-   $this->consoleModel->setArticleInfoByData($post);
+   $pinfo = '';
+   if($post['pic']){
+    $pinfo = parse_cover($post['pic']);
+    unset($post['pic']);
+   }
+   if($pinfo){
+    $post['host'] = $pinfo['host'];
+    $post['cover'] = $pinfo['key'];
+    $post['ext'] = $pinfo['ext'];
+   }else{
+    unset($post['host']);
+    unset($post['cover']);
+    unset($post['ext']);
+   }
+   $cate = explode('-',$post['cid2']);
+   if(isset($cate[1])){
+    $post['cid'] = $cate[1];
+    $post['pcid'] = $cate[0];
+   }
+//$this->debug($post);
+   $aid = $this->consoleModel->setArticleInfoByData($post);
+$this->debug($aid);
    redirect('/console/post');
   }
   $rinfo = array();

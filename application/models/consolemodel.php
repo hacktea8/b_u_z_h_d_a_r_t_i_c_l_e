@@ -16,11 +16,37 @@ class consoleModel extends baseModel{
   $body = $this->check_id($_tArtileBody,self::$_fAB,array('id='=>$aid));
   return array_merge($check,$body);
  }
+ static public function mstrip_tags( &$str){
+  // replace js code
+  $str = preg_replace('#<[^>]*script[^>]*>.*<[^>]*/[^>]*script[^>]*>#Uis','',$str);
+  return $str;
+ }
+ static public function filter_code($str){
+  $str = trim(strip_tags($str));
+  $str = preg_replace('#\S+\.\S+#is','',$str);
+  $str = mb_substr($str, 0, 180, 'UTF-8');
+  return $str;
+ }
  public function setArticleInfoByData($row){
   $aid = isset($row['id'])?$row['id']:0;
   $aid = intval($aid);
-  $head = $this->filter($row,array('cid','pcid','title','summary','host','cover'));
-  $body = $this->filter($row,array('is_original','original_url','intro','no_infringement'));
+  $row['title'] = self::filter_code($row['title']);
+  if( empty($row['title']) || empty(@$row['cid']) || empty(@$row['pcid'])){
+   return 0;
+  }
+  
+  $summary = $row['summary'];
+  if( empty($summary )){
+   $summary = $row['intro'];
+  }
+  $row['summary'] = self::filter_code($summary);
+  self::mstrip_tags( $row['intro']);
+  if( empty($row['intro'])){
+   return 0;
+  }
+//echo '<pre>';var_dump($row);exit;
+  $head = $this->filter($row,array('is_original','cid','pcid','title','summary','host','cover','ext','is_adult'));
+  $body = $this->filter($row,array('original_url','intro','no_infringement'));
   $_tags = &$row['tags'];
   if($aid){
    $uid = $row['uid'];
@@ -28,6 +54,7 @@ class consoleModel extends baseModel{
    if(empty($check)){
     return -1;
    }
+   $head['utime'] = time();
    $this->db->update(self::$_tArtileHead,$head,array('id'=>$aid));
    $this->db->update(self::$_tArtileBody,$body,array('id'=>$aid));
    $this->addTags($_tags, $aid);
@@ -38,6 +65,7 @@ class consoleModel extends baseModel{
    return $check['id'];
   }
   $head['uid'] = $row['uid'];
+  $head['utime'] = $head['ptime'] = time();
   $this->db->insert(self::$_tArtileHead, $head);
   $aid = $this->db->insert_id();
   if( !$aid){
@@ -47,10 +75,46 @@ class consoleModel extends baseModel{
   $this->db->insert(self::$_tArtileBody,$body);
   $this->addTags($_tags, $aid);
   $this->updateArticlePreNxtLink($head);
+  $this->updateUserArticleCount($head['uid']);
+  $this->updateCateArticleCount($head['cid'],$head['pcid']);
   return $aid;
  }
+ public function updateCateArticleCount($cid,$pcid){
+  $sql = sprintf('UPDATE %s SET total=(SELECT COUNT(*) FROM %s WHERE cid=%d AND flag=1) WHERE cid=%d LIMIT 1'
+  ,self::$_tCate,self::$_tArtileHead,$cid,$cid);
+  $this->db->query($sql);
+  $sql = sprintf('UPDATE %s SET total=(SELECT COUNT(*) FROM %s WHERE pcid=%d) WHERE cid=%d LIMIT 1'
+  ,self::$_tCate,self::$_tCate,$pcid,$pcid);
+  $this->db->query($sql);
+ }
+ public function updateUserArticleCount($uid = 0){
+  if( !$uid){
+   return 0;
+  }
+  $sql = sprintf('UPDATE %s SET post_count=(SELECT COUNT(*) FROM %s WHERE uid=%d AND flag=1) WHERE uid=%d LIMIT 1'
+  ,self::$_tUser,self::$_tArtileHead,$uid,$uid);
+  $this->db->query($sql);
+  return 1;
+ }
+ public function unbindTagMap($aid){
+  $where = array('aid='=>$aid);
+  $query = $this->select(self::$_tTA,'tid', $where, $order = '', $limit = array());
+  $list = $query->result_array();
+  $list = $list?$list:array();
+  foreach($list as $tid){
+   $sql = sprintf('UPDATE %s SET total=total -1 WHERE tid=%d LIMIT 1',self::$_tTag,$tid);
+   $this->db->query($sql);
+  }
+  $this->db->delete(self::$_tTA, array('aid'=>$aid));
+  return true;
+ }
  public function addTags($tags, $aid){
-  $tagArr = explode(',',$row['tags']);
+  if( empty($tags)){
+   return 0;
+  }
+  $this->unbindTagMap($aid);
+  $tags = str_replace('，', ',', $tags);
+  $tagArr = explode(',',$tags);
   $inArr = array();
   $i = 0;
   foreach($tagArr as $v){
@@ -81,9 +145,6 @@ class consoleModel extends baseModel{
    $tid = $this->db->insert_id();
   }else{
    $tid = $tinfo['tid'];
-  }
-  if($tid){
-   return 0;
   }
   $map = $this->check_id(self::$_tTA,'tid',array('tid='=>$tid,'aid'=>$aid));
   if($map){

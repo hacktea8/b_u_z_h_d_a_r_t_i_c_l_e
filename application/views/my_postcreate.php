@@ -19,8 +19,7 @@
           </h2>
         </div>
         <div class="p20">
-          <form enctype="multipart/form-data" id="Post-form" action="/console/postcreate"
-          method="post">
+          <form id="article_form" method="post">
             <div class="ui_warning">
               發文章前請確認您已經仔細閱讀過
               <a target="_blank" class="fcEm7" href="/forum/post_1.html">
@@ -59,6 +58,7 @@
               <input class="ui_text_input" name="Post[original_url]" id="Post_original_url"
               type="text" />
               <div class="ui_text_tips error_msg fcEm6" id="Post_original_url_em_" style="display:none">
+              請填寫原文網址
               </div>
               <div class="ui_text_tips" id="no_infringement_">
                 <label class="fcEm3 title none" for="pubGrade">
@@ -78,9 +78,10 @@
               <label class="fcEm3 title" for="Post_title">
                 *標題：
               </label>
-              <input class="ui_text_input" onblur="Members.ckList({target: this, url:&#039;/chkTitle.html&#039;, post_id:0})"
+              <input class="ui_text_input"
               name="Post[title]" id="Post_title" type="text" maxlength="65" />
               <div class="ui_text_tips error_msg fcEm6" id="Post_title_em_" style="display:none">
+              請填寫標題
               </div>
               <p class="fcEm4 ui_text_tips">
                 文章成功的關鍵在於精準聳動之標題
@@ -92,8 +93,7 @@
               <label class="fcEm3 title vt" for="pubSubTitle">
                 摘要：
               </label>
-              <textarea class="ui_text_textarea" name="Post[summary]" id="Post_summary">
-              </textarea>
+              <textarea class="ui_text_textarea" name="Post[summary]" id="Post_summary"></textarea>
               <div class="ui_text_tips error_msg fcEm6" id="Post_summary_em_" style="display:none">
               </div>
               <p class="fcEm3 ui_text_tips">
@@ -105,14 +105,19 @@
             </div>
             <div class="ui_text_block">
               <label class="fcEm3 title" for="pubImg">
+                封面展示：
+              </label>
+              <img id="logo" src="" />
+            </div>
+            <div class="ui_text_block">
+              <label class="fcEm3 title" for="pubImg">
                 封面：
               </label>
               <input placeholder="網路圖片可以直接輸入網絡地址" type="text" class="ui_text_input"
-              id="pubImg" name="pubImg" style="width: 50%;">
-              <label class="ui_btn ui_btn_upload" for="uploadImg">
-                上傳封面圖
-              </label>
-              <input class="none" type="file" placeholder="封面圖" id="uploadImg" name="uploadImg">
+              id="input_cover" name="Post[pic]" style="width: 50%;">
+              <img src="http://i2.tietuku.com/674a895eaa333a88.png" alt ="tietuku" style ="cursor:pointer" onclick="tietuku_upload()"/>
+<script language = "javascript" type = "text/javascript"  src="http://static.tietuku.com/static/open/tietuku.dialog.js"></script>
+<script type = "text/javascript"  src="<?php echo $cdn_url,'/js/ttk_upload.js?v=',$version;?>"></script>
               <p class="fcEm4 ui_text_tips">
                 一個好的文章封面會更加吸引人的注意，如果文章內文中無圖片最好上傳一張圖片作為封面；如果文章內文中有圖片可以不用專門上傳封面，系統會自動將內文中的第一張圖片設為文章封面。建議大小：500X290px，
                 封面會做居中裁剪處理，所以請選擇合適比例的圖片才能獲得更好的效果。
@@ -122,9 +127,9 @@
               <label class="fcEm3 title vt" for="pubContent">
                 *內文：
               </label>
-              <textarea name="Post[content]" id="Post_content" tabindex="3">
-              </textarea>
+              <textarea name="Post[intro]" id="Post_content" tabindex="3"></textarea>
               <div class="ui_text_tips error_msg fcEm6" id="Post_content_em_" style="display:none">
+              請填寫內文內容
               </div>
               <p class="fcEm4 ui_text_tips">
                 請詳細閱讀文章內容規範，未經作者同意請勿張貼他人編寫之內容，以免觸法。
@@ -159,6 +164,7 @@ if($sv['pcid'] != $k){
 ?>
               </select>
               <div class="ui_text_tips error_msg fcEm6" id="Post_cid2_em_" style="display:none">
+              請選擇分類
               </div>
             </div>
             <div class="ui_text_block">
@@ -177,7 +183,7 @@ if($sv['pcid'] != $k){
               <label class="fcEm3 title" for="Post_t_ratio">
                 共推申請：
               </label>
-              <select class="ui_text_select" name="Post[t_ratio]" id="Post_t_ratio">
+              <select class="ui_text_select" name="Post[coop]" id="Post_t_ratio">
                 <option value="0" selected="selected">
                   我不願意讓其他會員推廣此文章
                 </option>
@@ -232,49 +238,6 @@ if($sv['pcid'] != $k){
             </p>
           </form>
         </div>
-        <script>
-          $(document).ready(function() {
-            //$("#original_url_").hide();
-            Members.init();
-
-            if ($("#Post_is_original input:radio:checked").attr("id") == "Post_is_original_1") {
-              $("#original_url_").hide();
-            }
-            $("#Post_is_original input:radio").click(function() {
-              if ($(this).attr("id") == "Post_is_original_1" && ($(this).attr("checked") == true || $(this).attr("checked") == "checked")) {
-                $("#original_url_").hide();
-                $("#Post_original_url").val('');
-                $("#no_infringement_").hide();
-
-              } else {
-                $("#original_url_").show();
-                $("#no_infringement_").show();
-              }
-            });
-
-            var checkSubmitFlg = false;
-            function checkSubmit() {
-              if (!checkSubmitFlg) {
-                checkSubmitFlg = true;
-                $("#postSubmit").addClass("disabled");
-                $("#postSubmit").attr("disabled", "disabled");
-                return true;
-              } else {
-                alert("Submit again!");
-                return false;
-              }
-            }
-            $("#Post-form").submit(function() {
-              return checkSubmit();
-            });
-
-            $("#uploadImg").change(function() {
-              console.log($(this).val());
-              $("#pubImg").val($(this).val());
-            });
-
-          });
-        </script>
       </div>
       <!-- end member_block -->
     </div>
@@ -286,14 +249,86 @@ if($sv['pcid'] != $k){
   <!-- end sidebar -->
 </div>
 <!-- end container -->
-<script type="text/javascript" src="<?php echo $cdn_url,'/js/jquery.yiiactiveform.js';?>"></script>
-<script type="text/javascript" src="<?php echo $cdn_url,'/js/ueditor/ueditor.config.js';?>"></script>
-<script type="text/javascript" src="<?php echo $cdn_url,'/js/ueditor/ueditor.all.min.js';?>"></script>
-<script type="text/javascript" src="<?php echo $cdn_url,'/js/ueditor/uesite.config.js';?>"></script>
+<script type="text/javascript" src="<?php echo $cdn_url,'/js/kindeditor/kindeditor.js';?>"></script>
+<script type="text/javascript" src="<?php echo $cdn_url,'/js/kindeditor/lang/zh_TW.js';?>"></script>
 <script type="text/javascript">
-/*<![CDATA[*/
-jQuery(function($) {
-jQuery('#Post-form').yiiactiveform({'attributes':[{'id':'Post_is_original','inputID':'Post_is_original','errorID':'Post_is_original_em_','model':'Post','name':'is_original','enableAjaxValidation':true},{'id':'Post_original_url','inputID':'Post_original_url','errorID':'Post_original_url_em_','model':'Post','name':'original_url','enableAjaxValidation':true},{'id':'Post_no_infringement','inputID':'Post_no_infringement','errorID':'Post_no_infringement_em_','model':'Post','name':'no_infringement','enableAjaxValidation':true},{'id':'Post_title','inputID':'Post_title','errorID':'Post_title_em_','model':'Post','name':'title','enableAjaxValidation':true},{'id':'Post_summary','inputID':'Post_summary','errorID':'Post_summary_em_','model':'Post','name':'summary','enableAjaxValidation':true},{'id':'Post_content','inputID':'Post_content','errorID':'Post_content_em_','model':'Post','name':'content','enableAjaxValidation':true},{'id':'Post_cid2','inputID':'Post_cid2','errorID':'Post_cid2_em_','model':'Post','name':'cid2','enableAjaxValidation':true},{'id':'Post_tags','inputID':'Post_tags','errorID':'Post_tags_em_','model':'Post','name':'tags','enableAjaxValidation':true},{'id':'Post_is_adult','inputID':'Post_is_adult','errorID':'Post_is_adult_em_','model':'Post','name':'is_adult','enableAjaxValidation':true}],'errorCss':'error'});
+$(document).ready(function() {
+ KindEditor.ready(function(K) {
+  var options = {
+   width : '780px',
+   height: '600px'
+  };
+  window.editor = K.create('#Post_content',options);
+ });
+ if ($("#Post_is_original input:radio:checked").attr("id") == "Post_is_original_1") {
+  $("#original_url_").hide();
+ }
+ $("#Post_is_original input:radio").click(function() {
+  if ($(this).attr("id") == "Post_is_original_1" && ($(this).attr("checked") == true || $(this).attr("checked") == "checked")) {
+   $("#original_url_").hide();
+   $("#Post_original_url").val('');
+   $("#no_infringement_").hide();
+  } else {
+   $("#original_url_").show();
+   $("#no_infringement_").show();
+  }
+ });
+ var checkSubmitFlg = false;
+ function checkSubmit() {
+  $('.error_msg').hide();
+  if (!checkSubmitFlg) {
+   var checkF = $('#Post_is_original_0').attr('checked');
+   if(checkF == true || checkF == 'checked'){
+    if($('#Post_original_url').val().length < 7){
+     $('#Post_original_url').focus();
+     $('#Post_original_url').next().show();
+     return false;
+    }
+   }
+   if($('#Post_title').val().length < 7){
+    $('#Post_title').focus();
+    $('#Post_title').next().show();
+    return false;
+   }
+   window.editor.sync();
+   if(window.editor.html().length < 300){
+    window.editor.focus();
+    $('#Post_content_em_').show();
+    return false;
+   }
+   if( !$('#Post_cid2').val()){
+    $('#Post_cid2').focus();
+    $('#Post_cid2').next().show();
+    return false;
+   }
+   checkSubmitFlg = true;
+   $("#postSubmit").addClass("disabled");
+   $("#postSubmit").attr("disabled", "disabled");
+   return true;
+  } else {
+   alert("Submit again!");
+   return false;
+  }
+ }
+ $("#article_form").submit(function(e) {
+  e.preventDefault();
+  if( !checkSubmit()){
+   return false;
+  }
+  $.ajax({
+  type: 'POST',
+  url: '/console/postcreate',
+  data: $("#article_form").serialize(),
+  success: function(data){
+   console.log(data);
+  },
+  dataType: 'json'
+  });
+  checkSubmitFlg = false;
+  $("#postSubmit").removeClass("disabled");
+  $("#postSubmit").removeAttr("disabled");
+  return false;
+ });
+
 });
-/*]]>*/
 </script>

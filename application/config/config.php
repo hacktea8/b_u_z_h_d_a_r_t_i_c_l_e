@@ -20,10 +20,10 @@ $config['cdn_url']	= '/public';
 $config['adm_js_url']	= '/public/js/admin/';
 $config['adm_css_url']	= '/public/css/admin/';
 $config['adm_img_url']	= '/public/images/admin/';
-$config['domain']	= 'buzhd.qvdhd.com';
-$config['web_title']	= 'BuzHd';
+$config['domain']	= 'www.news8s.com';
+$config['web_title']	= 'News8s';
 $config['login_url']	= 'http://www.hacktea8.com/member.php?mod=logging&action=login&goto=';
-$config['allow_referer'] = '.qvdhd.com|.hacktea8.com|.emubt.com';
+$config['allow_referer'] = '.news8s.com|.hacktea8.com';
 
 /*
 |--------------------------------------------------------------------------

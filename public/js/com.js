@@ -198,6 +198,7 @@ var Com = {
 *@description 绑定分享事件
 */
 	mobile_fnBindShare: function() {
+return 0;
 		$(".entry").each(function() {
 			var appended = $(this).attr("appended");
 			var share_links = $(this);
@@ -235,6 +236,7 @@ var Com = {
 *@description 绑定分享事件
 */
 	desktop_fnBindShare: function() {
+return 0;
 		$(".entry").off().on({
 			mouseover : function() {
 				var share_links = $(this);
