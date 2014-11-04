@@ -24,7 +24,7 @@ $ext_arr = array(
 	'file' => array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'htm', 'html', 'txt', 'zip', 'rar', 'gz', 'bz2'),
 );
 //最大文件大小
-$max_size = 1000000;
+$max_size = 2000000;
 
 $save_path = realpath($save_path) . '/';
 
@@ -60,7 +60,7 @@ if (!empty($_FILES['imgFile']['error'])) {
 }
 
 //有上传文件时
-if (empty($_FILES) === false) {
+if ( !empty($_FILES) ) {
 	//原文件名
 	$file_name = $_FILES['imgFile']['name'];
 	//服务器上临时文件名
@@ -87,6 +87,9 @@ if (empty($_FILES) === false) {
 	if ($file_size > $max_size) {
 		alert("上传文件大小超过限制。");
 	}
+        if('image' != $_GET['dir']){
+         alert("抱歉-暂时只支持图片格式。");
+        }
 	//检查目录名
 	$dir_name = empty($_GET['dir']) ? 'image' : trim($_GET['dir']);
 	if (empty($ext_arr[$dir_name])) {
@@ -101,6 +104,7 @@ if (empty($_FILES) === false) {
 	if (in_array($file_ext, $ext_arr[$dir_name]) === false) {
 		alert("上传文件扩展名是不允许的扩展名。\n只允许" . implode(",", $ext_arr[$dir_name]) . "格式。");
 	}
+if(0){
 	//创建文件夹
 	if ($dir_name !== '') {
 		$save_path .= $dir_name . "/";
@@ -115,16 +119,39 @@ if (empty($_FILES) === false) {
 	if (!file_exists($save_path)) {
 		mkdir($save_path);
 	}
+}
 	//新文件名
 	$new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $file_ext;
 	//移动文件
-	$file_path = $save_path . $new_file_name;
+	$file_path = $php_path.'../attached/' . $new_file_name;
+        $out_file = $php_path.'../attached/out_' . $new_file_name;
 	if (move_uploaded_file($tmp_name, $file_path) === false) {
 		alert("上传文件失败。");
 	}
 	@chmod($file_path, 0644);
-	$file_url = $save_url . $new_file_name;
+//	$file_url = $save_url . $new_file_name;
 
+        require_once $php_path.'../../../../application/libraries/Tietuku.php';
+        require_once $php_path.'../../../../application/libraries/gickimg.php';
+        $gick = new Gickimg();
+        $gick->convert($file_path, $out_file);
+        @unlink($file_path);
+        if( !file_exists($out_file)){
+         alert("上传文件失败。");
+        }
+        $wimg = $php_path.'../../../../public/images/watermark/news8s_waterMark.png';
+        $gick->waterMark($out_file,$wimg, $file_path, $wmpos = 0);
+        @unlink($out_file);
+        if( !file_exists($file_path)){
+         alert("上传文件失败。");
+        }
+        $ttk = new Tietuku();
+        $r = $ttk->uploadFile($album = 0,$file_path);
+        $file_url = @$r['linkurl'];
+        @unlink($file_path);
+        if( empty($file_url)){
+         alert("上传文件失败。");
+        }
 	header('Content-type: text/html; charset=UTF-8');
 	$json = new Services_JSON();
 	echo $json->encode(array('error' => 0, 'url' => $file_url));

@@ -24,7 +24,7 @@ class consoleModel extends baseModel{
  static public function filter_code($str){
   $str = str_replace(array('&lt;','&gt;'),array('<','>'),$str);
   $str = trim(strip_tags($str));
-  $str = preg_replace('#\S+\.\S+#is','',$str);
+  $str = preg_replace('#[a-z0-9_\.:/-]+\.[a-z0-9_\.:/-]+#is','',$str);
   $str = preg_replace('#\s(?=\s)#', '', $str);
   $str = preg_replace("#(\r\n|\r|\n|\t)#", '', $str);
   $str = mb_substr($str, 0, 180, 'UTF-8');

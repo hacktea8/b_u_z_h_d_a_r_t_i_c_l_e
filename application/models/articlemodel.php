@@ -34,6 +34,31 @@ class articleModel extends baseModel{
   }
   return $r;
  }
+ public function getArticleListByDate($date = '', $sort = '', $limit = array(1,7)){
+  $where = array();
+  if($date){
+   $time = time();
+   $ptimeMap = array('daily'=>strtotime(date('Y-m-d',$time)),'weekly'=>strtotime(date('Y-m-d',$time - date('w')*86400)),'monthly'=>strtotime(date('Y-m')));
+   $ptime = isset($ptimeMap[$date])?$ptimeMap[$date]:$ptimeMap['daily'];
+   $where['ptime>='] = $ptime;
+  }
+  if( in_array($sort, array('original_new','original_hot'))){
+   $where['is_original='] = 1;
+  }
+  $orderMap = array('new'=>' ptime DESC','hot'=>' hits DESC','original_new'=>' ptime DESC'
+  ,'original_hot'=>' hits DESC');
+  $order = $orderMap[$sort];
+  $query = $this->select(self::$_tArtileHead, self::$_fAH, $where, $order, $limit);
+//echo $query;exit;
+  $list = $query->result_array();
+  $list = $list ?$list :array();
+  foreach($list as &$v){
+   $v['url'] = $this->get_url('article',$v['id']);
+   $v['pic'] = $this->get_pic($v['host'],$v['cover'],$v['ext']);
+   $v['uinfo'] = $this->get_uinfo($v['uid']);
+  }
+  return $list;
+ }
  public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7),$uid = 0){
   $where = array('flag='=>1);
   $where = array();

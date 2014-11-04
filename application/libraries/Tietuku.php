@@ -7,7 +7,8 @@ define('MY_SECRETKEY', '17f987cc028d3ceaad38e612eda11e5c0da5b1d7');
 //获取地址:http://open.tietuku.com/manager
 class Tietuku{
  static public $ttk = '';
- static public $ablum = array('cover'=>0,'w0'=>0,'w1'=>0,'w2'=>0,'w3'=>0,'w4'=>0,'w5'=>0,'w6'=>0);
+ static public $ablum = array('cover'=>12697,'w0'=>12700,'w1'=>12702,'w2'=>12703
+ ,'w3'=>12704,'w4'=>12705,'w5'=>12706,'w6'=>12707);
  
 /**
  * 构造函数

@@ -4,6 +4,7 @@ require_once 'viewbase.php';
 class Article extends Viewbase {
  public function __construct(){
   parent::__construct();
+  $this->model('articleModel');
  }
  public function index($aid = 0){
   $aid = intval($aid);
@@ -12,7 +13,6 @@ class Article extends Viewbase {
    header('Location: /');
    exit;
   }
-  $this->model('articleModel');
   $data = $this->articleModel->getArticleInfoByAid($aid,0,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
 //$this->debug($data);
   if(empty($data)){
@@ -68,16 +68,23 @@ class Article extends Viewbase {
   $this->setseo($data['title'],$data['tags'],$data['summary']);
   $this->view('article_index');
   }
- public function hots($where = 'daily'){
-  $this->assign();
-  $this->view('article_hots');
+ public function hots($date = '0',$display = 'list'){
+  $originList = $this->articleModel->getArticleListByDate($date,$sort = 'original_hot',array(1,20));
+  $hotList = $this->articleModel->getArticleListByDate($date,$sort = 'hot',array(1,20));
+  $this->assign('originList','hotList','date','display');
+  $display = !in_array($display,array('list','box'))?'list':$display;
+  $this->view('article_hots_'.$display);
  }
  public function news(){
-  $this->assign();
+  $newList = $this->articleModel->getArticleListByDate($date = '',$sort = 'new',array(1,20));
+  $originList = $this->articleModel->getArticleListByDate($date = '',$sort = 'original_new',array(1,20));
+  $this->assign(compact('newList','originList'));
   $this->view('article_news');
  }
  public function original(){
-  $this->assign();
+  $originList = $this->articleModel->getArticleListByDate($date = '',$sort = 'original_hot',array(1,20));
+  $hotList = $this->articleModel->getArticleListByDate($date = '',$sort = 'hot',array(1,20));
+  $this->assign(compact('originList','hotList'));
   $this->view('article_original');
  }
  
