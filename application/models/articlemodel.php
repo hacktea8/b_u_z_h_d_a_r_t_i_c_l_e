@@ -56,6 +56,7 @@ class articleModel extends baseModel{
    $v['url'] = $this->get_url('article',$v['id']);
    $v['pic'] = $this->get_pic($v['host'],$v['cover'],$v['ext']);
    $v['uinfo'] = $this->get_uinfo($v['uid']);
+   $v['time_ago'] = $this->time_ago($v['ptime']);
   }
   return $list;
  }

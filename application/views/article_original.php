@@ -49,7 +49,7 @@
                   <a class="fcEm7" href="<?php echo $v['uinfo']['url'];?>">
                   <?php echo $v['uinfo']['title'];?>
                   </a>
-                  / 剛剛
+                  / <?php echo $v['time_ago'];?>
                 </p>
                 <p class="mt5">
                 <?php echo $v['summary'];?>

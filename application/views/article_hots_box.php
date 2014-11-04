@@ -85,7 +85,7 @@
                   <a class="fcEm7" href="<?php echo $v['uinfo']['url'];?>">
                     <?php echo $v['uinfo']['title'];?>
                   </a>
-                  / 10月08日
+                  / <?php echo $v['time_ago'];?>
                 </p>
                 <p class="share_stub">
                   <span class="ui_icon ui_icon20 ui_icon20_share">
@@ -158,7 +158,7 @@
                   次分享 /
                 </span>
                 <span class="fcEm4">
-                  9小時前
+                  <?php echo $v['time_ago'];?>
                 </span>
               </p>
             </div>

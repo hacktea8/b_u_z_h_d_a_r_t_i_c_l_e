@@ -42,6 +42,22 @@ class baseModel extends CI_Model{
   $r['pic'] = $this->get_pic($row['host'],$row['pic'],$row['ext']);
   return $r;
  }
+ public function time_ago($time){
+  $t = time() - $time;
+  $r = '刚刚';
+  if($t < 300){
+   $r = '刚刚';
+  }elseif( ($tmp = ceil($t/60)) < 60){
+   $r = $tmp.'分钟前';
+  }elseif( ($tmp = ceil($t/3600)) < 24 ){
+   $r = $tmp.'小时前';
+  }elseif( ($tmp = ceil($t/86400)) < 7 ){
+   $r = $tmp.'天前';
+  }else{
+   $r = date('m月d日',$time);
+  }
+  return $r;
+ }
  public function get_url($mod,$p1=0,$p2=0,$p3=0,$p4=0){
   $url = '';
   $suf = '.html';

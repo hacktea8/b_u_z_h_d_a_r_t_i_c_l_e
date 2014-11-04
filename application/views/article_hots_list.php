@@ -77,7 +77,7 @@
                   <a class="fcEm7" href="<?php echo $v['uinfo']['url'];?>">
                     <?php echo $v['uinfo']['title'];?>
                   </a>
-                  / 11小時前
+                  / <?php echo $v['time_ago'];?>
                 </p>
                 <p class="mt5">
                   <?php echo $v['summary'];?>
@@ -153,7 +153,7 @@
                   次分享 /
                 </span>
                 <span class="fcEm4">
-                  20小時前
+                  <?php echo $v['time_ago'];?>
                 </span>
               </p>
             </div>
