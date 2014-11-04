@@ -71,7 +71,7 @@
                 </h2>
                 <p class="mt5 fcEm4">
                   <a class="fcEm4" href="<?php echo $cate_info[$v['cid']]['url'];?>">
-                   <?php echo $cate_info[$v['cid']]$v['title'];?>
+                   <?php echo $cate_info[$v['cid']]['title'];?>
                   </a>
                   /
                   <a class="fcEm7" href="<?php echo $v['uinfo']['url'];?>">
