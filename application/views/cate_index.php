@@ -20,7 +20,7 @@
       更多類別∨
     </a>
     <ul class="nav">
-      <li class="on">
+      <li class="<?php echo $subcid?'':'on';?>">
         <a href="<?php echo $cate_info[$pcid]['url'];?>">
           全部
         </a>

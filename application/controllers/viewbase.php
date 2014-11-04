@@ -35,7 +35,7 @@ class Viewbase extends Webbase {
     $this->load->model('cateModel');
     $this->cateModel->getCateArticleTotals();
     $cate_info = $this->cateModel->getAllCateInfo();
-    $this->mem->set($_key,$cate_info,self::$ttl['3d']);
+    $this->mem->set($_key,$cate_info,self::$ttl['5m']);
    }
    return $cate_info;
   }
@@ -117,10 +117,7 @@ class Viewbase extends Webbase {
    return $writerGroup;
   }
   protected function setseo($title = '',$keyword = '',$description = ''){
-   if($title){
-    $title .= ' | ';
-   }
-   self::$seo['title'] = $title.$this->viewData['site_name'].'';
+   self::$seo['title'] = $title;
    if($keyword){
     self::$seo['keyword'] = $keyword;
    }

@@ -58,13 +58,14 @@ class Article extends Viewbase {
   $click_key = $this->str_encode($str,'ENCODE');
   $isCollect = 0;//$this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['id']);
   $writerGroup = $this->getUserWriterGroup();
-  $this->assign(array('isCollect'=>$isCollect,'click_key'=>$click_key,'seo_title'=>$title
-  ,'seo_keywords'=>$keywords,'cid'=>$cid,'pcid'=>$cpid,'info'=>$data
-  ,'aid'=>$aid,'seo_description'=>$seo_description,'top_channel'=>$top_channel
+  $this->assign(array('isCollect'=>$isCollect,'click_key'=>$click_key
+  ,'cid'=>$cid,'pcid'=>$cpid,'info'=>$data
+  ,'aid'=>$aid,'top_channel'=>$top_channel
   ,'also_like'=>$also_like,'viewHot'=>$viewHot,'writerGroup'=>$writerGroup
   ,'postUinfo'=>$postUinfo,'author_other_article'=>$author_other_article
   )); 
   //$this->debug($this->viewData);
+  $this->setseo($data['title'],$data['tags'],$data['summary']);
   $this->view('article_index');
   }
  public function hots($where = 'daily'){

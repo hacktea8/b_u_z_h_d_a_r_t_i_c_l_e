@@ -37,9 +37,15 @@ class userModel extends baseModel{
   $check = $this->check_id(self::$_tUser,$f,array('uid='=>$uid));
   return $check;
  }
- public function getUserChannelInfo($uid){
-  $r = $this->getUinfoByUid('*', $uid);
-  $m = $this->check_id(self::$_tUMeta, '*',array('uid='=>$uid));
+ public function getUserChannelInfo($urlkey){
+  $tmp = intval($urlkey);
+  if($urlkey == $tmp && $tmp){
+   $where = array('uid='=>$tmp);
+  }else{
+   $where = array('urlkey='=>$urlkey);
+  }
+  $m = $this->check_id(self::$_tUMeta, '*', $where);
+  $r = $this->getUinfoByUid('*', $m['uid']);
   return array_merge($r,$m);
  }
  public function getChannelList($order = 'new',$limit = array(1,8)){

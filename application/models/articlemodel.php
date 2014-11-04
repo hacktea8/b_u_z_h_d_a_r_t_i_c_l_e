@@ -82,12 +82,14 @@ class articleModel extends baseModel{
    $data = array();
    $query = $this->db->query($sql);
    if($query->num_rows()){
+    global $site_url;
     $data = $query->row_array();
     $data['id'] = $aid;
-    $data['url'] = $this->get_url('article', $aid);
+    $data['url'] = $site_url.$this->get_url('article', $aid);
     $data['pre'] = $this->getArticleLink($data['prelink']);
     $data['nxt'] = $this->getArticleLink($data['nextlink']);
     $data['pic'] = $this->get_pic($data['host'],$data['cover'],$data['ext']);
+    $data['uinfo'] = $this->get_uinfo($data['uid']);
    }
    return $data;
  }

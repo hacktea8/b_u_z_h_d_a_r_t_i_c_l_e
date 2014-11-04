@@ -4,7 +4,7 @@ class baseModel extends CI_Model{
  static public $_tArtileHead = 'article_title';
  static public $_fAH = ' id,`pcid`, `cid`,is_original, `uid`, `title`, `cover`,host,ext, `coop`, `hits`, `ptime`, `utime`';
  static public $_tArtileBody = 'article_content';
- static public $_fAB = 'no_infringement,original_url, `intro`, `tags`, `prelink`, `nextlink`';
+ static public $_fAB = 'summary,no_infringement,original_url, `intro`, `tags`, `prelink`, `nextlink`';
  static public $_tCate = 'cate';
  static public $_fCate = '`cid`, `pcid`, `title`, `sort`, `adult`, `total`';
  static public $_tTag = '`tags`';
@@ -13,7 +13,7 @@ class baseModel extends CI_Model{
  static public $_tUser = '`user`';
  static public $_fUser = '`uid`, `uname`, `gid`, `invite`,month_hits,amount, `hits`, `click_count`,isAdmin,post_count,wid, `isvip`, `loginip`, `logintime`,email';
  static public $_tUMeta = '`user_meta`';
- static public $_fUMeta = '`uid`, `fname`,urlkey,`lname`,host,iscover,intro,title,pic, `mobile`, `county`, `pay_method`, `pay_account`';
+ static public $_fUMeta = '`uid`, `fname`,urlkey,`lname`,host,ext,intro,title,pic, `mobile`, `county`, `pay_method`, `pay_account`';
  static public $_tUGroup = '`user_group`';
  static public $_fUGroup = '`gid`, `title`, `price`, `note`, `post_count`, `offline_count`, `offline_amount`';
  static public $_tUPC = '`user_pay_records`';
@@ -33,6 +33,15 @@ class baseModel extends CI_Model{
   parent::__construct();
   $this->db  = $this->load->database('default', TRUE);     
  } 
+ public function get_uinfo($uid){
+  $r = array();
+  $row = $this->check_id(self::$_tUMeta,'urlkey,host,pic,ext,title',array('uid='=>$uid));
+  $key = $row['urlkey']?$row['urlkey']:$uid;
+  $r['url'] = $this->get_url('uchannel',$key);
+  $r['title'] = $row['title'];
+  $r['pic'] = $this->get_pic($row['host'],$row['pic'],$row['ext']);
+  return $r;
+ }
  public function get_url($mod,$p1=0,$p2=0,$p3=0,$p4=0){
   $url = '';
   $suf = '.html';
@@ -42,9 +51,9 @@ class baseModel extends CI_Model{
   }elseif('article' == $mod){
     $url = sprintf('%s/article/index/%d%s',$site_url,$p1,$suf);
   }elseif('channel' == $mod){
-    $url = sprintf('%s/channel/index/%d/%d/%d%s?%d-%d-%d',$site_url,$p1,$p2,$p3,$suf,$p1,$p2,$p3);
+    $url = sprintf('%s/channel/index/',$site_url);
   }elseif('uchannel' == $mod){
-    $url = sprintf('%s/channel/user/%d/0/%d/%d%s?%d-%d-%d',$site_url,$p1,$p2,$p3,$suf,$p1,$p2,$p3);
+    $url = sprintf('%s/channel/user/%s',$site_url,$p1);
   }
    return $url;
  }

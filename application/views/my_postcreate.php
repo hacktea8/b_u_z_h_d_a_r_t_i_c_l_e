@@ -252,14 +252,14 @@ if($sv['pcid'] != $k){
 <script type="text/javascript" src="<?php echo $cdn_url,'/js/kindeditor/kindeditor.js';?>"></script>
 <script type="text/javascript" src="<?php echo $cdn_url,'/js/kindeditor/lang/zh_TW.js';?>"></script>
 <script type="text/javascript">
+KindEditor.ready(function(K) {
+ var options = {
+  width : '780px',
+  height: '600px'
+ };
+ window.editor = K.create('#Post_content',options);
+});
 $(document).ready(function() {
- KindEditor.ready(function(K) {
-  var options = {
-   width : '780px',
-   height: '600px'
-  };
-  window.editor = K.create('#Post_content',options);
- });
  if ($("#Post_is_original input:radio:checked").attr("id") == "Post_is_original_1") {
   $("#original_url_").hide();
  }
@@ -321,6 +321,10 @@ $(document).ready(function() {
   data: $("#article_form").serialize(),
   success: function(data){
    console.log(data);
+   if(1 == data.flag){
+    alert('文章發佈成功');
+    window.location.href = data.url;
+   }
   },
   dataType: 'json'
   });

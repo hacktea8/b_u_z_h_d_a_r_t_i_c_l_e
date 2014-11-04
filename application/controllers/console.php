@@ -122,7 +122,13 @@ class Console extends Viewbase {
    }
 //$this->debug($post);
    $aid = $this->consoleModel->setArticleInfoByData($post);
-$this->debug($aid);
+   $aurl = $this->consoleModel->get_url('article', $aid);
+   $rinfo = array('flag'=>1,'url'=>$aurl);
+   if($this->input->is_ajax_request()){
+    die(json_encode($rinfo));
+   }
+//echo $aid;exit;
+//$this->debug($aid);
    redirect('/console/post');
   }
   $rinfo = array();

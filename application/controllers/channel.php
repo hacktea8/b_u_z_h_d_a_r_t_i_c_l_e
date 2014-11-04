@@ -37,18 +37,13 @@ class Channel extends Viewbase {
 //var_dump($this->viewData);exit;
     $this->view('channel_index');
   }
-  public function user($uid,$sort = 'new', $cid = 0,$page = 1){
-    $uid = intval($uid);
+  public function user($urlkey,$sort = 'new', $cid = 0,$page = 1){
     $page = intval($page);
     $page = $page<1?1:$page;
-    if($uid <1){
-      header('HTTP/1.1 301 Moved Permanently');
-      header('Location: /');
-      exit;
-    }
     $pLimit = 20;
     $this->model('userModel');
-    $channel = $this->userModel->getUserChannelInfo($uid);
+    $channel = $this->userModel->getUserChannelInfo($urlkey);
+    $uid = $channel['uid'];
     if(empty($channel)){
      $this->oops('频道不存在');
     }

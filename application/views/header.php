@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-<?php if('article' == $_a){?>
+<?php if('article' == $_c){?>
     <meta property="og:image" content="<?php echo $info['pic'];?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?php echo $info['url'];?>" />
     <meta property="article:publisher" content="https://www.facebook.com/<?php echo $fans_page;?>" />
-<?php }?>
     <meta property="og:site_name" content="<?php echo $site_name?>" />
     <meta property="og:title" content="<?php echo $info['title'];?>" />
     <meta property="article:section" content="<?php echo $cate_info[$info['cid']]['title'];?>" />
     <meta property="og:description" content="<?php echo $info['summary'];?>" />
+<?php }?>
     <meta property="og:locale" content="zh_TW" />
     <title>
      <?php echo $seo['title'];?> - <?php echo $site_name;?>

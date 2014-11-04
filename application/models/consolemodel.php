@@ -22,8 +22,11 @@ class consoleModel extends baseModel{
   return $str;
  }
  static public function filter_code($str){
+  $str = str_replace(array('&lt;','&gt;'),array('<','>'),$str);
   $str = trim(strip_tags($str));
   $str = preg_replace('#\S+\.\S+#is','',$str);
+  $str = preg_replace('#\s(?=\s)#', '', $str);
+  $str = preg_replace("#(\r\n|\r|\n|\t)#", '', $str);
   $str = mb_substr($str, 0, 180, 'UTF-8');
   return $str;
  }
@@ -62,7 +65,7 @@ class consoleModel extends baseModel{
   }
   $check = $this->check_id(self::$_tArtileHead,'id',array('title='=>$head['title']));
   if( !empty($check)){
-   return $check['id'];
+   //return $check['id'];
   }
   $head['uid'] = $row['uid'];
   $head['utime'] = $head['ptime'] = time();
@@ -83,8 +86,10 @@ class consoleModel extends baseModel{
   $sql = sprintf('UPDATE %s SET total=(SELECT COUNT(*) FROM %s WHERE cid=%d AND flag=1) WHERE cid=%d LIMIT 1'
   ,self::$_tCate,self::$_tArtileHead,$cid,$cid);
   $this->db->query($sql);
-  $sql = sprintf('UPDATE %s SET total=(SELECT COUNT(*) FROM %s WHERE pcid=%d) WHERE cid=%d LIMIT 1'
-  ,self::$_tCate,self::$_tCate,$pcid,$pcid);
+  $sql = sprintf('SELECT SUM(total) as totals FROM %s WHERE pcid=%d',self::$_tCate,$pcid);
+  $row = $this->db->query($sql)->row_array();
+  $sql = sprintf('UPDATE %s SET total=%d WHERE cid=%d LIMIT 1'
+  ,self::$_tCate,$row['totals'],$pcid);
   $this->db->query($sql);
  }
  public function updateUserArticleCount($uid = 0){
@@ -146,11 +151,7 @@ class consoleModel extends baseModel{
   }else{
    $tid = $tinfo['tid'];
   }
-  $map = $this->check_id(self::$_tTA,'tid',array('tid='=>$tid,'aid'=>$aid));
-  if($map){
-   return $tid;
-  }
-  $this->db->insert(self::$_tTag,array('tid'=>$tid,'aid'=>$aid));
+  $this->db->insert(self::$_tTA,array('tid'=>$tid,'aid'=>$aid));
   $sql = sprintf("UPDATE %s SET total=(SELECT COUNT(*) FROM %s WHERE tid=%d) WHERE tid=%d LIMIT 1"
   ,self::$_tTag,self::$_tTA,$tid,$tid);
   $this->db->query($sql);
@@ -250,8 +251,8 @@ class consoleModel extends baseModel{
  }
  public function checkUserIsSetting($uid){
   $r = array('pic'=>0,'account'=>0);
-  $row =  $this->check_id(self::$_tUMeta, 'uid',array('uid='=>$uid,'iscover='=>1));
-  $r['pic'] = $row?1:0;
+  $row =  $this->check_id(self::$_tUMeta, 'pic',array('uid='=>$uid));
+  $r['pic'] = $row['pic']?1:0;
   $row =  $this->check_id(self::$_tUMeta, 'uid',array('uid='=>$uid,'pay_method>'=>0));
   $r['account'] = $row?1:0;
   return $r;

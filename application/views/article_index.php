@@ -42,11 +42,11 @@
             <div class="mt5">
               <ul class="post_meta">
                 <li>
-                  <a class="fr" href="/channel_1497.html">
+                  <a class="fr" href="<?php echo $info['uinfo']['url'];?>">
                     <span class="ui_icon ui_icon_level ui_icon_level0">
                     </span>
                     <span class="vm ml5">
-                      <?php echo $cate_info[$info['cid']]['title'];?>
+                      <?php echo $info['uinfo']['title'];?>
                     </span>
                   </a>
                 </li>
@@ -121,7 +121,7 @@
           <!-- ysm_ad_place3 -->
           <!-- fb-comments -->
           <div id="fb-comments-container">
-            <div class="fb-comments" data-href="<?php echo $site_url,$info['url'];?>"
+            <div class="fb-comments" data-href="<?php echo $info['url'];?>"
             data-width="100%" data-num-posts="10">
             </div>
           </div>
@@ -164,8 +164,8 @@
               <ul>
                 <li>
                   <div class="img ui_imgbg ui_user_img">
-                    <a href="/channel/user/<?php echo $info['uid'];?>">
-                      <img src="<?php echo $cdn_url;?>/images/user_img_def.png" />
+                    <a href="<?php echo $info['uinfo']['url'];?>">
+                      <img src="<?php echo $info['uinfo']['pic'];?>" />
                     </a>
                   </div>
 <?php if(0){?>
@@ -190,8 +190,8 @@
                 <li>
                   <div class="mb10">
                     <span class="vm mr10 fcEm7">
-                      <a href="/channel_1497.html">
-                        <?php echo $cate_info[$info['cid']]['title'];?>
+                      <a href="<?php echo $info['uinfo']['url'];?>">
+                        <?php echo $info['uinfo']['title'];?>
                       </a>
                     </span>
                     <span class="ui_icon ui_icon_level ui_icon_level0">
@@ -205,12 +205,11 @@
                       <h3 class="fl">
                         該作者的文章
                       </h3>
-                      <a class="fr" href="/channel/user/<?php echo $info['uid'];?>">
+                      <a class="fr" href="<?php echo $info['uinfo']['url'];?>">
                         更多»
                       </a>
                     </div>
                     <ul class="list">
-                      <!-- 4 loop list -->
 <?php foreach($author_other_article as $v){?>
                       <li>
                         <a title="<?php echo $v['title'];?>" href="<?php echo $v['url'];?>">
@@ -218,7 +217,6 @@
                         </a>
                       </li>
 <?php }?>
-                      <!-- end loop list -->
                     </ul>
                   </div>
                 </li>
@@ -290,7 +288,7 @@
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
-                  0
+                <?php echo $v['share_count'];?>
                 </span>
                 <span class="vm">
                   次分享
@@ -343,14 +341,4 @@ $(document).scroll(function(){
  }
 
 });
-  var fb_page = 'https://www.facebook.com/BuzzHandCom';
-  var fb_name = 'BuzzHand'; (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=184373368282608";
-    fjs.parentNode.insertBefore(js, fjs);
-  } (document, 'script', 'facebook-jssdk'));
 </script>
-<!-- footer -->
