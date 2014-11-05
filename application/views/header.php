@@ -5,11 +5,13 @@
     <meta property="og:image" content="<?php echo $info['pic'];?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?php echo $info['url'];?>" />
-    <meta property="article:publisher" content="https://www.facebook.com/<?php echo $fans_page;?>" />
+    <meta property="article:publisher" content="https://www.facebook.com/news8s" />
     <meta property="og:site_name" content="<?php echo $site_name?>" />
     <meta property="og:title" content="<?php echo $info['title'];?>" />
     <meta property="article:section" content="<?php echo $cate_info[$info['cid']]['title'];?>" />
     <meta property="og:description" content="<?php echo $info['summary'];?>" />
+    <meta name=thumbnail" content="<?php echo $info['pic'];?>" />
+    <meta itemprop="image" content="<?php echo $info['pic'];?>"/>
 <?php }?>
     <meta property="og:locale" content="zh_TW" />
     <title>

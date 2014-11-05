@@ -64,14 +64,13 @@ class Article extends Viewbase {
   ,'also_like'=>$also_like,'viewHot'=>$viewHot,'writerGroup'=>$writerGroup
   ,'postUinfo'=>$postUinfo,'author_other_article'=>$author_other_article
   )); 
-  //$this->debug($this->viewData);
   $this->setseo($data['title'],$data['tags'],$data['summary']);
   $this->view('article_index');
   }
  public function hots($date = '0',$display = 'list'){
-  $originList = $this->articleModel->getArticleListByDate($date,$sort = 'original_hot',array(1,20));
   $hotList = $this->articleModel->getArticleListByDate($date,$sort = 'hot',array(1,20));
-  $this->assign('originList','hotList','date','display');
+  $originList = $this->articleModel->getArticleListByDate($date,$sort = 'original_hot',array(1,20));
+  $this->assign(compact('originList','hotList','date','display'));
   $display = !in_array($display,array('list','box'))?'list':$display;
   $this->view('article_hots_'.$display);
  }

@@ -8,7 +8,7 @@ var messages={
 
 
 /**
- * @author Vickyhuang
+ * @author jason
  */
 var Com = {
 	init: function() {
@@ -27,7 +27,7 @@ var Com = {
 	},
 
 /**
-*@author tim.yang
+*@author jason
 */
 	initMenu: function() {
 
@@ -126,8 +126,12 @@ var Com = {
 
 				if($(this).hasClass("follow")){
 					if($(this).find(".submenu_content").length == 0){
-						$(this).append("<div class='submenu_content'><iframe frameborder='0' allowtransparency='true' style='border:none; overflow:hidden; width:88px; height:21px;' scrolling='no' src='//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2FBuzzHandCom&amp;send=false&amp;layout=button_count&amp;width=88&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=184373368282608'></iframe><a href='https://twitter.com/buzzhand' class='twitter-follow-button' data-show-count='false' data-lang='zh-tw'>跟隨 @BuzzHand</a><div class='g-follow' data-annotation='bubble' data-height='20' data-href='//plus.google.com/+Mashable' data-rel='author'></div><div class='g-override-container'><div class='g-ytsubscribe' data-channel='buzzhand'></div></div><a href='"+window.base_url+"site/feed' target='_blank' class='fr ui_btn ui_btn_green2'><span class='ui_icon ui_icon15 ui_icon15_rss'>rss</span></a></div>");
-						loadScriptAsync('twitter');
+						$(this).append("<div class='submenu_content'><div class='fb-like' data-href='"+fb_page+"'></div><div class='g-plusone' data-callback=''></div><a style='display:none;' href='https://twitter.com/"+tt_page+"' class='twitter-follow-button' data-show-count='false' data-lang='zh-tw'>跟隨 @"+tt_name+"</a><a href='"+window.base_url+"site/feed' target='_blank' class='fr ui_btn ui_btn_green2'><span class='ui_icon ui_icon15 ui_icon15_rss'>rss</span></a></div>");
+                                          //$('#fbpic').load('',function(){
+						loadScriptAsync('facebook');
+						loadScriptAsync('gplusapi');
+						//loadScriptAsync('twitter');
+                                          //});
 					}
 				}
 
@@ -193,7 +197,7 @@ var Com = {
 
 
 /**
-*@author tim.yang
+*@author jason
 *@param {Object} options include:
 *@description 绑定分享事件
 */
@@ -289,7 +293,7 @@ return 0;
 	},
 
 /**
-*@author tim yang
+*@author jason
 *@param {Object} options include:
 *@description 綁定分享按鈕入口
 */
@@ -1329,13 +1333,13 @@ var Contributing = {
 
 
 /**
- * @author tim.yang
+ * @author jason
  */
 
 var searchSubmit = function ()
 {
 	var word=document.getElementById("s").value;
-	location.href="/search/"+word + '.html';
+	location.href="/search/index/"+word + '.html';
 	return false;
 }
 
@@ -1366,7 +1370,7 @@ var loadScriptAsync = function(i, r, s, a) {
         n = [];
         e = null;
         t = {
-            facebook: "https://connect.facebook.net/zh_TW/all.js#appId=184373368282608&xfbml=1&status=1&cookie=1",
+            facebook: "https://connect.facebook.net/zh_TW/all.js#appId="+fb_appId+"&xfbml=1&status=1&cookie=1",
             twitter: "https://platform.twitter.com/widgets.js",
             gplus: "https://apis.google.com/js/plusone.js",
             gplusapi: "https://apis.google.com/js/client:plusone.js?onload=plusOneLoaded"

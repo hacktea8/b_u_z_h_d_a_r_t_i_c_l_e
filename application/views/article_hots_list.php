@@ -25,16 +25,16 @@
         <!-- article_list_top -->
         <div class="article_list_top">
           <ul class="nav clearfix">
-            <li class="nav_l on">
+            <li class="nav_l <?php if('daily' == $date){ echo 'on';}?>">
               <a rel="nofollow" href="/article/hots/daily">今天</a>
             </li>
-            <li class="nav_l">
+            <li class="nav_l <?php if('weekly' == $date){ echo 'on';}?>">
               <a rel="nofollow" href="/article/hots/weekly">本周</a>
             </li>
-            <li class="nav_l">
+            <li class="nav_l <?php if('monthly' == $date){ echo 'on';}?>">
               <a rel="nofollow" href="/article/hots/monthly">本月</a>
             </li>
-            <li class="nav_l">
+            <li class="nav_l <?php if( !in_array($date, array('daily','weekly','monthly'))){ echo 'on';}?>">
               <a href="/article/hots.html">全部</a>
             </li>
             <li class="nav_r grids">

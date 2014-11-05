@@ -35,7 +35,7 @@ class articleModel extends baseModel{
   return $r;
  }
  public function getArticleListByDate($date = '', $sort = '', $limit = array(1,7)){
-  $where = array();
+  $where = array('flag='=>1);
   if($date){
    $time = time();
    $ptimeMap = array('daily'=>strtotime(date('Y-m-d',$time)),'weekly'=>strtotime(date('Y-m-d',$time - date('w')*86400)),'monthly'=>strtotime(date('Y-m')));

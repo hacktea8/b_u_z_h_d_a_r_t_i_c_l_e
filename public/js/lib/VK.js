@@ -1,6 +1,6 @@
 /**
  *@class  JavaScript library
- *@author Vickyhuang
+ *@author jason
  *@param
  */
 
@@ -8,7 +8,7 @@ var VK = {};
 VK.version = "0.1";
 
 /**
- *@author Vickyhuang
+ *@author jason
  *@param args:
  */
 VK.doAjax = function(args){

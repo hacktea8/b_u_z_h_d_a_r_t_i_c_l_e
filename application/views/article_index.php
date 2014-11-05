@@ -106,12 +106,16 @@
           <!-- share -->
           <div id="afterContent" class="share p10 pr20">
             <div class="ml5">
-              <a class="ui_btn ui_btn_blue ml5 mr5 fb_aftercontent" onclick="shareToFb(window.location.pathname);"
+              <a class="ui_btn ui_btn_blue ml5 mr5 fb_aftercontent" 
               style="padding:10px 0 5px;font-size:18px;width: 60%">
                 <span class="ui_icon ui_icon_third20 ui_icon_third20_f" style="margin-right:4px">
                 </span>
                 喜歡這篇文章嗎？快分享吧！
               </a>
+            </div>
+            <div class="ml5">
+             <a title="Share on Google+" href="https://plus.google.com/share?url=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('gs',<?php echo $info['id'];?>);return false;"><img src="https://www.gstatic.com/images/icons/gplus-64.png" alt="Share on Google+"/></a>
+             <a title="Share on Facebook" href="https://www.facebook.com/sharer.php?app_id=113869198637480&display=popup&u=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('fbs',<?php echo $info['id'];?>);return false;"><img src="<?php echo $cdn_url,'/images/fbshare.jpg';?>" alt="Share on FaceBook"/></a>
             </div>
           </div>
           <!-- end share -->

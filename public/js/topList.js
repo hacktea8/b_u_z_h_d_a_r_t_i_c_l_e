@@ -1,5 +1,5 @@
 /**
- * @author Vickyhuang
+ * @author jason
  */
 document.write('<script language=javascript src="/public/js/topList_data.js?t='+new Date().getHours()+'"></script>');
 
