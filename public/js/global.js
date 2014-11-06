@@ -16,3 +16,12 @@ if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elain
       })(navigator.userAgent || navigator.vendor || window.opera);
 document.write("<script src='"+cdn_url+"/js/waypoints.min.js?v="+js_version+"'><\/script>");
 document.write("<script src='"+cdn_url+"/js/lib/VK.js?v="+js_version+"'><\/script>");
+function updateArticleShareCount(stype,aid){
+ $.ajax({
+  type: 'POST',
+  url: '/ajax/updateArticleShareCount',
+  data: {'stype':stype,'aid':aid},
+  success: function(){},
+  dataType: 'json'
+ });
+}

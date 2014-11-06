@@ -20,4 +20,7 @@ class Help extends Viewbase {
  public function copyright(){
   $this->view('help_copyright');
  }
+ public function bonus(){
+  $this->view('help_bonus');
+ }
 }

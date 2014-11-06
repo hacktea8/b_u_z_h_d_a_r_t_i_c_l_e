@@ -32,16 +32,14 @@
                 *內容來源：
               </label>
               <span class="ib">
-                <input id="ytPost_is_original" type="hidden" value="" name="Post[is_original]"
-                />
                 <span id="Post_is_original">
-                  <input id="Post_is_original_0" value="0" checked="checked" type="radio"
+                  <input id="Post_is_original_0" value="0" <?php if( !$rinfo['is_original']){echo 'checked="checked"';}?> type="radio"
                   name="Post[is_original]" />
                   <label for="Post_is_original_0">
                     轉載
                   </label>
                   <br/>
-                  <input id="Post_is_original_1" value="1" type="radio" name="Post[is_original]"
+                  <input id="Post_is_original_1" value="1" type="radio" <?php if( $rinfo['is_original']){echo 'checked="checked"';}?> name="Post[is_original]"
                   />
                   <label for="Post_is_original_1">
                     親自撰寫、拍攝
@@ -56,7 +54,7 @@
                 *原文網址：
               </label>
               <input class="ui_text_input" name="Post[original_url]" id="Post_original_url"
-              type="text" />
+              type="text" value="<?php echo $rinfo['original_url'];?>"/>
               <div class="ui_text_tips error_msg fcEm6" id="Post_original_url_em_" style="display:none">
               請填寫原文網址
               </div>
@@ -64,9 +62,9 @@
                 <label class="fcEm3 title none" for="pubGrade">
                 </label>
                 <label>
-                  <input id="ytPost_no_infringement" type="hidden" value="0" name="Post[no_infringement]"
+                  <input id="ytPost_no_infringement" type="hidden" value="<?php echo $rinfo['no_infringement'];?>" name="Post[no_infringement]"
                   />
-                  <input name="Post[no_infringement]" id="Post_no_infringement" value="1"
+                  <input name="Post[no_infringement]" id="Post_no_infringement" <?php if($rinfo['no_infringement']){echo 'checked="checked"';}?> value="1"
                   type="checkbox" />
                   轉載以上文章不會侵犯到原作權益或相關法律
                   <div class="error_msg fcEm6" id="Post_no_infringement_em_" style="display:none">
@@ -78,7 +76,7 @@
               <label class="fcEm3 title" for="Post_title">
                 *標題：
               </label>
-              <input class="ui_text_input"
+              <input class="ui_text_input" value="<?php echo $rinfo['title'];?>" 
               name="Post[title]" id="Post_title" type="text" maxlength="65" />
               <div class="ui_text_tips error_msg fcEm6" id="Post_title_em_" style="display:none">
               請填寫標題
@@ -93,7 +91,7 @@
               <label class="fcEm3 title vt" for="pubSubTitle">
                 摘要：
               </label>
-              <textarea class="ui_text_textarea" name="Post[summary]" id="Post_summary"></textarea>
+              <textarea class="ui_text_textarea" name="Post[summary]" id="Post_summary"><?php echo $rinfo['summary'];?></textarea>
               <div class="ui_text_tips error_msg fcEm6" id="Post_summary_em_" style="display:none">
               </div>
               <p class="fcEm3 ui_text_tips">
@@ -107,13 +105,13 @@
               <label class="fcEm3 title" for="pubImg">
                 封面展示：
               </label>
-              <img id="logo" src="" />
+              <img id="logo" src="<?php echo $rinfo['pic'];?>" />
             </div>
             <div class="ui_text_block">
               <label class="fcEm3 title" for="pubImg">
                 封面：
               </label>
-              <input placeholder="網路圖片可以直接輸入網絡地址" type="text" class="ui_text_input"
+              <input placeholder="網路圖片可以直接輸入網絡地址" value="<?php echo $rinfo['pic'];?>" type="text" class="ui_text_input"
               id="input_cover" name="Post[pic]" style="width: 50%;">
               <img src="http://i2.tietuku.com/674a895eaa333a88.png" alt ="tietuku" style ="cursor:pointer" onclick="tietuku_upload()"/>
 <script language = "javascript" type = "text/javascript"  src="http://static.tietuku.com/static/open/tietuku.dialog.js"></script>
@@ -127,7 +125,7 @@
               <label class="fcEm3 title vt" for="pubContent">
                 *內文：
               </label>
-              <textarea name="Post[intro]" id="Post_content" tabindex="3"></textarea>
+              <textarea name="Post[intro]" id="Post_content" tabindex="3"><?php echo $rinfo['intro'];?></textarea>
               <div class="ui_text_tips error_msg fcEm6" id="Post_content_em_" style="display:none">
               請填寫內文內容
               </div>
@@ -140,7 +138,7 @@
                 *分類：
               </label>
               <select class="ui_text_select" name="Post[cid2]" id="Post_cid2">
-                <option value="" selected="selected">
+                <option value="">
                   == 請選擇 ==
                 </option>
 <?php foreach($cate_info as $k => $v){
@@ -154,7 +152,7 @@ if($sv['pcid'] != $k){
  continue;
 }
 ?>
-                  <option value="<?php echo $k,'-',$sk;?>">
+                  <option value="<?php echo $k,'-',$sk;?>" <?php if($rinfo['cid'] == $sk){echo 'selected="selected"';}?>>
                     <?php echo $sv['title'];?>
                   </option>
 <?php } ?>
@@ -172,7 +170,7 @@ if($sv['pcid'] != $k){
                 標籤：
               </label>
               <input class="ui_text_input" name="Post[tags]" id="Post_tags" type="text"
-              maxlength="100" />
+              maxlength="100" value="<?php echo $rinfo['tags'];?>"/>
               <div class="ui_text_tips error_msg fcEm6" id="Post_tags_em_" style="display:none">
               </div>
               <p class="fcEm4 ui_text_tips">
@@ -184,28 +182,15 @@ if($sv['pcid'] != $k){
                 共推申請：
               </label>
               <select class="ui_text_select" name="Post[coop]" id="Post_t_ratio">
-                <option value="0" selected="selected">
+                <option value="0">
                   我不願意讓其他會員推廣此文章
                 </option>
                 <optgroup label="申請讓其他會員推廣此文章，並讓其他會員抽取:">
-                  <option value="0.9">
-                    90%傭金
+<?php $coop_arr=array(9,8,7,6,5,4);foreach($coop_arr as $v){?>
+                  <option value="0.<?php echo $v?>" <?php if($v == $rinfo['coop']*10){echo 'selected="selected"';}?>>
+                    <?php echo $v;?>0%傭金
                   </option>
-                  <option value="0.8">
-                    80%傭金
-                  </option>
-                  <option value="0.7">
-                    70%傭金
-                  </option>
-                  <option value="0.6">
-                    60%傭金
-                  </option>
-                  <option value="0.5">
-                    50%傭金
-                  </option>
-                  <option value="0.4">
-                    40%傭金
-                  </option>
+<?php }?>
                 </optgroup>
               </select>
             </div>
@@ -216,9 +201,9 @@ if($sv['pcid'] != $k){
                 </font>
               </label>
               <label for="g1">
-                <input id="ytPost_is_adult" type="hidden" value="0" name="Post[is_adult]"
+                <input id="ytPost_is_adult" type="hidden" value="<?php echo $rinfo['is_adult'];?>" name="Post[is_adult]"
                 />
-                <input name="Post[is_adult]" id="Post_is_adult" value="1" type="checkbox"
+                <input name="Post[is_adult]" id="Post_is_adult" value="1" <?php if($rinfo['is_adult']){echo 'checkted="checked"';}?> type="checkbox"
                 />
                 <div class="ui_text_tips error_msg fcEm6" id="Post_is_adult_em_" style="display:none">
                 </div>
@@ -234,7 +219,7 @@ if($sv['pcid'] != $k){
             </div>
             <p class="ui_text_block">
               <input id="postSubmit" type="submit" value="發表" name="submit" class="ui_btn ui_btn_green2 ui_text_tips f16 fb">
-              <input type="hidden" id="ct" name="ct" value="">
+              <input type="hidden" id="ct" name="Post[id]" value="<?php echo $rinfo['id'];?>">
             </p>
           </form>
         </div>

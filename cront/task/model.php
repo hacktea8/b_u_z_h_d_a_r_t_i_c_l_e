@@ -61,6 +61,16 @@ class M{
   $this->db->update($this->_t_ACR, array('flag'=>$flag), array('id'=>$id));
   return 1;
  }
+/**** article share count ******/
+ public function setPostShareCountLog($param = array()){
+  $map = array(1=>'share_google_count',2=>'share_fb_count');
+  $field = $map[$param['stype']];
+  $count = &$param['count'];
+  $sql = sprintf('UPDATE %s SET share_count=share_count+%d ,%s=%s+%d WHERE id=%d LIMIT 1'
+  ,$this->_t_AH,$count,$field,$count,$param['aid']);
+  $this->db->query($sql);
+  return $count;
+ }
  public function setPostLog($param = array()){
   $id = $this->check_id($param['aid'], $param['Ymd']);
   

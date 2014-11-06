@@ -43,6 +43,25 @@ class Ajax extends Webbase {
   $log_key = sprintf('post_click_uv:%d:%d:%d:%d:%d:%d:%d:%d',$t,$uk,$gid,$wid,$coop,$aid,$uid,$pcid,$cid,date('Ym'),date('Ymd'));
   $this->redis->incr($log_key);
  } 
+ public function updateArticleShareCount(){
+  $allow_type = array('gs'=>1,'fbs'=>2);
+  $stype = $this->input->post('stype');
+  $aid = intval($this->input->post('aid'));
+  $skey = isset($allow_type[$stype])?$allow_type[$stype]:0;
+  if( !$aid || !$skey){
+   return 0;
+  }
+  $ip = $this->input->ip_address();
+  // 检查当前IP是否已使用
+  $check_key = sprintf('share_post_uv_key_%d_%s',$aid,$ip);
+  if($this->redis->exists($check_key)){
+   return 0;
+  }
+  //redis file_storge
+  $this->redis->set($check_key,1,$this->ttl['1d']);
+  $log_key = sprintf('share_post_click_uv:%d:%d',$skey, $aid);
+  $this->redis->incr($log_key);
+ }
  public function checkUserChannelUrlkey(){
   $urlkey = $this->input->post('urlkey');
   $r = array('status'=>0,'msg'=>'');

@@ -13,7 +13,8 @@ class consoleModel extends baseModel{
   if(empty($check)){
    return -1;
   }
-  $body = $this->check_id($_tArtileBody,self::$_fAB,array('id='=>$aid));
+  $check['pic'] = $this->get_pic($check['host'],$check['cover'],$check['ext']);
+  $body = $this->check_id(self::$_tArtileBody,self::$_fAB,array('id='=>$aid));
   return array_merge($check,$body);
  }
  static public function mstrip_tags( &$str){
@@ -34,7 +35,7 @@ class consoleModel extends baseModel{
   $aid = isset($row['id'])?$row['id']:0;
   $aid = intval($aid);
   $row['title'] = self::filter_code($row['title']);
-  if( empty($row['title']) || empty(@$row['cid']) || empty(@$row['pcid'])){
+  if( strlen($row['title'])<10 || empty(@$row['cid']) || empty(@$row['pcid'])){
    return 0;
   }
   
@@ -69,6 +70,7 @@ class consoleModel extends baseModel{
   }
   $head['uid'] = $row['uid'];
   $head['utime'] = $head['ptime'] = time();
+echo 8888;exit;
   $this->db->insert(self::$_tArtileHead, $head);
   $aid = $this->db->insert_id();
   if( !$aid){
@@ -77,7 +79,8 @@ class consoleModel extends baseModel{
   $body['id'] = $aid;
   $this->db->insert(self::$_tArtileBody,$body);
   $this->addTags($_tags, $aid);
-  $this->updateArticlePreNxtLink($head);
+  $update = array('id'=>$aid,'flag'=>$head['flag']);
+  $this->updateArticlePreNxtLink($update);
   $this->updateUserArticleCount($head['uid']);
   $this->updateCateArticleCount($head['cid'],$head['pcid']);
   return $aid;
