@@ -10,7 +10,25 @@ class articleModel extends baseModel{
   $r['hot'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'hot', $limit = array($p,9));
   $r['new'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'new', $limit = array($p,36));
   $r['wonderfull'] = $this->getArticleListByCid($pcid = 0,$cid = 0, 'wonderfull', $limit = array($p,20));
+  $r['month_active'] = $this->getMonthUserActive('post', $limit = array($p,10));
+  $r['month_attention'] = $this->getMonthUserActive('click', $limit = array($p,10));
   return $r;
+ }
+ public function getMonthUserActive($sort = 'post', $limit = array(1, 10)){
+  $sortMap = array('post'=>'u.post_count DESC','click'=>'u.month_click DESC');
+  $order = $sortMap[$sort];
+  $limitSql = $this->get_limit( $limit);
+  $sql = sprintf('SELECT u.uid,u.month_click,u.post_count,m.title,m.urlkey,m.host,m.pic,m.ext FROM %s as u INNER JOIN %s as m ON(u.uid = m.uid) WHERE u.flag=1 ORDER BY %s %s'
+  ,self::$_tUser,self::$_tUMeta,$order,$limitSql);
+  $list = $this->db->query($sql)->result_array();
+  $list = $list ?$list :array();
+  foreach($list as &$v){
+   $key = $v['urlkey']?$v['urlkey']:$v['uid'];
+   $v['url'] = $this->get_url('uchannel',$key);
+   $v['pic'] = $this->get_pic($v['host'],$v['pic'],$v['ext']);
+   
+  }
+  return $list;
  }
  public function getArticleListByUid($uid,$pcid = 0,$cid = 0, $sort = 'new', $limit = array(1,7)){
   $r = $this->getArticleListByCid($pcid,$cid, $sort, $limit,$uid);

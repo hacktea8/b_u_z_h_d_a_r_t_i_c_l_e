@@ -9,12 +9,12 @@ class consoleModel extends baseModel{
   if( !$aid || !$uid){
    return 0;
   }
-  $check = $this->check_id(self::$_tArtileHead,self::$_fAH,array('id='=>$aid,'uid='=>$uid));
+  $check = $this->check_id(self::$_tArtileHead,'*',array('id='=>$aid,'uid='=>$uid));
   if(empty($check)){
    return -1;
   }
   $check['pic'] = $this->get_pic($check['host'],$check['cover'],$check['ext']);
-  $body = $this->check_id(self::$_tArtileBody,self::$_fAB,array('id='=>$aid));
+  $body = $this->check_id(self::$_tArtileBody,'*',array('id='=>$aid));
   return array_merge($check,$body);
  }
  static public function mstrip_tags( &$str){
@@ -49,7 +49,8 @@ class consoleModel extends baseModel{
    return 0;
   }
 //echo '<pre>';var_dump($row);exit;
-  $head = $this->filter($row,array('is_original','cid','pcid','title','summary','host','cover','ext','is_adult'));
+  $head = $this->filter($row,array('is_original','coop','cid','pcid','title','summary','host','cover','ext','is_adult'));
+  $head['flag'] = 1;
   $body = $this->filter($row,array('original_url','intro','no_infringement'));
   $_tags = &$row['tags'];
   if($aid){
@@ -62,6 +63,8 @@ class consoleModel extends baseModel{
    $this->db->update(self::$_tArtileHead,$head,array('id'=>$aid));
    $this->db->update(self::$_tArtileBody,$body,array('id'=>$aid));
    $this->addTags($_tags, $aid);
+   $update = array('id'=>$aid,'uid'=>$uid,'flag'=>$head['flag']);
+   $this->updateArticlePreNxtLink($update);
    return $aid;
   }
   $check = $this->check_id(self::$_tArtileHead,'id',array('title='=>$head['title']));
@@ -70,7 +73,6 @@ class consoleModel extends baseModel{
   }
   $head['uid'] = $row['uid'];
   $head['utime'] = $head['ptime'] = time();
-echo 8888;exit;
   $this->db->insert(self::$_tArtileHead, $head);
   $aid = $this->db->insert_id();
   if( !$aid){
@@ -79,7 +81,7 @@ echo 8888;exit;
   $body['id'] = $aid;
   $this->db->insert(self::$_tArtileBody,$body);
   $this->addTags($_tags, $aid);
-  $update = array('id'=>$aid,'flag'=>$head['flag']);
+  $update = array('id'=>$aid,'flag'=>$head['flag'],'uid'=>$head['uid']);
   $this->updateArticlePreNxtLink($update);
   $this->updateUserArticleCount($head['uid']);
   $this->updateCateArticleCount($head['cid'],$head['pcid']);
@@ -120,7 +122,7 @@ echo 8888;exit;
   if( empty($tags)){
    return 0;
   }
-  $this->unbindTagMap($aid);
+  //$this->unbindTagMap($aid);
   $tags = str_replace('，', ',', $tags);
   $tagArr = explode(',',$tags);
   $inArr = array();
@@ -134,7 +136,7 @@ echo 8888;exit;
    if($i > 6){
     break;
    }
-   $this->addArticleMap($v,$aid);
+   //$this->addArticleMap($v,$aid);
   }
   $tagStr = implode(',',$inArr);
   if( !$tagStr){

@@ -182,8 +182,7 @@ class baseModel extends CI_Model{
    if( 1 != $data['flag']){
     return 1;
    }
-   $table = $this->get_content_table($data['id']);
-   $sql = sprintf("SELECT id FROM %s WHERE id<%d AND uid=%d AND flag=1 ORDER BY id DESC LIMIT 1",$table,$data['id'],$data['uid']);
+   $sql = sprintf("SELECT id FROM %s WHERE id<%d AND uid=%d AND flag=1 ORDER BY id DESC LIMIT 1",self::$_tArtileHead,$data['id'],$data['uid']);
    $row = $this->db->query($sql)->row_array();
    if( empty($row)){
     return 0;

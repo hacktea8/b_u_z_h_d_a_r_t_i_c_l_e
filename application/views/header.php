@@ -12,6 +12,9 @@
     <meta property="og:description" content="<?php echo $info['summary'];?>" />
     <meta name=thumbnail" content="<?php echo $info['pic'];?>" />
     <meta itemprop="image" content="<?php echo $info['pic'];?>"/>
+    <?php foreach($tags as $v){?>
+    <meta property="article:tag" content="<?php echo $v;?>" />
+    <?php }?>
 <?php }?>
     <meta property="og:locale" content="zh_TW" />
     <title>
@@ -37,6 +40,14 @@ var ttk_token = '<?php echo $ttk_token;?>';
 <?php }?>
     var cdn_url = '<?php echo $cdn_url;?>';
     var js_version = '<?php echo $version;?>';
+    var _c = '<?php echo $_c;?>';
+    var _a = '<?php echo $_a;?>';
+    <?php if('article' == $_c){?>
+    var article_id = '<?php echo $info['id'];?>';
+    var article_uid = '<?php echo $info['uid'];?>';
+    var isAdmin = 0;
+    var login_uid = 0;
+    <?php }?>
     </script>
     <script src="<?php echo $cdn_url;?>/js/global.js?v=<?php echo $version;?>"></script>
     <!--[if lt IE 9]>

@@ -5,10 +5,6 @@ class Ajax extends Webbase {
 
  public function __construct(){
   parent::__construct();
-  //判断请求是否Ajax
-  if( !$this->input->is_ajax_request()){
-   die(0);
-  }
   //判断referer是否合法
   $allow_referer = $this->config->item('allow_referer');
   $domain_arr = explode('|', $allow_referer);
@@ -116,5 +112,14 @@ class Ajax extends Webbase {
     file_put_contents($lock,'');
     chmod($lock,0777);
     echo 1;exit;
+ }
+ public function is_login(){
+  $r = array('flag'=>0);
+  if($this->userInfo['uid']){
+   $r['flag'] = 1;
+   $r['uid'] = $this->userInfo['uid'];
+   $r['isAdmin'] = $this->userInfo['isAdmin'];
   }
+  die(json_encode($r));
+ }
 }

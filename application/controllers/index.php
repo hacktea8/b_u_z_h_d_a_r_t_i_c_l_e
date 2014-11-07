@@ -13,7 +13,7 @@ class Index extends Viewbase {
     if(!is_writeable($view)){
      die($view.' is not write!');
     }
-    $view .= 'index.html';
+    $view .= 'index_index.html';
     $lock = $view . '.lock';
     if( !file_exists($view) || (time() - filemtime($view)) > 1*3600 ){
      if(!file_exists($lock)){

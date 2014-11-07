@@ -15,6 +15,19 @@ class Viewbase extends Webbase {
   ,'cate_info'=>$cate_info
   ,'pcid'=>0,'cid'=>0
   ));
+/** user level **/
+  if( $this->uid && !isset($this->userInfo['level_point'])){
+   $nxtLevel = array();
+   foreach($writerGroup as $v){
+    if($v['hits'] > $this->userInfo['month_hits']){
+     $nxtLevel = $v;
+     break;
+    }
+   }
+   $this->userInfo['level_point'] = $nxtLevel['hits'] - $this->userInfo['month_hits'];
+   $this->userInfo['level_per'] = ( $this->userInfo['month_hits'] / $nxtLevel['hits'])*100;
+   $this->session->set_userdata(array('user_logindata'=>$this->userInfo));
+  }
   $invate = $this->input->get('invite',0);
   if($invate){
    $this->cookie('invite', $invate, 86400);
@@ -78,13 +91,13 @@ class Viewbase extends Webbase {
     $this->assign(array('click_ad_link'=>$click_ad_link));
     //echo $links[$k];exit;
   }
-  public function view($view_file){
+  protected function view($view_file){
     $this->viewData['seo'] = &self::$seo;
     $this->load->view('header',$this->viewData);
     $this->load->view($view_file);
     $this->load->view('footer');
   }
-  public function isrobots(){
+  protected function isrobots(){
     $robots = array('baidu','360','google');
     $return = 0;
     foreach($robots as $v){

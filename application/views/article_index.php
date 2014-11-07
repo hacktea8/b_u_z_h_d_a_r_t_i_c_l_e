@@ -85,16 +85,34 @@
                     </span>
                   </a>
                 </li>
+<li class="fcEm4">
+                <span class="vm" id="manage_iframe"></span>
+                </li>
                 <li class="share_block">
+                <a class="ui_btn ui_btn_blue ml5 mr5" href="https://www.facebook.com/sharer.php?app_id=113869198637480&display=popup&u=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('fbs',<?php echo $info['id'];?>);return false;">
+                 <span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a>
+                <a class="ui_btn ui_btn_red mr5" href="https://plus.google.com/share?url=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('gs',<?php echo $info['id'];?>);return false;">
+                 <span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a>
                 </li>
               </ul>
             </div>
+<?php if($info['coop']){?>
+<div class="mt10 ui_remind">
+ <p> 此文章提供共同推廣機制,您可以透過以下專屬連結推廣此文章，並獲取
+  <span class="fb"><?php echo $info['coop'];?>0% </span>
+   收益。</p>
+  <p class="fcEm7">
+  <span id="copyLink"><?php echo $info['url'],'?uk=',$uinfo['uid'];?></span>
+ <a id="btn_copy" class="ui_btn ui_btn_green2 ml5 mr5"> 複製共推鏈接</a></p>
+</div>
+<?php }?>
             <!-- end title_tool -->
           </div>
           <!-- end ui_title -->
           <div id="article-item-box_static" style="height:0px;width:100%;"></div>
           <!-- content -->
           <div id="detailContent" class="content p20" style="border-bottom: none;">
+            <div class="ui_remark mb10"><?php echo $info['summary'];?></div>
             <!-- ysm_ad_place1 -->
             <!-- adsense_ad_place2 -->
             <div id="articleContent" class="detail f16 fcEm8 lh32">
@@ -123,6 +141,12 @@
           </div>
           <!-- adsense_ad_place3 -->
           <!-- ysm_ad_place3 -->
+          <div class="tag_list pl20 pr20 pt10 pb10">
+	    <span class="ui_icon ui_icon15 ui_icon15_tag"></span>
+           <?php foreach($tags as $v){?>
+            <a href="/search/index/<?php echo $v;?>" target="_blank" class="vm ml5 mr5 fcEm7"><?php echo $v;?></a>
+           <?php }?>
+          </div>
           <!-- fb-comments -->
           <div id="fb-comments-container">
             <div class="fb-comments" data-href="<?php echo $info['url'];?>"
@@ -315,6 +339,7 @@
 <!-- adsense_ad_place6 -->
 <!-- all_ad_place2 -->
 <script type="text/javascript">
+/*
 document.body.oncopy = function(e) {
  if (window.clipboardData) {
   window.clipboardData.clearData();
@@ -324,6 +349,7 @@ document.body.oncopy = function(e) {
 document.oncontextmenu = function() {
  return false;
 };
+*/
 var slog = 0;
 $(document).scroll(function(){
  var hMove = document.body.scrollTop;

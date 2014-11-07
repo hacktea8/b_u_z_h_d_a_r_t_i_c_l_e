@@ -1,3 +1,8 @@
+Array.prototype.S=String.fromCharCode(2);
+Array.prototype.in_array=function(e){
+ var r=new RegExp(this.S+e+this.S);
+ return (r.test(this.S+this.join(this.S)+this.S));
+};
 window.jQuery || document.write("<script src='http://libs.baidu.com/jquery/1.7.2/jquery.min.js'><\/script>");
 window.jlang = 'www';
 var fb_page = 'https://www.facebook.com/news8s';

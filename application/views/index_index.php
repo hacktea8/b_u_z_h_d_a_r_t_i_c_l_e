@@ -16,7 +16,7 @@
           <div class="content">
             <ul class="ui_list3">
 <?php foreach($indexData['hot'] as $v){?>
-              <li class="entry" share_count="493" s-facebook="481" s-google="12" s-linkin="0"
+              <li class="entry" share_count="<?php echo $v['share_count'];?>" s-facebook="<?php echo $v['share_fb_count'];?>" s-google="<?php echo $v['share_google_count'];?>" s-linkin="0"
               s-twitter="0">
                 <div class="img ui_imgbg">
                   <a title="<?php echo $v['title'];?>" href="<?php echo $v['url'];?>">
@@ -36,7 +36,7 @@
                     <span class="ui_icon ui_icon20 ui_icon20_share">
                     </span>
                     <span class="fb vm">
-                      493
+                     <?php echo $v['share_count'];?>
                     </span>
                     <span class="vm">
                       次分享
@@ -65,7 +65,7 @@
         <ul>
           <!-- loop list -->
 <?php foreach($indexData['new'] as $v){?>
-          <li class="entry" share_count="0" s-facebook="0">
+          <li class="entry" share_count="<?php echo $v['share_count'];?>" s-facebook="<?php echo $v['share_fb_count'];?>">
             <div class="img ui_imgbg">
               <a title="<?php echo $v['title'];?>" href="<?php echo $v['url'];?>">
                 <img src="<?php echo $v['pic'];?>" />
@@ -81,13 +81,13 @@
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
-                  0
+                <?php echo $v['share_count'];?>
                 </span>
                 <span class="vm">
                   次分享 /
                 </span>
                 <span class="fcEm4">
-                  剛剛
+                <?php echo $v['time_ago'];?>
                 </span>
               </p>
             </div>
@@ -145,7 +145,7 @@
             <a href="/console/index.html" class="fcEm7 ul mr5">
               會員中心
             </a>
-            <a href="/channel/user/vb_code" class="fcEm7 ul mr5">
+            <a href="<?php echo $uinfo['url'];?>" class="fcEm7 ul mr5">
               我的频道
             </a>
           </p>
@@ -155,18 +155,18 @@
             <span class="ui_icon ui_icon_level ui_icon_level0">
             </span>
             <span class="vm">
-              書童
+            <?php echo $writerGroup[$uinfo['wid']]['title'];?>
             </span>
           </p>
           <div class="exp">
             <p class="tc f12">
-              100個點閱後升級
+              <?php echo $uinfo['level_point'];?>個點閱後升級
             </p>
             <div class="ui_progress_bar mt10">
               <div style="width:0%;" class="bar_bg">
               </div>
               <div class="bar_text rc5">
-                0%
+                <?php echo $uinfo['level_per'];?>%
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@
 <div class="index_reg ui_blockbg mt20">
   <h2 class="f20 title">
     <span class="fcEm2 fb">
-      BuzzHand
+    <?php echo $site_name;?>
     </span>
     讓您擁有自己的線上頻道，給您現金收益。
   </h2>
@@ -235,361 +235,57 @@
           <ul class="menu">
             <li onclick="Com.fnSwitchTab({target: this, childId:'#ui_rank_attention'});"
             class="cur">
-              本周最受關注
+              本月最受關注
             </li>
             <li onclick="Com.fnSwitchTab({target: this, childId:'#ui_rank_active'});"
             datatype="active" class="">
-              本周最活躍
+              本月最活躍
             </li>
           </ul>
           <div class="content">
             <ul id="ui_rank_attention" style="display: block;">
               <!-- loop list -->
+<?php foreach($indexData['month_attention'] as $v){?>
               <li class="fcEm2 pr">
                 <div class="img ui_imgbg">
-                  <a href="/SexyGirLs">
-                    <img src="/uploads/user/1/14085519961943.png">
+                  <a href="<?php echo $v['url'];?>" title="<?php echo $v['title'];?>">
+                    <img src="<?php echo $v['pic'];?>" alt="<?php echo $v['title'];?>">
                   </a>
                 </div>
                 <div class="content">
                   <h3>
-                    <a class="fcEm" href="/SexyGirLs">
-                      Sexy & GirL's
+                    <a class="fcEm" href="<?php echo $v['url'];?>">
+                    <?php echo $v['title'];?>
                     </a>
                   </h3>
                   <p class="fcEm4 mt5">
-                    點閱數：322392
+                    點閱數：<?php echo $v['month_click'];?>
                   </p>
                 </div>
               </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_1375.html">
-                    <img src="/uploads/user/3/14097378057190.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_1375.html">
-                      鳳梨小公主
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：238010
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_1859.html">
-                    <img src="/uploads/user/4/14104236259725.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_1859.html">
-                      旺旺前輩
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：196560
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_1181.html">
-                    <img src="/uploads/user/3/14095358485348.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_1181.html">
-                      bestrade_store
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：166727
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/BBOY">
-                    <img src="/uploads/user/2/14090617572828.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/BBOY">
-                      BBA
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：115013
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_656.html">
-                    <img src="/uploads/user/2/14112018386133.gif">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_656.html">
-                      书生
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：92019
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/dayanzi">
-                    <img src="/uploads/user/1/1411757628230.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/dayanzi">
-                      大燕子の分享
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：86651
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_2293.html">
-                    <img src="/uploads/user/5/14104877823737.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_2293.html">
-                      a0931209901
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：78258
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_3628.html">
-                    <img src="https://graph.facebook.com/1473372842929629/picture?type=large">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_3628.html">
-                      蓝色的忧郁
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：65268
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_1686.html">
-                    <img src="/uploads/user/4/14099906618087.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_1686.html">
-                      八卦女人区
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    點閱數：65148
-                  </p>
-                </div>
-              </li>
-              <!-- end loop list -->
+<?php }?>
             </ul>
             <ul class="none" id="ui_rank_active" style="display: none;">
               <!-- loop list -->
+<?php foreach($indexData['month_active'] as $v){?>
               <li class="fcEm2 pr">
                 <div class="img ui_imgbg">
-                  <a href="/yunfan">
-                    <img src="/uploads/user/1/14083603047637.jpg">
+                  <a href="<?php echo $v['url'];?>">
+                    <img src="<?php echo $v['pic'];?>" alt="<?php echo $v['title'];?>">
                   </a>
                 </div>
                 <div class="content">
                   <h3>
-                    <a class="fcEm" href="/yunfan">
-                      风高云淡
+                    <a class="fcEm" href="<?php echo $v['url'];?>">
+                    <?php echo $v['title'];?>
                     </a>
                   </h3>
                   <p class="fcEm4 mt5">
-                    發文數：976
+                    發文數：<?php echo $v['post_count'];?>
                   </p>
                 </div>
               </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/caomunianhua">
-                    <img src="/themes/default/images/user_img_def.png">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/caomunianhua">
-                      827127896
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：822
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/tai">
-                    <img src="/uploads/user/3/141105431334.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/tai">
-                      驅魔大師
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：698
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/wwwyoukucomi">
-                    <img src="/uploads/user/2/14114537265476.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/wwwyoukucomi">
-                      加勒比奶酪
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：492
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/tianxiazatan">
-                    <img src="/uploads/user/2/14107952007920.gif">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/tianxiazatan">
-                      天下雜談
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：366
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/tomhua">
-                    <img src="/uploads/user/1/14085954645081.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/tomhua">
-                      tomhua
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：338
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_2112.html">
-                    <img src="/themes/default/images/user_img_def.png">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_2112.html">
-                      2414687180
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：327
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_1537.html">
-                    <img src="/uploads/user/4/14100568034021.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_1537.html">
-                      490594982
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：284
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/channel_45.html">
-                    <img src="/uploads/channel/1/14118624397941.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/channel_45.html">
-                      ￣伊人輕笑、嬌嬈的紅顏
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：278
-                  </p>
-                </div>
-              </li>
-              <li class="fcEm2 pr">
-                <div class="img ui_imgbg">
-                  <a href="/BBOY">
-                    <img src="/uploads/user/2/14090617572828.jpg">
-                  </a>
-                </div>
-                <div class="content">
-                  <h3>
-                    <a class="fcEm" href="/BBOY">
-                      BBA
-                    </a>
-                  </h3>
-                  <p class="fcEm4 mt5">
-                    發文數：275
-                  </p>
-                </div>
-              </li>
-              <!-- end loop list -->
+<?php }?>
             </ul>
           </div>
         </div>
@@ -601,7 +297,7 @@
           <h2>
             精彩文章
           </h2>
-          <a class="more f12 fcEm" href="/post/original.html">
+          <a class="more f12 fcEm" href="/article/original.html">
             <span class="vm">
               More
             </span>
@@ -612,7 +308,7 @@
         <ul>
           <!-- loop list -->
 <?php foreach($indexData['wonderfull'] as $v){?>
-          <li class="entry" share_count="0" s-facebook="0">
+          <li class="entry" share_count="<?php echo $v['share_count'];?>" s-facebook="<?php echo $v['share_fb_count'];?>">
             <div class="img ui_imgbg">
               <a title="<?php echo $v['title'];?>" href="<?php echo $v['url'];?>">
                 <img src="<?php echo $v['pic'];?>" />
@@ -628,13 +324,13 @@
                 <span class="ui_icon ui_icon20 ui_icon20_share">
                 </span>
                 <span class="fb vm">
-                  0
+                  <?php echo $v['share_count'];?>
                 </span>
                 <span class="vm">
                   次分享 /
                 </span>
                 <span class="fcEm4">
-                  1小時前
+                 <?php echo $v['time_ago'];?>
                 </span>
               </p>
             </div>

@@ -187,7 +187,7 @@ if($sv['pcid'] != $k){
                 </option>
                 <optgroup label="申請讓其他會員推廣此文章，並讓其他會員抽取:">
 <?php $coop_arr=array(9,8,7,6,5,4);foreach($coop_arr as $v){?>
-                  <option value="0.<?php echo $v?>" <?php if($v == $rinfo['coop']*10){echo 'selected="selected"';}?>>
+                  <option value="<?php echo $v?>" <?php if($v == $rinfo['coop']){echo 'selected="selected"';}?>>
                     <?php echo $v;?>0%傭金
                   </option>
 <?php }?>
@@ -201,9 +201,7 @@ if($sv['pcid'] != $k){
                 </font>
               </label>
               <label for="g1">
-                <input id="ytPost_is_adult" type="hidden" value="<?php echo $rinfo['is_adult'];?>" name="Post[is_adult]"
-                />
-                <input name="Post[is_adult]" id="Post_is_adult" value="1" <?php if($rinfo['is_adult']){echo 'checkted="checked"';}?> type="checkbox"
+                <input name="Post[is_adult]" id="Post_is_adult" value="1" <?php if($rinfo['is_adult']){echo 'checked="checked"';}?> type="checkbox"
                 />
                 <div class="ui_text_tips error_msg fcEm6" id="Post_is_adult_em_" style="display:none">
                 </div>

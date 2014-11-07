@@ -45,8 +45,7 @@ class Article extends Viewbase {
    $this->mem->set($_key, $author_other_article, self::$ttl['2h']);
   }
   $data['intro'] = preg_replace(array('#[a-z]+://[a-z0-9]+\.[a-z0-9-_/\.]+#is','#[a-z0-9]+\.[a-z0-9-_/\.]+#is'),array('',''),$data['intro']);
-// seo setting
-  $this->setseo();
+  $tags = explode(',',$data['tags']);
   $uk = $this->input->get('uk',0);
   $uk = intval($uk);
   $t = $uk?2:1;
@@ -59,7 +58,7 @@ class Article extends Viewbase {
   $isCollect = 0;//$this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['id']);
   $writerGroup = $this->getUserWriterGroup();
   $this->assign(array('isCollect'=>$isCollect,'click_key'=>$click_key
-  ,'cid'=>$cid,'pcid'=>$cpid,'info'=>$data
+  ,'cid'=>$cid,'pcid'=>$cpid,'info'=>$data,'tags'=>$tags
   ,'aid'=>$aid,'top_channel'=>$top_channel
   ,'also_like'=>$also_like,'viewHot'=>$viewHot,'writerGroup'=>$writerGroup
   ,'postUinfo'=>$postUinfo,'author_other_article'=>$author_other_article
