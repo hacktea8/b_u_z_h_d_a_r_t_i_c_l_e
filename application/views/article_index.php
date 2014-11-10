@@ -85,14 +85,10 @@
                     </span>
                   </a>
                 </li>
+                <li class="share_block">
+                </li>
 <li class="fcEm4">
                 <span class="vm" id="manage_iframe"></span>
-                </li>
-                <li class="share_block">
-                <a class="ui_btn ui_btn_blue ml5 mr5" href="https://www.facebook.com/sharer.php?app_id=113869198637480&display=popup&u=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('fbs',<?php echo $info['id'];?>);return false;">
-                 <span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a>
-                <a class="ui_btn ui_btn_red mr5" href="https://plus.google.com/share?url=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('gs',<?php echo $info['id'];?>);return false;">
-                 <span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a>
                 </li>
               </ul>
             </div>
@@ -132,8 +128,6 @@
               </a>
             </div>
             <div class="ml5">
-             <a title="Share on Google+" href="https://plus.google.com/share?url=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('gs',<?php echo $info['id'];?>);return false;"><img src="<?php echo $cdn_url;?>/images/gplus-64.png" alt="Share on Google+"/></a>
-             <a title="Share on Facebook" href="https://www.facebook.com/sharer.php?app_id=113869198637480&display=popup&u=<?php echo $info['url'];?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');updateArticleShareCount('fbs',<?php echo $info['id'];?>);return false;"><img src="<?php echo $cdn_url,'/images/fbshare.jpg';?>" alt="Share on FaceBook"/></a>
             </div>
           </div>
           <!-- end share -->
@@ -335,10 +329,57 @@
   </div>
   <!-- end article_wrap -->
 </div>
+<?php if($info['is_adult'] == 1){?>
+<div class="warn-wp" style="display: none;">
+  <div class="modal-content warn-sec">
+    <button type="button" class="close warn-close">
+      ×
+    </button>
+    <h4>
+      警&nbsp;&nbsp;&nbsp;&nbsp;告
+    </h4>
+    <p>
+      <img src="<?php echo $cdn_url;?>/images/warn.png" alt="未滿十八歲者不得瀏覽">
+    </p>
+    <p>
+      本區域依『電腦網際網路分級辦法』歸類為限制級。
+    </p>
+    <p>
+      限定為年滿18歲已具有完整行為能力且願接受本站內影音內容及各項條款之網友才可瀏覽，未滿18歲謝絕進入。為防範未滿18歲之未成年網友瀏覽網路上限制級內容的圖文資訊
+      建議您可進行網路分級基金會TICRF分級服務的安裝與設定。依電腦網路內容分級法，未滿18歲不得瀏覽。
+    </p>
+    <p class="no-warn-box">
+      <label class="no-warn">
+        <input type="checkbox">
+        不再提醒
+      </label>
+    </p>
+    <div class="warn-btn">
+      <button type="button" class="btn btn-white btn-no">
+        離開
+      </button>
+      <button type="button" class="btn btn-info btn-yes">
+        同意
+      </button>
+    </div>
+  </div>
+  <div class="modal-backdrop in">
+  </div>
+</div>
+<?php }?>
 <!-- end container -->
 <!-- adsense_ad_place6 -->
 <!-- all_ad_place2 -->
+<script src="<?php echo $cdn_url,'/js/lib/jquery.zclip.min.js?v=',$version;?>"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+window.setTimeout(function(){ Com.fnCopyToClipboard({
+  "path": "<?php echo $cdn_url,'/js/lib/ZeroClipboard.swf';?>",
+  "txt": $("#copyLink").text(),
+  "wrapId": "btn_copy"
+ });	
+},4000);
+});
 /*
 document.body.oncopy = function(e) {
  if (window.clipboardData) {
@@ -351,24 +392,6 @@ document.oncontextmenu = function() {
 };
 */
 var slog = 0;
-$(document).scroll(function(){
- var hMove = document.body.scrollTop;
- hStatic = $('#article-item-box_static').offset().top;
- if(hMove > hStatic){
-  if(slog){
-   return 0;
-  }
-  setTimeout(function(){
-  $.ajax({
-   type: 'POST',
-   url: '/ajax/clicklog',
-   data: {'key':'<?php echo $click_key;?>'},
-   success: function(msg){},
-   dataType: 'json'
-  });
-  },15000);
-   slog = 1;
- }
-
-});
+var click_key = '<?php echo $click_key;?>';
+var article_adult = '<?php echo $info['is_adult'];?>';
 </script>

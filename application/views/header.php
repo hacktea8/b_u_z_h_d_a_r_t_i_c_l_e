@@ -32,7 +32,7 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="alternate" type="application/rss+xml" title="<?php echo $site_name?> &raquo; Feed"
     href="/rss/index/feed.html">
-    <link href="<?php echo $cdn_url;?>/css/buzzhand.css?v=<?php echo $version;?>" rel="stylesheet">
+    <link href="<?php echo $cdn_url;?>/css/global.css?v=<?php echo $version;?>" rel="stylesheet">
     <link rel="icon shortcut" href="<?php echo $cdn_url;?>/images/favicon.ico?v=<?php echo $version;?>" type="image/x-icon">
     <script type="text/javascript">
 <?php if( in_array($_c, array('console'))){?>
@@ -42,6 +42,7 @@ var ttk_token = '<?php echo $ttk_token;?>';
     var js_version = '<?php echo $version;?>';
     var _c = '<?php echo $_c;?>';
     var _a = '<?php echo $_a;?>';
+   window.base_url = '<?php echo $site_url;?>';
     <?php if('article' == $_c){?>
     var article_id = '<?php echo $info['id'];?>';
     var article_uid = '<?php echo $info['uid'];?>';
@@ -54,6 +55,9 @@ var ttk_token = '<?php echo $ttk_token;?>';
       <script src="<?php echo $cdn_url;?>/js/lib/html5.js?v=<?php echo $version;?>"></script>
       <script src="<?php echo $cdn_url;?>/js/lib/css3-mediaqueries.js?v=<?php echo $version;?>"></script>
     <![endif]-->
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/lib/jquery.cookie.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/topList.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $cdn_url;?>/js/com.js?v=<?php echo $version;?>"></script>
   </head>
   <body>
     <!-- wrap -->

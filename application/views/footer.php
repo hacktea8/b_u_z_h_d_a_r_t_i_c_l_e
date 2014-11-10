@@ -111,10 +111,9 @@
 </div>
 <div id="fb-root">
 </div>
+<?php if(0){?>
 <img id="fbpic" src="https://graph.facebook.com/712719613/picture" width="0" height="0" style="display:none" />
-<script type="text/javascript" src="<?php echo $cdn_url;?>/js/lib/jquery.cookie.js?v=<?php echo $version;?>"></script>
-<script type="text/javascript" src="<?php echo $cdn_url;?>/js/topList.js?v=<?php echo $version;?>"></script>
-<script type="text/javascript" src="<?php echo $cdn_url;?>/js/com.js?v=<?php echo $version;?>"></script>
+<?php }?>
 <script type="text/javascript">
 </script>
 <script type="text/javascript" src="<?php echo $cdn_url;?>/js/footer.js?v=<?php echo $version;?>"></script>

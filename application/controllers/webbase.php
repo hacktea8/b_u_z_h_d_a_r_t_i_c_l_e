@@ -49,7 +49,7 @@ class Webbase extends CI_Controller {
     }
     $current_url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $this->checkIsrobot();
-    $site_url = trim($this->config->item('base_url'),'/');
+    $site_url = $this->config->item('base_url');
     $GLOBALS['site_url'] = $site_url;
     $this->assign(array('domain'=>$this->config->item('domain'),
      'site_url'=>$site_url,

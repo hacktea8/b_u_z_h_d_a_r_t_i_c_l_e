@@ -636,20 +636,20 @@ return 0;
     // 複製到剪贴板
 	fnCopyToClipboard: function(args) {
 		var txt = args.txt,
-			$wrapId = typeof args.wrapId === "object" ? args.wrapId : $("#" + args.wrapId);
+		$wrapId = typeof args.wrapId === "object" ? args.wrapId : $("#" + args.wrapId);
 		// if (window.clipboardData) {
 			// window.clipboardData.clearData();
 			// clipboardData.setData("Text", txt);
 			// (txt != "") && alert("複製成功！");
 		// }else{
-			$wrapId.zclip({
-			    path: args.path,
-			    copy: txt,
-				afterCopy: function(){
-					var popHtml = '<div class="tc pt10"><h2 class="mb5 fcEm7 fb f20">複製成功。</h2></div>'
-					Com.fnPopupWin({id:"win_copyToClipboard", content: popHtml, expiry: 1000});
-				}
-			});
+		$wrapId.zclip({
+		    path: args.path,
+		    copy: txt,
+			afterCopy: function(){
+				var popHtml = '<div class="tc pt10"><h2 class="mb5 fcEm7 fb f20">複製成功。</h2></div>'
+				Com.fnPopupWin({id:"win_copyToClipboard", content: popHtml, expiry: 1000});
+			}
+		});
 		// }
 
 	},
@@ -1096,7 +1096,7 @@ var Article = {
 
 			setTimeout(function(){
 			article_container = $("#ac");
-			var _img = 'http://my.buzzhand.com/images/2014' + article_container.attr("p") +  '042906669009' +  article_container.attr("ac") + '.png';
+			var _img = '';
 			article_container.append("<img src=\""+_img+"\" width=\"1\" height=\"1\">");
 			},7000);
 
@@ -1122,7 +1122,8 @@ var Article = {
 			}
 		} else {
 			$('#mobileFBLike').hide();
-			$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a><a class="ui_btn ui_btn_red mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a><span class="othershare none"><a class="ui_btn ui_btn_cyanblue mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_t">Share on Twitter</span></a><a class="ui_btn ui_btn_blue2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_i">Share on LinkedIn</span></a><a class="ui_btn ui_btn_red2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_p">Share on pinterest</span></a></span><span class="addmore" onclick="Com.fnShowOther({\'target\': this, \'showDiv\': \'.othershare\'});">+</span>');
+			//$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a><a class="ui_btn ui_btn_red mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a><span class="othershare none"><a class="ui_btn ui_btn_cyanblue mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_t">Share on Twitter</span></a><a class="ui_btn ui_btn_blue2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_i">Share on LinkedIn</span></a><a class="ui_btn ui_btn_red2 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_p">Share on pinterest</span></a></span><span class="addmore" onclick="Com.fnShowOther({\'target\': this, \'showDiv\': \'.othershare\'});">+</span>');
+			$(".share_block").html('<a class="ui_btn ui_btn_blue ml5 mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_f"></span> 分享到Facebook</a><a class="ui_btn ui_btn_red mr5"><span class="ui_icon ui_icon_third20 ui_icon_third20_g"></span> 分享到Google+</a>');
 		}
 		
 		//Article.showSidebarShare();
@@ -1149,7 +1150,7 @@ var Article = {
 		}); 
 
 
-		setTimeout('show_like()', 30000);
+		//setTimeout('show_like()', 30000);
 		$('#articleContent').waypoint(function(direction) {
 		 if (!window.i) {
 				 setTimeout('show_share()', 34000);
@@ -1360,8 +1361,8 @@ templates["templates/shared/like_us_on_facebook"] = '<div id="like-encourager"><
 templates["templates/shared/share_on_facebook"] = "<div id='like-encourager' style='text-align:center;'><a class='mash-lightbox-close  icon_close'></a><hgroup>\n<h1 class='first'>"+messages[window.jlang]['like_article']+"</h1>\n</hgroup>\n<a style='padding:10px 0 5px;font-size:18px;width: 80%' onclick='share_tofb()' class='ui_btn ui_btn_blue ml5 mr5'><span style='margin-right:4px' class='ui_icon ui_icon_third20 ui_icon_third20_f'></span> "+messages[window.jlang]['share_tofb']+"</a><br><p class='opt-out' id='opt-out'>"+messages[window.jlang]['no_thanks']+"</p></div>";
 
 
-var shareTrack = function(type, path) {
-	$.post("/post/sharetrack.html",{type: type, path: path });
+var shareTrack = function(type, aid) {
+	$.post("/ajax/updateArticleShareCount",{'stype': type, 'aid': aid });
 }
 
 
@@ -1565,14 +1566,14 @@ var shareToPinterest = function(url) {
 var shareToFb = function(url) {
 		return n = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.base_url + url),
         popupCenter(n, 685, 500),
-		shareTrack('facebook', url),
+		shareTrack('fbs', article_id),
 		t = $([window, document]),
 	   setTimeout(
 	   function() {
 	   return t.on("focus focusin",
 	   function() {
 	   return t.off("focus focusin"),
-			show_like()
+		function(){}//	show_like()
 	   })},500),
         !1
 }
@@ -1583,7 +1584,7 @@ var shareToGoogle = function(url) {
 		var encoded_url = encodeURIComponent(window.base_url + url);
 		n = "https://plus.google.com/share?url=" + encoded_url;
 		popupCenter(n, 600, 600),
-        shareTrack('google', url);
+        shareTrack('gs', article_id);
 }
 
 
