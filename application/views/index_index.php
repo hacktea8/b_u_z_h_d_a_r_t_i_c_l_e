@@ -259,7 +259,7 @@
                     </a>
                   </h3>
                   <p class="fcEm4 mt5">
-                    點閱數：<?php echo $v['month_click'];?>
+                    點閱數：<?php echo $v['month_hits'];?>
                   </p>
                 </div>
               </li>

@@ -1,11 +1,11 @@
 $(document).ready(function() {
- window.setTimeout("check_user_login()",2000);
  Index.init();
  Com.init();
  window.onresize = function() {
   $("#indexBanner").get(0) && BannerEffect.reset();
  };
  if('article' == _c){
+  window.setTimeout("check_user_login()",2000);
   Article.init();
   window.setTimeout("load_iframe_manage()",3000);
   $(document).scroll(function(){

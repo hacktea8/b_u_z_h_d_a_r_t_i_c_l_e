@@ -15,10 +15,10 @@ class articleModel extends baseModel{
   return $r;
  }
  public function getMonthUserActive($sort = 'post', $limit = array(1, 10)){
-  $sortMap = array('post'=>'u.post_count DESC','click'=>'u.month_click DESC');
+  $sortMap = array('post'=>'u.post_count DESC','click'=>'u.month_hits DESC');
   $order = $sortMap[$sort];
   $limitSql = $this->get_limit( $limit);
-  $sql = sprintf('SELECT u.uid,u.month_click,u.post_count,m.title,m.urlkey,m.host,m.pic,m.ext FROM %s as u INNER JOIN %s as m ON(u.uid = m.uid) WHERE u.flag=1 ORDER BY %s %s'
+  $sql = sprintf('SELECT u.uid,u.month_hits,u.post_count,m.title,m.urlkey,m.host,m.pic,m.ext FROM %s as u INNER JOIN %s as m ON(u.uid = m.uid) WHERE u.flag=1 ORDER BY %s %s'
   ,self::$_tUser,self::$_tUMeta,$order,$limitSql);
   $list = $this->db->query($sql)->result_array();
   $list = $list ?$list :array();

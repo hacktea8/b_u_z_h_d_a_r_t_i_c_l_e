@@ -470,7 +470,12 @@ class TTKClient{
 		$param['album'] = $aid;
 		$Token=$this->op_Token->dealParam($param)->createToken();
 		$data['Token']=$Token;
-		$data['file']='@'.$file;
+                $upfile = '@'.$file;
+                // PHP Version >5.5
+                if(class_exists('CURLFile')){
+                 $upfile = new CURLFile(realpath($file));
+                }
+                $data['file'] = $upfile;
 		return empty($file)?$Token:$this->post($url,$data);
 	}
 	/**

@@ -10,7 +10,7 @@ class DB_MYSQL{
   var $user     = "";
   var $password = "";
 
-  var $db_pre   = "qd_";
+  var $db_pre   = "";
   var $link_id  = 0;
   var $query_id = 0;
   var $record   = array();
@@ -22,7 +22,7 @@ class DB_MYSQL{
   var $usepconnect = 0;  //使用 pconnect
   var $num_rows = 0;
 
-  public function  __construct($server = "localhost",$user = "qvodweb",$password = "ilove",$database = "qvodweb"){
+  public function  __construct($server = "localhost",$user = "buzhdweb",$password = "ilove",$database = "buzhdweb"){
     $this->connect($server,$user,$password,$database);
     mysql_query("set names utf8");
   }
