@@ -44,7 +44,7 @@ class Article extends Viewbase {
    $author_other_article = array_merge($author_other_article ,$tmp);
    $this->mem->set($_key, $author_other_article, self::$ttl['2h']);
   }
-  $data['intro'] = preg_replace(array('#[a-z]+://[a-z0-9]+\.[a-z0-9-_/\.]+#is','#[a-z0-9]+\.[a-z0-9-_/\.]+#is'),array('',''),$data['intro']);
+//  $data['intro'] = preg_replace(array('#[a-z]+://[a-z0-9]+\.[a-z0-9-_/\.]+#is','#[a-z0-9]+\.[a-z0-9-_/\.]+#is'),array('',''),$data['intro']);
   $tags = explode(',',$data['tags']);
   $uk = $this->input->get('uk',0);
   $uk = intval($uk);

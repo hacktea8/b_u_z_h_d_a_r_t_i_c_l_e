@@ -13,7 +13,7 @@
     <meta name=thumbnail" content="<?php echo $info['pic'];?>" />
     <meta itemprop="image" content="<?php echo $info['pic'];?>"/>
     <?php foreach($tags as $v){?>
-    <meta property="article:tag" content="<?php echo $v;?>" />
+<meta property="article:tag" content="<?php echo $v;?>" />
     <?php }?>
 <?php }?>
     <meta property="og:locale" content="zh_TW" />

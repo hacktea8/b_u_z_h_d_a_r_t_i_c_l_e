@@ -17,7 +17,7 @@ class Dbmysql{
   var $usepconnect = 1;  //使用 pconnect
   var $num_rows = 0;
 
-  public function  __construct($server = "localhost",$user = "apenweb",$password = "allen123",$database = "av"){
+  public function  __construct($server = "localhost",$user = "buzhdweb",$password = "ilove",$database = "buzhdweb"){
     $this->connect($server,$user,$password,$database);
     mysql_query("set names utf8");
   }
@@ -25,7 +25,7 @@ class Dbmysql{
   function connect($server="",$user="",$password="",$database="") {
     global $usepconnect;
     // connect to db server
-    $usepconnect = 1;
+    $usepconnect = 0;
     if ( 0 == $this->link_id ) {
       if ($password=="") {
         if ($usepconnect==1) {

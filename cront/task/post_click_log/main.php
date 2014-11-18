@@ -9,7 +9,7 @@ $ROOTPATH = dirname(__FILE__).'/';
 require_once $ROOTPATH.'../config.php';
 
 $keys = $redis->keys("post_click_uv:*");
-//var_dump($keys);exit;
+var_dump($keys);exit;
 foreach($keys as $v){
  $hits = $redis->get($v);
  $arr = explode(':',$v);
@@ -35,6 +35,6 @@ foreach($keys as $v){
   $m->setUKPostLog($param);
  }
  echo "\n==== Key $v Value $hits ======\n";
- $redis->delete($v);
+// $redis->delete($v);
 }
 

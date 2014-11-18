@@ -19,7 +19,7 @@ class consoleModel extends baseModel{
  }
  static public function mstrip_tags( &$str){
   // replace js code
-  $str = preg_replace('#<[^>]*script[^>]*>.*<[^>]*/[^>]*script[^>]*>#Uis','',$str);
+  $str = preg_replace('#<\s*(script|iframe)[^>]*>.*<\s*/\s*(script|iframe)[^>]*>#Uis','',$str);
   return $str;
  }
  static public function filter_code($str){
@@ -51,7 +51,9 @@ class consoleModel extends baseModel{
 //echo '<pre>';var_dump($row);exit;
   $head = $this->filter($row,array('is_original','coop','cid','pcid','title','summary','host','cover','ext','is_adult'));
   $head['flag'] = 1;
+  $head['coop'] = intval($head['coop']);
   $body = $this->filter($row,array('original_url','intro','no_infringement'));
+  $body['no_infringement'] = intval($body['no_infringement']);
   $_tags = &$row['tags'];
   if($aid){
    $uid = $row['uid'];
@@ -73,13 +75,17 @@ class consoleModel extends baseModel{
   }
   $head['uid'] = $row['uid'];
   $head['utime'] = $head['ptime'] = time();
-  $this->db->insert(self::$_tArtileHead, $head);
+  $sql = $this->db->insert_string(self::$_tArtileHead, $head);
+  //echo $sql;exit;
+  $this->db->query($sql);
   $aid = $this->db->insert_id();
   if( !$aid){
    return 0;
   }
   $body['id'] = $aid;
-  $this->db->insert(self::$_tArtileBody,$body);
+  $sql = $this->db->insert_string(self::$_tArtileBody,$body);
+  //echo $sql;exit;
+  $this->db->query($sql);
   $this->addTags($_tags, $aid);
   $update = array('id'=>$aid,'flag'=>$head['flag'],'uid'=>$head['uid']);
   $this->updateArticlePreNxtLink($update);

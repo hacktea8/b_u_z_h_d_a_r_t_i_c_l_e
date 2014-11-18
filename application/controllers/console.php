@@ -129,7 +129,9 @@ class Console extends Viewbase {
    }
 //echo $aid;exit;
 //$this->debug($aid);
-   redirect('/console/post');
+   $url = $rinfo['url']?$rinfo['url']:'/console/post';
+   header('Location: '.$url);
+   return true;
   }
   $rinfo = array();
   if($aid){
