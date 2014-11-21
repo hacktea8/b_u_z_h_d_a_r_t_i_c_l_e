@@ -2,28 +2,40 @@
 
 
 class Model{
-  protected $db;
+ protected $db;
   
-  function __construct(){
-    $this->db=new DB_MYSQL();
-  }
+ function __construct(){
+  $this->db = new DB_MYSQL();
+ }
 
-  function getCateBycid($cid){
-    if(!$cid){
-      return false;
-    }
-    $sql=sprintf('SELECT * FROM %s WHERE `flag`=1 AND `id`=%d LIMIT 1',$this->db->getTable('emule_cate'),$cid);
-    $res=$this->db->row_array($sql);
-     return $res;
+ function getCateBycid($cid){
+  if(!$cid){
+   return false;
   }
-
-  function getsubcatelist(){
-    $sql=sprintf('SELECT `id`, `pid`, `name`,`url` FROM %s WHERE `flag`=1 AND `pid`>0',$this->db->getTable('emule_cate'));
-    $res=$this->db->result_array($sql);
-     return $res;
+  $sql = sprintf('SELECT * FROM %s WHERE `flag`=1 AND `id`=%d LIMIT 1',$this->db->getTable('emule_cate'),$cid);
+  $res = $this->db->row_array($sql);
+  return $res;
+ }
+ function addArticleOaid($oaid){
+  if( !$oaid){
+   return 0;
   }
+  $sql = $this->db->insert_string('crawmap',array('oaid'=>$oaid));
+  $this->db->query($sql);
+  return $this->db->insert_id();
+ }
+ function checkArticleByOaid($oaid){
+  $sql = sprintf("SELECT id FROM crawmap where oaid=%d LIMIT 1",$oaid);
+  $res = $this->db->row_array($sql);
+  return $res['id'];
+ }
+ function getsubcatelist(){
+  $sql = sprintf('SELECT `id`, `pid`, `name`,`url` FROM %s WHERE `flag`=1 AND `pid`>0',$this->db->getTable('emule_cate'));
+  $res = $this->db->result_array($sql);
+  return $res;
+ }
 
-  function geticiliemusubcate(){
+ function geticiliemusubcate(){
     $sql=sprintf('SELECT * FROM %s WHERE `flag`=1 AND `iciliemu` IS NOT NULL AND `pid`>0',$this->db->getTable('emule_cate'));
     $res=$this->db->result_array($sql);
      return $res;

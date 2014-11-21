@@ -4,110 +4,67 @@ define('ROOTPATH',$APPPATH.'../');
 //include_once($APPPATH.'../db.class.php');
 //include_once($APPPATH.'../model.php');
 require_once ROOTPATH.'phpCurl.php';
+require_once ROOTPATH.'post.class.php';
+require_once ROOTPATH.'../../application/libraries/Tietuku.php';
+require_once ROOTPATH.'../../application/libraries/gickimg.php';
+
+$ttk = new Tietuku();
+
+$postObj = new Post();
+$config = array('ttk'=>$ttk);
+$postObj->init($config);
 
 $apicurl = new phpCurl();
 $apicurl->config['cookie'] = 'cookie_api';
 
 //$model=new Model();
 
+function trimBOM ($contents) {
+ $charset = array();
+ $charset[1] = substr($contents, 0, 1);
+ $charset[2] = substr($contents, 1, 1);
+ $charset[3] = substr($contents, 2, 1);
+ if (ord($charset[1]) == 239 && ord($charset[2]) == 187 && ord($charset[3]) == 191) {
+   return substr($contents, 3);
+ }
+ return $contents;
+}
+
 /*
 获取配对的标签的内容
 */
 function getTagpair(&$str,&$string,$head,$end,$same){
-  $str='';
-  $start=stripos($string, $head);
-  if($start===false){
-    return false;
-  }
+ $str='';
+ $start = stripos($string, $head);
+ if($start === false){
+  return false;
+ }
 //第一个包含head标签位置的剩下字符串
-  $string=substr($string,$start);
-//第一次结尾的end标签的位置
-  $start=stripos($string, $end)+strlen($end);
-  if($start===false){
-    return false;
-  }
-  $str=substr($string,0,$start);
-  $others=substr($string, $start+1);
+ $string = substr($string, $start);
+ //第一次结尾的end标签的位置
+ $start = stripos($string, $end)+strlen($end);
+ if($start === false){
+  return false;
+ }
+ $str = substr($string,0,$start);
+ $others = substr($string, $start+1);
 //开始标签出现的次数
-  $count_head=substr_count($str,$same);
+ $count_head = substr_count($str,$same);
 //结束标签出息的次数
-  $count_tail=substr_count($str, $end);
+ $count_tail = substr_count($str, $end);
 //echo $others,exit;
-  while($count_head!=$count_tail &&$count_tail){
-    //$start=stripos($others, $same);
-    $length=stripos($others, $end)+strlen($end);
-    $str.=substr($others, 0,$length);
-    $others=substr($others, $length);
-    $count_head=substr_count($str,$same);
-    $count_tail=substr_count($str, $end);	
-  }
+ while($count_head != $count_tail && $count_tail){
+  //$start=stripos($others, $same);
+  $length = stripos($others, $end)+strlen($end);
+  $str .= substr($others, 0,$length);
+  $others = substr($others, $length);
+  $count_head = substr_count($str,$same);
+  $count_tail = substr_count($str, $end);	
+ }
 }
 /*
 */
 
-function getsubcatelist(&$subcate){
-  global $model;
-  $subcate=$model->getsubcatelist();
-}
-
-function getlastgrabinfo($mode=1,$config=array()){
-  global $lastgrab,$cateid,$pageno;
-  if($mode){
-     if(!file_exists($lastgrab)){
-        return false;
-     }
-     include($lastgrab);
-     return true;
-  }
-  $text="<?php\r\n";
-  $text.="\$cateid=$config[cateid];\r\n";
-  $text.="\$pageno=$config[pageno];\r\n";
-  
-  file_put_contents($lastgrab,$text);
-  return true;
-}
-
-function getCatearticle($pid=0){
-  if(!$pid){
-    return false;
-  }
-  global $model,$_root,$cid;
-  
-  $cateList=$model->getCateInfoBypid($pid);
-  foreach($cateList as $cate){
-    if($cate['id']!=$cateid &&$flag){
-         continue;
-    }
-    if($cate['id']==$cateid){
-       $flag=false;
-    }
-    $cateurl=$_root.$cate['url'];
-    $cid=$cate['id'];
-    $status = getinfolist($cateurl);
-    if(6 == $status){
-       break;
-    }
-sleep(30);
-  }
-}
-
-function getSubCatearticle($cate){
-   global $_root,$cid;
-   $cateurl = $_root.$cate['ourl'];
-   $cid = $cate['cid'];
-   getinfolist($cateurl);
-}
-function addCateByname($name,$pid,$ourl){
-  global $apicurl,$POST_API;
-  $url = $POST_API.'addCateByname';
-  $apicurl->config['url'] = $url;
-  $apicurl->postVal = array(
-  'cate_info' => json_encode(array('name'=>$name,'pid' => $pid, 'ourl' => $ourl))
-  );
-  $html = $apicurl->getHtml();
-  $return = json_decode($html,1);
-  return $return;
-}
 function checkArticleByOname($oname){
   global $apicurl,$POST_API;
   $url = $POST_API.'checkArticleByOname';
@@ -131,24 +88,9 @@ function addArticleVols($data){
   return json_decode($html,1);
 }
 function addArticle($data){
-  global $apicurl,$POST_API;
-  $url = $POST_API.'addArticleInfo';
-  $apicurl->config['url'] = $url;
-  //$post = json_encode($data);
-  $post = serialize($data);
-  $apicurl->postVal = array(
-  'article_data' => $post
-  );
-  $error = json_last_error();
-  if($error){
-    echo "=== JSON ERROR! ====\n";
-    var_dump($data);exit;
-  }
-  $html = $apicurl->getHtml();
-/*/echo $url;
-var_dump($html);exit;
-/**/
-  return json_decode($html,1);
+ global $postObj;
+ $html = $postObj->create($data);
+ return $html;
 }
 function getHtml($url){
   global $http_proxy,$http_header;

@@ -153,9 +153,18 @@ class Tietuku{
   * @param string $fileurl 网络图片地址
   * @return string 如果$fileurl!=null 返回请求接口的json数据否则只返回Token
   */
- public function uploadRemoteFile($albumid,$url){
-  $r = self::$ttk->uploadFromWeb($albumid,$url);
-  $r = json_decode($r, 1);
+ public function uploadRemoteFile($album = 0,$url){
+  if( isset(self::$ablum[$album])){
+   $albumid = self::$ablum[$album];
+  }else{
+   $k = 'w'.date('w');
+   $albumid = self::$ablum[$k];
+  }
+  $h = self::$ttk->uploadFromWeb($albumid,$url);
+  $r = json_decode($h, 1);
+  if( !$r){
+   return $h;
+  }
   return $r;
  }
 //比var_dump更友好的格式化输出 从 ThinkPHP 提取
