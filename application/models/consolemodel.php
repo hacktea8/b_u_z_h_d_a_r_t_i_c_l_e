@@ -5,12 +5,12 @@ class consoleModel extends baseModel{
  public function __construct(){
   parent::__construct();
  }
- public function getArticleInfoById($aid,$uid){
-  if( !$aid || !$uid){
+ public function getArticleInfoById($aid,$uinfo){
+  if( !$aid || !$uinfo['uid']){
    return 0;
   }
-  $check = $this->check_id(self::$_tArtileHead,'*',array('id='=>$aid,'uid='=>$uid));
-  if(empty($check)){
+  $check = $this->check_id(self::$_tArtileHead,'*',array('id='=>$aid));
+  if(empty($check) || ($uinfo['uid'] != $check['uid'] && !$uinfo['isAdmin'])){
    return -1;
   }
   $check['pic'] = $this->get_pic($check['host'],$check['cover'],$check['ext']);
@@ -31,7 +31,7 @@ class consoleModel extends baseModel{
   $str = mb_substr($str, 0, 180, 'UTF-8');
   return $str;
  }
- public function setArticleInfoByData($row){
+ public function setArticleInfoByData($row, $uinfo){
   $aid = isset($row['id'])?$row['id']:0;
   $aid = intval($aid);
   $row['title'] = self::filter_code($row['title']);
@@ -49,7 +49,7 @@ class consoleModel extends baseModel{
    return 0;
   }
 //echo '<pre>';var_dump($row);exit;
-  $head = $this->filter($row,array('is_original','coop','cid','pcid','title','summary','host','cover','ext','is_adult'));
+  $head = $this->filter($row,array('ext','is_original','coop','cid','pcid','title','summary','host','cover','is_adult'));
   $head['flag'] = 1;
   $head['coop'] = intval($head['coop']);
   $body = $this->filter($row,array('original_url','intro','no_infringement'));
@@ -57,8 +57,8 @@ class consoleModel extends baseModel{
   $_tags = &$row['tags'];
   if($aid){
    $uid = $row['uid'];
-   $check = $this->check_id(self::$_tArtileHead,'id',array('id='=>$aid,'uid='=>$uid));
-   if(empty($check)){
+   $check = $this->check_id(self::$_tArtileHead,'id,uid',array('id='=>$aid));
+   if(empty($check) || ($uinfo['uid'] != $check['uid'] && !$uinfo['isAdmin'])){
     return -1;
    }
    $head['utime'] = time();
@@ -71,10 +71,11 @@ class consoleModel extends baseModel{
   }
   $check = $this->check_id(self::$_tArtileHead,'id',array('title='=>$head['title']));
   if( !empty($check)){
-   //return $check['id'];
+   return $check['id'];
   }
   $head['uid'] = $row['uid'];
   $head['utime'] = $head['ptime'] = time();
+  $head['flag'] = @$row['verify']?5:1;
   $sql = $this->db->insert_string(self::$_tArtileHead, $head);
   //echo $sql;exit;
   $this->db->query($sql);

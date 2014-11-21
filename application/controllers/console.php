@@ -135,7 +135,7 @@ class Console extends Viewbase {
   }
   $rinfo = array();
   if($aid){
-   $rinfo = $this->consoleModel->getArticleInfoById($aid,$this->uid);
+   $rinfo = $this->consoleModel->getArticleInfoById($aid,$this->userInfo);
   }
   $this->assign(array('rinfo'=>$rinfo));
   $this->view('my_postcreate');

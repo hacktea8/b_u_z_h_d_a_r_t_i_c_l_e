@@ -1,20 +1,126 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $web_title;?>管理后台</title>
-</head>
-<frameset rows="75,*,22" cols="*" frameborder="no" border="0" framespacing="0">
-	<frame src="/admin/index_top" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" />
-	<frameset id="bodyFrameset" cols="190,14,*" frameborder="no" border="0" framespacing="0">
-		<frame src="/admin/index_left" name="leftFrame" id="leftFrame" noresize="noresize" />
-		<frame src="/admin/index_change" name="changeFrame" noresize="noresize" id="changeFrame"  frameborder="no"  scrolling="no" marginwidth="0" marginheight="0"/>
-		<frame src="/admin/index_main" name="mainFrame" id="mainFrame"   frameborder="no"  scrolling="no" marginwidth="0" marginheight="0" />
-	</frameset>
-	<frame src="/admin/index_footer" name="bottomFrame" scrolling="no" noresize="noresize" />
-</frameset>
-<noframes>
-<body style="padding:0">
-</body>
-</noframes>
-</html>
+  <div class="header">
+      <div class="dl-title">
+          <span class="lp-title-port">BUI</span><span class="dl-title-text">前端框架</span>
+        </a>
+      </div>
+    <div class="dl-log">欢迎您，<span class="dl-log-user"><?php echo $uinfo['name'];?></span><a href="###" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+  </div>
+   <div class="content">
+    <div class="dl-main-nav">
+      <div class="dl-inform"><div class="dl-inform-title">贴心小秘书<s class="dl-inform-icon dl-up"></s></div></div>
+      <ul id="J_Nav"  class="nav-list ks-clear">
+        <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">首页</div></li>
+        <li class="nav-item"><div class="nav-item-inner nav-order">用户管理</div></li>
+        <li class="nav-item"><div class="nav-item-inner nav-inventory">分类管理</div></li>
+        <li class="nav-item"><div class="nav-item-inner nav-supplier">文章管理</div></li>
+        <li class="nav-item"><div class="nav-item-inner nav-marketing">图表</div></li>
+      </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+   </div>
+
+  <script>
+    BUI.use('common/main',function(){
+      var config = [{
+          id:'menu', 
+          homePage : 'code',
+          menu:[{
+              text:'首页内容',
+              items:[
+                {id:'code',text:'文章待审核列表',href:'/admin/index_index',closeable : false},
+                {id:'main-menu',text:'顶部导航',href:'main/menu.html'},
+                {id:'second-menu',text:'右边菜单',href:'main/second-menu.html'},
+                {id:'dyna-menu',text:'动态菜单',href:'main/dyna-menu.html'}
+              ]
+            },{
+              text:'页面操作',
+              items:[
+                {id:'operation',text:'页面常见操作',href:'main/operation.html'},
+                {id:'quick',text:'页面操作快捷方式',href:'main/quick.html'}  
+              ]
+            },{
+              text:'文件结构',
+              items:[
+                {id:'resource',text:'资源文件结构',href:'main/resource.html'},
+                {id:'loader',text:'引入JS方式',href:'main/loader.html'}  
+              ]
+            }]
+          },{
+            id:'form',
+            menu:[{
+                text:'表单页面',
+                items:[
+                  {id:'code',text:'表单代码',href:'form/code.html'},
+                  {id:'example',text:'表单示例',href:'form/example.html'},
+                  {id:'introduce',text:'表单简介',href:'form/introduce.html'},
+                  {id:'valid',text:'表单基本验证',href:'form/basicValid.html'},
+                  {id:'advalid',text:'表单复杂验证',href:'form/advalid.html'},
+                  {id:'remote',text:'远程调用',href:'form/remote.html'},
+                  {id:'group',text:'表单分组',href:'form/group.html'},
+                  {id:'depends',text:'表单联动',href:'form/depends.html'}
+                ]
+              },{
+                text:'成功失败页面',
+                items:[
+                  {id:'success',text:'成功页面',href:'form/success.html'},
+                  {id:'fail',text:'失败页面',href:'form/fail.html'}
+                
+                ]
+              },{
+                text:'可编辑表格',
+                items:[
+                  {id:'grid',text:'可编辑表格',href:'form/grid.html'},
+                  {id:'form-grid',text:'表单中的可编辑表格',href:'form/form-grid.html'},
+                  {id:'dialog-grid',text:'使用弹出框',href:'form/dialog-grid.html'},
+                  {id:'form-dialog-grid',text:'表单中使用弹出框',href:'form/form-dialog-grid.html'}
+                ]
+              }]
+          },{
+            id:'search',
+            menu:[{
+                text:'搜索页面',
+                items:[
+                  {id:'code',text:'搜索页面代码',href:'search/code.html'},
+                  {id:'example',text:'搜索页面示例',href:'search/example.html'},
+                  {id:'example-dialog',text:'搜索页面编辑示例',href:'search/example-dialog.html'},
+                  {id:'introduce',text:'搜索页面简介',href:'search/introduce.html'}, 
+                  {id:'config',text:'搜索配置',href:'search/config.html'}
+                ]
+              },{
+                text : '更多示例',
+                items : [
+                  {id : 'tab',text : '使用tab过滤',href : 'search/tab.html'}
+                ]
+              }]
+          },{
+            id:'detail',
+            menu:[{
+                text:'详情页面',
+                items:[
+                  {id:'code',text:'详情页面代码',href:'detail/code.html'},
+                  {id:'example',text:'详情页面示例',href:'detail/example.html'},
+                  {id:'introduce',text:'详情页面简介',href:'detail/introduce.html'}
+                ]
+              }]
+          },{
+            id : 'chart',
+            menu : [{
+              text : '图表',
+              items:[
+                  {id:'code',text:'引入代码',href:'chart/code.html'},
+                  {id:'line',text:'折线图',href:'chart/line.html'},
+                  {id:'area',text:'区域图',href:'chart/area.html'},
+                  {id:'column',text:'柱状图',href:'chart/column.html'},
+                  {id:'pie',text:'饼图',href:'chart/pie.html'}, 
+                  {id:'radar',text:'雷达图',href:'chart/radar.html'}
+              ]
+            }]
+          }];
+      new PageUtil.MainPage({
+        modulesConfig : config
+      });
+    });
+  </script>

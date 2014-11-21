@@ -1,18 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'webbase.php';
 class Viewbase extends Webbase {
- static public $seo = array('title'=>'首页','keyword'=>'','description'=>''); 
  static public $url404 = '/404.html';
  
  public function __construct(){
   parent::__construct();
   $writerGroup = $this->getUserWriterGroup();  
   $userGroup = $this->getUserGroup();  
-  $cate_info = $this->getAllCate();
   $this->assign(array(
   'cdn_url'=>$this->config->item('cdn_url'),'writerGroup'=>$writerGroup
   ,'error_img'=>'/public/images/show404.jpg','userGroup'=>$userGroup
-  ,'cate_info'=>$cate_info
   ,'pcid'=>0,'cid'=>0
   ));
 /** user level **/
@@ -35,23 +32,6 @@ class Viewbase extends Webbase {
   //$this->_get_ads_link();
 //var_dump($this->viewData);exit;
  }
-  protected function oops($msg){
-   $this->assign(array('msg'=>$msg,'refreshtime'=>10));
-   $this->view('oops');
-   $output = $this->output->get_output();
-   die($output);
-  }
-  protected function getAllCate(){
-   $_key = 'cate_info';
-   $cate_info = $this->mem->get($_key);
-   if( empty($cate_info)){
-    $this->load->model('cateModel');
-    $this->cateModel->getCateArticleTotals();
-    $cate_info = $this->cateModel->getAllCateInfo();
-    $this->mem->set($_key,$cate_info,self::$ttl['5m']);
-   }
-   return $cate_info;
-  }
   protected function getHotArticle($pcid = 0, $cid = 0){
     $_key = sprintf('site_hotArticle_%d_%d',$pcid,$cid);
     $hotArticle = $this->mem->get($_key);
@@ -90,12 +70,6 @@ class Viewbase extends Webbase {
    }
     $this->assign(array('click_ad_link'=>$click_ad_link));
     //echo $links[$k];exit;
-  }
-  protected function view($view_file){
-    $this->viewData['seo'] = &self::$seo;
-    $this->load->view('header',$this->viewData);
-    $this->load->view($view_file);
-    $this->load->view('footer');
   }
   protected function isrobots(){
     $robots = array('baidu','360','google');
