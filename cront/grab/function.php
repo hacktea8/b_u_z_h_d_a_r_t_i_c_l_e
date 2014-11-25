@@ -29,7 +29,9 @@ function trimBOM ($contents) {
  }
  return $contents;
 }
-
+function getDownFileName($url){
+ 
+}
 /*
 获取配对的标签的内容
 */

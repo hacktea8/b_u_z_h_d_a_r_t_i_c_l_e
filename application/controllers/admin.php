@@ -27,7 +27,7 @@ class Admin extends Admbase {
  public function index_footer(){
   $this->view('index_footer');
  }
- public function album_cate($p=1){
-  $this->load->view('album_cate',$this->viewData);
+ public function cate_list(){
+  $this->view('cate_list');
  }
 }

@@ -1,9 +1,10 @@
+<!-- http://www.builive.com/apps/default/main.html#menu/code -->
   <div class="header">
       <div class="dl-title">
           <span class="lp-title-port">BUI</span><span class="dl-title-text">前端框架</span>
         </a>
       </div>
-    <div class="dl-log">欢迎您，<span class="dl-log-user"><?php echo $uinfo['name'];?></span><a href="###" title="退出系统" class="dl-log-quit">[退出]</a>
+    <div class="dl-log">欢迎您，<span class="dl-log-user"><?php echo $uinfo['uname'];?></span><a href="###" title="退出系统" class="dl-log-quit">[退出]</a>
     </div>
   </div>
    <div class="content">
@@ -81,9 +82,9 @@
           },{
             id:'search',
             menu:[{
-                text:'搜索页面',
+                text:'分类页面',
                 items:[
-                  {id:'code',text:'搜索页面代码',href:'search/code.html'},
+                  {id:'code',text:'分类列表',href:'/admin/cate_list'},
                   {id:'example',text:'搜索页面示例',href:'search/example.html'},
                   {id:'example-dialog',text:'搜索页面编辑示例',href:'search/example-dialog.html'},
                   {id:'introduce',text:'搜索页面简介',href:'search/introduce.html'}, 

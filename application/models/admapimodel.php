@@ -39,4 +39,19 @@ class admapiModel extends baseModel{
   $this->db->query($sql);
   return 1;
  }
+ public function getCateList($where,$limit = array(1,30)){
+  $whereSql = array();
+  foreach($where as $k => $v){
+   $whereSql[$k.'='] = $v;
+  }
+  $query = $this->select(self::$_tCate, self::$_fCate, $whereSql, $order='', $limit);
+  if($query->num_rows()){
+   $list = $query->result_array();
+   global $cinfo;
+   foreach($list as &$v){
+    $v['url'] = $this->get_url('cate',$v['id']);
+   }
+  }
+  return $list;
+ }
 }

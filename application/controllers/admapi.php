@@ -19,4 +19,12 @@ class Admapi extends Admbase {
   die(json_encode(array('success'=>1)));
   var_dump($ids);exit;
  }
+ public function cate_list(){
+  $start = $this->input->get('start');
+  $limit = $this->input->get('limit');
+  $whereSql = array();
+  $list = $this->admapiModel->getCateList($whereSql, array(intval($start)+1,intval($limit)));
+  $r = array('rows'=>$list,'results'=>30);
+  die(json_encode($r));
+ }
 }

@@ -2,6 +2,8 @@
 
 
 class Model{
+ static public $_tAH = 'article_title';
+ static public $_tAC = 'article_content';
  protected $db;
   
  function __construct(){
@@ -15,6 +17,31 @@ class Model{
   $sql = sprintf('SELECT * FROM %s WHERE `flag`=1 AND `id`=%d LIMIT 1',$this->db->getTable('emule_cate'),$cid);
   $res = $this->db->row_array($sql);
   return $res;
+ }
+ function getArticleViaList($flag = 5, $limit = 30){
+  $sql = sprintf('SELECT at.id,ac.intro FROM %s as at INNER JOIN %s as ac WHERE at.id=ac.id AND at.flag=%d LIMIT %d',self::$_tAH,self::$_tAC,$flag,$limit);
+  $list = $this->db->result_array($sql);
+  $list = $list?$list:array();
+  return $list;
+ }
+ function updateArticleParam($param){
+  $head = $this->filter($param, array('flag'));
+  $body = $this->filter($param, array('intro'));
+  $where = array('id'=>$param['id']);
+  $sql = $this->db->update_string(self::$_tAH,$head,$where);
+  $this->db->query($sql);
+  $sql = $this->db->update_string(self::$_tAC,$body,$where);
+  $this->db->query($sql);
+  return 1;
+ }
+ function filter($data,$key){
+  $r = array();
+  foreach($key as $k){
+   if( isset($data[$k])){
+    $r[$k] = $data[$k];
+   }
+  }
+  return $r;
  }
  function addArticleOaid($oaid){
   if( !$oaid){
