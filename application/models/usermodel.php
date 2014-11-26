@@ -85,7 +85,8 @@ class userModel extends baseModel{
    $sql = $this->db->update_string(self::$_tUser,$update,$where);
    $this->db->query($sql);
   }
-  return $row;
+  $pre_cash = $this->getUserPreAmount($row['uid']);
+  return array_merge($pre_cash,$row);
   }else{
    $invite = isset($_COOKIE['invite'])? intval($_COOKIE['invite']): 0;
    $insert_data = $uinfo;
@@ -98,8 +99,13 @@ class userModel extends baseModel{
    $this->db->insert(self::$_tUser,$insert_data);
    $meta = array('uid'=>$insert_data['uid'],'title'=>$uinfo['uname'],'nickname'=>$uinfo['uname']);
    $this->db->insert(self::$_tUMeta, $meta);
+   $insert_data['now_hits'] = 0;
+   $insert_data['now_amount'] = 0;
    return $insert_data;
   }
  }
-                
+ public function getUserPreAmount($uid){
+  $r = array('now_hits'=>0,'now_amount'=>0);
+  return $r;
+ }
 }

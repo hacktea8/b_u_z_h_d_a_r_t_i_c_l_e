@@ -80,7 +80,6 @@ class articleModel extends baseModel{
  }
  public function getArticleListByCid($pcid = 0,$cid = 0, $sort, $limit = array(1,7),$uid = 0){
   $where = array('flag='=>1);
-  $where = array();
   if($pcid){
    $where['pcid='] = $pcid;
   }elseif($cid){

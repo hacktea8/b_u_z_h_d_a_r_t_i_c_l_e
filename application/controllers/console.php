@@ -120,8 +120,9 @@ class Console extends Viewbase {
     $post['cid'] = $cate[1];
     $post['pcid'] = $cate[0];
    }
+   $this->convert_lang($post, $key = array('title','intro','tags','summary'));
 //$this->debug($post);
-   $aid = $this->consoleModel->setArticleInfoByData($post);
+   $aid = $this->consoleModel->setArticleInfoByData($post,$this->userInfo);
    $aurl = $this->consoleModel->get_url('article', $aid);
    $rinfo = array('flag'=>1,'url'=>$aurl);
    if($this->input->is_ajax_request()){
@@ -182,5 +183,14 @@ class Console extends Viewbase {
    $this->mem->set($k,$checkSetting,self::$ttl['1h']);
   }
   return $checkSetting;
+ }
+ protected function convert_lang(&$data,$key){
+  $this->load->library('big2gb');
+  foreach($key as $k){
+   if( isset($data[$k])){
+    $data[$k] = $this->big2gb->chg_utfcode($data[$k], 'big5');
+   }
+  }
+  return $data;
  }
 }

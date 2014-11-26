@@ -107,30 +107,20 @@
         <div class="index_login_top">
           <h4 class="p20">
             歡迎你，
-            <span class="fcEm7">
-              1187247901
-            </span>
+            <span class="fcEm7"><?php echo $uinfo['uname'];?></span>
           </h4>
           <p>
             今天收益：US $
-            <span class="fcEm6 fb">
-              0
-            </span>
+            <span class="fcEm6 fb"><?php echo $uinfo['now_amount'];?></span>
           </p>
-          <p>
-            昨天收益：US $0
-          </p>
+          <p>昨天收益：US $<?php echo $uinfo['pre_amount'];?></p>
           <p>
             今日點閱數：
-            <span class="fcEm7 fb">
-              0
-            </span>
+            <span class="fcEm7 fb"><?php echo $uinfo['now_hits'];?></span>
           </p>
           <p>
             昨日點閱數：
-            <span class="fcEm7 fb">
-              0
-            </span>
+            <span class="fcEm7 fb"><?php echo $uinfo['pre_hits'];?></span>
           </p>
           <!-- <p>
           30日點閱數：<span class="fcEm7 fb">0</span>
@@ -163,7 +153,7 @@
               <?php echo $uinfo['level_point'];?>個點閱後升級
             </p>
             <div class="ui_progress_bar mt10">
-              <div style="width:0%;" class="bar_bg">
+              <div style="width:<?php echo $uinfo['level_per'];?>%;" class="bar_bg">
               </div>
               <div class="bar_text rc5">
                 <?php echo $uinfo['level_per'];?>%

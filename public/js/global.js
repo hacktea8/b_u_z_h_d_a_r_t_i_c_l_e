@@ -30,3 +30,11 @@ function updateArticleShareCount(stype,aid){
   dataType: 'json'
  });
 }
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?930f9b4755b1e8403e09cb86fbe3ec00";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+

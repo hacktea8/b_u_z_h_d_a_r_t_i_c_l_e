@@ -41,16 +41,17 @@ if ( ! function_exists('get_client_ip')){
 }
 
 if ( ! function_exists('getSynuserUid')){
-  function getSynuserUid($cookie_key = 'hk8_auth'){
-    if(isset($_COOKIE[$cookie_key])){
-      $code = $_COOKIE[$cookie_key];
-      $uinfo = uc_authcode($code, $operation = 'DECODE');
-      $info = array();
-      list($info['uname'],$info['uid']) = explode("\t", $uinfo);
-      return $info;
-    }
-    return false;
+ function getSynuserUid($cookie_key = 'hk8_auth'){
+  if(isset($_COOKIE[$cookie_key])){
+   $code = $_COOKIE[$cookie_key];
+   $uinfo = uc_authcode($code, $operation = 'DECODE');
+   $info = array();
+   list($info['uname'],$info['uid']) = explode("\t", $uinfo);
+   $info['uname'] = mb_convert_encoding($info['uname'],'UTF-8','GBK');
+   return $info;
   }
+  return false;
+ }
 }
 
 if ( ! function_exists('getSynuserInfo')){

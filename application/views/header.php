@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
+ <head>
 <?php if('article' == $_c){?>
-    <meta property="og:image" content="<?php echo $info['pic'];?>" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="<?php echo $info['url'];?>" />
-    <meta property="article:publisher" content="https://www.facebook.com/news8s" />
-    <meta property="og:site_name" content="<?php echo $site_name?>" />
-    <meta property="og:title" content="<?php echo $info['title'];?>" />
-    <meta property="article:section" content="<?php echo $cate_info[$info['cid']]['title'];?>" />
-    <meta property="og:description" content="<?php echo $info['summary'];?>" />
-    <meta name=thumbnail" content="<?php echo $info['pic'];?>" />
-    <meta itemprop="image" content="<?php echo $info['pic'];?>"/>
-    <?php foreach($tags as $v){?>
+  <meta property="og:image" content="<?php echo $info['pic'];?>" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="<?php echo $info['url'];?>" />
+  <meta property="article:publisher" content="https://www.facebook.com/news8s" />
+  <meta property="og:title" content="<?php echo $info['title'];?>" />
+  <meta property="article:section" content="<?php echo $cate_info[$info['cid']]['title'];?>" />
+  <meta property="og:description" content="<?php echo $info['summary'];?>" />
+  <meta name=thumbnail" content="<?php echo $info['pic'];?>" />
+  <meta itemprop="image" content="<?php echo $info['pic'];?>"/>
+  <?php foreach($tags as $v){?>
 <meta property="article:tag" content="<?php echo $v;?>" />
-    <?php }?>
+  <?php }?>
+<?php }else{ ?>
+  <meta property="og:title" content="<?php echo $site_name;?> - 創作分享平台"/>
+  <meta property="og:description" content="<?php echo $seo['description'];?>"/>
+  <meta property="og:image" content="<?php echo $cdn_url;?>/images/news8s_favicon.png"/>
+  <meta property="fb:app_id" content="382005278631659"/>
 <?php }?>
-    <meta property="og:locale" content="zh_TW" />
-    <title>
-     <?php echo $seo['title'];?> - <?php echo $site_name;?>
-    </title>
-    <meta charset="utf-8">
-    <meta name="description" content="<?php echo $seo['description'];?>" />
-    <meta name="keywords" content="<?php echo $seo['keyword'];?>" />
-    <meta name="robots" content="all" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="tencent-x5-page-direction" content="landscape">
-    <meta name="distribution" content="Taiwan" />
-    <meta name="author" content="<?php echo $site_name?>">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="format-detection" content="telephone=no">
-    <link rel="alternate" type="application/rss+xml" title="<?php echo $site_name?> &raquo; Feed"
-    href="/rss/index/feed.html">
-    <link href="<?php echo $cdn_url;?>/css/global.css?v=<?php echo $version;?>" rel="stylesheet">
-    <link rel="icon shortcut" href="<?php echo $cdn_url;?>/images/favicon.ico?v=<?php echo $version;?>" type="image/x-icon">
-    <script type="text/javascript">
+  <meta property="og:site_name" content="<?php echo $site_name?>" />
+  <meta property="og:locale" content="zh_TW" />
+  <title><?php echo $seo['title'];?> - <?php echo $site_name;?> - 文章創作分享平台</title>
+  <meta charset="utf-8">
+  <meta name="description" content="<?php echo $seo['description'];?>" />
+  <meta name="keywords" content="<?php echo $seo['keyword'];?>" />
+  <meta name="robots" content="all" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="tencent-x5-page-direction" content="landscape">
+  <meta name="distribution" content="Taiwan" />
+  <meta name="author" content="<?php echo $site_name?>">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no">
+  <link rel="alternate" type="application/rss+xml" title="<?php echo $site_name?> &raquo; Feed" href="/rss/index/feed.html">
+  <link href="<?php echo $cdn_url;?>/css/global.css?v=<?php echo $version;?>" rel="stylesheet">
+  <link rel="icon shortcut" href="<?php echo $cdn_url;?>/images/favicon.ico?v=<?php echo $version;?>" type="image/x-icon">
+  <script type="text/javascript">
 <?php if( in_array($_c, array('console'))){?>
 var ttk_token = '<?php echo $ttk_token;?>';
 <?php }?>
-    var cdn_url = '<?php echo $cdn_url;?>';
-    var js_version = '<?php echo $version;?>';
-    var _c = '<?php echo $_c;?>';
-    var _a = '<?php echo $_a;?>';
-   window.base_url = '<?php echo $site_url;?>';
-    <?php if('article' == $_c){?>
-    var article_id = '<?php echo $info['id'];?>';
+  var cdn_url = '<?php echo $cdn_url;?>';
+  var js_version = '<?php echo $version;?>';
+  var _c = '<?php echo $_c;?>';
+  var _a = '<?php echo $_a;?>';
+  window.base_url = '<?php echo $site_url;?>';
+  <?php if('article' == $_c){?>
+  var article_id = '<?php echo $info['id'];?>';
     var article_uid = '<?php echo $info['uid'];?>';
     var isAdmin = 0;
     var login_uid = 0;

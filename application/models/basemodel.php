@@ -11,7 +11,7 @@ class baseModel extends CI_Model{
  static public $_fTag = '`tid`, `title`, `total`';
  static public $_tTA = '`article_tag`';
  static public $_tUser = '`user`';
- static public $_fUser = '`uid`, `uname`, `gid`, `invite`,month_hits,amount, `hits`, `click_count`,isAdmin,post_count,wid, `isvip`, `loginip`, `logintime`,email';
+ static public $_fUser = '`uid`, `uname`, `gid`, `invite`,pre_amount,pre_hits,month_hits,amount, `hits`, `click_count`,isAdmin,post_count,wid, `isvip`, `loginip`, `logintime`,email';
  static public $_tUMeta = '`user_meta`';
  static public $_fUMeta = '`uid`, `fname`,urlkey,`lname`,host,ext,intro,title,pic, `mobile`, `county`, `pay_method`, `pay_account`';
  static public $_tUGroup = '`user_group`';

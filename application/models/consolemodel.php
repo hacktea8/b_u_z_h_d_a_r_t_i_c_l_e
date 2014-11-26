@@ -52,13 +52,16 @@ class consoleModel extends baseModel{
   $head = $this->filter($row,array('ext','is_original','coop','cid','pcid','title','summary','host','cover','is_adult'));
   $head['flag'] = 1;
   $head['coop'] = intval($head['coop']);
+  if(isset($head['is_adult'])){
+   $head['is_adult'] = intval($head['is_adult']);
+  }
   $body = $this->filter($row,array('original_url','intro','no_infringement'));
   $body['no_infringement'] = intval($body['no_infringement']);
   $_tags = &$row['tags'];
   if($aid){
    $uid = $row['uid'];
    $check = $this->check_id(self::$_tArtileHead,'id,uid',array('id='=>$aid));
-   if(empty($check) || ($uinfo['uid'] != $check['uid'] && !$uinfo['isAdmin'])){
+   if(empty($check) || ($uid != $check['uid'] && !$uinfo['isAdmin'])){
     return -1;
    }
    $head['utime'] = time();

@@ -2,7 +2,8 @@
 
 class Webbase extends CI_Controller {
  static public $ttl = array('5m'=>300,'15m'=>900,'30m'=>1800,'1h'=>3600,'2h'=>7200,'3h'=>10800,'6h'=>21600,'9h'=>32400,'12h'=>43200,'1d'=>86400,'3d'=>253200,'5d'=>432000,'7d'=>604800);
- static public $seo = array('title'=>'首页','keyword'=>'','description'=>''); 
+ static public $seo = array('title'=>'發文賺錢','keyword'=>'giga circle,創作,分享,文章,圖片,短片,影片,網路賺錢,發文賺錢'
+ ,'description'=>'新聞巴士 創作分享平台提供讀者百萬篇精采文章，有多位駐站長期作者分享創作，馬上加入作者行列並透過文章分享賺取現金收益。'); 
  protected $mem = '';
  protected $redis = '';
  public $viewData = array();

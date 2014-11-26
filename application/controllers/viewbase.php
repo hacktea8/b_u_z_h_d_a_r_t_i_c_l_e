@@ -72,16 +72,11 @@ class Viewbase extends Webbase {
     //echo $links[$k];exit;
   }
   protected function isrobots(){
-    $robots = array('baidu','360','google');
-    $return = 0;
-    foreach($robots as $v){
-     if(FALSE !== stripos($_SERVER['HTTP_USER_AGENT'],$v)){
-      $return = 1;
-      break;
-      
-     }
-    }
-    return $return;
+   $return = 0;
+   if(FALSE !== stripos($_SERVER['HTTP_USER_AGENT'], 'spider')){
+    $return = 1;
+   }
+   return $return;
   }
   protected function getUserGroup(){
    $k = 'site_urser_group';
