@@ -16,10 +16,11 @@ $(document).ready(function() {
     return 0;
    }
    setTimeout(function(){
+   uk = getQueryString('uk');
    $.ajax({
     type: 'POST',
     url: '/ajax/clicklog',
-    data: {'key':click_key},
+    data: {'key':click_key,'uk':uk},
     success: function(msg){},
     dataType: 'json'
    });

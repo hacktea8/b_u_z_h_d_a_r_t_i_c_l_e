@@ -46,9 +46,9 @@ class Article extends Viewbase {
   }
 //  $data['intro'] = preg_replace(array('#[a-z]+://[a-z0-9]+\.[a-z0-9-_/\.]+#is','#[a-z0-9]+\.[a-z0-9-_/\.]+#is'),array('',''),$data['intro']);
   $tags = explode(',',$data['tags']);
-  $uk = $this->input->get('uk',0);
-  $uk = intval($uk);
-  $t = $uk?2:1;
+  //$uk = $this->input->get('uk',0);
+  $uk = 0;//intval($uk);
+  $t = 1;//$uk?2:1;
   $this->model('userModel');
   $postUinfo = $this->userModel->getUinfoByUid('wid,gid', $data['uid']);
   $str = sprintf('%d|%d|%d|%d|%d|%d|%d|%d|%d',

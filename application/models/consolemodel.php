@@ -20,6 +20,13 @@ class consoleModel extends baseModel{
  static public function mstrip_tags( &$str){
   // replace js code
   $str = preg_replace('#<\s*(script|iframe)[^>]*>.*<\s*/\s*(script|iframe)[^>]*>#Uis','',$str);
+  preg_match_all('#<a ([^>]*href=[^>]+)>#Uis', $html, $match);
+  $link = @$match[1];
+  foreach($link as $v){
+   if(false === stripos($v,'nofollow')){
+    $str = str_replace($v,'rel="nofollow" '.$v,$str);
+   }
+  }
   return $str;
  }
  static public function filter_code($str){

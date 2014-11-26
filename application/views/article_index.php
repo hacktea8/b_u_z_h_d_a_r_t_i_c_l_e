@@ -37,6 +37,7 @@
               <h1 class="f22 fb fcEm8">
                 <?php echo $info['title'];?>
               </h1>
+                <span class="vm" id="manage_iframe"></span>
             </div>
             <!-- title_tool -->
             <div class="mt5">
@@ -88,7 +89,6 @@
                 <li class="share_block">
                 </li>
 <li class="fcEm4">
-                <span class="vm" id="manage_iframe"></span>
                 </li>
               </ul>
             </div>

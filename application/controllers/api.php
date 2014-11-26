@@ -24,6 +24,3 @@ class Api extends CI_Controller {
     $this->load->view('api_opensearch',array('data'=>$data));
   }
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

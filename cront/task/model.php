@@ -19,7 +19,7 @@ class M{
   
  }
  public function check_id($aid,$date,$table = ''){
-  $where = array('aid'=>$aid,'Ymd'=>$date);
+  $where = array('aid='=>$aid,'Ymd='=>$date);
   $t = $table?$table:$this->_table;
   $sql = $this->db->select_string($t, $fieldsStr = 'id', $limit = array(1), $where);
   $row = $this->db->row_array($sql);
@@ -74,14 +74,15 @@ class M{
  public function setPostLog($param = array()){
   $id = $this->check_id($param['aid'], $param['Ymd']);
   
-  $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_AH, $param['click'], $aid);
+  $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_AH, $param['hits'], $param['aid']);
   $this->db->query($sql);
   if($id){
-    $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_table, $param['hits'], $id);
-    $this->db->query($sql);
-    return $id;
+   $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_table, $param['hits'], $id);
+   $this->db->query($sql);
+   return $id;
   }
-  return $this->db->insert($this->_table,$fields = $param);
+  $this->db->insert($this->_table,$fields = $param);
+  return $this->db->insert_id();
  }
  public function setUKPostLog($param = array()){
   $id = $this->check_id($param['aid'], $param['Ymd'],$this->_t_ACR);

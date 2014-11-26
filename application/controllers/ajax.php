@@ -30,13 +30,17 @@ class Ajax extends Webbase {
   }
   $ip = $this->input->ip_address();
   // 检查当前IP是否已使用
+  //$check_key = sprintf('post_uv_key_%s',$ip);
   $check_key = sprintf('post_uv_key_%d_%s',$aid,$ip);
   if($this->redis->exists($check_key)){
    return 0;
   }
+  $uk = $this->input->get_post('uk');
+  $uk = intval($uk);
+  $t = $uk?2:1;
   //redis file_storge
-  $this->redis->set($check_key,1,$this->ttl['1d']);
-  $log_key = sprintf('post_click_uv:%d:%d:%d:%d:%d:%d:%d:%d',$t,$uk,$gid,$wid,$coop,$aid,$uid,$pcid,$cid,date('Ym'),date('Ymd'));
+  $this->redis->set($check_key,1, self::$ttl['1d']);
+  $log_key = sprintf('post_click_uv:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d',$t,$uk,$gid,$wid,$coop,$aid,$uid,$pcid,$cid,date('Ym'),date('Ymd'));
   $this->redis->incr($log_key);
  } 
  public function updateArticleShareCount(){

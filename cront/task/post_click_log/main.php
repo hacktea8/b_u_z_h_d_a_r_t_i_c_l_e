@@ -9,8 +9,10 @@ $ROOTPATH = dirname(__FILE__).'/';
 require_once $ROOTPATH.'../config.php';
 
 $keys = $redis->keys("post_click_uv:*");
-var_dump($keys);exit;
+//$keys = $redis->keys("post_uv_key_*");
+//var_dump($keys);exit;
 foreach($keys as $v){
+//buzhdpost_click_uv:1:0:1:1:0:2:2:1
  $hits = $redis->get($v);
  $arr = explode(':',$v);
  $type = $arr[1];
@@ -26,6 +28,7 @@ foreach($keys as $v){
  $Ymd = $arr[11];
  $flag = 1;
  if(1 == $type){
+  echo "=== Update article Aid $aid Hits $hits ====\n";
   // 统计UV
   $param = compact('gid','wid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
   $m->setPostLog($param);
@@ -33,8 +36,9 @@ foreach($keys as $v){
   //共推收益
   $param = compact('cop','gid','wid','cop_uid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
   $m->setUKPostLog($param);
+exit;
  }
  echo "\n==== Key $v Value $hits ======\n";
-// $redis->delete($v);
+ $redis->delete($v);
 }
 
