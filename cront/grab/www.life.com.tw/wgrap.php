@@ -1,31 +1,34 @@
 <?php
 
-$APPPATH=dirname(__FILE__).'/';
+$APPPATH = dirname(__FILE__).'/';
 include_once($APPPATH.'../config.php');
 include_once($APPPATH.'../function.php');
+include_once($APPPATH.'../db.class.php');
+include_once($APPPATH.'../model.php');
 include_once($APPPATH.'/function.php');
 include_once($APPPATH.'config.php');
 
 
+$model = new Model();
+
 /*============ Get Cate article =================*/
 
-$lastgrab = basename(__FILE__);
-$path = $APPPATH.'config/';
 
-$i = 0;
-$num = 19;
-foreach($cate_config as $_cate){
-  $i++;
-  //3,7,11,15,19 isok
-  if($i > $num){
-    break;
-  }
-  if($i != $num){
-    continue;
-  }
-  $lastgrab = $path.$_cate['cid'].'_'.$lastgrab;
-  getSubCatearticle($_cate);
-  sleep(10);
+$num = 2;
+$pageStart = 1;
+
+foreach($cate_config as $k => $_cate){
+ $cid = $_cate['cid'];
+ echo "=== Current Index $k Cid $cid ====\n";
+ //2, isok
+ if($k > $num){
+  break;
+ }
+ if($k != $num){
+  continue;
+ }
+ getinfolist($_cate);
+ echo "\n==== 抓取任务结束! =====\n";
 }
 
 

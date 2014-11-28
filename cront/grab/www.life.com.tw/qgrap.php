@@ -14,19 +14,21 @@ $model = new Model();
 /*============ Get Cate article =================*/
 
 
-$num=1;
-foreach($cate_config as $_cate){
-  $i = $_cate['cid'];
-  //1,5,9,13,17 isok
-  if($i > $num){
-    break;
-  }
-  if($i != $num){
-    continue;
-  }
-  $cid = $i;
-  getinfolist($_cate);
-  echo "\n==== 抓取任务结束! =====\n";
+$num = 0;
+$pageStart = 1;
+
+foreach($cate_config as $k => $_cate){
+ $cid = $_cate['cid'];
+ echo "=== Current Index $k Cid $cid ====\n";
+ //0, isok
+ if($k > $num){
+  break;
+ }
+ if($k != $num){
+  continue;
+ }
+ getinfolist($_cate);
+ echo "\n==== 抓取任务结束! =====\n";
 }
 
 

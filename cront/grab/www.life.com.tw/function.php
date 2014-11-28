@@ -2,9 +2,11 @@
   
 
 function getinfolist(&$_cate){
- global $_root,$cid,$model;
+ global $_root,$cid,$model,$pageStart;
  $pageEnd = isset($_cate['page'])? $_cate['page']: 1;
- for($i=1; $i <= $pageEnd; $i++){
+ $isAdult = isset($_cate['adult'])? $_cate['adult']: 0;
+ $pageStart = $pageStart ? $pageStart : 1;
+ for($i = $pageStart; $i <= $pageEnd; $i++){
 //通过 atotal计算i的值
   $url = sprintf('%s/index.php?app=category&act=categorylist&no=%d&page=%d',$_root,$_cate['ourl'],$i);
   echo "\n++++ ",$url," ++++\n";
@@ -28,7 +30,7 @@ function getinfolist(&$_cate){
     return 6;
    }
    $ourl = getFullPath($list['ourl']);
-   $ainfo = array('ourl'=>$ourl,'title'=>'','oid'=>$oid,'cid'=>$cid,'verify'=>1);
+   $ainfo = array('ourl'=>$ourl,'title'=>'','oid'=>$oid,'cid'=>$cid,'verify'=>1,'adult'=>$isAdult);
    getinfodetail($ainfo);
   sleep(3);
     }
