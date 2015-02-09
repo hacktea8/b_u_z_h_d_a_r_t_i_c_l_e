@@ -86,7 +86,7 @@ class M{
  }
  public function setUKPostLog($param = array()){
   $id = $this->check_id($param['aid'], $param['Ymd'],$this->_t_ACR);
-  $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_AH, $param['hits'], $aid);
+  $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_AH, $param['hits'], $param['aid']);
   $this->db->query($sql);
   if($id){
     $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->_t_ACR, $param['hits'], $id);

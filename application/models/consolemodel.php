@@ -20,7 +20,7 @@ class consoleModel extends baseModel{
  static public function mstrip_tags( &$str){
   // replace js code
   $str = preg_replace('#<\s*(script|iframe)[^>]*>.*<\s*/\s*(script|iframe)[^>]*>#Uis','',$str);
-  preg_match_all('#<a ([^>]*href=[^>]+)>#Uis', $html, $match);
+  preg_match_all('#<a ([^>]*href=[^>]+)>#Uis', $str, $match);
   $link = @$match[1];
   foreach($link as $v){
    if(false === stripos($v,'nofollow')){
@@ -56,7 +56,7 @@ class consoleModel extends baseModel{
    return 0;
   }
 //echo '<pre>';var_dump($row);exit;
-  $head = $this->filter($row,array('ext','is_original','coop','cid','pcid','title','summary','host','cover','is_adult'));
+  $head = $this->filter($row,array('thum','iscover','ext','is_original','coop','cid','pcid','title','summary','host','cover','is_adult'));
   $head['flag'] = 1;
   $head['coop'] = intval($head['coop']);
   if(isset($head['is_adult'])){

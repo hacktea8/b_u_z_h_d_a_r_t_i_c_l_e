@@ -29,6 +29,22 @@ function trimBOM ($contents) {
  }
  return $contents;
 }
+function parse_cover($url){
+  $uinfo = parse_url($url);
+  $r = array();
+  $host = @$uinfo['host'];
+  $host = explode('.',$host);
+  $r['host'] = @$host[0];
+  $host = ltrim(@$uinfo['path'],'/');
+  $host = explode('.',$host);
+  $r['key'] = @$host[0];
+  if( !$r['host'] || !$r['key']){
+   return 0;
+  }
+  $r['ext'] = @$host[1];
+  $r['url'] = $url;
+  return $r;
+}
 function getDownFileName($url){
  
 }

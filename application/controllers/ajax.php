@@ -29,6 +29,7 @@ class Ajax extends Webbase {
    return 0;
   }
   $ip = $this->input->ip_address();
+//http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=106.187.42.93
   // 检查当前IP是否已使用
   //$check_key = sprintf('post_uv_key_%s',$ip);
   $check_key = sprintf('post_uv_key_%d_%s',$aid,$ip);

@@ -329,13 +329,41 @@ class Uploader
     {
         return $this->fileSize <= ($this->config["maxSize"]);
     }
+    /**
+    图片类型格式转换
 
+    */
+    public function convert_jpg(){
+      $info = getimagesize($this->filePath);
+      if( false === stripos($info['mime'], 'image/')){
+       return 0;
+      }
+      $file = $this->filePath.'.jpg';
+      $cmd = sprintf('convert %s %s',$this->filePath, $file);
+      exec($cmd);
+      @unlink($this->filePath);
+      if( !file_exists($file)){
+       $this->stateInfo = $this->getStateInfo('ERROR_CONVERT');
+       return;
+      }
+      $fname = basename($this->filePath);
+      $fname = array_shift(explode('.',$fname));
+      $this->filePath = dirname($this->filePath).'/'.$fname.'.jpg';
+      $this->fullName = dirname($this->fullName).'/'.$fname.'.jpg';
+      $cmd = sprintf('jpegtran  -copy none -progressive -optimize  %s > %s',$file, $this->filePath);
+      exec($cmd);
+      @unlink($file);
+      if( !file_exists($this->filePath)){
+       $this->stateInfo = $this->getStateInfo('ERROR_JPEGTRAN');
+      }
+    }
     /**
      * 获取当前上传成功文件的各项信息
      * @return array
      */
-    public function getFileInfo()
-    {
+    public function getFileInfo(){
+     //pic convert
+     $this->convert_jpg();
         return array(
             "state" => $this->stateInfo,
             "url" => $this->fullName,

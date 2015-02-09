@@ -32,11 +32,11 @@ foreach($keys as $v){
   // 统计UV
   $param = compact('gid','wid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
   $m->setPostLog($param);
- }elseif(2 == $type){
+ }elseif(2 == $type && $cop){
+  echo "=== Update Coop article Aid $aid Hits $hits ====\n";
   //共推收益
   $param = compact('cop','gid','wid','cop_uid','aid','uid','pcid','cid','Ym','Ymd','hits','flag');
   $m->setUKPostLog($param);
-exit;
  }
  echo "\n==== Key $v Value $hits ======\n";
  $redis->delete($v);

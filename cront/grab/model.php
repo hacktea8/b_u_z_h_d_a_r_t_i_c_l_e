@@ -24,14 +24,24 @@ class Model{
   $list = $list?$list:array();
   return $list;
  }
+ function getArticleNoCoverList($flag = 5, $limit = 30){
+  $sql = sprintf('SELECT id,thum FROM %s WHERE flag=1 AND iscover=%d LIMIT %d',self::$_tAH,$flag,$limit);
+  $list = $this->db->result_array($sql);
+  $list = $list?$list:array();
+  return $list;
+ }
  function updateArticleParam($param){
-  $head = $this->filter($param, array('flag'));
+  $head = $this->filter($param, array('flag','iscover','cover','host','ext'));
   $body = $this->filter($param, array('intro'));
   $where = array('id'=>$param['id']);
-  $sql = $this->db->update_string(self::$_tAH,$head,$where);
-  $this->db->query($sql);
-  $sql = $this->db->update_string(self::$_tAC,$body,$where);
-  $this->db->query($sql);
+  if($head){
+   $sql = $this->db->update_string(self::$_tAH,$head,$where);
+   $this->db->query($sql);
+  }
+  if($body){
+   $sql = $this->db->update_string(self::$_tAC,$body,$where);
+   $this->db->query($sql);
+  }
   return 1;
  }
  function filter($data,$key){

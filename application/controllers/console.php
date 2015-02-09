@@ -110,6 +110,7 @@ class Console extends Viewbase {
     $post['host'] = $pinfo['host'];
     $post['cover'] = $pinfo['key'];
     $post['ext'] = $pinfo['ext'];
+    $post['iscover'] = 1;
    }else{
     unset($post['host']);
     unset($post['cover']);
